@@ -25112,7 +25112,7 @@ exports['default'] = _react2['default'].createClass({
             null,
             _react2['default'].createElement(_PropertyListHeader2['default'], { properties: this.state.properties,
                 onNew: this.onNew,
-                onSortChange: this.sortChangeHandler,
+                onSort: this.sortHandler,
                 onViewChange: this.viewChangeHandler }),
             view,
             this.state.newProperty ? _react2['default'].createElement(_PropertyNew2['default'], { onSave: this.onSave, onCancel: this.onCancel }) : ""
@@ -25293,7 +25293,7 @@ exports['default'] = _react2['default'].createClass({
                             ),
                             _react2['default'].createElement(
                                 ButtonDropdown,
-                                { header: 'Sort By', icon: 'sort', onChange: this.props.onSortChange },
+                                { header: 'Sort By', icon: 'sort', onChange: this.props.onSort },
                                 _react2['default'].createElement(DropdownItem, { value: 'address', label: 'Address' }),
                                 _react2['default'].createElement(DropdownItem, { value: 'city', label: 'City' }),
                                 _react2['default'].createElement(DropdownItem, { value: 'price', label: 'Price' })

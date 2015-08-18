@@ -60,7 +60,7 @@ export default React.createClass({
             <div>
                 <PropertyListHeader properties={this.state.properties}
                                     onNew={this.onNew}
-                                    onSortChange={this.sortChangeHandler}
+                                    onSort={this.sortHandler}
                                     onViewChange={this.viewChangeHandler}/>
                 {view}
                 {this.state.newProperty ?  <PropertyNew onSave={this.onSave} onCancel={this.onCancel}/> : ""}

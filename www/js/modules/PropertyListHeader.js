@@ -50,7 +50,7 @@ export default React.createClass({
                                     <ButtonIcon name="filterList"/>
                                     <span className="slds-assistive-text">Filter List</span>
                                 </button>
-                                <ButtonDropdown header="Sort By" icon="sort" onChange={this.props.onSortChange}>
+                                <ButtonDropdown header="Sort By" icon="sort" onChange={this.props.onSort}>
                                     <DropdownItem value="address" label="Address"/>
                                     <DropdownItem value="city" label="City"/>
                                     <DropdownItem value="price" label="Price"/>
