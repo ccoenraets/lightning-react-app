@@ -2,6 +2,7 @@ import React from 'react';
 
 import * as Icons from "./Icons";
 import * as activityService from './services/ActivityService';
+import moment from './utils/moment';
 
 let Icon = Icons.Icon;
 let ButtonIcon = Icons.ButtonIcon;
@@ -27,13 +28,13 @@ let ActivityListItem = React.createClass({
                                             <li className="slds-list__item slds-m-right--large">
                                                 <dl className="slds-dl--inline">
                                                     <dt className="slds-dl--inline__label">Date:</dt>
-                                                    <dd className="slds-dl--inline__detail"><a href="#">{this.props.activity.acitivity_date}</a></dd>
+                                                    <dd className="slds-dl--inline__detail"><a href="#">{moment(this.props.activity.activity_date).format("MMMM Do YYYY")}</a></dd>
                                                 </dl>
                                             </li>
                                             <li className="slds-list__item">
                                                 <dl className="slds-dl--inline">
                                                     <dt className="slds-dl--inline__label">From:</dt>
-                                                    <dd className="slds-dl--inline__detail"><a href="#">Jason Dewar</a></dd>
+                                                    <dd className="slds-dl--inline__detail"><a href={'#contact/' + this.props.contact_id}>{this.props.activity.first_name} {this.props.activity.last_name}</a></dd>
                                                 </dl>
                                             </li>
                                         </ul>
@@ -68,7 +69,6 @@ export default React.createClass({
     },
 
     render() {
-        console.log("****** render propertyactivitylist");
         var items = this.state.activities.map(function (activity) {
             return (
                 <ActivityListItem key={activity.activity_id} activity={activity}/>

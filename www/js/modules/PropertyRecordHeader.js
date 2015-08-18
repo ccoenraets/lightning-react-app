@@ -82,7 +82,7 @@ export default React.createClass({
                                 <p className="slds-truncate" title="Field 1">Asking Price</p>
                             </dt>
                             <dd>
-                                <p className="slds-text-body--regular slds-truncate" title="Description that demonstrates truncation with a long text field">{this.props.price}</p>
+                                <p className="slds-text-body--regular slds-truncate" title="Description that demonstrates truncation with a long text field">{parseFloat(this.props.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
                             </dd>
                         </dl>
                     </div>

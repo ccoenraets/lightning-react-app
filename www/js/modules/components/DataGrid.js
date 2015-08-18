@@ -1,6 +1,7 @@
 import React from 'react';
 
 import * as Icons from "./Icons";
+import moment from "./../utils/moment";
 
 let ButtonIcon = Icons.ButtonIcon;
 
@@ -47,7 +48,10 @@ let Column = React.createClass({
             console.log("currency");
             value = parseFloat(value).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
             console.log(value);
+        } else if (this.props.format === "date") {
+            value = moment(value).format("YYYY/MM/DD");
         }
+
         if (this.props.onLink) {
             value = <a href="#" onClick={this.linkHandler}>{value}</a>
         }

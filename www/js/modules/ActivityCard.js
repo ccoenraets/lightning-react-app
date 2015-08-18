@@ -57,7 +57,7 @@ export default React.createClass({
                 <section className="slds-card__body">
                     <DataGrid data={this.state.activities}>
                         <div header="Type" field="activity_name" sortable="true"/>
-                        <div header="Date" field="activity_date" sortable="true"/>
+                        <div header="Date" field="activity_date" sortable="true" format="date"/>
                         <div header="First Name" field="first_name"/>
                         <div header="Last Name" field="last_name"/>
                         <div header="Price" field="price" sortable="true"/>
