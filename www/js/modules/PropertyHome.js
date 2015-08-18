@@ -18,7 +18,7 @@ export default React.createClass({
             return this.setState({properties:properties})
         });
     },
-    sortChangeHandler(sortOrder) {
+    sortHandler(sortOrder) {
         propertyService.findAll(sortOrder).then(properties => this.setState({sortOrder: sortOrder, properties:properties}));
     },
 
@@ -54,7 +54,7 @@ export default React.createClass({
                 </div>
             </div>;
         } else {
-            view = <PropertyList properties={this.state.properties} onSortChange={this.sortChangeHandler}/>;
+            view = <PropertyList properties={this.state.properties} onSort={this.sortHandler}/>;
         }
         return (
             <div>

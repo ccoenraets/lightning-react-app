@@ -18,7 +18,7 @@ export default React.createClass({
                 <div header="City" field="city" sortable="true"/>
                 <div header="Bedrooms" field="bedrooms"/>
                 <div header="Bathrooms" field="bathrooms"/>
-                <div header="Price" field="price"/>
+                <div header="Price" field="price" sortable="true"/>
             </DataGrid>
         );
     }

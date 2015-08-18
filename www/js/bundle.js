@@ -25055,7 +25055,7 @@ exports['default'] = _react2['default'].createClass({
             return _this.setState({ properties: properties });
         });
     },
-    sortChangeHandler: function sortChangeHandler(sortOrder) {
+    sortHandler: function sortHandler(sortOrder) {
         var _this2 = this;
 
         propertyService.findAll(sortOrder).then(function (properties) {
@@ -25105,7 +25105,7 @@ exports['default'] = _react2['default'].createClass({
                 )
             );
         } else {
-            view = _react2['default'].createElement(_PropertyList2['default'], { properties: this.state.properties, onSortChange: this.sortChangeHandler });
+            view = _react2['default'].createElement(_PropertyList2['default'], { properties: this.state.properties, onSort: this.sortHandler });
         }
         return _react2['default'].createElement(
             'div',
@@ -25158,7 +25158,7 @@ exports['default'] = _react2['default'].createClass({
             _react2['default'].createElement('div', { header: 'City', field: 'city', sortable: 'true' }),
             _react2['default'].createElement('div', { header: 'Bedrooms', field: 'bedrooms' }),
             _react2['default'].createElement('div', { header: 'Bathrooms', field: 'bathrooms' }),
-            _react2['default'].createElement('div', { header: 'Price', field: 'price' })
+            _react2['default'].createElement('div', { header: 'Price', field: 'price', sortable: 'true' })
         );
     }
 
