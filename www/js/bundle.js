@@ -22945,6 +22945,10 @@ exports['default'] = _react2['default'].createClass({
         alert(field);
     },
 
+    linkHandler: function linkHandler(contact) {
+        window.location.hash = "#contact/" + contact.contact_id;
+    },
+
     render: function render() {
 
         return _react2['default'].createElement(
@@ -23003,9 +23007,9 @@ exports['default'] = _react2['default'].createClass({
                     { data: this.state.activities },
                     _react2['default'].createElement('div', { header: 'Type', field: 'activity_name', sortable: 'true' }),
                     _react2['default'].createElement('div', { header: 'Date', field: 'activity_date', sortable: 'true', format: 'date' }),
-                    _react2['default'].createElement('div', { header: 'First Name', field: 'first_name' }),
-                    _react2['default'].createElement('div', { header: 'Last Name', field: 'last_name' }),
-                    _react2['default'].createElement('div', { header: 'Price', field: 'price', sortable: 'true' })
+                    _react2['default'].createElement('div', { header: 'First Name', field: 'first_name', onLink: this.linkHandler }),
+                    _react2['default'].createElement('div', { header: 'Last Name', field: 'last_name', onLink: this.linkHandler }),
+                    _react2['default'].createElement('div', { header: 'Price', field: 'price', sortable: 'true', format: 'currency' })
                 )
             ),
             _react2['default'].createElement(
@@ -23088,20 +23092,44 @@ var ActivityListItem = _react2['default'].createClass({
                                 _react2['default'].createElement(
                                     'p',
                                     { className: 'tile__title slds-truncate' },
+                                    this.props.activity.activity_name
+                                ),
+                                this.props.activity.contact_id ? _react2['default'].createElement(
+                                    'ul',
+                                    { className: 'slds-list--horizontal slds-text-body--medium' },
                                     _react2['default'].createElement(
-                                        'a',
-                                        { href: '#' },
-                                        this.props.activity.activity_name
+                                        'li',
+                                        { className: 'slds-list__item' },
+                                        _react2['default'].createElement(
+                                            'dl',
+                                            { className: 'slds-dl--inline' },
+                                            _react2['default'].createElement(
+                                                'dt',
+                                                { className: 'slds-dl--inline__label' },
+                                                'From:'
+                                            ),
+                                            _react2['default'].createElement(
+                                                'dd',
+                                                { className: 'slds-dl--inline__detail' },
+                                                _react2['default'].createElement(
+                                                    'a',
+                                                    { href: '#contact/' + this.props.activity.contact_id },
+                                                    this.props.activity.first_name,
+                                                    ' ',
+                                                    this.props.activity.last_name
+                                                )
+                                            )
+                                        )
                                     )
+                                ) : "",
+                                _react2['default'].createElement(
+                                    'p',
+                                    { className: 'slds-truncate slds-text-body--small' },
+                                    this.props.activity.comment
                                 ),
                                 _react2['default'].createElement(
                                     'div',
                                     { className: 'tile__detail' },
-                                    _react2['default'].createElement(
-                                        'p',
-                                        { className: 'slds-truncate' },
-                                        this.props.activity.comment
-                                    ),
                                     _react2['default'].createElement(
                                         'ul',
                                         { className: 'slds-list--horizontal slds-text-body--small' },
@@ -23119,35 +23147,25 @@ var ActivityListItem = _react2['default'].createClass({
                                                 _react2['default'].createElement(
                                                     'dd',
                                                     { className: 'slds-dl--inline__detail' },
-                                                    _react2['default'].createElement(
-                                                        'a',
-                                                        { href: '#' },
-                                                        (0, _utilsMoment2['default'])(this.props.activity.activity_date).format("MMMM Do YYYY")
-                                                    )
+                                                    (0, _utilsMoment2['default'])(this.props.activity.activity_date).format("MMMM Do YYYY")
                                                 )
                                             )
                                         ),
                                         _react2['default'].createElement(
                                             'li',
-                                            { className: 'slds-list__item' },
+                                            { className: 'slds-list__item slds-m-right--large' },
                                             _react2['default'].createElement(
                                                 'dl',
                                                 { className: 'slds-dl--inline' },
                                                 _react2['default'].createElement(
                                                     'dt',
                                                     { className: 'slds-dl--inline__label' },
-                                                    'From:'
+                                                    'Price:'
                                                 ),
                                                 _react2['default'].createElement(
                                                     'dd',
                                                     { className: 'slds-dl--inline__detail' },
-                                                    _react2['default'].createElement(
-                                                        'a',
-                                                        { href: '#contact/' + this.props.contact_id },
-                                                        this.props.activity.first_name,
-                                                        ' ',
-                                                        this.props.activity.last_name
-                                                    )
+                                                    parseFloat(this.props.activity.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
                                                 )
                                             )
                                         )
@@ -23181,7 +23199,8 @@ exports['default'] = _react2['default'].createClass({
         }
         if (promise) {
             promise.then(function (activities) {
-                return _this.setState({ activities: activities });
+                console.log(activities);
+                _this.setState({ activities: activities });
             });
         }
     },

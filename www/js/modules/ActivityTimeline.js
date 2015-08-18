@@ -21,20 +21,29 @@ let ActivityListItem = React.createClass({
                             </div>
                             <div className="slds-media__body">
                                 <div className="slds-tile">
-                                    <p className="tile__title slds-truncate"><a href="#">{this.props.activity.activity_name}</a></p>
+                                    <p className="tile__title slds-truncate">{this.props.activity.activity_name}</p>
+                                    {this.props.activity.contact_id ?
+                                    <ul className="slds-list--horizontal slds-text-body--medium">
+                                        <li className="slds-list__item">
+                                            <dl className="slds-dl--inline">
+                                                <dt className="slds-dl--inline__label">From:</dt>
+                                                <dd className="slds-dl--inline__detail"><a href={'#contact/' + this.props.activity.contact_id}>{this.props.activity.first_name} {this.props.activity.last_name}</a></dd>
+                                            </dl>
+                                        </li>
+                                    </ul> : ""}
+                                    <p className="slds-truncate slds-text-body--small">{this.props.activity.comment}</p>
                                     <div className="tile__detail">
-                                        <p className="slds-truncate">{this.props.activity.comment}</p>
                                         <ul className="slds-list--horizontal slds-text-body--small">
                                             <li className="slds-list__item slds-m-right--large">
                                                 <dl className="slds-dl--inline">
                                                     <dt className="slds-dl--inline__label">Date:</dt>
-                                                    <dd className="slds-dl--inline__detail"><a href="#">{moment(this.props.activity.activity_date).format("MMMM Do YYYY")}</a></dd>
+                                                    <dd className="slds-dl--inline__detail">{moment(this.props.activity.activity_date).format("MMMM Do YYYY")}</dd>
                                                 </dl>
                                             </li>
-                                            <li className="slds-list__item">
+                                            <li className="slds-list__item slds-m-right--large">
                                                 <dl className="slds-dl--inline">
-                                                    <dt className="slds-dl--inline__label">From:</dt>
-                                                    <dd className="slds-dl--inline__detail"><a href={'#contact/' + this.props.contact_id}>{this.props.activity.first_name} {this.props.activity.last_name}</a></dd>
+                                                    <dt className="slds-dl--inline__label">Price:</dt>
+                                                    <dd className="slds-dl--inline__detail">{parseFloat(this.props.activity.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</dd>
                                                 </dl>
                                             </li>
                                         </ul>
@@ -64,7 +73,10 @@ export default React.createClass({
             promise = activityService.findByContact(props.contactId);
         }
         if (promise) {
-            promise.then((activities) => this.setState({activities: activities}));
+            promise.then((activities) => {
+                console.log(activities);
+                this.setState({activities: activities})
+            });
         }
     },
 
