@@ -19,7 +19,7 @@ export default React.createClass({
 
     render() {
         return (
-            <QuickFind label="Select a contact"
+            <QuickFind label="Select a contact..."
                        searchKey={this.state.searchKey}
                        valueField="contact_id"
                        labelField="name"

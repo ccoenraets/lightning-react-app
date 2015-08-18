@@ -1,7 +1,7 @@
 import React from 'react';
 
 import DatePicker from './components/DatePicker';
-import PickListActivity from './PickListActivity';
+import ActivityTypePickList from './ActivityTypePickList';
 import ContactLookup from './ContactLookup';
 import ContactQuickFind from './ContactQuickFind';
 import * as Icons from './Icons';
@@ -14,12 +14,12 @@ export default React.createClass({
         return {property_id: this.props.propertyId, price: this.props.price, contact_id: undefined, activity_type_id: undefined, activity_date: new Date(), comment: ""};
     },
 
-    contactSelectionChange(data, label) {
+    contactChange(data, label) {
         this.setState({contact_id: data});
     },
 
-    activityTypeSelectionChange(data, label) {
-        this.setState({activity_type_id: data});
+    activityTypeChange(value, label) {
+        this.setState({activity_type_id: value});
     },
 
     activityDateChange(event) {
@@ -58,14 +58,14 @@ export default React.createClass({
                                 <div className="slds-form-element">
                                     <label className="slds-form-element__label" htmlFor="sample1">Contact</label>
                                     <div className="slds-form-element__control">
-                                        <ContactQuickFind onChange={this.contactSelectionChange}/>
+                                        <ContactQuickFind onChange={this.contactChange}/>
                                     </div>
                                 </div>
 
                                 <div className="slds-form-element">
                                     <label className="slds-form-element__label" htmlFor="sample1">Type</label>
                                     <div className="slds-form-element__control">
-                                        <PickListActivity onSelectionChange={this.activityTypeSelectionChange}/>
+                                        <ActivityTypePickList onChange={this.activityTypeChange}/>
                                     </div>
                                 </div>
 

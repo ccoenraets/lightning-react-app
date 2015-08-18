@@ -22888,7 +22888,7 @@ _reactRouter2['default'].run(routes, function (Handler) {
     _react2['default'].render(_react2['default'].createElement(Handler, null), document.body);
 });
 
-},{"./modules/ContactForm":199,"./modules/ContactHome":200,"./modules/ContactRecord":206,"./modules/ContactView":208,"./modules/PropertyForm":212,"./modules/PropertyHome":213,"./modules/PropertyRecord":217,"./modules/PropertyView":219,"react":195,"react-router":26}],197:[function(require,module,exports){
+},{"./modules/ContactForm":200,"./modules/ContactHome":201,"./modules/ContactRecord":207,"./modules/ContactView":209,"./modules/PropertyForm":212,"./modules/PropertyHome":213,"./modules/PropertyRecord":217,"./modules/PropertyView":219,"react":195,"react-router":26}],197:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23023,7 +23023,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./Icons":209,"./components/DataGrid":221,"./services/ActivityService":230,"react":195}],198:[function(require,module,exports){
+},{"./Icons":210,"./components/DataGrid":221,"./services/ActivityService":230,"react":195}],198:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23194,7 +23194,52 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./Icons":209,"./services/ActivityService":230,"react":195}],199:[function(require,module,exports){
+},{"./Icons":210,"./services/ActivityService":230,"react":195}],199:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _componentsPickList = require("./components/PickList");
+
+var _componentsPickList2 = _interopRequireDefault(_componentsPickList);
+
+var _servicesActivityTypeService = require('./services/ActivityTypeService');
+
+var ActivityTypeService = _interopRequireWildcard(_servicesActivityTypeService);
+
+exports['default'] = _react2['default'].createClass({
+    displayName: 'ActivityTypePickList',
+
+    getInitialState: function getInitialState() {
+        return { activityTypes: [] };
+    },
+
+    componentDidMount: function componentDidMount() {
+        var _this = this;
+
+        ActivityTypeService.findAll().then(function (activityTypes) {
+            return _this.setState({ activityTypes: activityTypes });
+        });
+    },
+
+    render: function render() {
+        return _react2['default'].createElement(_componentsPickList2['default'], { valueField: 'activity_type_id', labelField: 'name', label: 'Select an activity...', items: this.state.activityTypes, onChange: this.props.onChange });
+    }
+
+});
+module.exports = exports['default'];
+
+},{"./components/PickList":227,"./services/ActivityTypeService":231,"react":195}],200:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23349,7 +23394,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"react":195}],200:[function(require,module,exports){
+},{"react":195}],201:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23425,7 +23470,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./ContactList":201,"./ContactListHeader":202,"./ContactNew":204,"./services/ContactService":232,"react":195}],201:[function(require,module,exports){
+},{"./ContactList":202,"./ContactListHeader":203,"./ContactNew":205,"./services/ContactService":232,"react":195}],202:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23463,7 +23508,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/DataGrid":221,"react":195}],202:[function(require,module,exports){
+},{"./components/DataGrid":221,"react":195}],203:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23644,7 +23689,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./Icons":209,"react":195}],203:[function(require,module,exports){
+},{"./Icons":210,"react":195}],204:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23698,7 +23743,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/Lookup":226,"./services/ContactService":232,"react":195}],204:[function(require,module,exports){
+},{"./components/Lookup":226,"./services/ContactService":232,"react":195}],205:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23880,7 +23925,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"react":195}],205:[function(require,module,exports){
+},{"react":195}],206:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23922,7 +23967,7 @@ exports['default'] = _react2['default'].createClass({
     },
 
     render: function render() {
-        return _react2['default'].createElement(_componentsQuickFind2['default'], { label: 'Select a contact',
+        return _react2['default'].createElement(_componentsQuickFind2['default'], { label: 'Select a contact...',
             searchKey: this.state.searchKey,
             valueField: 'contact_id',
             labelField: 'name',
@@ -23934,7 +23979,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/QuickFind":228,"./services/ContactService":232,"react":195}],206:[function(require,module,exports){
+},{"./components/QuickFind":228,"./services/ContactService":232,"react":195}],207:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -24004,7 +24049,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./ContactRecordHeader":207,"./services/ContactService":232,"react":195,"react-router":26}],207:[function(require,module,exports){
+},{"./ContactRecordHeader":208,"./services/ContactService":232,"react":195,"react-router":26}],208:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24220,7 +24265,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./Icons":209,"react":195}],208:[function(require,module,exports){
+},{"./Icons":210,"react":195}],209:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -24412,7 +24457,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./ActivityCard":197,"./ActivityTimeline":198,"./NewActivity":210,"./components/Tabs":229,"./services/PropertyService":233,"react":195}],209:[function(require,module,exports){
+},{"./ActivityCard":197,"./ActivityTimeline":198,"./NewActivity":211,"./components/Tabs":229,"./services/PropertyService":233,"react":195}],210:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -24480,7 +24525,7 @@ var InputIcon = _react2['default'].createClass({
 });
 exports.InputIcon = InputIcon;
 
-},{"react":195}],210:[function(require,module,exports){
+},{"react":195}],211:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -24499,9 +24544,9 @@ var _componentsDatePicker = require('./components/DatePicker');
 
 var _componentsDatePicker2 = _interopRequireDefault(_componentsDatePicker);
 
-var _PickListActivity = require('./PickListActivity');
+var _ActivityTypePickList = require('./ActivityTypePickList');
 
-var _PickListActivity2 = _interopRequireDefault(_PickListActivity);
+var _ActivityTypePickList2 = _interopRequireDefault(_ActivityTypePickList);
 
 var _ContactLookup = require('./ContactLookup');
 
@@ -24524,12 +24569,12 @@ exports['default'] = _react2['default'].createClass({
         return { property_id: this.props.propertyId, price: this.props.price, contact_id: undefined, activity_type_id: undefined, activity_date: new Date(), comment: "" };
     },
 
-    contactSelectionChange: function contactSelectionChange(data, label) {
+    contactChange: function contactChange(data, label) {
         this.setState({ contact_id: data });
     },
 
-    activityTypeSelectionChange: function activityTypeSelectionChange(data, label) {
-        this.setState({ activity_type_id: data });
+    activityTypeChange: function activityTypeChange(value, label) {
+        this.setState({ activity_type_id: value });
     },
 
     activityDateChange: function activityDateChange(event) {
@@ -24594,7 +24639,7 @@ exports['default'] = _react2['default'].createClass({
                                 _react2['default'].createElement(
                                     'div',
                                     { className: 'slds-form-element__control' },
-                                    _react2['default'].createElement(_ContactQuickFind2['default'], { onChange: this.contactSelectionChange })
+                                    _react2['default'].createElement(_ContactQuickFind2['default'], { onChange: this.contactChange })
                                 )
                             ),
                             _react2['default'].createElement(
@@ -24608,7 +24653,7 @@ exports['default'] = _react2['default'].createClass({
                                 _react2['default'].createElement(
                                     'div',
                                     { className: 'slds-form-element__control' },
-                                    _react2['default'].createElement(_PickListActivity2['default'], { onSelectionChange: this.activityTypeSelectionChange })
+                                    _react2['default'].createElement(_ActivityTypePickList2['default'], { onChange: this.activityTypeChange })
                                 )
                             ),
                             _react2['default'].createElement(
@@ -24680,53 +24725,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./ContactLookup":203,"./ContactQuickFind":205,"./Icons":209,"./PickListActivity":211,"./components/DatePicker":222,"react":195}],211:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-    value: true
-});
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _componentsPickList = require("./components/PickList");
-
-var _componentsPickList2 = _interopRequireDefault(_componentsPickList);
-
-var _servicesActivityTypeService = require('./services/ActivityTypeService');
-
-var ActivityTypeService = _interopRequireWildcard(_servicesActivityTypeService);
-
-exports['default'] = _react2['default'].createClass({
-    displayName: 'PickListActivity',
-
-    getInitialState: function getInitialState() {
-        return { activityTypes: [] };
-    },
-
-    componentDidMount: function componentDidMount() {
-        var _this = this;
-
-        ActivityTypeService.findAll().then(function (activityTypes) {
-            console.log(activityTypes);
-            _this.setState({ activityTypes: activityTypes });
-        });
-    },
-
-    render: function render() {
-        return _react2['default'].createElement(_componentsPickList2['default'], { dataField: 'activity_type_id', labelField: 'name', label: 'Select an activity', items: this.state.activityTypes, onSelectionChange: this.props.onSelectionChange });
-    }
-
-});
-module.exports = exports['default'];
-
-},{"./components/PickList":227,"./services/ActivityTypeService":231,"react":195}],212:[function(require,module,exports){
+},{"./ActivityTypePickList":199,"./ContactLookup":204,"./ContactQuickFind":206,"./Icons":210,"./components/DatePicker":222,"react":195}],212:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25337,7 +25336,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./Icons":209,"./components/Dropdown":223,"react":195}],216:[function(require,module,exports){
+},{"./Icons":210,"./components/Dropdown":223,"react":195}],216:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25828,7 +25827,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./Icons":209,"react":195}],219:[function(require,module,exports){
+},{"./Icons":210,"react":195}],219:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -26126,7 +26125,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./ActivityCard":197,"./ActivityTimeline":198,"./NewActivity":210,"./RealtorsCard":220,"./components/GoogleMaps":224,"./components/Tabs":229,"./services/ActivityService":230,"react":195}],220:[function(require,module,exports){
+},{"./ActivityCard":197,"./ActivityTimeline":198,"./NewActivity":211,"./RealtorsCard":220,"./components/GoogleMaps":224,"./components/Tabs":229,"./services/ActivityService":230,"react":195}],220:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26346,7 +26345,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./Icons":209,"react":195}],221:[function(require,module,exports){
+},{"./Icons":210,"react":195}],221:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27027,7 +27026,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./../Icons":209,"react":195}],223:[function(require,module,exports){
+},{"./../Icons":210,"react":195}],223:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27413,7 +27412,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Icons = require("./../Icons");
+var _Icons = require("./Icons");
 
 var Icons = _interopRequireWildcard(_Icons);
 
@@ -27423,8 +27422,9 @@ var ButtonIcon = Icons.ButtonIcon;
 var ListItem = _react2["default"].createClass({
     displayName: "ListItem",
 
-    handleClick: function handleClick() {
-        this.props.onSelected(this.props.data, this.props.label);
+    clickHandler: function clickHandler() {
+        console.log(this.props.label);
+        this.props.onSelect(this.props.data, this.props.label);
     },
 
     render: function render() {
@@ -27433,7 +27433,7 @@ var ListItem = _react2["default"].createClass({
             { className: "slds-dropdown__item slds-has-icon--left", role: "menuitem option", tabIndex: "-1" },
             _react2["default"].createElement(
                 "a",
-                { tabIndex: "-1", className: "slds-truncate", onClick: this.handleClick },
+                { tabIndex: "-1", className: "slds-truncate", onClick: this.clickHandler },
                 this.props.label
             )
         );
@@ -27448,11 +27448,11 @@ var Dropdown = _react2["default"].createClass({
         var _this = this;
 
         var items = this.props.items.map(function (item) {
-            return _react2["default"].createElement(ListItem, { data: item[_this.props.dataField], label: item[_this.props.labelField], onSelected: _this.props.onChange });
+            return _react2["default"].createElement(ListItem, { data: item[_this.props.valueField], label: item[_this.props.labelField], onSelect: _this.props.onChange });
         });
         return _react2["default"].createElement(
             "div",
-            { ref: "dd", className: "slds-dropdown slds-dropdown--left slds-dropdown--small slds-dropdown--menu" },
+            { className: "slds-dropdown slds-dropdown--left slds-dropdown--small slds-dropdown--menu", style: { display: this.props.isOpen ? "inherit" : "none" } },
             _react2["default"].createElement(
                 "ul",
                 { className: "slds-dropdown__list", role: "menu" },
@@ -27468,36 +27468,32 @@ exports["default"] = _react2["default"].createClass({
 
     getInitialState: function getInitialState() {
         return {
-            id: undefined,
+            value: undefined,
             label: this.props.label || 'Select an option',
-            opened: false
+            isOpen: false
         };
     },
 
-    handleFocus: function handleFocus() {
-        this.setState({ opened: true });
+    focusHandler: function focusHandler() {
+        this.setState({ isOpen: true });
     },
 
-    handleBlur: function handleBlur(id, label) {
-        var _this2 = this;
-
-        setTimeout(function () {
-            return _this2.setState({ opened: false });
-        }, 100);
+    blurHandler: function blurHandler(value, label) {
+        this.setState({ isOpen: false });
     },
 
-    changeHandler: function changeHandler(id, label) {
-        this.setState({ id: id, label: label, opened: false });
-        this.props.onChange(id, label);
+    changeHandler: function changeHandler(value, label) {
+        this.setState({ value: value, label: label, isOpen: false });
+        this.props.onChange(value, label);
     },
 
     render: function render() {
         return _react2["default"].createElement(
             "div",
-            { "aria-expanded": "true", className: "slds-picklist" },
+            { "aria-expanded": "true", className: "slds-picklist", onFocus: this.focusHandler, onBlur: this.blurHandler },
             _react2["default"].createElement(
                 "button",
-                { className: "slds-button slds-button--neutral slds-picklist__label", "aria-haspopup": "true", onFocus: this.handleFocus, onBlur: this.handleBlur },
+                { className: "slds-button slds-button--neutral slds-picklist__label", "aria-haspopup": "true" },
                 _react2["default"].createElement(
                     "span",
                     { className: "slds-truncate" },
@@ -27505,14 +27501,14 @@ exports["default"] = _react2["default"].createClass({
                 ),
                 _react2["default"].createElement(Icon, { name: "down" })
             ),
-            this.state.opened ? _react2["default"].createElement(Dropdown, { onChange: this.changeHandler, dataField: this.props.dataField, labelField: this.props.labelField, items: this.props.items }) : ''
+            _react2["default"].createElement(Dropdown, { onChange: this.changeHandler, valueField: this.props.valueField, labelField: this.props.labelField, items: this.props.items, isOpen: this.state.isOpen })
         );
     }
 
 });
 module.exports = exports["default"];
 
-},{"./../Icons":209,"react":195}],228:[function(require,module,exports){
+},{"./Icons":225,"react":195}],228:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27527,7 +27523,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Icons = require("./../Icons");
+var _Icons = require("./Icons");
 
 var Icons = _interopRequireWildcard(_Icons);
 
@@ -27574,7 +27570,7 @@ var Dropdown = _react2["default"].createClass({
         });
         return _react2["default"].createElement(
             "div",
-            { className: "slds-dropdown slds-dropdown--left slds-dropdown--small slds-dropdown--menu" },
+            { className: "slds-dropdown slds-dropdown--left slds-dropdown--small slds-dropdown--menu", style: { display: this.props.isOpen ? "inherit" : "none" } },
             _react2["default"].createElement(
                 "div",
                 { className: "slds-dropdown__header" },
@@ -27607,31 +27603,30 @@ exports["default"] = _react2["default"].createClass({
         return {
             value: undefined,
             label: this.props.label || 'Select an option',
-            active: false
+            isOpen: false
         };
     },
 
-    clickHandler: function clickHandler() {
-        this.setState({ active: !this.state.active });
+    focusHandler: function focusHandler() {
+        this.setState({ isOpen: true });
     },
 
-    handleBlur: function handleBlur(id, label) {
-        console.log("picklistblur");
-        //setTimeout(() => this.setState({active: false}));
+    blurHandler: function blurHandler(value, label) {
+        this.setState({ isOpen: false });
     },
 
     changeHandler: function changeHandler(value, label) {
-        this.setState({ value: value, label: label, active: false });
+        this.setState({ value: value, label: label, isOpen: false });
         this.props.onChange(value, label);
     },
 
     render: function render() {
         return _react2["default"].createElement(
             "div",
-            { "aria-expanded": "true", className: "slds-picklist slds-picklist--quickfind" },
+            { "aria-expanded": "true", className: "slds-picklist slds-picklist--quickfind", onFocus: this.focusHandler, onBlur: this.blurHandler },
             _react2["default"].createElement(
                 "button",
-                { className: "slds-button slds-button--neutral slds-picklist__label", "aria-haspopup": "true", onClick: this.clickHandler },
+                { className: "slds-button slds-button--neutral slds-picklist__label", "aria-haspopup": "true" },
                 _react2["default"].createElement(
                     "span",
                     { className: "slds-truncate" },
@@ -27639,14 +27634,19 @@ exports["default"] = _react2["default"].createClass({
                 ),
                 _react2["default"].createElement(Icon, { name: "down" })
             ),
-            this.state.active ? _react2["default"].createElement(Dropdown, { valueField: this.props.valueField, labelField: this.props.labelField, list: this.props.list, onSearchKeyChange: this.props.onSearchKeyChange, onChange: this.changeHandler }) : ''
+            _react2["default"].createElement(Dropdown, { valueField: this.props.valueField,
+                labelField: this.props.labelField,
+                list: this.props.list,
+                isOpen: this.state.isOpen,
+                onSearchKeyChange: this.props.onSearchKeyChange,
+                onChange: this.changeHandler })
         );
     }
 
 });
 module.exports = exports["default"];
 
-},{"./../Icons":209,"react":195}],229:[function(require,module,exports){
+},{"./Icons":225,"react":195}],229:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {

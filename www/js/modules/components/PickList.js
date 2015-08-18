@@ -1,20 +1,21 @@
 import React from 'react';
 
-import * as Icons from "./../Icons";
+import * as Icons from "./Icons";
 
 let Icon = Icons.Icon;
 let ButtonIcon = Icons.ButtonIcon;
 
 var ListItem = React.createClass({
 
-    handleClick() {
-        this.props.onSelected(this.props.data, this.props.label);
+    clickHandler() {
+        console.log(this.props.label);
+        this.props.onSelect(this.props.data, this.props.label);
     },
 
     render() {
         return (
             <li className="slds-dropdown__item slds-has-icon--left" role="menuitem option" tabIndex="-1">
-                <a tabIndex="-1" className="slds-truncate" onClick={this.handleClick}>{this.props.label}</a>
+                <a tabIndex="-1" className="slds-truncate" onClick={this.clickHandler}>{this.props.label}</a>
             </li>
         );
     }
@@ -24,9 +25,9 @@ var ListItem = React.createClass({
 var Dropdown = React.createClass({
 
     render() {
-        let items = this.props.items.map((item) => <ListItem data={item[this.props.dataField]} label={item[this.props.labelField]} onSelected={this.props.onChange}/>);
+        let items = this.props.items.map((item) => <ListItem data={item[this.props.valueField]} label={item[this.props.labelField]} onSelect={this.props.onChange}/>);
         return (
-            <div ref="dd" className="slds-dropdown slds-dropdown--left slds-dropdown--small slds-dropdown--menu">
+            <div className="slds-dropdown slds-dropdown--left slds-dropdown--small slds-dropdown--menu" style={{display: this.props.isOpen ? "inherit" : "none"}}>
                 <ul className="slds-dropdown__list" role="menu">
                     {items}
                 </ul>
@@ -40,33 +41,33 @@ export default React.createClass({
 
     getInitialState() {
         return {
-            id: undefined,
+            value: undefined,
             label: this.props.label || 'Select an option',
-            opened: false
+            isOpen: false
         };
     },
 
-    handleFocus() {
-        this.setState({opened: true});
+    focusHandler() {
+        this.setState({isOpen: true});
     },
 
-    handleBlur(id, label) {
-        setTimeout(() => this.setState({opened: false}),100);
+    blurHandler(value, label) {
+        this.setState({isOpen: false});
     },
 
-    changeHandler(id, label) {
-        this.setState({id: id, label: label, opened: false});
-        this.props.onChange(id, label);
+    changeHandler(value, label) {
+        this.setState({value: value, label: label, isOpen: false});
+        this.props.onChange(value, label);
     },
 
     render() {
         return (
-            <div aria-expanded="true" className="slds-picklist">
-                <button className="slds-button slds-button--neutral slds-picklist__label" aria-haspopup="true" onFocus={this.handleFocus}  onBlur={this.handleBlur} >
+            <div aria-expanded="true" className="slds-picklist" onFocus={this.focusHandler}  onBlur={this.blurHandler}>
+                <button className="slds-button slds-button--neutral slds-picklist__label" aria-haspopup="true">
                     <span className="slds-truncate">{this.state.label}</span>
                     <Icon name="down"/>
                 </button>
-                {this.state.opened ? <Dropdown onChange={this.changeHandler} dataField={this.props.dataField} labelField={this.props.labelField} items={this.props.items}/> : ''}
+                <Dropdown onChange={this.changeHandler} valueField={this.props.valueField} labelField={this.props.labelField} items={this.props.items} isOpen={this.state.isOpen}/>
             </div>
         );
     }
