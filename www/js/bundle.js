@@ -25155,9 +25155,9 @@ exports['default'] = _react2['default'].createClass({
             { data: this.props.properties, onSort: this.sortHandler },
             _react2['default'].createElement('div', { header: 'Address', field: 'address', sortable: 'true', onLink: this.linkHandler }),
             _react2['default'].createElement('div', { header: 'City', field: 'city', sortable: 'true' }),
-            _react2['default'].createElement('div', { header: 'Bedrooms', field: 'bedrooms' }),
-            _react2['default'].createElement('div', { header: 'Bathrooms', field: 'bathrooms' }),
-            _react2['default'].createElement('div', { header: 'Price', field: 'price', sortable: 'true' })
+            _react2['default'].createElement('div', { header: 'Bedrooms', field: 'bedrooms', textAlign: 'center' }),
+            _react2['default'].createElement('div', { header: 'Bathrooms', field: 'bathrooms', textAlign: 'center' }),
+            _react2['default'].createElement('div', { header: 'Price', field: 'price', sortable: 'true', textAlign: 'right', format: 'currency' })
         );
     }
 
@@ -25816,7 +25816,7 @@ exports["default"] = _react2["default"].createClass({
                             _react2["default"].createElement(
                                 "p",
                                 { className: "slds-text-body--regular slds-truncate", title: "Description that demonstrates truncation with a long text field" },
-                                "$899,000"
+                                this.props.price
                             )
                         )
                     )
@@ -26369,6 +26369,12 @@ var ButtonIcon = Icons.ButtonIcon;
 var ColumnHeader = _react2["default"].createClass({
     displayName: "ColumnHeader",
 
+    getDefaultProps: function getDefaultProps() {
+        return {
+            textAlign: "left"
+        };
+    },
+
     sortHandler: function sortHandler() {
         this.props.onSort(this.props.field);
     },
@@ -26376,7 +26382,7 @@ var ColumnHeader = _react2["default"].createClass({
     render: function render() {
         return _react2["default"].createElement(
             "th",
-            { className: this.props.sortable ? "slds-is-sortable" : "", scope: "col" },
+            { className: this.props.sortable ? "slds-is-sortable" : "", scope: "col", style: { textAlign: this.props.textAlign } },
             _react2["default"].createElement(
                 "span",
                 { className: "slds-truncate" },
@@ -26408,20 +26414,23 @@ var Column = _react2["default"].createClass({
     },
 
     render: function render() {
-        var value = undefined;
+        var value = this.props.data[this.props.field];
+        if (this.props.format === "currency") {
+            console.log("currency");
+            value = parseFloat(value).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+            console.log(value);
+        }
         if (this.props.onLink) {
             value = _react2["default"].createElement(
                 "a",
                 { href: "#", onClick: this.linkHandler },
-                this.props.data[this.props.field]
+                value
             );
-        } else {
-            value = this.props.data[this.props.field];
         }
 
         return _react2["default"].createElement(
             "td",
-            { "data-label": this.props.label },
+            { "data-label": this.props.label, style: { textAlign: this.props.textAlign } },
             _react2["default"].createElement(
                 "span",
                 { className: "slds-truncate" },
@@ -26439,7 +26448,7 @@ var Row = _react2["default"].createClass({
         var columns = [];
         for (var i = 0; i < this.props.columns.length; i++) {
             var column = this.props.columns[i];
-            columns.push(_react2["default"].createElement(Column, { label: column.props.header, data: this.props.data, field: column.props.field, onLink: column.props.onLink }));
+            columns.push(_react2["default"].createElement(Column, { label: column.props.header, data: this.props.data, field: column.props.field, textAlign: column.props.textAlign, format: column.props.format, onLink: column.props.onLink }));
         }
         return _react2["default"].createElement(
             "tr",
@@ -26465,7 +26474,7 @@ exports["default"] = _react2["default"].createClass({
         var headers = [];
         for (var i = 0; i < this.props.children.length; i++) {
             var column = this.props.children[i];
-            headers.push(_react2["default"].createElement(ColumnHeader, { field: column.props.field, label: column.props.header, sortable: column.props.sortable, onSort: this.sortHandler }));
+            headers.push(_react2["default"].createElement(ColumnHeader, { field: column.props.field, label: column.props.header, sortable: column.props.sortable, textAlign: column.props.textAlign, onSort: this.sortHandler }));
         }
         var rows = this.props.data.map(function (item) {
             return _react2["default"].createElement(Row, { data: item, columns: _this.props.children });

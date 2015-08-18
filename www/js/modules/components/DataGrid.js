@@ -6,13 +6,19 @@ let ButtonIcon = Icons.ButtonIcon;
 
 let ColumnHeader = React.createClass({
 
+    getDefaultProps: function () {
+        return {
+            textAlign: "left"
+        };
+    },
+
     sortHandler() {
         this.props.onSort(this.props.field);
     },
 
     render() {
         return (
-            <th className={this.props.sortable ? "slds-is-sortable" : ""} scope="col">
+            <th className={this.props.sortable ? "slds-is-sortable" : ""} scope="col"  style={{textAlign: this.props.textAlign}}>
                 <span className="slds-truncate">{this.props.label}</span>
                 {this.props.sortable ?
                     <button className="slds-button slds-button--icon-bare slds-button--icon-border-small" onClick={this.sortHandler}>
@@ -36,15 +42,18 @@ let Column = React.createClass({
     },
 
     render() {
-        let value;
+        let value = this.props.data[this.props.field];
+        if (this.props.format === "currency") {
+            console.log("currency");
+            value = parseFloat(value).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+            console.log(value);
+        }
         if (this.props.onLink) {
-            value = <a href="#" onClick={this.linkHandler}>{this.props.data[this.props.field]}</a>
-        } else {
-            value = this.props.data[this.props.field];
+            value = <a href="#" onClick={this.linkHandler}>{value}</a>
         }
 
         return (
-            <td data-label={this.props.label}>
+            <td data-label={this.props.label} style={{textAlign: this.props.textAlign}}>
                 <span className="slds-truncate">
                     {value}
                 </span>
@@ -60,7 +69,7 @@ let Row = React.createClass({
         var columns = [];
         for (let i=0; i<this.props.columns.length; i++) {
             let column = this.props.columns[i];
-            columns.push(<Column label={column.props.header} data={this.props.data} field={column.props.field} onLink={column.props.onLink}/>);
+            columns.push(<Column label={column.props.header} data={this.props.data} field={column.props.field} textAlign={column.props.textAlign} format={column.props.format} onLink={column.props.onLink}/>);
         }
         return (
             <tr className="slds-hint-parent">
@@ -83,7 +92,7 @@ export default React.createClass({
         let headers = [];
         for (let i=0; i<this.props.children.length; i++) {
             let column = this.props.children[i];
-            headers.push(<ColumnHeader field={column.props.field} label={column.props.header} sortable={column.props.sortable} onSort={this.sortHandler}/>);
+            headers.push(<ColumnHeader field={column.props.field} label={column.props.header} sortable={column.props.sortable} textAlign={column.props.textAlign} onSort={this.sortHandler}/>);
         }
         var rows = this.props.data.map(item => <Row data={item} columns={this.props.children}/>)
         return (

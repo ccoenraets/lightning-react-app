@@ -82,7 +82,7 @@ export default React.createClass({
                                 <p className="slds-truncate" title="Field 1">Asking Price</p>
                             </dt>
                             <dd>
-                                <p className="slds-text-body--regular slds-truncate" title="Description that demonstrates truncation with a long text field">$899,000</p>
+                                <p className="slds-text-body--regular slds-truncate" title="Description that demonstrates truncation with a long text field">{this.props.price}</p>
                             </dd>
                         </dl>
                     </div>
