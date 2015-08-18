@@ -1,16 +1,18 @@
+# Lightning Realty 
 
 ## Automatic Deployment to Heroku
 
 Click the Button below to deploy to Heroku
 
+(available soon)
 
 ## Local Installation
 
 1. Install Postgres locally and create a database called **realty**
 
-1. Navigate to the **Lightning-realty** directory and install the project dependencies:
+1. Navigate to the **lightningrealty** directory and install the project dependencies:
 
-    ```npm Install```
+    ```npm install```
 
 1. Type the following command to build the client application:
 
