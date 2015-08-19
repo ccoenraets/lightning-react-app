@@ -10,7 +10,10 @@ module.exports = React.createClass( {
       string:'',
       selected: null,
       placeholder: 'Pick a Date',
-      format: 'MM/DD/YYYY'
+      format: 'MM/DD/YYYY',
+      onDateChage: function(moment){
+        console.log('onDateChage should be defined');
+      }
     }
   },
 
@@ -28,6 +31,9 @@ module.exports = React.createClass( {
       isOpen:false,
       string:moment.format(this.props.format)
     })
+    if(this.props.onDateChage){
+      this.props.onDateChange(moment)
+    }
   },
 
   handleClose() {
@@ -57,10 +63,14 @@ module.exports = React.createClass( {
   handleInputChange() {
     var string = this.refs.date.getDOMNode().value;
     if(Moment().isValid(string)){
+      var selected = Moment(string,this.props.format);
       this.setState({
-        selected:Moment(string,this.props.format),
+        selected:selected,
         string:string
       });
+      if(this.props.onDateChage){
+        this.props.onDateChange(selected)
+      }
     }
     else{
       this.setState({

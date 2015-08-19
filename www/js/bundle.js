@@ -36211,7 +36211,7 @@ module.exports = _react2['default'].createClass({
       { className: 'ignore-react-onclickoutside' },
       _react2['default'].createElement(
         'div',
-        { className: 'sds-datepicker', 'aria-hidden': 'false', 'data-selection': 'single', onClick: this.handleClick },
+        { className: 'slds-datepicker', 'aria-hidden': 'false', 'data-selection': 'single', onClick: this.handleClick },
         _react2['default'].createElement(_SLDSDatePickerNavIndex2['default'], {
           onChangeMonth: this.handleMonthChange,
           selected: this.props.selected,
@@ -36222,12 +36222,12 @@ module.exports = _react2['default'].createClass({
           onSelectDate: this.handleSelectDate }),
         _react2['default'].createElement(
           'span',
-          { id: 'bn_prev-label', className: 'sds-assistive-text' },
+          { id: 'bn_prev-label', className: 'slds-assistive-text' },
           'Go to previous month'
         ),
         _react2['default'].createElement(
           'span',
-          { id: 'bn_next-label', className: 'sds-assistive-text' },
+          { id: 'bn_next-label', className: 'slds-assistive-text' },
           'Go to next month'
         )
       )
@@ -36418,7 +36418,10 @@ module.exports = _react2['default'].createClass({
       string: '',
       selected: null,
       placeholder: 'Pick a Date',
-      format: 'MM/DD/YYYY'
+      format: 'MM/DD/YYYY',
+      onDateChage: function onDateChage(moment) {
+        console.log('onDateChage should be defined');
+      }
     };
   },
 
@@ -36436,6 +36439,9 @@ module.exports = _react2['default'].createClass({
       isOpen: false,
       string: moment.format(this.props.format)
     });
+    if (this.props.onDateChage) {
+      this.props.onDateChange(moment);
+    }
   },
 
   handleClose: function handleClose() {
@@ -36467,10 +36473,14 @@ module.exports = _react2['default'].createClass({
   handleInputChange: function handleInputChange() {
     var string = this.refs.date.getDOMNode().value;
     if ((0, _moment2['default'])().isValid(string)) {
+      var selected = (0, _moment2['default'])(string, this.props.format);
       this.setState({
-        selected: (0, _moment2['default'])(string, this.props.format),
+        selected: selected,
         string: string
       });
+      if (this.props.onDateChage) {
+        this.props.onDateChange(selected);
+      }
     } else {
       this.setState({
         selected: null,
