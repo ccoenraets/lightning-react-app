@@ -1,11 +1,25 @@
 import React from 'react';
 
-import * as Icons from "./Icons";
+import * as Icons from "./components/Icons";
 import * as activityService from './services/ActivityService';
 import moment from './utils/moment';
 
 let Icon = Icons.Icon;
 let ButtonIcon = Icons.ButtonIcon;
+
+let getActivityTheme =  (activityName) => {
+    if (activityName === "Listed") {
+        return "event"
+    } else if (activityName === "Open House") {
+        return "event";
+    } else if (activityName === "Inquiry") {
+        return "email";
+    } else if (activityName === "Offer") {
+        return "email";
+    } else if (activityName === "Price Reduction") {
+        return "task";
+    }
+};
 
 let ActivityListItem = React.createClass({
 
@@ -15,9 +29,9 @@ let ActivityListItem = React.createClass({
                 <span className="slds-assistive-text">Email</span>
                 <div className="slds-media slds-media--reverse">
                     <div className="slds-media__body">
-                        <div className="slds-media slds-media--timeline slds-timeline__media--email">
+                        <div className={"slds-media slds-media--timeline slds-timeline__media--" + this.props.theme}>
                             <div className="slds-media__figure">
-                                <Icon name="email" size="--medium"/>
+                                <Icon type="standard" name={this.props.theme}/>
                             </div>
                             <div className="slds-media__body">
                                 <div className="slds-tile">
@@ -82,8 +96,9 @@ export default React.createClass({
 
     render() {
         var items = this.state.activities.map(function (activity) {
+            let theme = getActivityTheme(activity.activity_name)
             return (
-                <ActivityListItem key={activity.activity_id} activity={activity}/>
+                <ActivityListItem key={activity.activity_id} activity={activity} theme={theme}/>
             );
         });
         return (

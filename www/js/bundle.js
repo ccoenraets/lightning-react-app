@@ -23042,9 +23042,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Icons = require("./Icons");
+var _componentsIcons = require("./components/Icons");
 
-var Icons = _interopRequireWildcard(_Icons);
+var Icons = _interopRequireWildcard(_componentsIcons);
 
 var _servicesActivityService = require('./services/ActivityService');
 
@@ -23056,6 +23056,20 @@ var _utilsMoment2 = _interopRequireDefault(_utilsMoment);
 
 var Icon = Icons.Icon;
 var ButtonIcon = Icons.ButtonIcon;
+
+var getActivityTheme = function getActivityTheme(activityName) {
+    if (activityName === "Listed") {
+        return "event";
+    } else if (activityName === "Open House") {
+        return "event";
+    } else if (activityName === "Inquiry") {
+        return "email";
+    } else if (activityName === "Offer") {
+        return "email";
+    } else if (activityName === "Price Reduction") {
+        return "task";
+    }
+};
 
 var ActivityListItem = _react2['default'].createClass({
     displayName: 'ActivityListItem',
@@ -23077,11 +23091,11 @@ var ActivityListItem = _react2['default'].createClass({
                     { className: 'slds-media__body' },
                     _react2['default'].createElement(
                         'div',
-                        { className: 'slds-media slds-media--timeline slds-timeline__media--email' },
+                        { className: "slds-media slds-media--timeline slds-timeline__media--" + this.props.theme },
                         _react2['default'].createElement(
                             'div',
                             { className: 'slds-media__figure' },
-                            _react2['default'].createElement(Icon, { name: 'email', size: '--medium' })
+                            _react2['default'].createElement(Icon, { type: 'standard', name: this.props.theme })
                         ),
                         _react2['default'].createElement(
                             'div',
@@ -23207,7 +23221,8 @@ exports['default'] = _react2['default'].createClass({
 
     render: function render() {
         var items = this.state.activities.map(function (activity) {
-            return _react2['default'].createElement(ActivityListItem, { key: activity.activity_id, activity: activity });
+            var theme = getActivityTheme(activity.activity_name);
+            return _react2['default'].createElement(ActivityListItem, { key: activity.activity_id, activity: activity, theme: theme });
         });
         return _react2['default'].createElement(
             'ul',
@@ -23218,7 +23233,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./Icons":210,"./services/ActivityService":230,"./utils/moment":234,"react":195}],199:[function(require,module,exports){
+},{"./components/Icons":225,"./services/ActivityService":230,"./utils/moment":234,"react":195}],199:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
