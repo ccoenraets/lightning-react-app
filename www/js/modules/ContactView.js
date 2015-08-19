@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Tabs from './components/Tabs';
+import moment from './utils/moment';
 
 import ActivityTimeline from './ActivityTimeline';
 import ActivityCard from './ActivityCard';
@@ -39,27 +40,43 @@ export default React.createClass({
 
                     <div className="slds-grid slds-wrap slds-m-top--large">
 
-                        <div className="slds-col--padded slds-size--1-of-1">
-                            <span className="slds-avatar slds-avatar--circle slds-avatar--large">
-                                <img src={this.props.pic} alt="portrait" />
+                        <div className="slds-col--padded slds-size--1-of-1 slds-m-bottom--small">
+                            <span className="slds-avatar slds-avatar--circle slds-avatar--large" style={{height: "120px", width: "120px"}}>
+                                <img src={this.props.pic} alt="portrait"/>
                             </span>
                         </div>
 
-                        <div className="slds-col--padded slds-size--1-of-1">
-                            {this.props.description}
+                        <div className="slds-col--padded slds-size--1-of-2">
+                            <dl className="page-header--rec-home__detail-item">
+                                <dt>
+                                    <p className="slds-truncate" title="Field 1" style={headerStyle}>Address</p>
+                                </dt>
+                                <dd>
+                                    <p className="slds-text-body--regular slds-truncate" title="">{this.props.address}<br/>{this.props.city}, {this.props.state} {this.props.zip}</p>
+                                </dd>
+                            </dl>
                         </div>
-
-                        <div className="slds-col--padded">
+                        <div className="slds-col--padded slds-size--1-of-2">
+                            <dl className="page-header--rec-home__detail-item">
+                                <dt>
+                                    <p className="slds-truncate" title="Field 1" style={headerStyle}>Occupation</p>
+                                </dt>
+                                <dd>
+                                    <p className="slds-text-body--regular slds-truncate" title="">{this.props.occupation}</p>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div className="slds-col--padded slds-size--1-of-2">
                             <dl className="page-header--rec-home__detail-item">
                                 <dt>
                                     <p className="slds-truncate" title="Field 1" style={headerStyle}>Member since</p>
                                 </dt>
                                 <dd>
-                                    <p className="slds-text-body--regular slds-truncate" title="">{this.props.member_since}</p>
+                                    <p className="slds-text-body--regular slds-truncate" title="">{moment(this.props.member_since).format("MMMM Do YYYY")}</p>
                                 </dd>
                             </dl>
                         </div>
-                        <div className="slds-col--padded">
+                        <div className="slds-col--padded slds-size--1-of-2">
                             <dl className="page-header--rec-home__detail-item">
                                 <dt>
                                     <p className="slds-truncate" title="Field 1" style={headerStyle}>Lead Source</p>
@@ -69,7 +86,7 @@ export default React.createClass({
                                 </dd>
                             </dl>
                         </div>
-                        <div className="slds-col--padded">
+                        <div className="slds-col--padded slds-size--1-of-2">
                             <dl className="page-header--rec-home__detail-item">
                                 <dt>
                                     <p className="slds-truncate" title="Field 1" style={headerStyle}>Category</p>

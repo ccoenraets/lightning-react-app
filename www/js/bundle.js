@@ -24485,6 +24485,10 @@ var _componentsTabs = require('./components/Tabs');
 
 var _componentsTabs2 = _interopRequireDefault(_componentsTabs);
 
+var _utilsMoment = require('./utils/moment');
+
+var _utilsMoment2 = _interopRequireDefault(_utilsMoment);
+
 var _ActivityTimeline = require('./ActivityTimeline');
 
 var _ActivityTimeline2 = _interopRequireDefault(_ActivityTimeline);
@@ -24535,21 +24539,74 @@ exports['default'] = _react2['default'].createClass({
                     { className: 'slds-grid slds-wrap slds-m-top--large' },
                     _react2['default'].createElement(
                         'div',
-                        { className: 'slds-col--padded slds-size--1-of-1' },
+                        { className: 'slds-col--padded slds-size--1-of-1 slds-m-bottom--small' },
                         _react2['default'].createElement(
                             'span',
-                            { className: 'slds-avatar slds-avatar--circle slds-avatar--large' },
+                            { className: 'slds-avatar slds-avatar--circle slds-avatar--large', style: { height: "120px", width: "120px" } },
                             _react2['default'].createElement('img', { src: this.props.pic, alt: 'portrait' })
                         )
                     ),
                     _react2['default'].createElement(
                         'div',
-                        { className: 'slds-col--padded slds-size--1-of-1' },
-                        this.props.description
+                        { className: 'slds-col--padded slds-size--1-of-2' },
+                        _react2['default'].createElement(
+                            'dl',
+                            { className: 'page-header--rec-home__detail-item' },
+                            _react2['default'].createElement(
+                                'dt',
+                                null,
+                                _react2['default'].createElement(
+                                    'p',
+                                    { className: 'slds-truncate', title: 'Field 1', style: headerStyle },
+                                    'Address'
+                                )
+                            ),
+                            _react2['default'].createElement(
+                                'dd',
+                                null,
+                                _react2['default'].createElement(
+                                    'p',
+                                    { className: 'slds-text-body--regular slds-truncate', title: '' },
+                                    this.props.address,
+                                    _react2['default'].createElement('br', null),
+                                    this.props.city,
+                                    ', ',
+                                    this.props.state,
+                                    ' ',
+                                    this.props.zip
+                                )
+                            )
+                        )
                     ),
                     _react2['default'].createElement(
                         'div',
-                        { className: 'slds-col--padded' },
+                        { className: 'slds-col--padded slds-size--1-of-2' },
+                        _react2['default'].createElement(
+                            'dl',
+                            { className: 'page-header--rec-home__detail-item' },
+                            _react2['default'].createElement(
+                                'dt',
+                                null,
+                                _react2['default'].createElement(
+                                    'p',
+                                    { className: 'slds-truncate', title: 'Field 1', style: headerStyle },
+                                    'Occupation'
+                                )
+                            ),
+                            _react2['default'].createElement(
+                                'dd',
+                                null,
+                                _react2['default'].createElement(
+                                    'p',
+                                    { className: 'slds-text-body--regular slds-truncate', title: '' },
+                                    this.props.occupation
+                                )
+                            )
+                        )
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'slds-col--padded slds-size--1-of-2' },
                         _react2['default'].createElement(
                             'dl',
                             { className: 'page-header--rec-home__detail-item' },
@@ -24568,14 +24625,14 @@ exports['default'] = _react2['default'].createClass({
                                 _react2['default'].createElement(
                                     'p',
                                     { className: 'slds-text-body--regular slds-truncate', title: '' },
-                                    this.props.member_since
+                                    (0, _utilsMoment2['default'])(this.props.member_since).format("MMMM Do YYYY")
                                 )
                             )
                         )
                     ),
                     _react2['default'].createElement(
                         'div',
-                        { className: 'slds-col--padded' },
+                        { className: 'slds-col--padded slds-size--1-of-2' },
                         _react2['default'].createElement(
                             'dl',
                             { className: 'page-header--rec-home__detail-item' },
@@ -24601,7 +24658,7 @@ exports['default'] = _react2['default'].createClass({
                     ),
                     _react2['default'].createElement(
                         'div',
-                        { className: 'slds-col--padded' },
+                        { className: 'slds-col--padded slds-size--1-of-2' },
                         _react2['default'].createElement(
                             'dl',
                             { className: 'page-header--rec-home__detail-item' },
@@ -24658,7 +24715,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./ActivityCard":197,"./ActivityTimeline":198,"./NewActivity":212,"./components/Tabs":229,"./services/PropertyService":234,"react":195}],211:[function(require,module,exports){
+},{"./ActivityCard":197,"./ActivityTimeline":198,"./NewActivity":212,"./components/Tabs":229,"./services/PropertyService":234,"./utils/moment":235,"react":195}],211:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {

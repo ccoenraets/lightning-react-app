@@ -5,7 +5,7 @@ import * as Icons from "./Icons";
 let Icon = Icons.Icon;
 let ButtonIcon = Icons.ButtonIcon;
 
-var ListItem = React.createClass({
+let ListItem = React.createClass({
 
     handleClick(event) {
         this.props.onSelected(this.props.value, this.props.label);
