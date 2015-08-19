@@ -27505,7 +27505,7 @@ exports["default"] = _react2["default"].createClass({
                     { className: "slds-truncate" },
                     this.state.label
                 ),
-                _react2["default"].createElement(Icon, { type: "utility", name: "down" })
+                _react2["default"].createElement(Icon, { category: "utility", name: "down" })
             ),
             _react2["default"].createElement(Dropdown, { onChange: this.changeHandler, valueField: this.props.valueField, labelField: this.props.labelField, items: this.props.items, isOpen: this.state.isOpen })
         );
@@ -27638,7 +27638,7 @@ exports["default"] = _react2["default"].createClass({
                     { className: "slds-truncate" },
                     this.state.label
                 ),
-                _react2["default"].createElement(Icon, { type: "utility", name: "down" })
+                _react2["default"].createElement(Icon, { category: "utility", name: "down" })
             ),
             _react2["default"].createElement(Dropdown, { valueField: this.props.valueField,
                 labelField: this.props.labelField,

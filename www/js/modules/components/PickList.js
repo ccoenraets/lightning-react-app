@@ -65,7 +65,7 @@ export default React.createClass({
             <div aria-expanded="true" className="slds-picklist" onFocus={this.focusHandler}  onBlur={this.blurHandler}>
                 <button className="slds-button slds-button--neutral slds-picklist__label" aria-haspopup="true">
                     <span className="slds-truncate">{this.state.label}</span>
-                    <Icon type="utility" name="down"/>
+                    <Icon category="utility" name="down"/>
                 </button>
                 <Dropdown onChange={this.changeHandler} valueField={this.props.valueField} labelField={this.props.labelField} items={this.props.items} isOpen={this.state.isOpen}/>
             </div>
