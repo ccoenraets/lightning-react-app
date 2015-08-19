@@ -22888,7 +22888,7 @@ _reactRouter2['default'].run(routes, function (Handler) {
     _react2['default'].render(_react2['default'].createElement(Handler, null), document.body);
 });
 
-},{"./modules/ContactForm":200,"./modules/ContactHome":201,"./modules/ContactRecord":207,"./modules/ContactView":209,"./modules/PropertyForm":212,"./modules/PropertyHome":213,"./modules/PropertyRecord":217,"./modules/PropertyView":219,"react":195,"react-router":26}],197:[function(require,module,exports){
+},{"./modules/ContactForm":201,"./modules/ContactHome":202,"./modules/ContactRecord":208,"./modules/ContactView":210,"./modules/PropertyForm":213,"./modules/PropertyHome":214,"./modules/PropertyRecord":218,"./modules/PropertyView":220,"react":195,"react-router":26}],197:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23027,7 +23027,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./Icons":210,"./components/DataGrid":221,"./services/ActivityService":230,"react":195}],198:[function(require,module,exports){
+},{"./Icons":211,"./components/DataGrid":221,"./services/ActivityService":230,"react":195}],198:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23233,7 +23233,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/Icons":225,"./services/ActivityService":230,"./utils/moment":234,"react":195}],199:[function(require,module,exports){
+},{"./components/Icons":225,"./services/ActivityService":230,"./utils/moment":235,"react":195}],199:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23279,6 +23279,135 @@ exports['default'] = _react2['default'].createClass({
 module.exports = exports['default'];
 
 },{"./components/PickList":227,"./services/ActivityTypeService":231,"react":195}],200:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _servicesBrokerService = require('./services/BrokerService');
+
+var brokerService = _interopRequireWildcard(_servicesBrokerService);
+
+var _componentsDataGrid = require("./components/DataGrid");
+
+var _componentsDataGrid2 = _interopRequireDefault(_componentsDataGrid);
+
+var _Icons = require("./Icons");
+
+var Icons = _interopRequireWildcard(_Icons);
+
+var Icon = Icons.Icon;
+var ButtonIcon = Icons.ButtonIcon;
+
+exports['default'] = _react2['default'].createClass({
+    displayName: 'BrokerCard',
+
+    getInitialState: function getInitialState() {
+        return { brokers: [] };
+    },
+
+    componentWillReceiveProps: function componentWillReceiveProps(props) {
+        var _this = this;
+
+        brokerService.findByProperty(props.propertyId).then(function (brokers) {
+            console.log(brokers);
+            _this.setState({ brokers: brokers });
+        });
+    },
+
+    linkHandler: function linkHandler(contact) {
+        window.location.hash = "#broker/" + broker.broker_id;
+    },
+
+    onNew: function onNew() {},
+
+    render: function render() {
+
+        return _react2['default'].createElement(
+            'div',
+            { className: 'slds-card' },
+            _react2['default'].createElement(
+                'header',
+                { className: 'slds-card__header slds-grid' },
+                _react2['default'].createElement(
+                    'div',
+                    { className: 'slds-media slds-media--center slds-has-flexi-truncate' },
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'slds-media__figure' },
+                        _react2['default'].createElement(Icon, { name: 'contact', size: 'small' })
+                    ),
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'slds-media__body' },
+                        _react2['default'].createElement(
+                            'h3',
+                            { className: 'slds-text-heading--small slds-truncate' },
+                            'Brokers'
+                        )
+                    )
+                ),
+                _react2['default'].createElement(
+                    'div',
+                    { className: 'slds-no-flex' },
+                    _react2['default'].createElement(
+                        'div',
+                        { className: 'slds-button-group' },
+                        _react2['default'].createElement(
+                            'button',
+                            { className: 'slds-button slds-button--neutral slds-button--small', onClick: this.props.onNew },
+                            'New'
+                        ),
+                        _react2['default'].createElement(
+                            'button',
+                            { className: 'slds-button slds-button--icon-border-filled' },
+                            _react2['default'].createElement(ButtonIcon, { name: 'down' }),
+                            _react2['default'].createElement(
+                                'span',
+                                { className: 'slds-assistive-text' },
+                                'Show More'
+                            )
+                        )
+                    )
+                )
+            ),
+            _react2['default'].createElement(
+                'section',
+                { className: 'slds-card__body' },
+                _react2['default'].createElement(
+                    _componentsDataGrid2['default'],
+                    { data: this.state.brokers },
+                    _react2['default'].createElement('div', { header: 'First Name', field: 'first_name' }),
+                    _react2['default'].createElement('div', { header: 'Last Name', field: 'last_name' }),
+                    _react2['default'].createElement('div', { header: 'Mobile Phone', field: 'mobile_phone' }),
+                    _react2['default'].createElement('div', { header: 'Office Phone', field: 'office_phone' })
+                )
+            ),
+            _react2['default'].createElement(
+                'footer',
+                { className: 'slds-card__footer' },
+                _react2['default'].createElement(
+                    'a',
+                    { href: '#' },
+                    'View All'
+                )
+            )
+        );
+    }
+
+});
+module.exports = exports['default'];
+
+},{"./Icons":211,"./components/DataGrid":221,"./services/BrokerService":232,"react":195}],201:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23433,7 +23562,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"react":195}],201:[function(require,module,exports){
+},{"react":195}],202:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23509,7 +23638,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./ContactList":202,"./ContactListHeader":203,"./ContactNew":205,"./services/ContactService":232,"react":195}],202:[function(require,module,exports){
+},{"./ContactList":203,"./ContactListHeader":204,"./ContactNew":206,"./services/ContactService":233,"react":195}],203:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23547,7 +23676,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/DataGrid":221,"react":195}],203:[function(require,module,exports){
+},{"./components/DataGrid":221,"react":195}],204:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23728,7 +23857,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./Icons":210,"react":195}],204:[function(require,module,exports){
+},{"./Icons":211,"react":195}],205:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23782,7 +23911,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/Lookup":226,"./services/ContactService":232,"react":195}],205:[function(require,module,exports){
+},{"./components/Lookup":226,"./services/ContactService":233,"react":195}],206:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23964,7 +24093,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"react":195}],206:[function(require,module,exports){
+},{"react":195}],207:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -24018,7 +24147,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/QuickFind":228,"./services/ContactService":232,"react":195}],207:[function(require,module,exports){
+},{"./components/QuickFind":228,"./services/ContactService":233,"react":195}],208:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -24088,7 +24217,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./ContactRecordHeader":208,"./services/ContactService":232,"react":195,"react-router":26}],208:[function(require,module,exports){
+},{"./ContactRecordHeader":209,"./services/ContactService":233,"react":195,"react-router":26}],209:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24304,7 +24433,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./Icons":210,"react":195}],209:[function(require,module,exports){
+},{"./Icons":211,"react":195}],210:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -24496,7 +24625,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./ActivityCard":197,"./ActivityTimeline":198,"./NewActivity":211,"./components/Tabs":229,"./services/PropertyService":233,"react":195}],210:[function(require,module,exports){
+},{"./ActivityCard":197,"./ActivityTimeline":198,"./NewActivity":212,"./components/Tabs":229,"./services/PropertyService":234,"react":195}],211:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -24564,7 +24693,7 @@ var InputIcon = _react2['default'].createClass({
 });
 exports.InputIcon = InputIcon;
 
-},{"react":195}],211:[function(require,module,exports){
+},{"react":195}],212:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -24764,7 +24893,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./ActivityTypePickList":199,"./ContactLookup":204,"./ContactQuickFind":206,"./Icons":210,"./components/DatePicker":222,"react":195}],212:[function(require,module,exports){
+},{"./ActivityTypePickList":199,"./ContactLookup":205,"./ContactQuickFind":207,"./Icons":211,"./components/DatePicker":222,"react":195}],213:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25045,7 +25174,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"react":195}],213:[function(require,module,exports){
+},{"react":195}],214:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -25160,7 +25289,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./PropertyList":214,"./PropertyListHeader":215,"./PropertyNew":216,"./components/GoogleMaps":224,"./services/PropertyService":233,"react":195}],214:[function(require,module,exports){
+},{"./PropertyList":215,"./PropertyListHeader":216,"./PropertyNew":217,"./components/GoogleMaps":224,"./services/PropertyService":234,"react":195}],215:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -25203,7 +25332,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/DataGrid":221,"react":195}],215:[function(require,module,exports){
+},{"./components/DataGrid":221,"react":195}],216:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -25375,7 +25504,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./Icons":210,"./components/Dropdown":223,"react":195}],216:[function(require,module,exports){
+},{"./Icons":211,"./components/Dropdown":223,"react":195}],217:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25557,7 +25686,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"react":195}],217:[function(require,module,exports){
+},{"react":195}],218:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -25626,7 +25755,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./PropertyRecordHeader":218,"./services/PropertyService":233,"react":195,"react-router":26}],218:[function(require,module,exports){
+},{"./PropertyRecordHeader":219,"./services/PropertyService":234,"react":195,"react-router":26}],219:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25866,7 +25995,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./Icons":210,"react":195}],219:[function(require,module,exports){
+},{"./Icons":211,"react":195}],220:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -25881,6 +26010,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _servicesActivityService = require('./services/ActivityService');
+
+var activityService = _interopRequireWildcard(_servicesActivityService);
+
 var _componentsTabs = require('./components/Tabs');
 
 var _componentsTabs2 = _interopRequireDefault(_componentsTabs);
@@ -25889,17 +26022,13 @@ var _componentsGoogleMaps = require('./components/GoogleMaps');
 
 var _componentsGoogleMaps2 = _interopRequireDefault(_componentsGoogleMaps);
 
-var _servicesActivityService = require('./services/ActivityService');
-
-var activityService = _interopRequireWildcard(_servicesActivityService);
-
 var _ActivityTimeline = require('./ActivityTimeline');
 
 var _ActivityTimeline2 = _interopRequireDefault(_ActivityTimeline);
 
-var _RealtorsCard = require('./RealtorsCard');
+var _BrokerCard = require('./BrokerCard');
 
-var _RealtorsCard2 = _interopRequireDefault(_RealtorsCard);
+var _BrokerCard2 = _interopRequireDefault(_BrokerCard);
 
 var _ActivityCard = require('./ActivityCard');
 
@@ -26155,7 +26284,7 @@ exports['default'] = _react2['default'].createClass({
                 { className: 'slds-col--padded slds-size--1-of-1' },
                 _react2['default'].createElement('br', null),
                 _react2['default'].createElement(_ActivityCard2['default'], { propertyId: this.props.property_id, onNew: this.onNewOpenHouse }),
-                _react2['default'].createElement(_RealtorsCard2['default'], null)
+                _react2['default'].createElement(_BrokerCard2['default'], { propertyId: this.props.property_id })
             ),
             this.state.addingActivity ? _react2['default'].createElement(_NewActivity2['default'], { onSave: this.saveNewActivity, onCancel: this.cancelNewActivity, propertyId: this.props.property_id, price: this.props.price }) : ""
         );
@@ -26164,227 +26293,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./ActivityCard":197,"./ActivityTimeline":198,"./NewActivity":211,"./RealtorsCard":220,"./components/GoogleMaps":224,"./components/Tabs":229,"./services/ActivityService":230,"react":195}],220:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj["default"] = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Icons = require("./Icons");
-
-var Icons = _interopRequireWildcard(_Icons);
-
-var Icon = Icons.Icon;
-var ButtonIcon = Icons.ButtonIcon;
-
-exports["default"] = _react2["default"].createClass({
-    displayName: "RealtorsCard",
-
-    render: function render() {
-
-        return _react2["default"].createElement(
-            "div",
-            { className: "slds-card" },
-            _react2["default"].createElement(
-                "header",
-                { className: "slds-card__header slds-grid" },
-                _react2["default"].createElement(
-                    "div",
-                    { className: "slds-media slds-media--center slds-has-flexi-truncate" },
-                    _react2["default"].createElement(
-                        "div",
-                        { className: "slds-media__figure" },
-                        _react2["default"].createElement(Icon, { name: "contact", size: "small" })
-                    ),
-                    _react2["default"].createElement(
-                        "div",
-                        { className: "slds-media__body" },
-                        _react2["default"].createElement(
-                            "h3",
-                            { className: "slds-text-heading--small slds-truncate" },
-                            "Realtors"
-                        )
-                    )
-                ),
-                _react2["default"].createElement(
-                    "div",
-                    { className: "slds-no-flex" },
-                    _react2["default"].createElement(
-                        "div",
-                        { className: "slds-button-group" },
-                        _react2["default"].createElement(
-                            "button",
-                            { className: "slds-button slds-button--neutral slds-button--small" },
-                            "Add"
-                        ),
-                        _react2["default"].createElement(
-                            "button",
-                            { className: "slds-button slds-button--icon-border-filled" },
-                            _react2["default"].createElement(ButtonIcon, { name: "down" }),
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-assistive-text" },
-                                "Show More"
-                            )
-                        )
-                    )
-                )
-            ),
-            _react2["default"].createElement(
-                "section",
-                { className: "slds-card__body" },
-                _react2["default"].createElement(
-                    "table",
-                    { className: "slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal slds-no-row-hover" },
-                    _react2["default"].createElement(
-                        "thead",
-                        null,
-                        _react2["default"].createElement(
-                            "tr",
-                            null,
-                            _react2["default"].createElement(
-                                "th",
-                                { className: "slds-text-heading--label slds-size--1-of-4", scope: "col" },
-                                "Name"
-                            ),
-                            _react2["default"].createElement(
-                                "th",
-                                { className: "slds-text-heading--label slds-size--1-of-4", scope: "col" },
-                                "Company"
-                            ),
-                            _react2["default"].createElement(
-                                "th",
-                                { className: "slds-text-heading--label slds-size--1-of-4", scope: "col" },
-                                "Title"
-                            ),
-                            _react2["default"].createElement(
-                                "th",
-                                { className: "slds-text-heading--label slds-size--1-of-4", scope: "col" },
-                                "Email"
-                            ),
-                            _react2["default"].createElement(
-                                "th",
-                                { className: "slds-row-action", scope: "col" },
-                                _react2["default"].createElement(
-                                    "button",
-                                    { className: "slds-button slds-button--icon-border-filled slds-button--icon-border-small" },
-                                    _react2["default"].createElement(ButtonIcon, { name: "down", hint: "true", size: "small" }),
-                                    _react2["default"].createElement(
-                                        "span",
-                                        { className: "slds-assistive-text" },
-                                        "Show More"
-                                    )
-                                )
-                            )
-                        )
-                    ),
-                    _react2["default"].createElement(
-                        "tbody",
-                        null,
-                        _react2["default"].createElement(
-                            "tr",
-                            { className: "slds-hint-parent" },
-                            _react2["default"].createElement(
-                                "td",
-                                { className: "slds-size--1-of-4", "data-label": "Name" },
-                                "James Smith"
-                            ),
-                            _react2["default"].createElement(
-                                "td",
-                                { className: "slds-size--1-of-4", "data-label": "Company" },
-                                "Lightning Realty"
-                            ),
-                            _react2["default"].createElement(
-                                "td",
-                                { className: "slds-size--1-of-4", "data-label": "Title" },
-                                "Senior Broker"
-                            ),
-                            _react2["default"].createElement(
-                                "td",
-                                { className: "slds-size--1-of-4", "data-label": "Email" },
-                                "james@lightning.com"
-                            ),
-                            _react2["default"].createElement(
-                                "td",
-                                null,
-                                _react2["default"].createElement(
-                                    "button",
-                                    { className: "slds-button slds-button--icon-border-filled slds-button--icon-border-small" },
-                                    _react2["default"].createElement(ButtonIcon, { name: "down", hint: "true", size: "small" }),
-                                    _react2["default"].createElement(
-                                        "span",
-                                        { className: "slds-assistive-text" },
-                                        "Show More"
-                                    )
-                                )
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "tr",
-                            { className: "slds-hint-parent" },
-                            _react2["default"].createElement(
-                                "td",
-                                { className: "slds-size--1-of-4", "data-label": "Name" },
-                                "Jessica Lee"
-                            ),
-                            _react2["default"].createElement(
-                                "td",
-                                { className: "slds-size--1-of-4", "data-label": "Company" },
-                                "Lightning Realty"
-                            ),
-                            _react2["default"].createElement(
-                                "td",
-                                { className: "slds-size--1-of-4", "data-label": "Title" },
-                                "Senior Broker"
-                            ),
-                            _react2["default"].createElement(
-                                "td",
-                                { className: "slds-size--1-of-4", "data-label": "Email" },
-                                "jessica@lightning.com"
-                            ),
-                            _react2["default"].createElement(
-                                "td",
-                                null,
-                                _react2["default"].createElement(
-                                    "button",
-                                    { className: "slds-button slds-button--icon-border-filled slds-button--icon-border-small" },
-                                    _react2["default"].createElement(ButtonIcon, { name: "down", hint: "true", size: "small" }),
-                                    _react2["default"].createElement(
-                                        "span",
-                                        { className: "slds-assistive-text" },
-                                        "Show More"
-                                    )
-                                )
-                            )
-                        )
-                    )
-                )
-            ),
-            _react2["default"].createElement(
-                "footer",
-                { className: "slds-card__footer" },
-                _react2["default"].createElement(
-                    "a",
-                    { href: "#" },
-                    "View All"
-                )
-            )
-        );
-    }
-
-});
-module.exports = exports["default"];
-
-},{"./Icons":210,"react":195}],221:[function(require,module,exports){
+},{"./ActivityCard":197,"./ActivityTimeline":198,"./BrokerCard":200,"./NewActivity":212,"./components/GoogleMaps":224,"./components/Tabs":229,"./services/ActivityService":230,"react":195}],221:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26522,9 +26431,12 @@ exports["default"] = _react2["default"].createClass({
             var column = this.props.children[i];
             headers.push(_react2["default"].createElement(ColumnHeader, { field: column.props.field, label: column.props.header, sortable: column.props.sortable, textAlign: column.props.textAlign, onSort: this.sortHandler }));
         }
-        var rows = this.props.data.map(function (item) {
-            return _react2["default"].createElement(Row, { data: item, columns: _this.props.children });
-        });
+        var rows;
+        if (this.props.data) {
+            rows = this.props.data.map(function (item) {
+                return _react2["default"].createElement(Row, { data: item, columns: _this.props.children });
+            });
+        }
         return _react2["default"].createElement(
             "table",
             { className: "slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal slds-no-row-hover" },
@@ -26548,7 +26460,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./../utils/moment":234,"./Icons":225,"react":195}],222:[function(require,module,exports){
+},{"./../utils/moment":235,"./Icons":225,"react":195}],222:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27081,7 +26993,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./../Icons":210,"react":195}],223:[function(require,module,exports){
+},{"./../Icons":211,"react":195}],223:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27931,6 +27843,41 @@ exports.findAll = findAll;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+var url = "/brokers";
+
+var findAll = function findAll() {
+    return new Promise(function (resolve, reject) {
+        console.log("activities findAll");
+        fetch(url).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            return resolve(data);
+        })["catch"](function (error) {
+            return reject(error);
+        });
+    });
+};
+
+exports.findAll = findAll;
+var findByProperty = function findByProperty(id) {
+    return new Promise(function (resolve, reject) {
+        fetch(url + "?propertyId=" + id).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            return resolve(data);
+        })["catch"](function (error) {
+            return reject(error);
+        });
+    });
+};
+exports.findByProperty = findByProperty;
+
+},{}],233:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 var url = "/contacts";
 
 var findAll = function findAll() {
@@ -28028,7 +27975,7 @@ var deleteItem = function deleteItem(contact) {
 };
 exports.deleteItem = deleteItem;
 
-},{}],233:[function(require,module,exports){
+},{}],234:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28117,7 +28064,7 @@ var deleteItem = function deleteItem(property) {
 };
 exports.deleteItem = deleteItem;
 
-},{}],234:[function(require,module,exports){
+},{}],235:[function(require,module,exports){
 //! moment.js
 //! version : 2.10.6
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors

@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS broker (
     last_name       TEXT,
     title           TEXT,
     mobile_phone    TEXT,
-    home_phone      TEXT,
+    office_phone    TEXT,
     email           TEXT,
     pic             TEXT
   );
@@ -45,12 +45,12 @@ CREATE TABLE IF NOT EXISTS property (
     description     TEXT,
     bedrooms        integer,
     bathrooms       integer,
-    size            text,
-    lot_size        text,
-    pic             text,
+    size            TEXT,
+    lot_size        TEXT,
+    pic             TEXT,
     status          integer,
     price           numeric DEFAULT 0,
-    location        point
+    location        POINT
   );
 
 CREATE TABLE IF NOT EXISTS activity_type (
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS activity (
   );
 
 
-INSERT INTO BROKER (first_name, last_name, title, mobile_phone, home_phone, email, pic) VALUES
+INSERT INTO BROKER (first_name, last_name, title, mobile_phone, office_phone, email, pic) VALUES
 ('Caroline', 'Kingsley', 'Senior Broker', '617-985-6955', '617-666-5555', 'caroline@lightningrealty.com', 'https://s3-us-west-1.amazonaws.com/sfdc-demo/people/caroline_kingsley.jpg'),
 ('Brad', 'Moretti', 'Senior Broker', '617-985-6955', '617-666-5555', 'brad@lightningrealty.com', 'https://s3-us-west-1.amazonaws.com/sfdc-demo/people/brad_moretti.jpg');
 
@@ -98,6 +98,19 @@ INSERT INTO property (address, city, state, zip, price, teaser, bedrooms, bathro
 ('110 Baxter street', 'Boston', 'MA', '02420', 850000, 'Waterfront in the City', 3, 2, 4000, 8, POINT(-71.053943, 42.372486), 'https://s3-us-west-1.amazonaws.com/sfdc-demo/houses/house18.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'),
 ('448 Hanover st', 'Boston', 'MA', '02420', 725000, 'Quiet Retreat', 4, 2, 4000, 8, POINT(-71.052617, 42.366855), 'https://s3-us-west-1.amazonaws.com/sfdc-demo/houses/house19.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'),
 ('127 Endicott st', 'Boston', 'MA', '02420', 450000, 'City Living', 3, 1, 1500, 8, POINT(-71.057352, 42.365003), 'https://s3-us-west-1.amazonaws.com/sfdc-demo/houses/house99.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.');
+
+
+INSERT INTO property_broker (property_id, broker_id) VALUES
+(1,1),
+(2,1),
+(3,1),
+(3,2),
+(4,1),
+(5,1),
+(5,2),
+(6,2),
+(7,1),
+(7,2);
 
 INSERT INTO activity_type (name) VALUES
 ('Listed'),

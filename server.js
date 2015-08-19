@@ -5,6 +5,7 @@ var express = require('express'),
     properties = require('./server/properties'),
     contacts = require('./server/contacts'),
     activities = require('./server/activities'),
+    brokers = require('./server/brokers'),
     activityTypes = require('./server/activitytypes'),
     sqlinit = require('./server/sqlinit'),
     app = express();
@@ -50,6 +51,7 @@ app.post('/activities', activities.createItem);
 app.delete('/activities/:id', activities.deleteItem);
 
 app.get('/activitytypes', activityTypes.findAll);
+app.get('/brokers', brokers.findAll);
 
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));

@@ -1,12 +1,12 @@
 import React from 'react';
 
+import * as activityService from './services/ActivityService';
+
 import Tabs from './components/Tabs';
 import GoogleMaps from './components/GoogleMaps';
 
-import * as activityService from './services/ActivityService';
-
 import ActivityTimeline from './ActivityTimeline';
-import RealtorsCard from './RealtorsCard';
+import BrokerCard from './BrokerCard';
 import ActivityCard from './ActivityCard';
 import NewActivity from './NewActivity';
 
@@ -148,7 +148,7 @@ export default React.createClass({
                 <div className="slds-col--padded slds-size--1-of-1">
                     <br/>
                     <ActivityCard propertyId={this.props.property_id} onNew={this.onNewOpenHouse}/>
-                    <RealtorsCard/>
+                    <BrokerCard propertyId={this.props.property_id}/>
                 </div>
                 {this.state.addingActivity ? <NewActivity onSave={this.saveNewActivity} onCancel={this.cancelNewActivity} propertyId={this.props.property_id} price={this.props.price}/> : ""}
             </div>

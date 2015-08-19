@@ -98,7 +98,10 @@ export default React.createClass({
             let column = this.props.children[i];
             headers.push(<ColumnHeader field={column.props.field} label={column.props.header} sortable={column.props.sortable} textAlign={column.props.textAlign} onSort={this.sortHandler}/>);
         }
-        var rows = this.props.data.map(item => <Row data={item} columns={this.props.children}/>)
+        var rows;
+        if (this.props.data) {
+            rows = this.props.data.map(item => <Row data={item} columns={this.props.children}/>);
+        }
         return (
             <table className="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal slds-no-row-hover">
                 <thead>
