@@ -17,7 +17,9 @@ export let DropdownItem = React.createClass({
             <li className="slds-dropdown__item slds-has-icon--left" role="menuitem option" tabIndex="-1">
                 <a href="#" tabIndex="-1" className="slds-truncate" onClick={this.clickHandler}>
                     {this.props.label}
-                    <Icon type="utility" name="table" size="small" position="right"/>
+                    {this.props.icon ?
+                    <Icon category="utility" name={this.props.icon} size="small" position="right"/>
+                    : ""}
                 </a>
             </li>
         );

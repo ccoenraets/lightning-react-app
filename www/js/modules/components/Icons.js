@@ -24,8 +24,14 @@ export let ButtonIcon = React.createClass({
 
 export let Icon = React.createClass({
 
+    getDefaultProps() {
+        return {
+            category: "standard"
+        }
+    },
+
     render() {
-        var useTag = '<use xlink:href="/assets/icons/' + this.props.type + '-sprite/svg/symbols.svg#' + this.props.name + '" />';
+        var useTag = '<use xlink:href="/assets/icons/' + this.props.category + '-sprite/svg/symbols.svg#' + this.props.name + '" />';
         var className  = "slds-icon";
         if (this.props.stateful) {
             className += "--stateful";
@@ -33,7 +39,10 @@ export let Icon = React.createClass({
         if (this.props.size) {
             className = className + " slds-icon--" + this.props.size;
         }
-        className = className + " slds-icon-standard-" + this.props.name;
+        if (this.props.position) {
+            className = className + " slds-icon--" + this.props.position;
+        }
+        className = className + " slds-icon-standard-" + (this.props.theme || this.props.name);
         return <svg  aria-hidden="true" className={className} dangerouslySetInnerHTML={{__html: useTag }} />;
     }
 

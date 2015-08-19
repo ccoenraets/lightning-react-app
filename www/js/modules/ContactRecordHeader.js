@@ -1,6 +1,6 @@
 import React from 'react';
 
-import * as Icons from "./Icons";
+import * as Icons from "./components/Icons";
 
 let Icon = Icons.Icon;
 let ButtonIcon = Icons.ButtonIcon;
@@ -23,11 +23,11 @@ export default React.createClass({
                                     <div className="slds-col slds-shrink-none slds-align-bottom">
                                         <button className="slds-button slds-button--neutral slds-not-selected" aria-live="assertive">
                 <span className="slds-text-not-selected">
-                  <ButtonIcon name="add" stateful="true" position="left"/>Follow</span>
+                  <ButtonIcon name="add" stateful={true} position="left"/>Follow</span>
                 <span className="slds-text-selected">
-                  <ButtonIcon name="add" stateful="true" position="check"/>Following</span>
+                  <ButtonIcon name="add" stateful={true} position="check"/>Following</span>
                 <span className="slds-text-selected-focus">
-                  <ButtonIcon name="add" stateful="true" position="close"/>Unfollow</span>
+                  <ButtonIcon name="add" stateful={true} position="close"/>Unfollow</span>
                                         </button>
                                     </div>
                                 </div>

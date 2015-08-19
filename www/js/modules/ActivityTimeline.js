@@ -31,7 +31,7 @@ let ActivityListItem = React.createClass({
                     <div className="slds-media__body">
                         <div className={"slds-media slds-media--timeline slds-timeline__media--" + this.props.theme}>
                             <div className="slds-media__figure">
-                                <Icon type="standard" name={this.props.theme}/>
+                                <Icon name={this.props.theme}/>
                             </div>
                             <div className="slds-media__body">
                                 <div className="slds-tile">

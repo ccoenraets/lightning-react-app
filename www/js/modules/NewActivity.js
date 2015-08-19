@@ -4,7 +4,7 @@ import DatePicker from './components/DatePicker';
 import ActivityTypePickList from './ActivityTypePickList';
 import ContactLookup from './ContactLookup';
 import ContactQuickFind from './ContactQuickFind';
-import * as Icons from './Icons';
+import * as Icons from './components/Icons';
 
 let Icon = Icons.Icon;
 

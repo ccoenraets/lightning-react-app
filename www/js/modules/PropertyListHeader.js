@@ -1,7 +1,7 @@
 import React from 'react';
 
 import * as Dropdown from './components/Dropdown';
-import * as Icons from './Icons';
+import * as Icons from './components/Icons';
 
 let ButtonIcon = Icons.ButtonIcon;
 let ButtonDropdown = Dropdown.ButtonDropdown;
@@ -36,9 +36,9 @@ export default React.createClass({
                         <div className="slds-grid">
                             <div className="slds-button-space-left">
                                 <ButtonDropdown header="Display as" icon="table" onChange={this.props.onViewChange}>
-                                    <DropdownItem value="table" label="Table"/>
-                                    <DropdownItem value="map" label="Map"/>
-                                    <DropdownItem value="split" label="Split"/>
+                                    <DropdownItem value="table" label="Table" icon="table"/>
+                                    <DropdownItem value="map" label="Map" icon="location"/>
+                                    <DropdownItem value="split" label="Split" icon="layout"/>
                                 </ButtonDropdown>
                             </div>
                             <div className="slds-button-group slds-button-space-left" role="group">

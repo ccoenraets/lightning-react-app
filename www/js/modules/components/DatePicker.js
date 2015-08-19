@@ -1,6 +1,6 @@
 import React from 'react';
 
-import * as Icons from "./../Icons";
+import * as Icons from "./Icons";
 
 let Icon = Icons.Icon;
 let ButtonIcon = Icons.ButtonIcon;

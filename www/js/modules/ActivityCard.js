@@ -3,7 +3,7 @@ import React from 'react';
 import * as activityService from './services/ActivityService';
 
 import DataGrid from "./components/DataGrid";
-import * as Icons from "./Icons";
+import * as Icons from "./components/Icons";
 
 let Icon = Icons.Icon;
 let ButtonIcon = Icons.ButtonIcon;
@@ -64,12 +64,12 @@ export default React.createClass({
 
                 <section className="slds-card__body">
                     <DataGrid data={this.state.activities}>
-                        <div header="Type" field="activity_name" sortable="true"/>
-                        <div header="Date" field="activity_date" sortable="true" format="date"/>
+                        <div header="Type" field="activity_name" sortable={true}/>
+                        <div header="Date" field="activity_date" sortable={true} format="date"/>
                         {this.props.showContact ? <div header="First Name" field="first_name" onLink={this.contactLinkHandler}/> : ''}
                         {this.props.showContact ? <div header="Last Name" field="last_name" onLink={this.contactLinkHandler}/> : ''}
                         {this.props.showProperty ? <div header="Property" field="address" onLink={this.propertyLinkHandler}/> : ''}
-                        <div header="Price" field="price" sortable="true" format="currency"/>
+                        <div header="Price" field="price" sortable={true} format="currency"/>
                     </DataGrid>
                 </section>
 

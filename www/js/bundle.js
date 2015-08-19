@@ -22888,7 +22888,7 @@ _reactRouter2['default'].run(routes, function (Handler) {
     _react2['default'].render(_react2['default'].createElement(Handler, null), document.body);
 });
 
-},{"./modules/ContactForm":201,"./modules/ContactHome":202,"./modules/ContactRecord":208,"./modules/ContactView":210,"./modules/PropertyForm":213,"./modules/PropertyHome":214,"./modules/PropertyRecord":218,"./modules/PropertyView":220,"react":195,"react-router":26}],197:[function(require,module,exports){
+},{"./modules/ContactForm":201,"./modules/ContactHome":202,"./modules/ContactRecord":208,"./modules/ContactView":210,"./modules/PropertyForm":212,"./modules/PropertyHome":213,"./modules/PropertyRecord":217,"./modules/PropertyView":219,"react":195,"react-router":26}],197:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -22911,9 +22911,9 @@ var _componentsDataGrid = require("./components/DataGrid");
 
 var _componentsDataGrid2 = _interopRequireDefault(_componentsDataGrid);
 
-var _Icons = require("./Icons");
+var _componentsIcons = require("./components/Icons");
 
-var Icons = _interopRequireWildcard(_Icons);
+var Icons = _interopRequireWildcard(_componentsIcons);
 
 var Icon = Icons.Icon;
 var ButtonIcon = Icons.ButtonIcon;
@@ -23009,12 +23009,12 @@ exports['default'] = _react2['default'].createClass({
                 _react2['default'].createElement(
                     _componentsDataGrid2['default'],
                     { data: this.state.activities },
-                    _react2['default'].createElement('div', { header: 'Type', field: 'activity_name', sortable: 'true' }),
-                    _react2['default'].createElement('div', { header: 'Date', field: 'activity_date', sortable: 'true', format: 'date' }),
+                    _react2['default'].createElement('div', { header: 'Type', field: 'activity_name', sortable: true }),
+                    _react2['default'].createElement('div', { header: 'Date', field: 'activity_date', sortable: true, format: 'date' }),
                     this.props.showContact ? _react2['default'].createElement('div', { header: 'First Name', field: 'first_name', onLink: this.contactLinkHandler }) : '',
                     this.props.showContact ? _react2['default'].createElement('div', { header: 'Last Name', field: 'last_name', onLink: this.contactLinkHandler }) : '',
                     this.props.showProperty ? _react2['default'].createElement('div', { header: 'Property', field: 'address', onLink: this.propertyLinkHandler }) : '',
-                    _react2['default'].createElement('div', { header: 'Price', field: 'price', sortable: 'true', format: 'currency' })
+                    _react2['default'].createElement('div', { header: 'Price', field: 'price', sortable: true, format: 'currency' })
                 )
             ),
             _react2['default'].createElement(
@@ -23032,7 +23032,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./Icons":211,"./components/DataGrid":221,"./services/ActivityService":230,"react":195}],198:[function(require,module,exports){
+},{"./components/DataGrid":220,"./components/Icons":224,"./services/ActivityService":229,"react":195}],198:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23100,7 +23100,7 @@ var ActivityListItem = _react2['default'].createClass({
                         _react2['default'].createElement(
                             'div',
                             { className: 'slds-media__figure' },
-                            _react2['default'].createElement(Icon, { type: 'standard', name: this.props.theme })
+                            _react2['default'].createElement(Icon, { name: this.props.theme })
                         ),
                         _react2['default'].createElement(
                             'div',
@@ -23266,7 +23266,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/Icons":225,"./services/ActivityService":230,"./utils/moment":235,"react":195}],199:[function(require,module,exports){
+},{"./components/Icons":224,"./services/ActivityService":229,"./utils/moment":234,"react":195}],199:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23311,7 +23311,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/PickList":227,"./services/ActivityTypeService":231,"react":195}],200:[function(require,module,exports){
+},{"./components/PickList":226,"./services/ActivityTypeService":230,"react":195}],200:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23334,9 +23334,9 @@ var _componentsDataGrid = require("./components/DataGrid");
 
 var _componentsDataGrid2 = _interopRequireDefault(_componentsDataGrid);
 
-var _Icons = require("./Icons");
+var _componentsIcons = require("./components/Icons");
 
-var Icons = _interopRequireWildcard(_Icons);
+var Icons = _interopRequireWildcard(_componentsIcons);
 
 var Icon = Icons.Icon;
 var ButtonIcon = Icons.ButtonIcon;
@@ -23440,7 +23440,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./Icons":211,"./components/DataGrid":221,"./services/BrokerService":232,"react":195}],201:[function(require,module,exports){
+},{"./components/DataGrid":220,"./components/Icons":224,"./services/BrokerService":231,"react":195}],201:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -23671,7 +23671,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./ContactList":203,"./ContactListHeader":204,"./ContactNew":206,"./services/ContactService":233,"react":195}],203:[function(require,module,exports){
+},{"./ContactList":203,"./ContactListHeader":204,"./ContactNew":206,"./services/ContactService":232,"react":195}],203:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23709,7 +23709,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/DataGrid":221,"react":195}],204:[function(require,module,exports){
+},{"./components/DataGrid":220,"react":195}],204:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23724,9 +23724,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Icons = require('./Icons');
+var _componentsIcons = require('./components/Icons');
 
-var Icons = _interopRequireWildcard(_Icons);
+var Icons = _interopRequireWildcard(_componentsIcons);
 
 var ButtonIcon = Icons.ButtonIcon;
 
@@ -23890,7 +23890,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./Icons":211,"react":195}],205:[function(require,module,exports){
+},{"./components/Icons":224,"react":195}],205:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -23944,7 +23944,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/Lookup":226,"./services/ContactService":233,"react":195}],206:[function(require,module,exports){
+},{"./components/Lookup":225,"./services/ContactService":232,"react":195}],206:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24180,7 +24180,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/QuickFind":228,"./services/ContactService":233,"react":195}],208:[function(require,module,exports){
+},{"./components/QuickFind":227,"./services/ContactService":232,"react":195}],208:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -24250,7 +24250,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./ContactRecordHeader":209,"./services/ContactService":233,"react":195,"react-router":26}],209:[function(require,module,exports){
+},{"./ContactRecordHeader":209,"./services/ContactService":232,"react":195,"react-router":26}],209:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -24265,9 +24265,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Icons = require("./Icons");
+var _componentsIcons = require("./components/Icons");
 
-var Icons = _interopRequireWildcard(_Icons);
+var Icons = _interopRequireWildcard(_componentsIcons);
 
 var Icon = Icons.Icon;
 var ButtonIcon = Icons.ButtonIcon;
@@ -24320,19 +24320,19 @@ exports["default"] = _react2["default"].createClass({
                                         _react2["default"].createElement(
                                             "span",
                                             { className: "slds-text-not-selected" },
-                                            _react2["default"].createElement(ButtonIcon, { name: "add", stateful: "true", position: "left" }),
+                                            _react2["default"].createElement(ButtonIcon, { name: "add", stateful: true, position: "left" }),
                                             "Follow"
                                         ),
                                         _react2["default"].createElement(
                                             "span",
                                             { className: "slds-text-selected" },
-                                            _react2["default"].createElement(ButtonIcon, { name: "add", stateful: "true", position: "check" }),
+                                            _react2["default"].createElement(ButtonIcon, { name: "add", stateful: true, position: "check" }),
                                             "Following"
                                         ),
                                         _react2["default"].createElement(
                                             "span",
                                             { className: "slds-text-selected-focus" },
-                                            _react2["default"].createElement(ButtonIcon, { name: "add", stateful: "true", position: "close" }),
+                                            _react2["default"].createElement(ButtonIcon, { name: "add", stateful: true, position: "close" }),
                                             "Unfollow"
                                         )
                                     )
@@ -24466,7 +24466,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./Icons":211,"react":195}],210:[function(require,module,exports){
+},{"./components/Icons":224,"react":195}],210:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -24715,75 +24715,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./ActivityCard":197,"./ActivityTimeline":198,"./NewActivity":212,"./components/Tabs":229,"./services/PropertyService":234,"./utils/moment":235,"react":195}],211:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-    value: true
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var ButtonIcon = _react2['default'].createClass({
-    displayName: 'ButtonIcon',
-
-    render: function render() {
-        var useTag = '<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#' + this.props.name + '" />';
-        var className = "slds-button__icon";
-        if (this.props.stateful) {
-            className += "--stateful";
-        }
-        if (this.props.position) {
-            className = className + " slds-button__icon--" + this.props.position;
-        }
-        if (this.props.size) {
-            className = className + " slds-button__icon--" + this.props.size;
-        }
-        if (this.props.hint) {
-            className = className + " slds-button__icon--hint";
-        }
-        return _react2['default'].createElement('svg', { 'aria-hidden': 'true', className: className, dangerouslySetInnerHTML: { __html: useTag } });
-    }
-
-});
-
-exports.ButtonIcon = ButtonIcon;
-var Icon = _react2['default'].createClass({
-    displayName: 'Icon',
-
-    render: function render() {
-        var useTag = '<use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#' + this.props.name + '" />';
-        var className = "slds-icon";
-        if (this.props.stateful) {
-            className += "--stateful";
-        }
-        if (this.props.size) {
-            className = className + " slds-icon--" + this.props.size;
-        }
-        className = className + " slds-icon-standard-" + this.props.name;
-        return _react2['default'].createElement('svg', { 'aria-hidden': 'true', className: className, dangerouslySetInnerHTML: { __html: useTag } });
-    }
-
-});
-
-exports.Icon = Icon;
-var InputIcon = _react2['default'].createClass({
-    displayName: 'InputIcon',
-
-    render: function render() {
-        var useTag = '<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#' + this.props.name + '" />';
-        var className = "slds-input__icon slds-icon-text-default";
-        return _react2['default'].createElement('svg', { 'aria-hidden': 'true', className: className, dangerouslySetInnerHTML: { __html: useTag } });
-    }
-
-});
-exports.InputIcon = InputIcon;
-
-},{"react":195}],212:[function(require,module,exports){
+},{"./ActivityCard":197,"./ActivityTimeline":198,"./NewActivity":211,"./components/Tabs":228,"./services/PropertyService":233,"./utils/moment":234,"react":195}],211:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -24814,9 +24746,9 @@ var _ContactQuickFind = require('./ContactQuickFind');
 
 var _ContactQuickFind2 = _interopRequireDefault(_ContactQuickFind);
 
-var _Icons = require('./Icons');
+var _componentsIcons = require('./components/Icons');
 
-var Icons = _interopRequireWildcard(_Icons);
+var Icons = _interopRequireWildcard(_componentsIcons);
 
 var Icon = Icons.Icon;
 
@@ -24983,7 +24915,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./ActivityTypePickList":199,"./ContactLookup":205,"./ContactQuickFind":207,"./Icons":211,"./components/DatePicker":222,"react":195}],213:[function(require,module,exports){
+},{"./ActivityTypePickList":199,"./ContactLookup":205,"./ContactQuickFind":207,"./components/DatePicker":221,"./components/Icons":224,"react":195}],212:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25264,7 +25196,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"react":195}],214:[function(require,module,exports){
+},{"react":195}],213:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -25379,7 +25311,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./PropertyList":215,"./PropertyListHeader":216,"./PropertyNew":217,"./components/GoogleMaps":224,"./services/PropertyService":234,"react":195}],215:[function(require,module,exports){
+},{"./PropertyList":214,"./PropertyListHeader":215,"./PropertyNew":216,"./components/GoogleMaps":223,"./services/PropertyService":233,"react":195}],214:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -25411,18 +25343,18 @@ exports['default'] = _react2['default'].createClass({
         return _react2['default'].createElement(
             _componentsDataGrid2['default'],
             { data: this.props.properties, onSort: this.sortHandler },
-            _react2['default'].createElement('div', { header: 'Address', field: 'address', sortable: 'true', onLink: this.linkHandler }),
-            _react2['default'].createElement('div', { header: 'City', field: 'city', sortable: 'true' }),
+            _react2['default'].createElement('div', { header: 'Address', field: 'address', sortable: true, onLink: this.linkHandler }),
+            _react2['default'].createElement('div', { header: 'City', field: 'city', sortable: true }),
             _react2['default'].createElement('div', { header: 'Bedrooms', field: 'bedrooms', textAlign: 'center' }),
             _react2['default'].createElement('div', { header: 'Bathrooms', field: 'bathrooms', textAlign: 'center' }),
-            _react2['default'].createElement('div', { header: 'Price', field: 'price', sortable: 'true', textAlign: 'right', format: 'currency' })
+            _react2['default'].createElement('div', { header: 'Price', field: 'price', sortable: true, textAlign: 'right', format: 'currency' })
         );
     }
 
 });
 module.exports = exports['default'];
 
-},{"./components/DataGrid":221,"react":195}],216:[function(require,module,exports){
+},{"./components/DataGrid":220,"react":195}],215:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -25441,9 +25373,9 @@ var _componentsDropdown = require('./components/Dropdown');
 
 var Dropdown = _interopRequireWildcard(_componentsDropdown);
 
-var _Icons = require('./Icons');
+var _componentsIcons = require('./components/Icons');
 
-var Icons = _interopRequireWildcard(_Icons);
+var Icons = _interopRequireWildcard(_componentsIcons);
 
 var ButtonIcon = Icons.ButtonIcon;
 var ButtonDropdown = Dropdown.ButtonDropdown;
@@ -25520,9 +25452,9 @@ exports['default'] = _react2['default'].createClass({
                             _react2['default'].createElement(
                                 ButtonDropdown,
                                 { header: 'Display as', icon: 'table', onChange: this.props.onViewChange },
-                                _react2['default'].createElement(DropdownItem, { value: 'table', label: 'Table' }),
-                                _react2['default'].createElement(DropdownItem, { value: 'map', label: 'Map' }),
-                                _react2['default'].createElement(DropdownItem, { value: 'split', label: 'Split' })
+                                _react2['default'].createElement(DropdownItem, { value: 'table', label: 'Table', icon: 'table' }),
+                                _react2['default'].createElement(DropdownItem, { value: 'map', label: 'Map', icon: 'location' }),
+                                _react2['default'].createElement(DropdownItem, { value: 'split', label: 'Split', icon: 'layout' })
                             )
                         ),
                         _react2['default'].createElement(
@@ -25594,7 +25526,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./Icons":211,"./components/Dropdown":223,"react":195}],217:[function(require,module,exports){
+},{"./components/Dropdown":222,"./components/Icons":224,"react":195}],216:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25776,7 +25708,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"react":195}],218:[function(require,module,exports){
+},{"react":195}],217:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -25845,7 +25777,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./PropertyRecordHeader":219,"./services/PropertyService":234,"react":195,"react-router":26}],219:[function(require,module,exports){
+},{"./PropertyRecordHeader":218,"./services/PropertyService":233,"react":195,"react-router":26}],218:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25860,9 +25792,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Icons = require("./Icons");
+var _componentsIcons = require("./components/Icons");
 
-var Icons = _interopRequireWildcard(_Icons);
+var Icons = _interopRequireWildcard(_componentsIcons);
 
 var Icon = Icons.Icon;
 var ButtonIcon = Icons.ButtonIcon;
@@ -25886,7 +25818,7 @@ exports["default"] = _react2["default"].createClass({
                         _react2["default"].createElement(
                             "div",
                             { className: "slds-media__figure" },
-                            _react2["default"].createElement(Icon, { name: "account", size: "large" })
+                            _react2["default"].createElement(Icon, { category: "custom", name: "custom85", theme: "account", size: "large" })
                         ),
                         _react2["default"].createElement(
                             "div",
@@ -25913,19 +25845,19 @@ exports["default"] = _react2["default"].createClass({
                                         _react2["default"].createElement(
                                             "span",
                                             { className: "slds-text-not-selected" },
-                                            _react2["default"].createElement(ButtonIcon, { name: "add", stateful: "true", position: "left" }),
+                                            _react2["default"].createElement(ButtonIcon, { name: "add", stateful: true, position: "left" }),
                                             "Follow"
                                         ),
                                         _react2["default"].createElement(
                                             "span",
                                             { className: "slds-text-selected" },
-                                            _react2["default"].createElement(ButtonIcon, { name: "add", stateful: "true", position: "check" }),
+                                            _react2["default"].createElement(ButtonIcon, { name: "add", stateful: true, position: "check" }),
                                             "Following"
                                         ),
                                         _react2["default"].createElement(
                                             "span",
                                             { className: "slds-text-selected-focus" },
-                                            _react2["default"].createElement(ButtonIcon, { name: "add", stateful: "true", position: "close" }),
+                                            _react2["default"].createElement(ButtonIcon, { name: "add", stateful: true, position: "close" }),
                                             "Unfollow"
                                         )
                                     )
@@ -26085,7 +26017,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./Icons":211,"react":195}],220:[function(require,module,exports){
+},{"./components/Icons":224,"react":195}],219:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -26383,7 +26315,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./ActivityCard":197,"./ActivityTimeline":198,"./BrokerCard":200,"./NewActivity":212,"./components/GoogleMaps":224,"./components/Tabs":229,"./services/ActivityService":230,"react":195}],221:[function(require,module,exports){
+},{"./ActivityCard":197,"./ActivityTimeline":198,"./BrokerCard":200,"./NewActivity":211,"./components/GoogleMaps":223,"./components/Tabs":228,"./services/ActivityService":229,"react":195}],220:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26558,7 +26490,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./../utils/moment":235,"./Icons":225,"react":195}],222:[function(require,module,exports){
+},{"./../utils/moment":234,"./Icons":224,"react":195}],221:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26573,7 +26505,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Icons = require("./../Icons");
+var _Icons = require("./Icons");
 
 var Icons = _interopRequireWildcard(_Icons);
 
@@ -27091,7 +27023,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./../Icons":211,"react":195}],223:[function(require,module,exports){
+},{"./Icons":224,"react":195}],222:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27129,7 +27061,7 @@ var DropdownItem = _react2["default"].createClass({
                 "a",
                 { href: "#", tabIndex: "-1", className: "slds-truncate", onClick: this.clickHandler },
                 this.props.label,
-                _react2["default"].createElement(Icon, { type: "utility", name: "table", size: "small", position: "right" })
+                this.props.icon ? _react2["default"].createElement(Icon, { category: "utility", name: this.props.icon, size: "small", position: "right" }) : ""
             )
         );
     }
@@ -27216,7 +27148,7 @@ var ButtonDropdown = _react2["default"].createClass({
 });
 exports.ButtonDropdown = ButtonDropdown;
 
-},{"./Icons":225,"react":195}],224:[function(require,module,exports){
+},{"./Icons":224,"react":195}],223:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -27288,7 +27220,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"react":195}],225:[function(require,module,exports){
+},{"react":195}],224:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -27328,8 +27260,14 @@ exports.ButtonIcon = ButtonIcon;
 var Icon = _react2['default'].createClass({
     displayName: 'Icon',
 
+    getDefaultProps: function getDefaultProps() {
+        return {
+            category: "standard"
+        };
+    },
+
     render: function render() {
-        var useTag = '<use xlink:href="/assets/icons/' + this.props.type + '-sprite/svg/symbols.svg#' + this.props.name + '" />';
+        var useTag = '<use xlink:href="/assets/icons/' + this.props.category + '-sprite/svg/symbols.svg#' + this.props.name + '" />';
         var className = "slds-icon";
         if (this.props.stateful) {
             className += "--stateful";
@@ -27337,7 +27275,10 @@ var Icon = _react2['default'].createClass({
         if (this.props.size) {
             className = className + " slds-icon--" + this.props.size;
         }
-        className = className + " slds-icon-standard-" + this.props.name;
+        if (this.props.position) {
+            className = className + " slds-icon--" + this.props.position;
+        }
+        className = className + " slds-icon-standard-" + (this.props.theme || this.props.name);
         return _react2['default'].createElement('svg', { 'aria-hidden': 'true', className: className, dangerouslySetInnerHTML: { __html: useTag } });
     }
 
@@ -27356,7 +27297,7 @@ var InputIcon = _react2['default'].createClass({
 });
 exports.InputIcon = InputIcon;
 
-},{"react":195}],226:[function(require,module,exports){
+},{"react":195}],225:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27462,7 +27403,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./Icons":225,"react":195}],227:[function(require,module,exports){
+},{"./Icons":224,"react":195}],226:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27573,7 +27514,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./Icons":225,"react":195}],228:[function(require,module,exports){
+},{"./Icons":224,"react":195}],227:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27711,7 +27652,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./Icons":225,"react":195}],229:[function(require,module,exports){
+},{"./Icons":224,"react":195}],228:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -27798,7 +27739,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"react":195}],230:[function(require,module,exports){
+},{"react":195}],229:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27914,7 +27855,7 @@ var deleteItem = function deleteItem(contact) {
 };
 exports.deleteItem = deleteItem;
 
-},{}],231:[function(require,module,exports){
+},{}],230:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27935,7 +27876,7 @@ var findAll = function findAll() {
 };
 exports.findAll = findAll;
 
-},{}],232:[function(require,module,exports){
+},{}],231:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27970,7 +27911,7 @@ var findByProperty = function findByProperty(id) {
 };
 exports.findByProperty = findByProperty;
 
-},{}],233:[function(require,module,exports){
+},{}],232:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28073,7 +28014,7 @@ var deleteItem = function deleteItem(contact) {
 };
 exports.deleteItem = deleteItem;
 
-},{}],234:[function(require,module,exports){
+},{}],233:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28162,7 +28103,7 @@ var deleteItem = function deleteItem(property) {
 };
 exports.deleteItem = deleteItem;
 
-},{}],235:[function(require,module,exports){
+},{}],234:[function(require,module,exports){
 //! moment.js
 //! version : 2.10.6
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors

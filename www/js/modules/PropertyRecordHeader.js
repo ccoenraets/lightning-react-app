@@ -1,6 +1,6 @@
 import React from 'react';
 
-import * as Icons from "./Icons";
+import * as Icons from "./components/Icons";
 
 let Icon = Icons.Icon;
 let ButtonIcon = Icons.ButtonIcon;
@@ -14,7 +14,7 @@ export default React.createClass({
                     <div className="slds-col slds-has-flexi-truncate">
                         <div className="slds-media media--rec-home">
                             <div className="slds-media__figure">
-                                <Icon name="account" size="large"/>
+                                <Icon category="custom" name="custom85" theme="account" size="large"/>
                             </div>
                             <div className="slds-media__body">
                                 <p className="slds-text-heading--label">Property</p>
@@ -22,9 +22,9 @@ export default React.createClass({
                                     <h1 className="slds-text-heading--medium slds-media--rec-home__title slds-truncate slds-align-middle" title="Record Title">{this.props.address}</h1>
                                     <div className="slds-col slds-shrink-none slds-align-bottom">
                                         <button className="slds-button slds-button--neutral slds-not-selected" aria-live="assertive">
-                                            <span className="slds-text-not-selected"><ButtonIcon name="add" stateful="true" position="left"/>Follow</span>
-                                            <span className="slds-text-selected"><ButtonIcon name="add" stateful="true" position="check"/>Following</span>
-                                            <span className="slds-text-selected-focus"><ButtonIcon name="add" stateful="true" position="close"/>Unfollow</span>
+                                            <span className="slds-text-not-selected"><ButtonIcon name="add" stateful={true} position="left"/>Follow</span>
+                                            <span className="slds-text-selected"><ButtonIcon name="add" stateful={true} position="check"/>Following</span>
+                                            <span className="slds-text-selected-focus"><ButtonIcon name="add" stateful={true} position="close"/>Unfollow</span>
                                         </button>
                                     </div>
                                 </div>

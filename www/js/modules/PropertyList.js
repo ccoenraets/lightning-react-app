@@ -14,11 +14,11 @@ export default React.createClass({
     render() {
         return (
             <DataGrid data={this.props.properties} onSort={this.sortHandler}>
-                <div header="Address" field="address" sortable="true" onLink={this.linkHandler}/>
-                <div header="City" field="city" sortable="true"/>
+                <div header="Address" field="address" sortable={true} onLink={this.linkHandler}/>
+                <div header="City" field="city" sortable={true}/>
                 <div header="Bedrooms" field="bedrooms" textAlign="center"/>
                 <div header="Bathrooms" field="bathrooms" textAlign="center"/>
-                <div header="Price" field="price" sortable="true" textAlign="right" format="currency"/>
+                <div header="Price" field="price" sortable={true} textAlign="right" format="currency"/>
             </DataGrid>
         );
     }
