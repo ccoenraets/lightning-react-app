@@ -45,7 +45,7 @@ module.exports = React.createClass( {
     return (
       <div className="ignore-react-onclickoutside">
 
-        <div className="sds-datepicker" aria-hidden="false" data-selection="single" onClick={this.handleClick}>
+        <div className="slds-datepicker" aria-hidden="false" data-selection="single" onClick={this.handleClick}>
           <SLDSDatePickerNav 
             onChangeMonth={this.handleMonthChange} 
             selected={this.props.selected}
@@ -54,8 +54,8 @@ module.exports = React.createClass( {
             selected={this.props.selected} 
             month={this.state.month} 
             onSelectDate={this.handleSelectDate}/>
-          <span id="bn_prev-label" className="sds-assistive-text">Go to previous month</span>
-          <span id="bn_next-label" className="sds-assistive-text">Go to next month</span>
+          <span id="bn_prev-label" className="slds-assistive-text">Go to previous month</span>
+          <span id="bn_next-label" className="slds-assistive-text">Go to next month</span>
         </div>
 
       </div>
