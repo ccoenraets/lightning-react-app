@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SLDSPopover from '../../SLDSPopover/index';
 import Moment from 'moment';
+import {InputIcon} from "./../../../components/Icons";
 
 var ListItemComponent = React.createClass( {
 
@@ -113,8 +114,9 @@ module.exports = React.createClass( {
               onFocus={this.handleFocus}
               aria-haspopup="true" 
               aria-expanded="false">{this.props.moment.format('YYYY')}
-              <span style={{color:'black'}}>&nbsp;&nbsp;&darr;</span>
+              <span style={{color:'black'}}></span>
             </button>
+            <InputIcon name="down"/>
           </div>
         </div>
         {this.popover()}
