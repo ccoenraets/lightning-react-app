@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SLDSPopover from '../SLDSPopover/index';
 import SLDSDatePicker from './SLDSDatePicker/index';
 import Moment from 'moment';
+import {InputIcon} from "./../../components/Icons";
 
 module.exports = React.createClass( {
 
@@ -86,6 +87,7 @@ module.exports = React.createClass( {
         <label className="slds-form-element__label" htmlFor="date">{this.props.label}</label>
         <div className="slds-form-element__control">
           <div className="slds-input-has-icon slds-input-has-icon--right">
+            <InputIcon name="event"/>
             <input 
               name="date"
               ref="date" 
