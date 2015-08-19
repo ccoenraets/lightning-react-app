@@ -73,7 +73,11 @@ let Row = React.createClass({
         var columns = [];
         for (let i=0; i<this.props.columns.length; i++) {
             let column = this.props.columns[i];
-            columns.push(<Column label={column.props.header} data={this.props.data} field={column.props.field} textAlign={column.props.textAlign} format={column.props.format} onLink={column.props.onLink}/>);
+            if (column.props && column.props.field) {
+                columns.push(<Column label={column.props.header} data={this.props.data} field={column.props.field}
+                                     textAlign={column.props.textAlign} format={column.props.format}
+                                     onLink={column.props.onLink}/>);
+            }
         }
         return (
             <tr className="slds-hint-parent">
@@ -96,7 +100,11 @@ export default React.createClass({
         let headers = [];
         for (let i=0; i<this.props.children.length; i++) {
             let column = this.props.children[i];
-            headers.push(<ColumnHeader field={column.props.field} label={column.props.header} sortable={column.props.sortable} textAlign={column.props.textAlign} onSort={this.sortHandler}/>);
+            if (column.props && column.props.field) {
+                headers.push(<ColumnHeader field={column.props.field} label={column.props.header}
+                                           sortable={column.props.sortable} textAlign={column.props.textAlign}
+                                           onSort={this.sortHandler}/>);
+            }
         }
         var rows;
         if (this.props.data) {

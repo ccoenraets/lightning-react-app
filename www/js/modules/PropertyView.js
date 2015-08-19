@@ -137,7 +137,7 @@ export default React.createClass({
                 <div className="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2">
                     <Tabs>
                         <div label="Activity">
-                            <ActivityTimeline propertyId={this.props.property_id}/>
+                            <ActivityTimeline propertyId={this.props.property_id} showContact={true} showProperty={false}/>
                         </div>
                         <div label="Gallery">
                             Drag and drop photos in this area
@@ -147,7 +147,7 @@ export default React.createClass({
 
                 <div className="slds-col--padded slds-size--1-of-1">
                     <br/>
-                    <ActivityCard propertyId={this.props.property_id} onNew={this.onNewOpenHouse}/>
+                    <ActivityCard propertyId={this.props.property_id} showContact={true} showProperty={false} onNew={this.onNewOpenHouse}/>
                     <BrokerCard propertyId={this.props.property_id}/>
                 </div>
                 {this.state.addingActivity ? <NewActivity onSave={this.saveNewActivity} onCancel={this.cancelNewActivity} propertyId={this.props.property_id} price={this.props.price}/> : ""}

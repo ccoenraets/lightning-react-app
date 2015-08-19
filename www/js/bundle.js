@@ -22945,8 +22945,12 @@ exports['default'] = _react2['default'].createClass({
         alert(field);
     },
 
-    linkHandler: function linkHandler(contact) {
-        window.location.hash = "#contact/" + contact.contact_id;
+    contactLinkHandler: function contactLinkHandler(activity) {
+        window.location.hash = "#contact/" + activity.contact_id;
+    },
+
+    propertyLinkHandler: function propertyLinkHandler(activity) {
+        window.location.hash = "#property/" + activity.property_id;
     },
 
     render: function render() {
@@ -23007,8 +23011,9 @@ exports['default'] = _react2['default'].createClass({
                     { data: this.state.activities },
                     _react2['default'].createElement('div', { header: 'Type', field: 'activity_name', sortable: 'true' }),
                     _react2['default'].createElement('div', { header: 'Date', field: 'activity_date', sortable: 'true', format: 'date' }),
-                    _react2['default'].createElement('div', { header: 'First Name', field: 'first_name', onLink: this.linkHandler }),
-                    _react2['default'].createElement('div', { header: 'Last Name', field: 'last_name', onLink: this.linkHandler }),
+                    this.props.showContact ? _react2['default'].createElement('div', { header: 'First Name', field: 'first_name', onLink: this.contactLinkHandler }) : '',
+                    this.props.showContact ? _react2['default'].createElement('div', { header: 'Last Name', field: 'last_name', onLink: this.contactLinkHandler }) : '',
+                    this.props.showProperty ? _react2['default'].createElement('div', { header: 'Property', field: 'address', onLink: this.propertyLinkHandler }) : '',
                     _react2['default'].createElement('div', { header: 'Price', field: 'price', sortable: 'true', format: 'currency' })
                 )
             ),
@@ -23108,7 +23113,7 @@ var ActivityListItem = _react2['default'].createClass({
                                     { className: 'tile__title slds-truncate' },
                                     this.props.activity.activity_name
                                 ),
-                                this.props.activity.contact_id ? _react2['default'].createElement(
+                                this.props.showContact && this.props.activity.contact_id ? _react2['default'].createElement(
                                     'ul',
                                     { className: 'slds-list--horizontal slds-text-body--medium' },
                                     _react2['default'].createElement(
@@ -23131,6 +23136,32 @@ var ActivityListItem = _react2['default'].createClass({
                                                     this.props.activity.first_name,
                                                     ' ',
                                                     this.props.activity.last_name
+                                                )
+                                            )
+                                        )
+                                    )
+                                ) : "",
+                                this.props.showProperty ? _react2['default'].createElement(
+                                    'ul',
+                                    { className: 'slds-list--horizontal slds-text-body--medium' },
+                                    _react2['default'].createElement(
+                                        'li',
+                                        { className: 'slds-list__item' },
+                                        _react2['default'].createElement(
+                                            'dl',
+                                            { className: 'slds-dl--inline' },
+                                            _react2['default'].createElement(
+                                                'dt',
+                                                { className: 'slds-dl--inline__label' },
+                                                'Property:'
+                                            ),
+                                            _react2['default'].createElement(
+                                                'dd',
+                                                { className: 'slds-dl--inline__detail' },
+                                                _react2['default'].createElement(
+                                                    'a',
+                                                    { href: '#property/' + this.props.activity.property_id },
+                                                    this.props.activity.address
                                                 )
                                             )
                                         )
@@ -23220,9 +23251,11 @@ exports['default'] = _react2['default'].createClass({
     },
 
     render: function render() {
+        var _this2 = this;
+
         var items = this.state.activities.map(function (activity) {
             var theme = getActivityTheme(activity.activity_name);
-            return _react2['default'].createElement(ActivityListItem, { key: activity.activity_id, activity: activity, theme: theme });
+            return _react2['default'].createElement(ActivityListItem, { key: activity.activity_id, activity: activity, theme: theme, showContact: _this2.props.showContact, showProperty: _this2.props.showProperty });
         });
         return _react2['default'].createElement(
             'ul',
@@ -24603,7 +24636,7 @@ exports['default'] = _react2['default'].createClass({
                     _react2['default'].createElement(
                         'div',
                         { label: 'Activity' },
-                        _react2['default'].createElement(_ActivityTimeline2['default'], { contactId: this.props.contact_id })
+                        _react2['default'].createElement(_ActivityTimeline2['default'], { contactId: this.props.contact_id, showContact: false, showProperty: true })
                     ),
                     _react2['default'].createElement(
                         'div',
@@ -24616,7 +24649,7 @@ exports['default'] = _react2['default'].createClass({
                 'div',
                 { className: 'slds-col--padded slds-size--1-of-1' },
                 _react2['default'].createElement('br', null),
-                _react2['default'].createElement(_ActivityCard2['default'], { contactId: this.props.contact_id, onNew: this.onNewActivity })
+                _react2['default'].createElement(_ActivityCard2['default'], { contactId: this.props.contact_id, showContact: false, showProperty: true, onNew: this.onNewActivity })
             ),
             this.state.addingActivity ? _react2['default'].createElement(_NewActivity2['default'], { onSave: this.saveActivity, onCancel: this.cancelActivity, contactId: this.props.contact_id }) : ""
         );
@@ -26270,7 +26303,7 @@ exports['default'] = _react2['default'].createClass({
                     _react2['default'].createElement(
                         'div',
                         { label: 'Activity' },
-                        _react2['default'].createElement(_ActivityTimeline2['default'], { propertyId: this.props.property_id })
+                        _react2['default'].createElement(_ActivityTimeline2['default'], { propertyId: this.props.property_id, showContact: true, showProperty: false })
                     ),
                     _react2['default'].createElement(
                         'div',
@@ -26283,7 +26316,7 @@ exports['default'] = _react2['default'].createClass({
                 'div',
                 { className: 'slds-col--padded slds-size--1-of-1' },
                 _react2['default'].createElement('br', null),
-                _react2['default'].createElement(_ActivityCard2['default'], { propertyId: this.props.property_id, onNew: this.onNewOpenHouse }),
+                _react2['default'].createElement(_ActivityCard2['default'], { propertyId: this.props.property_id, showContact: true, showProperty: false, onNew: this.onNewOpenHouse }),
                 _react2['default'].createElement(_BrokerCard2['default'], { propertyId: this.props.property_id })
             ),
             this.state.addingActivity ? _react2['default'].createElement(_NewActivity2['default'], { onSave: this.saveNewActivity, onCancel: this.cancelNewActivity, propertyId: this.props.property_id, price: this.props.price }) : ""
@@ -26403,7 +26436,11 @@ var Row = _react2["default"].createClass({
         var columns = [];
         for (var i = 0; i < this.props.columns.length; i++) {
             var column = this.props.columns[i];
-            columns.push(_react2["default"].createElement(Column, { label: column.props.header, data: this.props.data, field: column.props.field, textAlign: column.props.textAlign, format: column.props.format, onLink: column.props.onLink }));
+            if (column.props && column.props.field) {
+                columns.push(_react2["default"].createElement(Column, { label: column.props.header, data: this.props.data, field: column.props.field,
+                    textAlign: column.props.textAlign, format: column.props.format,
+                    onLink: column.props.onLink }));
+            }
         }
         return _react2["default"].createElement(
             "tr",
@@ -26429,7 +26466,11 @@ exports["default"] = _react2["default"].createClass({
         var headers = [];
         for (var i = 0; i < this.props.children.length; i++) {
             var column = this.props.children[i];
-            headers.push(_react2["default"].createElement(ColumnHeader, { field: column.props.field, label: column.props.header, sortable: column.props.sortable, textAlign: column.props.textAlign, onSort: this.sortHandler }));
+            if (column.props && column.props.field) {
+                headers.push(_react2["default"].createElement(ColumnHeader, { field: column.props.field, label: column.props.header,
+                    sortable: column.props.sortable, textAlign: column.props.textAlign,
+                    onSort: this.sortHandler }));
+            }
         }
         var rows;
         if (this.props.data) {

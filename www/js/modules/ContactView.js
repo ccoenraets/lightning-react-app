@@ -85,7 +85,7 @@ export default React.createClass({
                 <div className="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2">
                     <Tabs>
                         <div label="Activity">
-                            <ActivityTimeline contactId={this.props.contact_id}/>
+                            <ActivityTimeline contactId={this.props.contact_id} showContact={false} showProperty={true}/>
                         </div>
                         <div label="Gallery">
                             Drag and drop photos in this area
@@ -95,7 +95,7 @@ export default React.createClass({
 
                 <div className="slds-col--padded slds-size--1-of-1">
                     <br/>
-                    <ActivityCard contactId={this.props.contact_id} onNew={this.onNewActivity}/>
+                    <ActivityCard contactId={this.props.contact_id} showContact={false} showProperty={true} onNew={this.onNewActivity}/>
                 </div>
                 {this.state.addingActivity ? <NewActivity onSave={this.saveActivity} onCancel={this.cancelActivity} contactId={this.props.contact_id} /> : ""}
             </div>

@@ -30,8 +30,12 @@ export default React.createClass({
         alert(field);
     },
 
-    linkHandler(contact) {
-        window.location.hash = "#contact/" + contact.contact_id;
+    contactLinkHandler(activity) {
+        window.location.hash = "#contact/" + activity.contact_id;
+    },
+
+    propertyLinkHandler(activity) {
+        window.location.hash = "#property/" + activity.property_id;
     },
 
     render() {
@@ -62,8 +66,9 @@ export default React.createClass({
                     <DataGrid data={this.state.activities}>
                         <div header="Type" field="activity_name" sortable="true"/>
                         <div header="Date" field="activity_date" sortable="true" format="date"/>
-                        <div header="First Name" field="first_name" onLink={this.linkHandler}/>
-                        <div header="Last Name" field="last_name" onLink={this.linkHandler}/>
+                        {this.props.showContact ? <div header="First Name" field="first_name" onLink={this.contactLinkHandler}/> : ''}
+                        {this.props.showContact ? <div header="Last Name" field="last_name" onLink={this.contactLinkHandler}/> : ''}
+                        {this.props.showProperty ? <div header="Property" field="address" onLink={this.propertyLinkHandler}/> : ''}
                         <div header="Price" field="price" sortable="true" format="currency"/>
                     </DataGrid>
                 </section>

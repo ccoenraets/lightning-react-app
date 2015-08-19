@@ -36,12 +36,21 @@ let ActivityListItem = React.createClass({
                             <div className="slds-media__body">
                                 <div className="slds-tile">
                                     <p className="tile__title slds-truncate">{this.props.activity.activity_name}</p>
-                                    {this.props.activity.contact_id ?
+                                    {this.props.showContact && this.props.activity.contact_id ?
                                     <ul className="slds-list--horizontal slds-text-body--medium">
                                         <li className="slds-list__item">
                                             <dl className="slds-dl--inline">
                                                 <dt className="slds-dl--inline__label">From:</dt>
                                                 <dd className="slds-dl--inline__detail"><a href={'#contact/' + this.props.activity.contact_id}>{this.props.activity.first_name} {this.props.activity.last_name}</a></dd>
+                                            </dl>
+                                        </li>
+                                    </ul> : ""}
+                                    {this.props.showProperty ?
+                                    <ul className="slds-list--horizontal slds-text-body--medium">
+                                        <li className="slds-list__item">
+                                            <dl className="slds-dl--inline">
+                                                <dt className="slds-dl--inline__label">Property:</dt>
+                                                <dd className="slds-dl--inline__detail"><a href={'#property/' + this.props.activity.property_id}>{this.props.activity.address}</a></dd>
                                             </dl>
                                         </li>
                                     </ul> : ""}
@@ -95,10 +104,10 @@ export default React.createClass({
     },
 
     render() {
-        var items = this.state.activities.map(function (activity) {
+        var items = this.state.activities.map(activity => {
             let theme = getActivityTheme(activity.activity_name)
             return (
-                <ActivityListItem key={activity.activity_id} activity={activity} theme={theme}/>
+                <ActivityListItem key={activity.activity_id} activity={activity} theme={theme} showContact={this.props.showContact} showProperty={this.props.showProperty}/>
             );
         });
         return (
