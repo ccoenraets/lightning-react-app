@@ -1,9 +1,9 @@
-drop table property_broker;
-drop table broker;
-drop table activity;
-drop table activity_type;
-drop table property;
-drop table contact;
+drop table IF EXISTS property_broker;
+drop table IF EXISTS broker;
+drop table IF EXISTS activity;
+drop table IF EXISTS activity_type;
+drop table IF EXISTS property;
+drop table IF EXISTS contact;
 
 CREATE TABLE IF NOT EXISTS broker (
     broker_id       SERIAL PRIMARY KEY,
