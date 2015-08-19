@@ -7,6 +7,9 @@ let ButtonIcon = Icons.ButtonIcon;
 let ButtonDropdown = Dropdown.ButtonDropdown;
 let DropdownItem = Dropdown.DropdownItem;
 
+import SLDSPopover from './slds/SLDSPopover';
+import SLDSDateInput from './slds/SLDSDateInput';
+
 export default React.createClass({
 
     render() {
@@ -15,10 +18,10 @@ export default React.createClass({
             <div className="slds-page-header">
                 <div className="slds-grid">
                     <div className="slds-col slds-has-flexi-truncate">
-                        <p className="slds-text-heading--label">Properties</p>
+                        <p className="slds-text-heading--label">Properties:</p>
                         <div className="slds-grid">
                             <div className="slds-grid slds-type-focus slds-no-space">
-                                <h1 className="slds-text-heading--medium slds-truncate" title="My Leads (truncates)">My Properties</h1>
+                                <h1 className="slds-text-heading--medium slds-truncate" title="My Leads (truncates)">My Properties:</h1>
                                 <button className="slds-button slds-button--icon-bare slds-shrink-none slds-align-middle slds-m-left--x-small">
                                     <ButtonIcon name="down"/>
                                     <span className="slds-assistive-text">View More</span>
@@ -29,6 +32,7 @@ export default React.createClass({
                                 <span className="slds-assistive-text">Settings</span>
                                 <ButtonIcon name="down" size="x-small"/>
                             </button>
+                            <SLDSDateInput />
                             <button className="slds-button slds-button--brand slds-button-space-left slds-m-right--medium slds-shrink-none slds-align-middle slds-hide" aria-hidden="true">Save</button>
                         </div>
                     </div>
