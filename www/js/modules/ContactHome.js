@@ -8,11 +8,9 @@ import ContactNew from './ContactNew';
 
 export default React.createClass({
     getInitialState() {
-        console.log('initState');
         return {contacts: []};
     },
     componentDidMount() {
-        console.log('didMount');
         ContactService.findAll().then(contacts => {
             console.log(contacts);
             this.setState({contacts:contacts});
@@ -22,9 +20,7 @@ export default React.createClass({
         this.setState({new: true});
     },
     onSave(Contact) {
-        console.log('adding Contact');
         ContactService.createItem(Contact).then(() => {
-            console.log('Contact added');
             this.setState({new: false});
         });
     },
@@ -32,8 +28,6 @@ export default React.createClass({
         this.setState({new: false});
     },
     render() {
-        console.log('render');
-        console.log(this.state.contacts);
         return (
             <div>
                 <ContactListHeader contacts={this.state.contacts} onNew={this.onNew}/>

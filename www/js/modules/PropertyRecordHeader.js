@@ -19,7 +19,7 @@ export default React.createClass({
                             <div className="slds-media__body">
                                 <p className="slds-text-heading--label">Property</p>
                                 <div className="slds-grid">
-                                    <h1 className="slds-text-heading--medium slds-media--rec-home__title slds-truncate slds-align-middle" title="Record Title">{this.props.address}</h1>
+                                    <h1 className="slds-text-heading--medium slds-media--rec-home__title slds-truncate slds-align-middle" title="Record Title">{this.props.property.address}</h1>
                                     <div className="slds-col slds-shrink-none slds-align-bottom">
                                         <button className="slds-button slds-button--neutral slds-not-selected" aria-live="assertive">
                                             <span className="slds-text-not-selected"><ButtonIcon name="add" stateful={true} position="left"/>Follow</span>
@@ -33,7 +33,7 @@ export default React.createClass({
                     </div>
                     <div className="slds-col slds-no-flex slds-align-bottom">
                         <div className="slds-button-group" role="group">
-                            <a className="slds-button slds-button--neutral" href={'#property/' + this.props.property_id + '/edit'}>Edit</a>
+                            <a className="slds-button slds-button--neutral" href={'#property/' + this.props.property.property_id + '/edit'}>Edit</a>
                             <button className="slds-button slds-button--neutral">Delete</button>
                             <button className="slds-button slds-button--neutral">Clone</button>
                             <div className="slds-button--last">
@@ -52,7 +52,7 @@ export default React.createClass({
                                 <p className="slds-truncate" title="Field 1">City</p>
                             </dt>
                             <dd>
-                                <p className="slds-text-body--regular slds-truncate" title="Description that demonstrates truncation with a long text field">{this.props.city}</p>
+                                <p className="slds-text-body--regular slds-truncate" title="Description that demonstrates truncation with a long text field">{this.props.property.city}</p>
                             </dd>
                         </dl>
                     </div>
@@ -82,7 +82,7 @@ export default React.createClass({
                                 <p className="slds-truncate" title="Field 1">Asking Price</p>
                             </dt>
                             <dd>
-                                <p className="slds-text-body--regular slds-truncate" title="Description that demonstrates truncation with a long text field">{parseFloat(this.props.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+                                <p className="slds-text-body--regular slds-truncate" title="Description that demonstrates truncation with a long text field">{parseFloat(this.props.property.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
                             </dd>
                         </dl>
                     </div>

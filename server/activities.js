@@ -18,9 +18,6 @@ function findAll(req, res, next) {
 
     var where = whereParts.length > 0 ? ("WHERE " + whereParts.join(" AND ")) : "";
 
-
-    var whereClause = propertyId ? "WHERE activity.property_id = $1" : "";
-
     db.query("SELECT activity_id, activity.property_id, property.address, activity.contact_id as contact_id, contact.first_name as first_name, contact.last_name as last_name, activity_type.name as activity_name, activity_date, activity.price, comment FROM activity " +
              "INNER JOIN property on activity.property_id = property.property_id " +
              "LEFT JOIN contact on activity.contact_id = contact.contact_id " +
@@ -48,6 +45,7 @@ function findById(req, res, next) {
 };
 
 function createItem(req, res, next) {
+    console.log(activity);
     var activity = req.body;
     db.query('INSERT INTO activity (property_id, contact_id, activity_type_id, activity_date, price, comment) VALUES ($1, $2, $3, $4, $5, $6)',
         [activity.property_id, activity.contact_id, activity.activity_type_id, activity.activity_date, activity.price, activity.comment], true)

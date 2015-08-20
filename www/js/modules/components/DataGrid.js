@@ -45,9 +45,7 @@ let Column = React.createClass({
     render() {
         let value = this.props.data[this.props.field];
         if (this.props.format === "currency") {
-            console.log("currency");
             value = parseFloat(value).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-            console.log(value);
         } else if (this.props.format === "date") {
             value = moment(value).format("YYYY/MM/DD");
         }

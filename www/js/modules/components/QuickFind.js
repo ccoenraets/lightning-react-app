@@ -43,7 +43,7 @@ let Dropdown = React.createClass({
                 <div className="slds-dropdown__header">
                     <div placeholder="Find in list..." className="slds-input-has-icon slds-input-has-icon--left slds-m-bottom--x-small">
                         <InputIcon name="search"/>
-                        <label className="slds-assistive-text" for="input__filter">Search...</label>
+                        <label className="slds-assistive-text" htmlFor="input__filter">Search...</label>
                         <input id="input__filter" className="slds-input" type="text" placeholder="Search..." onChange={this.searchKeyChangeHandler}/>
                     </div>
                 </div>

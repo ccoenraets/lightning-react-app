@@ -20,7 +20,6 @@ export default React.createClass({
     componentDidMount() {
         let contactId = this.context.router.getCurrentParams().contactId;
         contactService.findById(contactId).then((contact) => {
-            console.log(contact);
             this.setState({contact});
         });
     },
@@ -32,11 +31,10 @@ export default React.createClass({
     },
 
     render() {
-        console.log("ContactRecord render");
         return (
             <div>
-                <ContactRecordHeader {...this.state.contact}/>
-                <RouteHandler {...this.state.contact} saveHandler={this.saveHandler}/>
+                <ContactRecordHeader contact={this.state.contact}/>
+                <RouteHandler contact={this.state.contact} saveHandler={this.saveHandler}/>
             </div>
         );
     }

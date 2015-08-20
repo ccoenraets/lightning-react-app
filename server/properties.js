@@ -3,8 +3,18 @@ var db = require('./pghelper');
 function findAll(req, res, next) {
 
     var sort = req.query.sort || "price";
+    var name = req.query.name;
+    var params = [];
 
-    db.query("SELECT property_id, address, city, bedrooms, bathrooms, price, location FROM property ORDER BY " + sort)
+    var whereClause = "";
+    if (name) {
+        whereClause = "WHERE address || city ~* $1";
+        params.push(name);
+    }
+
+    params.push(sort);
+
+    db.query("SELECT property_id, address, city, bedrooms, bathrooms, price, location FROM property " + whereClause + " ORDER BY $" + params.length, params)
         .then(function (properties) {
             return res.send(JSON.stringify(properties));
         })

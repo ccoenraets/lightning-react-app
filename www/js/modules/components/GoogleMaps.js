@@ -25,7 +25,6 @@ export default React.createClass({
     },
 
     addMarkers(map, data) {
-        console.log(data);
         if (data) {
             for (let i=0; i<data.length; i++) {
                 let item = data[i];

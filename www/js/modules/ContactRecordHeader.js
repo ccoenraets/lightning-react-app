@@ -19,7 +19,7 @@ export default React.createClass({
                             <div className="slds-media__body">
                                 <p className="slds-text-heading--label">Contact</p>
                                 <div className="slds-grid">
-                                    <h1 className="slds-text-heading--medium slds-media--rec-home__title slds-truncate slds-align-middle" title="Record Title">{this.props.first_name} {this.props.last_name}</h1>
+                                    <h1 className="slds-text-heading--medium slds-media--rec-home__title slds-truncate slds-align-middle" title="Record Title">{this.props.contact.first_name} {this.props.contact.last_name}</h1>
                                     <div className="slds-col slds-shrink-none slds-align-bottom">
                                         <button className="slds-button slds-button--neutral slds-not-selected" aria-live="assertive">
                                             <span className="slds-text-not-selected">
@@ -36,7 +36,7 @@ export default React.createClass({
                     </div>
                     <div className="slds-col slds-no-flex slds-align-bottom">
                         <div className="slds-button-group" role="group">
-                            <a className="slds-button slds-button--neutral" href={'#contact/' + this.props.contact_id + '/edit'}>Edit</a>
+                            <a className="slds-button slds-button--neutral" href={'#contact/' + this.props.contact.contact_id + '/edit'}>Edit</a>
                             <button className="slds-button slds-button--neutral">Delete</button>
                             <button className="slds-button slds-button--neutral">Clone</button>
                             <div className="slds-button--last">
@@ -55,7 +55,7 @@ export default React.createClass({
                                 <p className="slds-truncate" title="Field 1">Mobile Phone</p>
                             </dt>
                             <dd>
-                                <p className="slds-text-body--regular slds-truncate" title="Description that demonstrates truncation with a long text field">{this.props.mobile_phone}</p>
+                                <p className="slds-text-body--regular slds-truncate" title="Description that demonstrates truncation with a long text field">{this.props.contact.mobile_phone}</p>
                             </dd>
                         </dl>
                     </div>
@@ -65,7 +65,7 @@ export default React.createClass({
                                 <p className="slds-truncate" title="Field 1">House Phone</p>
                             </dt>
                             <dd>
-                                <p className="slds-text-body--regular slds-truncate" title="Description that demonstrates truncation with a long text field">{this.props.home_phone}</p>
+                                <p className="slds-text-body--regular slds-truncate" title="Description that demonstrates truncation with a long text field">{this.props.contact.home_phone}</p>
                             </dd>
                         </dl>
                     </div>
@@ -75,7 +75,7 @@ export default React.createClass({
                                 <p className="slds-truncate" title="Field 1">Email</p>
                             </dt>
                             <dd>
-                                <p className="slds-text-body--regular slds-truncate" title="Description that demonstrates truncation with a long text field">{this.props.email}</p>
+                                <p className="slds-text-body--regular slds-truncate" title="Description that demonstrates truncation with a long text field">{this.props.contact.email}</p>
                             </dd>
                         </dl>
                     </div>

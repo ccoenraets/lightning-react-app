@@ -8,7 +8,6 @@ export let findAll = () => new Promise((resolve, reject) => {
 });
 
 export let findById = (id) => new Promise((resolve, reject) => {
-    console.log("contact: " + id);
     fetch(url + "/"+id)
         .then(response => response.json())
         .then(data => resolve(data))

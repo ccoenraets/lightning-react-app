@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-import * as propertyService from './services/PropertyService';
+import * as activityService from './services/ActivityService';
 
 import Tabs from './components/Tabs';
 
@@ -13,21 +13,35 @@ import NewActivity from './NewActivity';
 let headerStyle = {
     fontWeight: "bold",
     paddingTop: "8px"
-
 };
 
 export default React.createClass({
 
     getInitialState() {
-        return {};
+        return {activities: []};
     },
 
-    onNewActivity() {
+    componentWillReceiveProps(props) {
+        this.loadActivities(props.contact.contact_id);
+    },
+
+    loadActivities(contactId) {
+        activityService.findByContact(contactId).then(activities => this.setState({activities}));
+    },
+
+    newActivityHandler() {
         this.setState({addingActivity: true})
     },
 
-    cancelNewActivity() {
+    cancelActivityHandler() {
         this.setState({addingActivity: false});
+    },
+
+    saveActivityHandler(activity) {
+        activityService.createItem(activity).then(() => {
+            this.loadActivities(this.props.contact.contact_id);
+            this.setState({addingActivity: false});
+        });
     },
 
     render() {
@@ -42,7 +56,7 @@ export default React.createClass({
 
                         <div className="slds-col--padded slds-size--1-of-1 slds-m-bottom--small">
                             <span className="slds-avatar slds-avatar--circle slds-avatar--large" style={{height: "120px", width: "120px"}}>
-                                <img src={this.props.pic} alt="portrait"/>
+                                <img src={this.props.contact.pic} alt="portrait"/>
                             </span>
                         </div>
 
@@ -52,7 +66,7 @@ export default React.createClass({
                                     <p className="slds-truncate" title="Field 1" style={headerStyle}>Address</p>
                                 </dt>
                                 <dd>
-                                    <p className="slds-text-body--regular slds-truncate" title="">{this.props.address}<br/>{this.props.city}, {this.props.state} {this.props.zip}</p>
+                                    <p className="slds-text-body--regular slds-truncate" title="">{this.props.contact.address}<br/>{this.props.contact.city}, {this.props.contact.state} {this.props.contact.zip}</p>
                                 </dd>
                             </dl>
                         </div>
@@ -62,7 +76,7 @@ export default React.createClass({
                                     <p className="slds-truncate" title="Field 1" style={headerStyle}>Occupation</p>
                                 </dt>
                                 <dd>
-                                    <p className="slds-text-body--regular slds-truncate" title="">{this.props.occupation}</p>
+                                    <p className="slds-text-body--regular slds-truncate" title="">{this.props.contact.occupation}</p>
                                 </dd>
                             </dl>
                         </div>
@@ -72,7 +86,7 @@ export default React.createClass({
                                     <p className="slds-truncate" title="Field 1" style={headerStyle}>Member since</p>
                                 </dt>
                                 <dd>
-                                    <p className="slds-text-body--regular slds-truncate" title="">{moment(this.props.member_since).format("MMMM Do YYYY")}</p>
+                                    <p className="slds-text-body--regular slds-truncate" title="">{moment(this.props.contact.member_since).format("MMMM Do YYYY")}</p>
                                 </dd>
                             </dl>
                         </div>
@@ -82,7 +96,7 @@ export default React.createClass({
                                     <p className="slds-truncate" title="Field 1" style={headerStyle}>Lead Source</p>
                                 </dt>
                                 <dd>
-                                    <p className="slds-text-body--regular slds-truncate" title="">{this.props.lead_source}</p>
+                                    <p className="slds-text-body--regular slds-truncate" title="">{this.props.contact.lead_source}</p>
                                 </dd>
                             </dl>
                         </div>
@@ -92,7 +106,7 @@ export default React.createClass({
                                     <p className="slds-truncate" title="Field 1" style={headerStyle}>Category</p>
                                 </dt>
                                 <dd>
-                                    <p className="slds-text-body--regular slds-truncate" title="">{this.props.category}</p>
+                                    <p className="slds-text-body--regular slds-truncate" title="">{this.props.contact.category}</p>
                                 </dd>
                             </dl>
                         </div>
@@ -102,7 +116,7 @@ export default React.createClass({
                 <div className="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2">
                     <Tabs>
                         <div label="Activity">
-                            <ActivityTimeline contactId={this.props.contact_id} showContact={false} showProperty={true}/>
+                            <ActivityTimeline contactId={this.props.contact.contact_id} activities={this.state.activities} showContact={false} showProperty={true}/>
                         </div>
                         <div label="Gallery">
                             Drag and drop photos in this area
@@ -112,9 +126,9 @@ export default React.createClass({
 
                 <div className="slds-col--padded slds-size--1-of-1">
                     <br/>
-                    <ActivityCard contactId={this.props.contact_id} showContact={false} showProperty={true} onNew={this.onNewActivity}/>
+                    <ActivityCard contactId={this.props.contact.contact_id} activities={this.state.activities} showContact={false} showProperty={true} onNew={this.newActivityHandler}/>
                 </div>
-                {this.state.addingActivity ? <NewActivity onSave={this.saveActivity} onCancel={this.cancelActivity} contactId={this.props.contact_id} /> : ""}
+                {this.state.addingActivity ? <NewActivity onSave={this.saveActivityHandler} onCancel={this.cancelActivityHandler} contactId={this.props.contact.contact_id} /> : ""}
             </div>
         );
     }

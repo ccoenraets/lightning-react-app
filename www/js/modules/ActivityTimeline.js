@@ -84,27 +84,8 @@ let ActivityListItem = React.createClass({
 
 export default React.createClass({
 
-    getInitialState() {
-        return {activities: []};
-    },
-
-    componentWillReceiveProps(props) {
-        let promise;
-        if (props.propertyId) {
-            promise = activityService.findByProperty(props.propertyId);
-        } else if (props.contactId) {
-            promise = activityService.findByContact(props.contactId);
-        }
-        if (promise) {
-            promise.then((activities) => {
-                console.log(activities);
-                this.setState({activities: activities})
-            });
-        }
-    },
-
     render() {
-        let items = this.state.activities.map(activity => {
+        let items = this.props.activities.map(activity => {
             let theme = getActivityTheme(activity.activity_name)
             return (
                 <ActivityListItem key={activity.activity_id} activity={activity} theme={theme} showContact={this.props.showContact} showProperty={this.props.showProperty}/>
@@ -116,4 +97,5 @@ export default React.createClass({
             </ul>
         );
     }
+
 });

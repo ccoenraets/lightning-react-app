@@ -8,9 +8,6 @@ export default React.createClass({
 
     render() {
 
-        console.log('header render');
-        console.log(this.props.contacts);
-
         return (
             <div className="slds-page-header">
                 <div className="slds-grid">

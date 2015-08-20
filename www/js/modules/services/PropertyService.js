@@ -7,6 +7,13 @@ export let findAll = (sort) => new Promise((resolve, reject) => {
         .catch(error => reject(error));
 });
 
+export let findByName = (name) => new Promise((resolve, reject) => {
+    fetch(url + "?name="+name)
+        .then(response => response.json())
+        .then(data => resolve(data))
+        .catch(error => reject(error));
+});
+
 export let findById = (id) => new Promise((resolve, reject) => {
     fetch(url + "/"+id)
         .then(response => response.json())

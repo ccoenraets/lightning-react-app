@@ -26084,7 +26084,7 @@ _reactRouter2['default'].run(routes, function (Handler) {
     _react2['default'].render(_react2['default'].createElement(Handler, null), document.body);
 });
 
-},{"./modules/ContactForm":202,"./modules/ContactHome":203,"./modules/ContactRecord":209,"./modules/ContactView":211,"./modules/PropertyForm":213,"./modules/PropertyHome":214,"./modules/PropertyRecord":218,"./modules/PropertyView":220,"react":196,"react-router":27}],198:[function(require,module,exports){
+},{"./modules/ContactForm":202,"./modules/ContactHome":203,"./modules/ContactRecord":209,"./modules/ContactView":211,"./modules/PropertyForm":213,"./modules/PropertyHome":214,"./modules/PropertyRecord":219,"./modules/PropertyView":221,"react":196,"react-router":27}],198:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -26116,30 +26116,6 @@ var ButtonIcon = Icons.ButtonIcon;
 
 exports['default'] = _react2['default'].createClass({
     displayName: 'ActivityCard',
-
-    getInitialState: function getInitialState() {
-        return { activities: [] };
-    },
-
-    componentWillReceiveProps: function componentWillReceiveProps(props) {
-        var _this = this;
-
-        var promise = undefined;
-        if (props.propertyId) {
-            promise = activityService.findByProperty(props.propertyId);
-        } else if (props.contactId) {
-            promise = activityService.findByContact(props.contactId);
-        }
-        if (promise) {
-            promise.then(function (activities) {
-                return _this.setState({ activities: activities });
-            });
-        }
-    },
-
-    sortHandler: function sortHandler(field) {
-        alert(field);
-    },
 
     contactLinkHandler: function contactLinkHandler(activity) {
         window.location.hash = "#contact/" + activity.contact_id;
@@ -26204,7 +26180,7 @@ exports['default'] = _react2['default'].createClass({
                 { className: 'slds-card__body' },
                 _react2['default'].createElement(
                     _componentsDataGrid2['default'],
-                    { data: this.state.activities },
+                    { data: this.props.activities },
                     _react2['default'].createElement('div', { header: 'Type', field: 'activity_name', sortable: true }),
                     _react2['default'].createElement('div', { header: 'Date', field: 'activity_date', sortable: true, format: 'date' }),
                     this.props.showContact ? _react2['default'].createElement('div', { header: 'First Name', field: 'first_name', onLink: this.contactLinkHandler }) : '',
@@ -26228,7 +26204,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/DataGrid":221,"./components/Icons":226,"./services/ActivityService":231,"react":196}],199:[function(require,module,exports){
+},{"./components/DataGrid":222,"./components/Icons":227,"./services/ActivityService":232,"react":196}],199:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -26425,33 +26401,12 @@ var ActivityListItem = _react2['default'].createClass({
 exports['default'] = _react2['default'].createClass({
     displayName: 'ActivityTimeline',
 
-    getInitialState: function getInitialState() {
-        return { activities: [] };
-    },
-
-    componentWillReceiveProps: function componentWillReceiveProps(props) {
+    render: function render() {
         var _this = this;
 
-        var promise = undefined;
-        if (props.propertyId) {
-            promise = activityService.findByProperty(props.propertyId);
-        } else if (props.contactId) {
-            promise = activityService.findByContact(props.contactId);
-        }
-        if (promise) {
-            promise.then(function (activities) {
-                console.log(activities);
-                _this.setState({ activities: activities });
-            });
-        }
-    },
-
-    render: function render() {
-        var _this2 = this;
-
-        var items = this.state.activities.map(function (activity) {
+        var items = this.props.activities.map(function (activity) {
             var theme = getActivityTheme(activity.activity_name);
-            return _react2['default'].createElement(ActivityListItem, { key: activity.activity_id, activity: activity, theme: theme, showContact: _this2.props.showContact, showProperty: _this2.props.showProperty });
+            return _react2['default'].createElement(ActivityListItem, { key: activity.activity_id, activity: activity, theme: theme, showContact: _this.props.showContact, showProperty: _this.props.showProperty });
         });
         return _react2['default'].createElement(
             'ul',
@@ -26459,10 +26414,11 @@ exports['default'] = _react2['default'].createClass({
             items
         );
     }
+
 });
 module.exports = exports['default'];
 
-},{"./components/Icons":226,"./services/ActivityService":231,"moment":2,"react":196}],200:[function(require,module,exports){
+},{"./components/Icons":227,"./services/ActivityService":232,"moment":2,"react":196}],200:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -26507,7 +26463,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/PickList":228,"./services/ActivityTypeService":232,"react":196}],201:[function(require,module,exports){
+},{"./components/PickList":229,"./services/ActivityTypeService":233,"react":196}],201:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -26636,7 +26592,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/DataGrid":221,"./components/Icons":226,"./services/BrokerService":233,"react":196}],202:[function(require,module,exports){
+},{"./components/DataGrid":222,"./components/Icons":227,"./services/BrokerService":234,"react":196}],202:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26826,13 +26782,11 @@ exports['default'] = _react2['default'].createClass({
     displayName: 'ContactHome',
 
     getInitialState: function getInitialState() {
-        console.log('initState');
         return { contacts: [] };
     },
     componentDidMount: function componentDidMount() {
         var _this = this;
 
-        console.log('didMount');
         ContactService.findAll().then(function (contacts) {
             console.log(contacts);
             _this.setState({ contacts: contacts });
@@ -26844,9 +26798,7 @@ exports['default'] = _react2['default'].createClass({
     onSave: function onSave(Contact) {
         var _this2 = this;
 
-        console.log('adding Contact');
         ContactService.createItem(Contact).then(function () {
-            console.log('Contact added');
             _this2.setState({ 'new': false });
         });
     },
@@ -26854,8 +26806,6 @@ exports['default'] = _react2['default'].createClass({
         this.setState({ 'new': false });
     },
     render: function render() {
-        console.log('render');
-        console.log(this.state.contacts);
         return _react2['default'].createElement(
             'div',
             null,
@@ -26867,7 +26817,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./ContactList":204,"./ContactListHeader":205,"./ContactNew":207,"./services/ContactService":234,"react":196}],204:[function(require,module,exports){
+},{"./ContactList":204,"./ContactListHeader":205,"./ContactNew":207,"./services/ContactService":235,"react":196}],204:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -26905,7 +26855,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/DataGrid":221,"react":196}],205:[function(require,module,exports){
+},{"./components/DataGrid":222,"react":196}],205:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -26930,9 +26880,6 @@ exports['default'] = _react2['default'].createClass({
     displayName: 'ContactListHeader',
 
     render: function render() {
-
-        console.log('header render');
-        console.log(this.props.contacts);
 
         return _react2['default'].createElement(
             'div',
@@ -27086,7 +27033,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/Icons":226,"react":196}],206:[function(require,module,exports){
+},{"./components/Icons":227,"react":196}],206:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -27140,7 +27087,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/Lookup":227,"./services/ContactService":234,"react":196}],207:[function(require,module,exports){
+},{"./components/Lookup":228,"./services/ContactService":235,"react":196}],207:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27376,14 +27323,12 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/QuickFind":229,"./services/ContactService":234,"react":196}],209:[function(require,module,exports){
+},{"./components/QuickFind":230,"./services/ContactService":235,"react":196}],209:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
@@ -27423,7 +27368,6 @@ exports['default'] = _react2['default'].createClass({
 
         var contactId = this.context.router.getCurrentParams().contactId;
         contactService.findById(contactId).then(function (contact) {
-            console.log(contact);
             _this.setState({ contact: contact });
         });
     },
@@ -27435,18 +27379,17 @@ exports['default'] = _react2['default'].createClass({
     },
 
     render: function render() {
-        console.log("ContactRecord render");
         return _react2['default'].createElement(
             'div',
             null,
-            _react2['default'].createElement(_ContactRecordHeader2['default'], this.state.contact),
-            _react2['default'].createElement(RouteHandler, _extends({}, this.state.contact, { saveHandler: this.saveHandler }))
+            _react2['default'].createElement(_ContactRecordHeader2['default'], { contact: this.state.contact }),
+            _react2['default'].createElement(RouteHandler, { contact: this.state.contact, saveHandler: this.saveHandler })
         );
     }
 });
 module.exports = exports['default'];
 
-},{"./ContactRecordHeader":210,"./services/ContactService":234,"react":196,"react-router":27}],210:[function(require,module,exports){
+},{"./ContactRecordHeader":210,"./services/ContactService":235,"react":196,"react-router":27}],210:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27503,9 +27446,9 @@ exports["default"] = _react2["default"].createClass({
                                 _react2["default"].createElement(
                                     "h1",
                                     { className: "slds-text-heading--medium slds-media--rec-home__title slds-truncate slds-align-middle", title: "Record Title" },
-                                    this.props.first_name,
+                                    this.props.contact.first_name,
                                     " ",
-                                    this.props.last_name
+                                    this.props.contact.last_name
                                 ),
                                 _react2["default"].createElement(
                                     "div",
@@ -27545,7 +27488,7 @@ exports["default"] = _react2["default"].createClass({
                         { className: "slds-button-group", role: "group" },
                         _react2["default"].createElement(
                             "a",
-                            { className: "slds-button slds-button--neutral", href: '#contact/' + this.props.contact_id + '/edit' },
+                            { className: "slds-button slds-button--neutral", href: '#contact/' + this.props.contact.contact_id + '/edit' },
                             "Edit"
                         ),
                         _react2["default"].createElement(
@@ -27599,7 +27542,7 @@ exports["default"] = _react2["default"].createClass({
                             _react2["default"].createElement(
                                 "p",
                                 { className: "slds-text-body--regular slds-truncate", title: "Description that demonstrates truncation with a long text field" },
-                                this.props.mobile_phone
+                                this.props.contact.mobile_phone
                             )
                         )
                     )
@@ -27625,7 +27568,7 @@ exports["default"] = _react2["default"].createClass({
                             _react2["default"].createElement(
                                 "p",
                                 { className: "slds-text-body--regular slds-truncate", title: "Description that demonstrates truncation with a long text field" },
-                                this.props.home_phone
+                                this.props.contact.home_phone
                             )
                         )
                     )
@@ -27651,7 +27594,7 @@ exports["default"] = _react2["default"].createClass({
                             _react2["default"].createElement(
                                 "p",
                                 { className: "slds-text-body--regular slds-truncate", title: "Description that demonstrates truncation with a long text field" },
-                                this.props.email
+                                this.props.contact.email
                             )
                         )
                     )
@@ -27662,7 +27605,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./components/Icons":226,"react":196}],211:[function(require,module,exports){
+},{"./components/Icons":227,"react":196}],211:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -27681,9 +27624,9 @@ var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
-var _servicesPropertyService = require('./services/PropertyService');
+var _servicesActivityService = require('./services/ActivityService');
 
-var propertyService = _interopRequireWildcard(_servicesPropertyService);
+var activityService = _interopRequireWildcard(_servicesActivityService);
 
 var _componentsTabs = require('./components/Tabs');
 
@@ -27704,22 +27647,42 @@ var _NewActivity2 = _interopRequireDefault(_NewActivity);
 var headerStyle = {
     fontWeight: "bold",
     paddingTop: "8px"
-
 };
 
 exports['default'] = _react2['default'].createClass({
     displayName: 'ContactView',
 
     getInitialState: function getInitialState() {
-        return {};
+        return { activities: [] };
     },
 
-    onNewActivity: function onNewActivity() {
+    componentWillReceiveProps: function componentWillReceiveProps(props) {
+        this.loadActivities(props.contact.contact_id);
+    },
+
+    loadActivities: function loadActivities(contactId) {
+        var _this = this;
+
+        activityService.findByContact(contactId).then(function (activities) {
+            return _this.setState({ activities: activities });
+        });
+    },
+
+    newActivityHandler: function newActivityHandler() {
         this.setState({ addingActivity: true });
     },
 
-    cancelNewActivity: function cancelNewActivity() {
+    cancelActivityHandler: function cancelActivityHandler() {
         this.setState({ addingActivity: false });
+    },
+
+    saveActivityHandler: function saveActivityHandler(activity) {
+        var _this2 = this;
+
+        activityService.createItem(activity).then(function () {
+            _this2.loadActivities(_this2.props.contact.contact_id);
+            _this2.setState({ addingActivity: false });
+        });
     },
 
     render: function render() {
@@ -27739,7 +27702,7 @@ exports['default'] = _react2['default'].createClass({
                         _react2['default'].createElement(
                             'span',
                             { className: 'slds-avatar slds-avatar--circle slds-avatar--large', style: { height: "120px", width: "120px" } },
-                            _react2['default'].createElement('img', { src: this.props.pic, alt: 'portrait' })
+                            _react2['default'].createElement('img', { src: this.props.contact.pic, alt: 'portrait' })
                         )
                     ),
                     _react2['default'].createElement(
@@ -27763,13 +27726,13 @@ exports['default'] = _react2['default'].createClass({
                                 _react2['default'].createElement(
                                     'p',
                                     { className: 'slds-text-body--regular slds-truncate', title: '' },
-                                    this.props.address,
+                                    this.props.contact.address,
                                     _react2['default'].createElement('br', null),
-                                    this.props.city,
+                                    this.props.contact.city,
                                     ', ',
-                                    this.props.state,
+                                    this.props.contact.state,
                                     ' ',
-                                    this.props.zip
+                                    this.props.contact.zip
                                 )
                             )
                         )
@@ -27795,7 +27758,7 @@ exports['default'] = _react2['default'].createClass({
                                 _react2['default'].createElement(
                                     'p',
                                     { className: 'slds-text-body--regular slds-truncate', title: '' },
-                                    this.props.occupation
+                                    this.props.contact.occupation
                                 )
                             )
                         )
@@ -27821,7 +27784,7 @@ exports['default'] = _react2['default'].createClass({
                                 _react2['default'].createElement(
                                     'p',
                                     { className: 'slds-text-body--regular slds-truncate', title: '' },
-                                    (0, _moment2['default'])(this.props.member_since).format("MMMM Do YYYY")
+                                    (0, _moment2['default'])(this.props.contact.member_since).format("MMMM Do YYYY")
                                 )
                             )
                         )
@@ -27847,7 +27810,7 @@ exports['default'] = _react2['default'].createClass({
                                 _react2['default'].createElement(
                                     'p',
                                     { className: 'slds-text-body--regular slds-truncate', title: '' },
-                                    this.props.lead_source
+                                    this.props.contact.lead_source
                                 )
                             )
                         )
@@ -27873,7 +27836,7 @@ exports['default'] = _react2['default'].createClass({
                                 _react2['default'].createElement(
                                     'p',
                                     { className: 'slds-text-body--regular slds-truncate', title: '' },
-                                    this.props.category
+                                    this.props.contact.category
                                 )
                             )
                         )
@@ -27889,7 +27852,7 @@ exports['default'] = _react2['default'].createClass({
                     _react2['default'].createElement(
                         'div',
                         { label: 'Activity' },
-                        _react2['default'].createElement(_ActivityTimeline2['default'], { contactId: this.props.contact_id, showContact: false, showProperty: true })
+                        _react2['default'].createElement(_ActivityTimeline2['default'], { contactId: this.props.contact.contact_id, activities: this.state.activities, showContact: false, showProperty: true })
                     ),
                     _react2['default'].createElement(
                         'div',
@@ -27902,16 +27865,16 @@ exports['default'] = _react2['default'].createClass({
                 'div',
                 { className: 'slds-col--padded slds-size--1-of-1' },
                 _react2['default'].createElement('br', null),
-                _react2['default'].createElement(_ActivityCard2['default'], { contactId: this.props.contact_id, showContact: false, showProperty: true, onNew: this.onNewActivity })
+                _react2['default'].createElement(_ActivityCard2['default'], { contactId: this.props.contact.contact_id, activities: this.state.activities, showContact: false, showProperty: true, onNew: this.newActivityHandler })
             ),
-            this.state.addingActivity ? _react2['default'].createElement(_NewActivity2['default'], { onSave: this.saveActivity, onCancel: this.cancelActivity, contactId: this.props.contact_id }) : ""
+            this.state.addingActivity ? _react2['default'].createElement(_NewActivity2['default'], { onSave: this.saveActivityHandler, onCancel: this.cancelActivityHandler, contactId: this.props.contact.contact_id }) : ""
         );
     }
 
 });
 module.exports = exports['default'];
 
-},{"./ActivityCard":198,"./ActivityTimeline":199,"./NewActivity":212,"./components/Tabs":230,"./services/PropertyService":235,"moment":2,"react":196}],212:[function(require,module,exports){
+},{"./ActivityCard":198,"./ActivityTimeline":199,"./NewActivity":212,"./components/Tabs":231,"./services/ActivityService":232,"moment":2,"react":196}],212:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -27938,6 +27901,10 @@ var _ContactLookup = require('./ContactLookup');
 
 var _ContactLookup2 = _interopRequireDefault(_ContactLookup);
 
+var _PropertyQuickFind = require('./PropertyQuickFind');
+
+var _PropertyQuickFind2 = _interopRequireDefault(_PropertyQuickFind);
+
 var _ContactQuickFind = require('./ContactQuickFind');
 
 var _ContactQuickFind2 = _interopRequireDefault(_ContactQuickFind);
@@ -27952,7 +27919,11 @@ exports['default'] = _react2['default'].createClass({
     displayName: 'NewActivity',
 
     getInitialState: function getInitialState() {
-        return { property_id: this.props.propertyId, price: this.props.price, contact_id: undefined, activity_type_id: undefined, activity_date: new Date(), comment: "" };
+        return { property_id: this.props.propertyId, contact_id: this.props.contactId, price: this.props.price, activity_type_id: undefined, activity_date: new Date(), comment: "" };
+    },
+
+    propertyChange: function propertyChange(data, label) {
+        this.setState({ property_id: data });
     },
 
     contactChange: function contactChange(data, label) {
@@ -28014,7 +27985,21 @@ exports['default'] = _react2['default'].createClass({
                         _react2['default'].createElement(
                             'div',
                             { className: 'slds-form--stacked' },
-                            _react2['default'].createElement(
+                            this.props.propertyId ? "" : _react2['default'].createElement(
+                                'div',
+                                { className: 'slds-form-element' },
+                                _react2['default'].createElement(
+                                    'label',
+                                    { className: 'slds-form-element__label', htmlFor: 'sample1' },
+                                    'Property'
+                                ),
+                                _react2['default'].createElement(
+                                    'div',
+                                    { className: 'slds-form-element__control' },
+                                    _react2['default'].createElement(_PropertyQuickFind2['default'], { onChange: this.propertyChange })
+                                )
+                            ),
+                            this.props.contactId ? "" : _react2['default'].createElement(
                                 'div',
                                 { className: 'slds-form-element' },
                                 _react2['default'].createElement(
@@ -28111,7 +28096,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./ActivityTypePickList":200,"./ContactLookup":206,"./ContactQuickFind":208,"./components/DatePicker":222,"./components/Icons":226,"react":196}],213:[function(require,module,exports){
+},{"./ActivityTypePickList":200,"./ContactLookup":206,"./ContactQuickFind":208,"./PropertyQuickFind":218,"./components/DatePicker":223,"./components/Icons":227,"react":196}],213:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28507,7 +28492,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./PropertyList":215,"./PropertyListHeader":216,"./PropertyNew":217,"./components/GoogleMaps":225,"./services/PropertyService":235,"react":196}],215:[function(require,module,exports){
+},{"./PropertyList":215,"./PropertyListHeader":216,"./PropertyNew":217,"./components/GoogleMaps":226,"./services/PropertyService":236,"react":196}],215:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -28550,7 +28535,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/DataGrid":221,"react":196}],216:[function(require,module,exports){
+},{"./components/DataGrid":222,"react":196}],216:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -28722,7 +28707,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/Dropdown":223,"./components/Icons":226,"react":196}],217:[function(require,module,exports){
+},{"./components/Dropdown":224,"./components/Icons":227,"react":196}],217:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -28911,7 +28896,59 @@ Object.defineProperty(exports, '__esModule', {
     value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _servicesPropertyService = require('./services/PropertyService');
+
+var PropertyService = _interopRequireWildcard(_servicesPropertyService);
+
+var _componentsQuickFind = require('./components/QuickFind');
+
+var _componentsQuickFind2 = _interopRequireDefault(_componentsQuickFind);
+
+exports['default'] = _react2['default'].createClass({
+    displayName: 'PropertyQuickFind',
+
+    getInitialState: function getInitialState() {
+        return {
+            searchKey: undefined,
+            list: []
+        };
+    },
+
+    searchKeyChangeHandler: function searchKeyChangeHandler(key) {
+        var _this = this;
+
+        PropertyService.findByName(key).then(function (list) {
+            return _this.setState({ searchKey: key, list: list });
+        });
+    },
+
+    render: function render() {
+        return _react2['default'].createElement(_componentsQuickFind2['default'], { label: 'Select a property...',
+            searchKey: this.state.searchKey,
+            valueField: 'property_id',
+            labelField: 'address',
+            list: this.state.list,
+            onSearchKeyChange: this.searchKeyChangeHandler,
+            onChange: this.props.onChange });
+    }
+
+});
+module.exports = exports['default'];
+
+},{"./components/QuickFind":230,"./services/PropertyService":236,"react":196}],219:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, '__esModule', {
+    value: true
+});
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
 
@@ -28925,13 +28962,13 @@ var _reactRouter = require('react-router');
 
 var _reactRouter2 = _interopRequireDefault(_reactRouter);
 
-var _PropertyRecordHeader = require('./PropertyRecordHeader');
-
-var _PropertyRecordHeader2 = _interopRequireDefault(_PropertyRecordHeader);
-
 var _servicesPropertyService = require('./services/PropertyService');
 
 var propertyService = _interopRequireWildcard(_servicesPropertyService);
+
+var _PropertyRecordHeader = require('./PropertyRecordHeader');
+
+var _PropertyRecordHeader2 = _interopRequireDefault(_PropertyRecordHeader);
 
 var RouteHandler = _reactRouter2['default'].RouteHandler;
 
@@ -28951,7 +28988,6 @@ exports['default'] = _react2['default'].createClass({
 
         var propertyId = this.context.router.getCurrentParams().propertyId;
         propertyService.findById(propertyId).then(function (property) {
-            console.log(property);
             _this.setState({ property: property });
         });
     },
@@ -28966,14 +29002,14 @@ exports['default'] = _react2['default'].createClass({
         return _react2['default'].createElement(
             'div',
             null,
-            _react2['default'].createElement(_PropertyRecordHeader2['default'], this.state.property),
-            _react2['default'].createElement(RouteHandler, _extends({}, this.state.property, { saveHandler: this.saveHandler }))
+            _react2['default'].createElement(_PropertyRecordHeader2['default'], { property: this.state.property }),
+            _react2['default'].createElement(RouteHandler, { property: this.state.property, saveHandler: this.saveHandler })
         );
     }
 });
 module.exports = exports['default'];
 
-},{"./PropertyRecordHeader":219,"./services/PropertyService":235,"react":196,"react-router":27}],219:[function(require,module,exports){
+},{"./PropertyRecordHeader":220,"./services/PropertyService":236,"react":196,"react-router":27}],220:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29030,7 +29066,7 @@ exports["default"] = _react2["default"].createClass({
                                 _react2["default"].createElement(
                                     "h1",
                                     { className: "slds-text-heading--medium slds-media--rec-home__title slds-truncate slds-align-middle", title: "Record Title" },
-                                    this.props.address
+                                    this.props.property.address
                                 ),
                                 _react2["default"].createElement(
                                     "div",
@@ -29070,7 +29106,7 @@ exports["default"] = _react2["default"].createClass({
                         { className: "slds-button-group", role: "group" },
                         _react2["default"].createElement(
                             "a",
-                            { className: "slds-button slds-button--neutral", href: '#property/' + this.props.property_id + '/edit' },
+                            { className: "slds-button slds-button--neutral", href: '#property/' + this.props.property.property_id + '/edit' },
                             "Edit"
                         ),
                         _react2["default"].createElement(
@@ -29124,7 +29160,7 @@ exports["default"] = _react2["default"].createClass({
                             _react2["default"].createElement(
                                 "p",
                                 { className: "slds-text-body--regular slds-truncate", title: "Description that demonstrates truncation with a long text field" },
-                                this.props.city
+                                this.props.property.city
                             )
                         )
                     )
@@ -29202,7 +29238,7 @@ exports["default"] = _react2["default"].createClass({
                             _react2["default"].createElement(
                                 "p",
                                 { className: "slds-text-body--regular slds-truncate", title: "Description that demonstrates truncation with a long text field" },
-                                parseFloat(this.props.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+                                parseFloat(this.props.property.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
                             )
                         )
                     )
@@ -29213,7 +29249,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./components/Icons":226,"react":196}],220:[function(require,module,exports){
+},{"./components/Icons":227,"react":196}],221:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -29263,29 +29299,41 @@ var _NewActivity2 = _interopRequireDefault(_NewActivity);
 var headerStyle = {
     fontWeight: "bold",
     paddingTop: "8px"
-
 };
 
 exports['default'] = _react2['default'].createClass({
     displayName: 'PropertyView',
 
     getInitialState: function getInitialState() {
-        return {};
+        return { activities: [] };
     },
 
-    onNewOpenHouse: function onNewOpenHouse() {
+    componentWillReceiveProps: function componentWillReceiveProps(props) {
+        this.loadActivities(props.property.property_id);
+    },
+
+    loadActivities: function loadActivities(propertyId) {
+        var _this = this;
+
+        activityService.findByProperty(propertyId).then(function (activities) {
+            return _this.setState({ activities: activities });
+        });
+    },
+
+    newActivityHandler: function newActivityHandler() {
         this.setState({ addingActivity: true });
     },
 
-    cancelNewActivity: function cancelNewActivity() {
+    cancelActivityHandler: function cancelActivityHandler() {
         this.setState({ addingActivity: false });
     },
 
-    saveNewActivity: function saveNewActivity(activity) {
-        var _this = this;
+    saveActivityHandler: function saveActivityHandler(activity) {
+        var _this2 = this;
 
         activityService.createItem(activity).then(function () {
-            _this.setState({ addingActivity: false });
+            _this2.loadActivities(_this2.props.property.property_id);
+            _this2.setState({ addingActivity: false });
         });
     },
 
@@ -29296,8 +29344,6 @@ exports['default'] = _react2['default'].createClass({
             fontWeight: "300",
             padding: "12px 0 6px 0"
         };
-
-        console.log(this.props);
 
         return _react2['default'].createElement(
             'div',
@@ -29311,13 +29357,13 @@ exports['default'] = _react2['default'].createClass({
                     _react2['default'].createElement(
                         'div',
                         { className: 'slds-col--padded slds-size--1-of-1' },
-                        _react2['default'].createElement('img', { src: this.props.pic }),
+                        _react2['default'].createElement('img', { src: this.props.property.pic }),
                         _react2['default'].createElement(
                             'h1',
                             { style: title },
-                            this.props.teaser
+                            this.props.property.teaser
                         ),
-                        this.props.description
+                        this.props.property.description
                     ),
                     _react2['default'].createElement(
                         'div',
@@ -29340,7 +29386,7 @@ exports['default'] = _react2['default'].createClass({
                                 _react2['default'].createElement(
                                     'p',
                                     { className: 'slds-text-body--regular slds-truncate', title: '' },
-                                    this.props.size
+                                    this.props.property.size
                                 )
                             )
                         )
@@ -29366,7 +29412,7 @@ exports['default'] = _react2['default'].createClass({
                                 _react2['default'].createElement(
                                     'p',
                                     { className: 'slds-text-body--regular slds-truncate', title: '' },
-                                    this.props.bedrooms
+                                    this.props.property.bedrooms
                                 )
                             )
                         )
@@ -29392,7 +29438,7 @@ exports['default'] = _react2['default'].createClass({
                                 _react2['default'].createElement(
                                     'p',
                                     { className: 'slds-text-body--regular slds-truncate', title: '' },
-                                    this.props.bathrooms
+                                    this.props.property.bathrooms
                                 )
                             )
                         )
@@ -29492,7 +29538,7 @@ exports['default'] = _react2['default'].createClass({
                     _react2['default'].createElement(
                         'div',
                         { label: 'Activity' },
-                        _react2['default'].createElement(_ActivityTimeline2['default'], { propertyId: this.props.property_id, showContact: true, showProperty: false })
+                        _react2['default'].createElement(_ActivityTimeline2['default'], { propertyId: this.props.property.property_id, activities: this.state.activities, showContact: true, showProperty: false })
                     ),
                     _react2['default'].createElement(
                         'div',
@@ -29505,17 +29551,17 @@ exports['default'] = _react2['default'].createClass({
                 'div',
                 { className: 'slds-col--padded slds-size--1-of-1' },
                 _react2['default'].createElement('br', null),
-                _react2['default'].createElement(_ActivityCard2['default'], { propertyId: this.props.property_id, showContact: true, showProperty: false, onNew: this.onNewOpenHouse }),
-                _react2['default'].createElement(_BrokerCard2['default'], { propertyId: this.props.property_id })
+                _react2['default'].createElement(_ActivityCard2['default'], { propertyId: this.props.property.property_id, activities: this.state.activities, showContact: true, showProperty: false, onNew: this.newActivityHandler }),
+                _react2['default'].createElement(_BrokerCard2['default'], { propertyId: this.props.property.property_id })
             ),
-            this.state.addingActivity ? _react2['default'].createElement(_NewActivity2['default'], { onSave: this.saveNewActivity, onCancel: this.cancelNewActivity, propertyId: this.props.property_id, price: this.props.price }) : ""
+            this.state.addingActivity ? _react2['default'].createElement(_NewActivity2['default'], { onSave: this.saveActivityHandler, onCancel: this.cancelActivityHandler, propertyId: this.props.property.property_id, price: this.props.property.price }) : ""
         );
     }
 
 });
 module.exports = exports['default'];
 
-},{"./ActivityCard":198,"./ActivityTimeline":199,"./BrokerCard":201,"./NewActivity":212,"./components/FileDropArea":224,"./components/GoogleMaps":225,"./components/Tabs":230,"./services/ActivityService":231,"react":196}],221:[function(require,module,exports){
+},{"./ActivityCard":198,"./ActivityTimeline":199,"./BrokerCard":201,"./NewActivity":212,"./components/FileDropArea":225,"./components/GoogleMaps":226,"./components/Tabs":231,"./services/ActivityService":232,"react":196}],222:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -29590,9 +29636,7 @@ var Column = _react2['default'].createClass({
     render: function render() {
         var value = this.props.data[this.props.field];
         if (this.props.format === "currency") {
-            console.log("currency");
             value = parseFloat(value).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-            console.log(value);
         } else if (this.props.format === "date") {
             value = (0, _moment2['default'])(value).format("YYYY/MM/DD");
         }
@@ -29690,7 +29734,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./Icons":226,"moment":2,"react":196}],222:[function(require,module,exports){
+},{"./Icons":227,"moment":2,"react":196}],223:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30223,7 +30267,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./Icons":226,"react":196}],223:[function(require,module,exports){
+},{"./Icons":227,"react":196}],224:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30348,7 +30392,7 @@ var ButtonDropdown = _react2["default"].createClass({
 });
 exports.ButtonDropdown = ButtonDropdown;
 
-},{"./Icons":226,"react":196}],224:[function(require,module,exports){
+},{"./Icons":227,"react":196}],225:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -30409,7 +30453,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"react":196}],225:[function(require,module,exports){
+},{"react":196}],226:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -30442,7 +30486,6 @@ exports['default'] = _react2['default'].createClass({
     addMarkers: function addMarkers(map, data) {
         var _this = this;
 
-        console.log(data);
         if (data) {
             for (var i = 0; i < data.length; i++) {
                 var item = data[i];
@@ -30478,7 +30521,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"react":196}],226:[function(require,module,exports){
+},{"react":196}],227:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -30555,7 +30598,7 @@ var InputIcon = _react2['default'].createClass({
 });
 exports.InputIcon = InputIcon;
 
-},{"react":196}],227:[function(require,module,exports){
+},{"react":196}],228:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30661,7 +30704,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./Icons":226,"react":196}],228:[function(require,module,exports){
+},{"./Icons":227,"react":196}],229:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30772,7 +30815,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./Icons":226,"react":196}],229:[function(require,module,exports){
+},{"./Icons":227,"react":196}],230:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -30844,7 +30887,7 @@ var Dropdown = _react2["default"].createClass({
                     _react2["default"].createElement(InputIcon, { name: "search" }),
                     _react2["default"].createElement(
                         "label",
-                        { className: "slds-assistive-text", "for": "input__filter" },
+                        { className: "slds-assistive-text", htmlFor: "input__filter" },
                         "Search..."
                     ),
                     _react2["default"].createElement("input", { id: "input__filter", className: "slds-input", type: "text", placeholder: "Search...", onChange: this.searchKeyChangeHandler })
@@ -30910,7 +30953,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./Icons":226,"react":196}],230:[function(require,module,exports){
+},{"./Icons":227,"react":196}],231:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -30997,7 +31040,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"react":196}],231:[function(require,module,exports){
+},{"react":196}],232:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31007,7 +31050,6 @@ var url = "/activities";
 
 var findAll = function findAll() {
     return new Promise(function (resolve, reject) {
-        console.log("activities findAll");
         fetch(url).then(function (response) {
             return response.json();
         }).then(function (data) {
@@ -31113,7 +31155,7 @@ var deleteItem = function deleteItem(contact) {
 };
 exports.deleteItem = deleteItem;
 
-},{}],232:[function(require,module,exports){
+},{}],233:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31134,7 +31176,7 @@ var findAll = function findAll() {
 };
 exports.findAll = findAll;
 
-},{}],233:[function(require,module,exports){
+},{}],234:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31144,7 +31186,6 @@ var url = "/brokers";
 
 var findAll = function findAll() {
     return new Promise(function (resolve, reject) {
-        console.log("activities findAll");
         fetch(url).then(function (response) {
             return response.json();
         }).then(function (data) {
@@ -31169,7 +31210,7 @@ var findByProperty = function findByProperty(id) {
 };
 exports.findByProperty = findByProperty;
 
-},{}],234:[function(require,module,exports){
+},{}],235:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31192,7 +31233,6 @@ var findAll = function findAll() {
 exports.findAll = findAll;
 var findById = function findById(id) {
     return new Promise(function (resolve, reject) {
-        console.log("contact: " + id);
         fetch(url + "/" + id).then(function (response) {
             return response.json();
         }).then(function (data) {
@@ -31272,7 +31312,7 @@ var deleteItem = function deleteItem(contact) {
 };
 exports.deleteItem = deleteItem;
 
-},{}],235:[function(require,module,exports){
+},{}],236:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31293,6 +31333,19 @@ var findAll = function findAll(sort) {
 };
 
 exports.findAll = findAll;
+var findByName = function findByName(name) {
+    return new Promise(function (resolve, reject) {
+        fetch(url + "?name=" + name).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            return resolve(data);
+        })["catch"](function (error) {
+            return reject(error);
+        });
+    });
+};
+
+exports.findByName = findByName;
 var findById = function findById(id) {
     return new Promise(function (resolve, reject) {
         fetch(url + "/" + id).then(function (response) {
