@@ -135,7 +135,7 @@ export default React.createClass({
 
                         <div className="slds-col--padded slds-size--1-of-1">
                             <br/>
-                            <GoogleMaps data={[this.props]} height="250px"/>
+                            <GoogleMaps data={this.props.property} height="250px"/>
                         </div>
 
                     </div>

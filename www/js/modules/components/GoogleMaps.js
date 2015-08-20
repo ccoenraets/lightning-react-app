@@ -25,18 +25,20 @@ export default React.createClass({
     },
 
     addMarkers(map, data) {
-        if (data) {
-            for (let i=0; i<data.length; i++) {
-                let item = data[i];
-                if (item.location) {
-                    let marker = new google.maps.Marker({position: {lat: item.location.y, lng: item.location.x}, title: 'Click for details', map: map});
-                    let infowindow = new google.maps.InfoWindow({
-                        content: this.props.infoWindow
-                    });
-                    marker.addListener('click', function() {
-                        infowindow.open(map, marker);
-                    });
-                }
+        if (!data) return;
+        if (!Array.isArray(data)) {
+            data = [data];
+        }
+        for (let i=0; i<data.length; i++) {
+            let item = data[i];
+            if (item.location) {
+                let marker = new google.maps.Marker({position: {lat: item.location.y, lng: item.location.x}, title: 'Click for details', map: map});
+                let infowindow = new google.maps.InfoWindow({
+                    content: this.props.infoWindow
+                });
+                marker.addListener('click', function() {
+                    infowindow.open(map, marker);
+                });
             }
         }
     },

@@ -29525,7 +29525,7 @@ exports['default'] = _react2['default'].createClass({
                         'div',
                         { className: 'slds-col--padded slds-size--1-of-1' },
                         _react2['default'].createElement('br', null),
-                        _react2['default'].createElement(_componentsGoogleMaps2['default'], { data: [this.props], height: '250px' })
+                        _react2['default'].createElement(_componentsGoogleMaps2['default'], { data: this.props.property, height: '250px' })
                     )
                 )
             ),
@@ -30486,20 +30486,22 @@ exports['default'] = _react2['default'].createClass({
     addMarkers: function addMarkers(map, data) {
         var _this = this;
 
-        if (data) {
-            for (var i = 0; i < data.length; i++) {
-                var item = data[i];
-                if (item.location) {
-                    (function () {
-                        var marker = new google.maps.Marker({ position: { lat: item.location.y, lng: item.location.x }, title: 'Click for details', map: map });
-                        var infowindow = new google.maps.InfoWindow({
-                            content: _this.props.infoWindow
-                        });
-                        marker.addListener('click', function () {
-                            infowindow.open(map, marker);
-                        });
-                    })();
-                }
+        if (!data) return;
+        if (!Array.isArray(data)) {
+            data = [data];
+        }
+        for (var i = 0; i < data.length; i++) {
+            var item = data[i];
+            if (item.location) {
+                (function () {
+                    var marker = new google.maps.Marker({ position: { lat: item.location.y, lng: item.location.x }, title: 'Click for details', map: map });
+                    var infowindow = new google.maps.InfoWindow({
+                        content: _this.props.infoWindow
+                    });
+                    marker.addListener('click', function () {
+                        infowindow.open(map, marker);
+                    });
+                })();
             }
         }
     },
