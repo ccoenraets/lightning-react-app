@@ -5,7 +5,7 @@ import ContactRecordHeader from './ContactRecordHeader';
 
 import * as contactService from './services/ContactService';
 
-var RouteHandler = Router.RouteHandler;
+let RouteHandler = Router.RouteHandler;
 
 export default React.createClass({
 
@@ -18,7 +18,7 @@ export default React.createClass({
     },
 
     componentDidMount() {
-        var contactId = this.context.router.getCurrentParams().contactId;
+        let contactId = this.context.router.getCurrentParams().contactId;
         contactService.findById(contactId).then((contact) => {
             console.log(contact);
             this.setState({contact});

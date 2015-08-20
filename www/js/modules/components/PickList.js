@@ -5,7 +5,7 @@ import * as Icons from "./Icons";
 let Icon = Icons.Icon;
 let ButtonIcon = Icons.ButtonIcon;
 
-var ListItem = React.createClass({
+let ListItem = React.createClass({
 
     clickHandler() {
         console.log(this.props.label);
@@ -22,7 +22,7 @@ var ListItem = React.createClass({
 
 });
 
-var Dropdown = React.createClass({
+let Dropdown = React.createClass({
 
     render() {
         let items = this.props.items.map((item) => <ListItem data={item[this.props.valueField]} label={item[this.props.labelField]} onSelect={this.props.onChange}/>);

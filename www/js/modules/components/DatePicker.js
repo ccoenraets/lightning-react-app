@@ -6,7 +6,7 @@ let Icon = Icons.Icon;
 let ButtonIcon = Icons.ButtonIcon;
 let InputIcon = Icons.InputIcon;
 
-var Dropdown = React.createClass({
+let Dropdown = React.createClass({
 
     render() {
         return (

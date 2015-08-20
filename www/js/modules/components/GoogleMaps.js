@@ -31,7 +31,7 @@ export default React.createClass({
                 let item = data[i];
                 if (item.location) {
                     let marker = new google.maps.Marker({position: {lat: item.location.y, lng: item.location.x}, title: 'Click for details', map: map});
-                    var infowindow = new google.maps.InfoWindow({
+                    let infowindow = new google.maps.InfoWindow({
                         content: this.props.infoWindow
                     });
                     marker.addListener('click', function() {
@@ -43,11 +43,11 @@ export default React.createClass({
     },
 
     componentDidMount: function() {
-        var mapOptions = {
+        let mapOptions = {
             center: new google.maps.LatLng(this.props.centerLat, this.props.centerLng),
             zoom: this.props.zoom
         };
-        var map = new google.maps.Map(this.getDOMNode(), mapOptions);
+        let map = new google.maps.Map(this.getDOMNode(), mapOptions);
         this.setState({map: map});
         this.addMarkers(map, this.props.data);
     },

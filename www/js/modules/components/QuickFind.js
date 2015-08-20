@@ -6,7 +6,7 @@ let Icon = Icons.Icon;
 let ButtonIcon = Icons.ButtonIcon;
 let InputIcon = Icons.InputIcon;
 
-var ListItem = React.createClass({
+let ListItem = React.createClass({
 
     clickHandler(event) {
         this.props.onSelect(this.props.value, this.props.label);
@@ -24,7 +24,7 @@ var ListItem = React.createClass({
 });
 
 
-var Dropdown = React.createClass({
+let Dropdown = React.createClass({
 
     searchKeyChangeHandler(e) {
         this.props.onSearchKeyChange(e.target.value);
@@ -32,7 +32,7 @@ var Dropdown = React.createClass({
 
     render() {
 
-        var items = this.props.list.map((item) => {
+        let items = this.props.list.map((item) => {
                 return <ListItem value={item[this.props.valueField]}
                                  label={item[this.props.labelField]}
                                  onSelect={this.props.onChange}/>

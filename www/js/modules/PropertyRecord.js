@@ -4,7 +4,7 @@ import Router from 'react-router';
 import PropertyRecordHeader from './PropertyRecordHeader';
 import * as propertyService from './services/PropertyService';
 
-var RouteHandler = Router.RouteHandler;
+let RouteHandler = Router.RouteHandler;
 
 export default React.createClass({
 
@@ -17,7 +17,7 @@ export default React.createClass({
     },
 
     componentDidMount() {
-        var propertyId = this.context.router.getCurrentParams().propertyId;
+        let propertyId = this.context.router.getCurrentParams().propertyId;
         propertyService.findById(propertyId).then((property) => {
             console.log(property);
             this.setState({property});

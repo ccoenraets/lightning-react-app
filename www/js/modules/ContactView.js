@@ -1,7 +1,7 @@
 import React from 'react';
+import moment from 'moment';
 
 import Tabs from './components/Tabs';
-import moment from './utils/moment';
 
 import ActivityTimeline from './ActivityTimeline';
 import ActivityCard from './ActivityCard';

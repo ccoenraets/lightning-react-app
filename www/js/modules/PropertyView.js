@@ -4,13 +4,14 @@ import * as activityService from './services/ActivityService';
 
 import Tabs from './components/Tabs';
 import GoogleMaps from './components/GoogleMaps';
+import FileDropArea from './components/FileDropArea';
 
 import ActivityTimeline from './ActivityTimeline';
 import BrokerCard from './BrokerCard';
 import ActivityCard from './ActivityCard';
 import NewActivity from './NewActivity';
 
-var headerStyle = {
+let headerStyle = {
     fontWeight: "bold",
     paddingTop: "8px"
 
@@ -140,7 +141,7 @@ export default React.createClass({
                             <ActivityTimeline propertyId={this.props.property_id} showContact={true} showProperty={false}/>
                         </div>
                         <div label="Gallery">
-                            Drag and drop photos in this area
+                            <FileDropArea/>
                         </div>
                     </Tabs>
                 </div>

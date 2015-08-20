@@ -1,8 +1,8 @@
 import React from 'react';
+import moment from 'moment';
 
 import * as Icons from "./components/Icons";
 import * as activityService from './services/ActivityService';
-import moment from './utils/moment';
 
 let Icon = Icons.Icon;
 let ButtonIcon = Icons.ButtonIcon;
@@ -104,7 +104,7 @@ export default React.createClass({
     },
 
     render() {
-        var items = this.state.activities.map(activity => {
+        let items = this.state.activities.map(activity => {
             let theme = getActivityTheme(activity.activity_name)
             return (
                 <ActivityListItem key={activity.activity_id} activity={activity} theme={theme} showContact={this.props.showContact} showProperty={this.props.showProperty}/>

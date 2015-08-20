@@ -3,8 +3,8 @@ import React from 'react';
 export let ButtonIcon = React.createClass({
 
     render() {
-        var useTag = '<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#' + this.props.name + '" />';
-        var className  = "slds-button__icon";
+        let useTag = '<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#' + this.props.name + '" />';
+        let className  = "slds-button__icon";
         if (this.props.stateful) {
             className += "--stateful";
         }
@@ -31,8 +31,8 @@ export let Icon = React.createClass({
     },
 
     render() {
-        var useTag = '<use xlink:href="/assets/icons/' + this.props.category + '-sprite/svg/symbols.svg#' + this.props.name + '" />';
-        var className  = "slds-icon";
+        let useTag = '<use xlink:href="/assets/icons/' + this.props.category + '-sprite/svg/symbols.svg#' + this.props.name + '" />';
+        let className  = "slds-icon";
         if (this.props.stateful) {
             className += "--stateful";
         }
@@ -51,8 +51,8 @@ export let Icon = React.createClass({
 export let InputIcon = React.createClass({
 
     render() {
-        var useTag = '<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#' + this.props.name + '" />';
-        var className  = "slds-input__icon slds-icon-text-default";
+        let useTag = '<use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#' + this.props.name + '" />';
+        let className  = "slds-input__icon slds-icon-text-default";
         return <svg  aria-hidden="true" className={className} dangerouslySetInnerHTML={{__html: useTag }} />;
     }
 

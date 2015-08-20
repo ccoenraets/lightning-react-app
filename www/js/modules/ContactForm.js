@@ -37,7 +37,7 @@ export default React.createClass({
     },
 
     render() {
-        var smallInput = {
+        let smallInput = {
             width: "120px"
         };
         return (

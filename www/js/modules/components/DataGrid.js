@@ -1,7 +1,7 @@
 import React from 'react';
+import moment from 'moment';
 
 import * as Icons from "./Icons";
-import moment from "./../utils/moment";
 
 let ButtonIcon = Icons.ButtonIcon;
 
@@ -70,7 +70,7 @@ let Column = React.createClass({
 let Row = React.createClass({
 
     render() {
-        var columns = [];
+        let columns = [];
         for (let i=0; i<this.props.columns.length; i++) {
             let column = this.props.columns[i];
             if (column.props && column.props.field) {
@@ -106,7 +106,7 @@ export default React.createClass({
                                            onSort={this.sortHandler}/>);
             }
         }
-        var rows;
+        let rows;
         if (this.props.data) {
             rows = this.props.data.map(item => <Row data={item} columns={this.props.children}/>);
         }
@@ -124,4 +124,4 @@ export default React.createClass({
         );
     }
 
-})
+});
