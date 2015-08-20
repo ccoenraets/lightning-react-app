@@ -33051,14 +33051,6 @@ var _Icons = require('./Icons');
 
 var Icons = _interopRequireWildcard(_Icons);
 
-var _sldsSLDSPopover = require('./slds/SLDSPopover');
-
-var _sldsSLDSPopover2 = _interopRequireDefault(_sldsSLDSPopover);
-
-var _sldsSLDSDateInput = require('./slds/SLDSDateInput');
-
-var _sldsSLDSDateInput2 = _interopRequireDefault(_sldsSLDSDateInput);
-
 var ButtonIcon = Icons.ButtonIcon;
 var ButtonDropdown = Dropdown.ButtonDropdown;
 var DropdownItem = Dropdown.DropdownItem;
@@ -33115,7 +33107,6 @@ exports['default'] = _react2['default'].createClass({
                             ),
                             _react2['default'].createElement(ButtonIcon, { name: 'down', size: 'x-small' })
                         ),
-                        _react2['default'].createElement(_sldsSLDSDateInput2['default'], null),
                         _react2['default'].createElement(
                             'button',
                             { className: 'slds-button slds-button--brand slds-button-space-left slds-m-right--medium slds-shrink-none slds-align-middle slds-hide', 'aria-hidden': 'true' },
@@ -33209,7 +33200,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./Icons":233,"./components/Dropdown":245,"./slds/SLDSDateInput":263,"./slds/SLDSPopover":264,"react":215}],239:[function(require,module,exports){
+},{"./Icons":233,"./components/Dropdown":245,"react":215}],239:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

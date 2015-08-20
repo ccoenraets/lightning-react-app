@@ -7,9 +7,6 @@ let ButtonIcon = Icons.ButtonIcon;
 let ButtonDropdown = Dropdown.ButtonDropdown;
 let DropdownItem = Dropdown.DropdownItem;
 
-import SLDSPopover from './slds/SLDSPopover';
-import SLDSDateInput from './slds/SLDSDateInput';
-
 export default React.createClass({
 
     render() {
@@ -32,7 +29,6 @@ export default React.createClass({
                                 <span className="slds-assistive-text">Settings</span>
                                 <ButtonIcon name="down" size="x-small"/>
                             </button>
-                            <SLDSDateInput />
                             <button className="slds-button slds-button--brand slds-button-space-left slds-m-right--medium slds-shrink-none slds-align-middle slds-hide" aria-hidden="true">Save</button>
                         </div>
                     </div>
