@@ -1,10 +1,10 @@
 import React from 'react';
 
+import * as ContactService from './services/ContactService';
+
 import ContactListHeader from './ContactListHeader';
 import ContactList from './ContactList';
 import ContactNew from './ContactNew';
-import * as ContactService from './services/ContactService';
-
 
 export default React.createClass({
     getInitialState() {

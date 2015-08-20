@@ -22,12 +22,12 @@ export default React.createClass({
                                     <h1 className="slds-text-heading--medium slds-media--rec-home__title slds-truncate slds-align-middle" title="Record Title">{this.props.first_name} {this.props.last_name}</h1>
                                     <div className="slds-col slds-shrink-none slds-align-bottom">
                                         <button className="slds-button slds-button--neutral slds-not-selected" aria-live="assertive">
-                <span className="slds-text-not-selected">
-                  <ButtonIcon name="add" stateful={true} position="left"/>Follow</span>
-                <span className="slds-text-selected">
-                  <ButtonIcon name="add" stateful={true} position="check"/>Following</span>
-                <span className="slds-text-selected-focus">
-                  <ButtonIcon name="add" stateful={true} position="close"/>Unfollow</span>
+                                            <span className="slds-text-not-selected">
+                                              <ButtonIcon name="add" stateful={true} position="left"/>Follow</span>
+                                            <span className="slds-text-selected">
+                                              <ButtonIcon name="add" stateful={true} position="check"/>Following</span>
+                                            <span className="slds-text-selected-focus">
+                                              <ButtonIcon name="add" stateful={true} position="close"/>Unfollow</span>
                                         </button>
                                     </div>
                                 </div>

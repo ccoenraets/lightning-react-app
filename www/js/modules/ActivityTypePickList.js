@@ -1,9 +1,8 @@
 import React from 'react';
 
-import PickList from "./components/PickList";
-
 import * as ActivityTypeService from './services/ActivityTypeService';
 
+import PickList from "./components/PickList";
 
 export default React.createClass({
 

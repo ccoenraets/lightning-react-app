@@ -1,8 +1,8 @@
 import React from 'react';
 
-import GoogleMaps from './components/GoogleMaps';
-
 import * as propertyService from './services/PropertyService';
+
+import GoogleMaps from './components/GoogleMaps';
 
 import PropertyListHeader from './PropertyListHeader';
 import PropertyList from './PropertyList';

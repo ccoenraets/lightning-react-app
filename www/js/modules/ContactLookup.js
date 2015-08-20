@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Lookup from './components/Lookup';
-
 import * as ContactService from './services/ContactService';
+
+import Lookup from './components/Lookup';
 
 export default React.createClass({
 

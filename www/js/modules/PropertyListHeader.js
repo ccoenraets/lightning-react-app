@@ -70,7 +70,7 @@ export default React.createClass({
                 </div>
                 <p className="slds-text-body--small slds-page-header__detail">{this.props.properties.length} properties • Sorted by Price</p>
             </div>
-     );
+        );
     }
 
 });

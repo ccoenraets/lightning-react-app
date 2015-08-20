@@ -1,12 +1,13 @@
 import React from 'react';
 import moment from 'moment';
 
+import * as propertyService from './services/PropertyService';
+
 import Tabs from './components/Tabs';
 
 import ActivityTimeline from './ActivityTimeline';
 import ActivityCard from './ActivityCard';
 import NewActivity from './NewActivity';
-import * as propertyService from './services/PropertyService';
 
 
 let headerStyle = {
@@ -14,7 +15,6 @@ let headerStyle = {
     paddingTop: "8px"
 
 };
-
 
 export default React.createClass({
 

@@ -46,7 +46,6 @@ export default React.createClass({
                         </div>
                         <div className="slds-modal__content">
 
-
                             <div className="slds-form--stacked">
                                 <div className="slds-form-element">
                                     <label className="slds-form-element__label" htmlFor="sample1">Address</label>
@@ -79,9 +78,6 @@ export default React.createClass({
                                     </div>
                                 </div>
                             </div>
-
-
-
 
                         </div>
                         <div className="slds-modal__footer">
