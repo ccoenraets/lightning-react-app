@@ -26609,24 +26609,25 @@ exports["default"] = _react2["default"].createClass({
     displayName: "ContactForm",
 
     getInitialState: function getInitialState() {
-        var _props = this.props;
-        var contact_id = _props.contact_id;
-        var first_name = _props.first_name;
-        var last_name = _props.last_name;
-        var mobile_phone = _props.mobile_phone;
-        var home_phone = _props.home_phone;
-        var email = _props.email;
+        var _props$contact = this.props.contact;
+        var contact_id = _props$contact.contact_id;
+        var first_name = _props$contact.first_name;
+        var last_name = _props$contact.last_name;
+        var mobile_phone = _props$contact.mobile_phone;
+        var home_phone = _props$contact.home_phone;
+        var email = _props$contact.email;
 
         return { contact_id: contact_id, first_name: first_name, last_name: last_name, mobile_phone: mobile_phone, home_phone: home_phone, email: email };
     },
 
     componentWillReceiveProps: function componentWillReceiveProps(props) {
-        var contact_id = props.contact_id;
-        var first_name = props.first_name;
-        var last_name = props.last_name;
-        var mobile_phone = props.mobile_phone;
-        var home_phone = props.home_phone;
-        var email = props.email;
+        var _props$contact2 = props.contact;
+        var contact_id = _props$contact2.contact_id;
+        var first_name = _props$contact2.first_name;
+        var last_name = _props$contact2.last_name;
+        var mobile_phone = _props$contact2.mobile_phone;
+        var home_phone = _props$contact2.home_phone;
+        var email = _props$contact2.email;
 
         this.setState({ contact_id: contact_id, first_name: first_name, last_name: last_name, mobile_phone: mobile_phone, home_phone: home_phone, email: email });
     },
@@ -28113,34 +28114,37 @@ exports["default"] = _react2["default"].createClass({
     displayName: "PropertyForm",
 
     getInitialState: function getInitialState() {
-        var _props = this.props;
-        var property_id = _props.property_id;
-        var address = _props.address;
-        var city = _props.city;
-        var state = _props.state;
-        var zip = _props.zip;
-        var pic = _props.pic;
-        var teaser = _props.teaser;
-        var description = _props.description;
-        var size = _props.size;
-        var bathrooms = _props.bathrooms;
-        var bedrooms = _props.bedrooms;
-        var price = _props.price;
+        var _props$property = this.props.property;
+        var property_id = _props$property.property_id;
+        var address = _props$property.address;
+        var city = _props$property.city;
+        var state = _props$property.state;
+        var zip = _props$property.zip;
+        var pic = _props$property.pic;
+        var teaser = _props$property.teaser;
+        var description = _props$property.description;
+        var size = _props$property.size;
+        var bathrooms = _props$property.bathrooms;
+        var bedrooms = _props$property.bedrooms;
+        var price = _props$property.price;
 
         return { property_id: property_id, address: address, city: city, state: state, zip: zip, pic: pic, teaser: teaser, description: description, size: size, bathrooms: bathrooms, bedrooms: bedrooms, price: price };
     },
 
     componentWillReceiveProps: function componentWillReceiveProps(props) {
-        var property_id = props.property_id;
-        var address = props.address;
-        var city = props.city;
-        var state = props.state;
-        var zip = props.zip;
-        var description = props.description;
-        var size = props.size;
-        var bathrooms = props.bathrooms;
-        var bedrooms = props.bedrooms;
-        var price = props.price;
+        var _props$property2 = props.property;
+        var property_id = _props$property2.property_id;
+        var address = _props$property2.address;
+        var city = _props$property2.city;
+        var state = _props$property2.state;
+        var zip = _props$property2.zip;
+        var pic = _props$property2.pic;
+        var teaser = _props$property2.teaser;
+        var description = _props$property2.description;
+        var size = _props$property2.size;
+        var bathrooms = _props$property2.bathrooms;
+        var bedrooms = _props$property2.bedrooms;
+        var price = _props$property2.price;
 
         this.setState({ property_id: property_id, address: address, city: city, state: state, zip: zip, pic: pic, teaser: teaser, description: description, size: size, bathrooms: bathrooms, bedrooms: bedrooms, price: price });
     },

@@ -3,12 +3,12 @@ import React from 'react';
 export default React.createClass({
 
     getInitialState() {
-        let {property_id, address, city, state, zip, pic, teaser, description, size, bathrooms, bedrooms, price} = this.props;
+        let {property_id, address, city, state, zip, pic, teaser, description, size, bathrooms, bedrooms, price} = this.props.property;
         return {property_id, address, city, state, zip, pic, teaser, description, size, bathrooms, bedrooms, price};
     },
 
     componentWillReceiveProps(props) {
-        let {property_id, address, city, state, zip, description, size, bathrooms, bedrooms, price} = props;
+        let {property_id, address, city, state, zip, pic, teaser, description, size, bathrooms, bedrooms, price} = props.property;
         this.setState({property_id, address, city, state, zip, pic, teaser, description, size, bathrooms, bedrooms, price});
     },
 

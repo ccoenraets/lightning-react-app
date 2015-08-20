@@ -3,12 +3,12 @@ import React from 'react';
 export default React.createClass({
 
     getInitialState() {
-        let {contact_id, first_name, last_name, mobile_phone, home_phone, email} = this.props;
+        let {contact_id, first_name, last_name, mobile_phone, home_phone, email} = this.props.contact;
         return {contact_id, first_name, last_name, mobile_phone, home_phone, email};
     },
 
     componentWillReceiveProps(props) {
-        let {contact_id, first_name, last_name, mobile_phone, home_phone, email} = props;
+        let {contact_id, first_name, last_name, mobile_phone, home_phone, email} = props.contact;
         this.setState({contact_id, first_name, last_name, mobile_phone, home_phone, email});
     },
 
