@@ -11,28 +11,25 @@ export default React.createClass({
         return {contacts: []};
     },
     componentDidMount() {
-        ContactService.findAll().then(contacts => {
-            console.log(contacts);
-            this.setState({contacts:contacts});
-        });
+        ContactService.findAll().then(contacts => this.setState({contacts:contacts}));
     },
-    onNew() {
-        this.setState({new: true});
+    newHandler() {
+        this.setState({addingContact: true});
     },
-    onSave(Contact) {
+    saveHandler(Contact) {
         ContactService.createItem(Contact).then(() => {
-            this.setState({new: false});
+            ContactService.findAll().then(contacts => this.setState({addingContact: false, contacts:contacts}));
         });
     },
-    onCancel() {
-        this.setState({new: false});
+    cancelHandler() {
+        this.setState({addingContact: false});
     },
     render() {
         return (
             <div>
-                <ContactListHeader contacts={this.state.contacts} onNew={this.onNew}/>
+                <ContactListHeader contacts={this.state.contacts} onNew={this.newHandler}/>
                 <ContactList contacts={this.state.contacts}/>
-                {this.state.new ?  <ContactNew onSave={this.onSave} onCancel={this.onCancel}/> : ""}
+                {this.state.addingContact ?  <ContactNew onSave={this.saveHandler} onCancel={this.cancelHandler}/> : ""}
             </div>
         );
     }

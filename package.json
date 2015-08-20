@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/ccoenraets/lightning-realty",
   "dependencies": {
+    "basic-auth": "^1.0.3",
     "body-parser": "^1.13.3",
     "compression": "^1.5.2",
     "express": "^4.13.2",

@@ -1,21 +1,21 @@
 let url = "/contacts";
 
 export let findAll = () => new Promise((resolve, reject) => {
-    fetch(url)
+    fetch(url, {credentials: 'same-origin'})
         .then(response => response.json())
         .then(data => resolve(data))
         .catch(error => reject(error));
 });
 
 export let findById = id => new Promise((resolve, reject) => {
-    fetch(url + "/"+id)
+    fetch(url + "/"+id, {credentials: 'same-origin'})
         .then(response => response.json())
         .then(data => resolve(data))
         .catch(error => reject(error));
 });
 
 export let findByName = name => new Promise((resolve, reject) => {
-    fetch(url + "?name="+name)
+    fetch(url + "?name="+name, {credentials: 'same-origin'})
         .then(response => response.json())
         .then(data => resolve(data))
         .catch(error => reject(error));
@@ -23,6 +23,7 @@ export let findByName = name => new Promise((resolve, reject) => {
 
 export let updateItem = contact => new Promise((resolve, reject) => {
     fetch(url, {
+        credentials: 'same-origin',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -39,6 +40,7 @@ export let updateItem = contact => new Promise((resolve, reject) => {
 
 export let createItem = contact =>  new Promise((resolve, reject) => {
     fetch(url, {
+        credentials: 'same-origin',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -55,6 +57,7 @@ export let createItem = contact =>  new Promise((resolve, reject) => {
 
 export let deleteItem = contact => new Promise((resolve, reject) => {
     fetch(url, {
+        credentials: 'same-origin',
         method: 'del'
     })
     .then(response => response.json())

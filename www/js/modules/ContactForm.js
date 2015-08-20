@@ -1,35 +1,17 @@
-import React from 'react';
+import React from 'react/addons';
 
 export default React.createClass({
 
+    mixins: [React.addons.LinkedStateMixin],
+
     getInitialState() {
-        let {contact_id, first_name, last_name, mobile_phone, home_phone, email} = this.props.contact;
-        return {contact_id, first_name, last_name, mobile_phone, home_phone, email};
+        let contact = this.props.contact;
+        return {...contact};
     },
 
     componentWillReceiveProps(props) {
-        let {contact_id, first_name, last_name, mobile_phone, home_phone, email} = props.contact;
-        this.setState({contact_id, first_name, last_name, mobile_phone, home_phone, email});
-    },
-
-    firstNameChange(event) {
-        this.setState({first_name: event.target.value});
-    },
-
-    lastNameChange(event) {
-        this.setState({last_name: event.target.value});
-    },
-
-    mobilePhoneChange(event) {
-        this.setState({mobile_phone: event.target.value});
-    },
-
-    homePhoneChange(event) {
-        this.setState({home_phone: event.target.value});
-    },
-
-    emailChange(event) {
-        this.setState({email: event.target.value});
+        let contact = props.contact;
+        this.setState({...contact});
     },
 
     save() {
@@ -45,31 +27,31 @@ export default React.createClass({
                 <div className="slds-form-element">
                     <label className="slds-form-element__label" htmlFor="sample1">First Name</label>
                     <div className="slds-form-element__control">
-                        <input className="slds-input" type="text" value={this.state.first_name} onChange={this.firstNameChange}/>
+                        <input className="slds-input" type="text" valueLink={this.linkState('first_name')}/>
                     </div>
                 </div>
                 <div className="slds-form-element">
                     <label className="slds-form-element__label" htmlFor="sample1">Last name</label>
                     <div className="slds-form-element__control">
-                        <input className="slds-input" type="text" value={this.state.last_name} onChange={this.lastNameChange}/>
+                        <input className="slds-input" type="text" valueLink={this.linkState('last_name')}/>
                     </div>
                 </div>
                 <div className="slds-form-element">
                     <label className="slds-form-element__label" htmlFor="sample1">Mobile Phone</label>
                     <div className="slds-form-element__control">
-                        <input className="slds-input" type="text" value={this.state.mobile_phone} onChange={this.mobilePhoneChange}/>
+                        <input className="slds-input" type="text" valueLink={this.linkState('mobile_phone')}/>
                     </div>
                 </div>
                 <div className="slds-form-element">
                     <label className="slds-form-element__label" htmlFor="sample2">Home Phone</label>
                     <div className="slds-form-element__control">
-                        <input className="slds-input" type="text" value={this.state.home_phone} onChange={this.homePhoneChange}/>
+                        <input className="slds-input" type="text" valueLink={this.linkState('home_phone')}/>
                     </div>
                 </div>
                 <div className="slds-form-element">
                     <label className="slds-form-element__label" htmlFor="sample1">Email</label>
                     <div className="slds-form-element__control">
-                        <input className="slds-input" type="text" value={this.state.email} onChange={this.emailChange}/>
+                        <input className="slds-input" type="text" valueLink={this.linkState('email')}/>
                     </div>
                 </div>
                 <div className="slds-form-element">

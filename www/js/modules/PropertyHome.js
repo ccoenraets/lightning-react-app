@@ -19,25 +19,28 @@ export default React.createClass({
         });
     },
     sortHandler(sortOrder) {
-        propertyService.findAll(sortOrder).then(properties => this.setState({sortOrder: sortOrder, properties:properties}));
+        propertyService.findAll(sortOrder).then(properties => {
+            console.log(properties);
+            this.setState({sortOrder: sortOrder, properties: properties})
+        });
     },
 
     viewChangeHandler(value) {
         this.setState({view: value});
     },
 
-    onNew() {
-        this.setState({newProperty: true});
+    newHandler() {
+        this.setState({addingProperty: true});
     },
 
-    onSave(property) {
+    saveHandler(property) {
         propertyService.createItem(property).then(() => {
-            propertyService.findAll(this.state.sort).then(properties => this.setState({newProperty: false, properties:properties}));
+            propertyService.findAll(this.state.sort).then(properties => this.setState({addingProperty: false, properties:properties}));
         });
     },
 
-    onCancel() {
-        this.setState({newProperty: false});
+    cancelHandler() {
+        this.setState({addingProperty: false});
     },
 
     render() {
@@ -59,11 +62,11 @@ export default React.createClass({
         return (
             <div>
                 <PropertyListHeader properties={this.state.properties}
-                                    onNew={this.onNew}
+                                    onNew={this.newHandler}
                                     onSort={this.sortHandler}
                                     onViewChange={this.viewChangeHandler}/>
                 {view}
-                {this.state.newProperty ?  <PropertyNew onSave={this.onSave} onCancel={this.onCancel}/> : ""}
+                {this.state.addingProperty ?  <PropertyNew onSave={this.saveHandler} onCancel={this.cancelHandler}/> : ""}
             </div>
         );
     }
