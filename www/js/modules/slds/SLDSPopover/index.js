@@ -77,14 +77,16 @@ module.exports = React.createClass( {
   },
 
 
-  _dropOptions: function() {
+  dropOptions: function() {
     let target = this.props.targetElement?this.props.targetElement.getDOMNode():this.getDOMNode().parentNode;
     return {
       target: target,
       content: this._popoverElement,
       classes: 'drop-theme-arrows',
       position: 'bottom left',
-      openOn: 'always'
+      openOn: 'always',
+      constrainToWindow:true,
+      constrainToScrollParent:false
     };
   },
 
@@ -92,18 +94,18 @@ module.exports = React.createClass( {
 
     React.render( this._popoverComponent(), this._popoverElement );
 
-    if ( this._drop != null ) {
-      if(this._drop.setOptions){
-        this._drop.setOptions( this._dropOptions() );
+    if ( this.drop != null ) {
+      if(this.drop.setOptions){
+        this.drop.setOptions( this.dropOptions() );
       }
     } else if ( window && document ) {
-      this._drop = new TetherDrop( this._dropOptions() );
+      this.drop = new TetherDrop( this.dropOptions() );
     }
   },
 
   componentWillUnmount: function() {
 
-    this._drop.destroy();
+    this.drop.destroy();
     React.unmountComponentAtNode( this._popoverElement );
     if ( this._popoverElement.parentNode ) {
       this._popoverElement.parentNode.removeChild( this._popoverElement );

@@ -32417,6 +32417,10 @@ var _Icons = require('./Icons');
 
 var Icons = _interopRequireWildcard(_Icons);
 
+var _sldsSLDSDateInput = require('./slds/SLDSDateInput');
+
+var _sldsSLDSDateInput2 = _interopRequireDefault(_sldsSLDSDateInput);
+
 var Icon = Icons.Icon;
 
 exports['default'] = _react2['default'].createClass({
@@ -32524,7 +32528,7 @@ exports['default'] = _react2['default'].createClass({
                                 _react2['default'].createElement(
                                     'div',
                                     { className: 'slds-form-element__control' },
-                                    _react2['default'].createElement(_componentsDatePicker2['default'], { value: this.state.activity_date, onChange: this.activityDateChange })
+                                    _react2['default'].createElement(_sldsSLDSDateInput2['default'], null)
                                 )
                             ),
                             _react2['default'].createElement(
@@ -32581,8 +32585,11 @@ exports['default'] = _react2['default'].createClass({
 
 });
 module.exports = exports['default'];
+/*
+                                       <DatePicker value={this.state.activity_date} onChange={this.activityDateChange}/>
+*/
 
-},{"./ActivityTypePickList":221,"./ContactLookup":227,"./ContactQuickFind":229,"./Icons":233,"./components/DatePicker":244,"react":215}],235:[function(require,module,exports){
+},{"./ActivityTypePickList":221,"./ContactLookup":227,"./ContactQuickFind":229,"./Icons":233,"./components/DatePicker":244,"./slds/SLDSDateInput":263,"react":215}],235:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -36036,6 +36043,8 @@ var _SLDSYearSelectorIndex = require('../../SLDSYearSelector/index');
 
 var _SLDSYearSelectorIndex2 = _interopRequireDefault(_SLDSYearSelectorIndex);
 
+var _componentsIcons = require("./../../../../components/Icons");
+
 module.exports = _react2['default'].createClass({
   displayName: 'exports',
 
@@ -36097,11 +36106,7 @@ module.exports = _react2['default'].createClass({
           _react2['default'].createElement(
             'button',
             { className: 'slds-button slds-button--icon-container', onClick: this.previousMonth },
-            _react2['default'].createElement(
-              'span',
-              { style: { color: 'black' } },
-              '«'
-            ),
+            _react2['default'].createElement(_componentsIcons.ButtonIcon, { name: 'left' }),
             _react2['default'].createElement(
               'span',
               { className: 'slds-assistive-text' },
@@ -36120,11 +36125,7 @@ module.exports = _react2['default'].createClass({
           _react2['default'].createElement(
             'button',
             { className: 'slds-button slds-button--icon-container', onClick: this.nextMonth },
-            _react2['default'].createElement(
-              'span',
-              { style: { color: 'black' } },
-              '»'
-            ),
+            _react2['default'].createElement(_componentsIcons.ButtonIcon, { name: 'right' }),
             _react2['default'].createElement(
               'span',
               { className: 'slds-assistive-text' },
@@ -36145,7 +36146,7 @@ module.exports = _react2['default'].createClass({
   }
 });
 
-},{"../../SLDSYearSelector/index":262,"moment":2,"react":215}],261:[function(require,module,exports){
+},{"../../SLDSYearSelector/index":262,"./../../../../components/Icons":247,"moment":2,"react":215}],261:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -36251,6 +36252,8 @@ var _SLDSPopoverIndex2 = _interopRequireDefault(_SLDSPopoverIndex);
 var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
+
+var _componentsIcons = require("./../../../components/Icons");
 
 var ListItemComponent = _react2['default'].createClass({
   displayName: 'ListItemComponent',
@@ -36376,12 +36379,9 @@ module.exports = _react2['default'].createClass({
               'aria-haspopup': 'true',
               'aria-expanded': 'false' },
             this.props.moment.format('YYYY'),
-            _react2['default'].createElement(
-              'span',
-              { style: { color: 'black' } },
-              '  ↓'
-            )
-          )
+            _react2['default'].createElement('span', { style: { color: 'black' } })
+          ),
+          _react2['default'].createElement(_componentsIcons.InputIcon, { name: 'down' })
         )
       ),
       this.popover()
@@ -36389,7 +36389,7 @@ module.exports = _react2['default'].createClass({
   }
 });
 
-},{"../../SLDSPopover/index":264,"moment":2,"react":215}],263:[function(require,module,exports){
+},{"../../SLDSPopover/index":264,"./../../../components/Icons":247,"moment":2,"react":215}],263:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -36409,6 +36409,8 @@ var _SLDSDatePickerIndex2 = _interopRequireDefault(_SLDSDatePickerIndex);
 var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
+
+var _componentsIcons = require("./../../components/Icons");
 
 module.exports = _react2['default'].createClass({
   displayName: 'exports',
@@ -36504,6 +36506,7 @@ module.exports = _react2['default'].createClass({
         _react2['default'].createElement(
           'div',
           { className: 'slds-input-has-icon slds-input-has-icon--right' },
+          _react2['default'].createElement(_componentsIcons.InputIcon, { name: 'event' }),
           _react2['default'].createElement('input', {
             name: 'date',
             ref: 'date',
@@ -36521,7 +36524,7 @@ module.exports = _react2['default'].createClass({
   }
 });
 
-},{"../SLDSPopover/index":264,"./SLDSDatePicker/index":261,"moment":2,"react":215}],264:[function(require,module,exports){
+},{"../SLDSPopover/index":264,"./../../components/Icons":247,"./SLDSDatePicker/index":261,"moment":2,"react":215}],264:[function(require,module,exports){
 "use strict";
 
 var React = require("react/addons");
@@ -36601,14 +36604,16 @@ module.exports = React.createClass({
     );
   },
 
-  _dropOptions: function _dropOptions() {
+  dropOptions: function dropOptions() {
     var target = this.props.targetElement ? this.props.targetElement.getDOMNode() : this.getDOMNode().parentNode;
     return {
       target: target,
       content: this._popoverElement,
       classes: 'drop-theme-arrows',
       position: 'bottom left',
-      openOn: 'always'
+      openOn: 'always',
+      constrainToWindow: true,
+      constrainToScrollParent: false
     };
   },
 
@@ -36616,18 +36621,18 @@ module.exports = React.createClass({
 
     React.render(this._popoverComponent(), this._popoverElement);
 
-    if (this._drop != null) {
-      if (this._drop.setOptions) {
-        this._drop.setOptions(this._dropOptions());
+    if (this.drop != null) {
+      if (this.drop.setOptions) {
+        this.drop.setOptions(this.dropOptions());
       }
     } else if (window && document) {
-      this._drop = new TetherDrop(this._dropOptions());
+      this.drop = new TetherDrop(this.dropOptions());
     }
   },
 
   componentWillUnmount: function componentWillUnmount() {
 
-    this._drop.destroy();
+    this.drop.destroy();
     React.unmountComponentAtNode(this._popoverElement);
     if (this._popoverElement.parentNode) {
       this._popoverElement.parentNode.removeChild(this._popoverElement);

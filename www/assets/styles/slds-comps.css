@@ -19,3 +19,6 @@
 .SLDSCalendar table:focus{
   outline-style: none;
 }
+.drop{
+  z-index:10001;
+}
