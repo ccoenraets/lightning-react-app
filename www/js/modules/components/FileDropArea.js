@@ -6,11 +6,11 @@ export default React.createClass({
         return {pictures: []};
     },
 
-    dragOverHandler: function(event) {
+    dragOverHandler(event) {
         event.preventDefault();
     },
 
-    dropHandler: function(event) {
+    dropHandler(event) {
         event.stopPropagation();
         event.preventDefault();
         event.dataTransfer.dropEffect = 'copy';
@@ -26,7 +26,7 @@ export default React.createClass({
         }
     },
 
-    render: function () {
+    render() {
         let imgs = this.state.pictures.map(picture => <img src={picture}/>);
         return (
             <div onDragOver={this.dragOverHandler} onDrop={this.dropHandler} style={{width:"100%", minHeight:"300px"}}>

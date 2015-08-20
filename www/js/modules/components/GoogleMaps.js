@@ -2,7 +2,7 @@ import React from 'react';
 
 export default React.createClass({
 
-    getDefaultProps: function () {
+    getDefaultProps() {
         return {
             zoom: 12,
             centerLat: 42.3600820,
@@ -36,14 +36,12 @@ export default React.createClass({
                 let infowindow = new google.maps.InfoWindow({
                     content: this.props.infoWindow
                 });
-                marker.addListener('click', function() {
-                    infowindow.open(map, marker);
-                });
+                marker.addListener('click', () => infowindow.open(map, marker));
             }
         }
     },
 
-    componentDidMount: function() {
+    componentDidMount() {
         let mapOptions = {
             center: new google.maps.LatLng(this.props.centerLat, this.props.centerLng),
             zoom: this.props.zoom
@@ -53,7 +51,7 @@ export default React.createClass({
         this.addMarkers(map, this.props.data);
     },
 
-    render: function () {
+    render() {
         return (
             <div style={{height: this.props.height}}></div>
         );

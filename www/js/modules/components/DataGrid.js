@@ -7,7 +7,7 @@ let ButtonIcon = Icons.ButtonIcon;
 
 let ColumnHeader = React.createClass({
 
-    getDefaultProps: function () {
+    getDefaultProps() {
         return {
             textAlign: "left"
         };

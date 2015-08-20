@@ -47,7 +47,7 @@ let Dropdown = React.createClass({
 
 export let ButtonDropdown = React.createClass({
 
-    getDefaultProps: function () {
+    getDefaultProps() {
         return {
             valueField: "value",
             labelField: "label"
