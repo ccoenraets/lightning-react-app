@@ -1,64 +1,68 @@
 let url = "/properties";
 
-export let findAll = (sort) => new Promise((resolve, reject) => {
-    fetch(url + (sort ? ("?sort=" + sort) : ""))
+export let findAll = sort => new Promise((resolve, reject) => {
+    fetch(url + (sort ? ("?sort=" + sort) : ""), {credentials: 'same-origin'})
         .then(response => response.json())
         .then(data => resolve(data))
         .catch(error => reject(error));
 });
 
-export let findById = (id) => new Promise((resolve, reject) => {
-    fetch(url + "/"+id)
+export let findByName = name => new Promise((resolve, reject) => {
+    fetch(url + "?name="+name, {credentials: 'same-origin'})
         .then(response => response.json())
         .then(data => resolve(data))
         .catch(error => reject(error));
 });
 
-export let updateItem = function(property) {
-    return new Promise((resolve, reject) => {
-        fetch(url, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'put',
-            body: JSON.stringify(property)
-        })
+export let findById = id => new Promise((resolve, reject) => {
+    fetch(url + "/"+id, {credentials: 'same-origin'})
         .then(response => response.json())
-        .then(data => {
-            resolve(data);
-        })
-        .catch(e => reject(e));
-    });
-};
+        .then(data => resolve(data))
+        .catch(error => reject(error));
+});
 
-export let createItem = function(property) {
-    return new Promise((resolve, reject) => {
-        fetch(url, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'post',
-            body: JSON.stringify(property)
-        })
-        .then(response => response.json())
-        .then(data => {
-            resolve(data);
-        })
-        .catch(e => reject(e));
-    });
-};
+export let updateItem = property => new Promise((resolve, reject) => {
+    fetch(url, {
+        credentials: 'same-origin',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: 'put',
+        body: JSON.stringify(property)
+    })
+    .then(response => response.json())
+    .then(data => {
+        resolve(data);
+    })
+    .catch(e => reject(e));
+});
 
-export let deleteItem = function(property) {
-    return new Promise((resolve, reject) => {
-        fetch(url, {
-            method: 'del'
-        })
-        .then(response => response.json())
-        .then(data => {
-            resolve(data);
-        })
-        .catch(e => reject(e));
-    });
-};
+export let createItem = property => new Promise((resolve, reject) => {
+    fetch(url, {
+        credentials: 'same-origin',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: 'post',
+        body: JSON.stringify(property)
+    })
+    .then(response => response.json())
+    .then(data => {
+        resolve(data);
+    })
+    .catch(e => reject(e));
+});
+
+export let deleteItem = property => new Promise((resolve, reject) => {
+    fetch(url, {
+        credentials: 'same-origin',
+        method: 'del'
+    })
+    .then(response => response.json())
+    .then(data => {
+        resolve(data);
+    })
+    .catch(e => reject(e));
+});

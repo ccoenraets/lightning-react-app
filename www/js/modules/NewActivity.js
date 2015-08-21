@@ -3,8 +3,9 @@ import React from 'react';
 import DatePicker from './components/DatePicker';
 import ActivityTypePickList from './ActivityTypePickList';
 import ContactLookup from './ContactLookup';
+import PropertyQuickFind from './PropertyQuickFind';
 import ContactQuickFind from './ContactQuickFind';
-import * as Icons from './Icons';
+import * as Icons from './components/Icons';
 
 import SLDSDateInput from './slds/SLDSDateInput';
 
@@ -14,7 +15,11 @@ let Icon = Icons.Icon;
 export default React.createClass({
 
     getInitialState() {
-        return {property_id: this.props.propertyId, price: this.props.price, contact_id: undefined, activity_type_id: undefined, activity_date: new Date(), comment: ""};
+        return {property_id: this.props.propertyId, contact_id: this.props.contactId, price: this.props.price, activity_type_id: undefined, activity_date: new Date(), comment: ""};
+    },
+
+    propertyChange(data, label) {
+        this.setState({property_id: data});
     },
 
     contactChange(data, label) {
@@ -58,12 +63,24 @@ export default React.createClass({
 
                             <div className="slds-form--stacked">
 
-                                <div className="slds-form-element">
-                                    <label className="slds-form-element__label" htmlFor="sample1">Contact</label>
-                                    <div className="slds-form-element__control">
-                                        <ContactQuickFind onChange={this.contactChange}/>
+                                {this.props.propertyId ? "" :
+                                    <div className="slds-form-element">
+                                        <label className="slds-form-element__label" htmlFor="sample1">Property</label>
+                                        <div className="slds-form-element__control">
+                                            <PropertyQuickFind onChange={this.propertyChange}/>
+                                        </div>
                                     </div>
-                                </div>
+                                }
+
+                                {this.props.contactId ? "" :
+                                    <div className="slds-form-element">
+                                        <label className="slds-form-element__label" htmlFor="sample1">Contact</label>
+
+                                        <div className="slds-form-element__control">
+                                            <ContactQuickFind onChange={this.contactChange}/>
+                                        </div>
+                                    </div>
+                                }
 
                                 <div className="slds-form-element">
                                     <label className="slds-form-element__label" htmlFor="sample1">Type</label>

@@ -12,11 +12,11 @@ import ContactForm from './modules/ContactForm';
 import ContactView from './modules/ContactView';
 
 let DefaultRoute = Router.DefaultRoute;
-var Link = Router.Link;
-var Route = Router.Route;
-var RouteHandler = Router.RouteHandler;
+let Link = Router.Link;
+let Route = Router.Route;
+let RouteHandler = Router.RouteHandler;
 
-var App = React.createClass({
+let App = React.createClass({
     render: function () {
         let headerStyles = {
             backgroundColor: "#01344E",
@@ -37,7 +37,7 @@ var App = React.createClass({
     }
 });
 
-var routes = (
+let routes = (
     <Route name="app" path="/" handler={App}>
         <Route name="property" handler={PropertyRecord}>
             <Route name="viewProperty" path=":propertyId" handler={PropertyView}/>

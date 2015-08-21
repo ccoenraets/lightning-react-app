@@ -10,6 +10,8 @@ Click the Button below to deploy to Heroku
 
 1. Install Postgres locally and create a database called **realty**
 
+1. Open **server/config.js** and make sure the databaseURL matches your configuration (use your user name)
+
 1. Navigate to the **lightningrealty** directory and install the project dependencies:
 
     ```npm install```

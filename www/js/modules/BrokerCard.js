@@ -3,7 +3,7 @@ import React from 'react';
 import * as brokerService from './services/BrokerService';
 
 import DataGrid from "./components/DataGrid";
-import * as Icons from "./Icons";
+import * as Icons from "./components/Icons";
 
 let Icon = Icons.Icon;
 let ButtonIcon = Icons.ButtonIcon;

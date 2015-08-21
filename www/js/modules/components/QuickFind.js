@@ -6,7 +6,7 @@ let Icon = Icons.Icon;
 let ButtonIcon = Icons.ButtonIcon;
 let InputIcon = Icons.InputIcon;
 
-var ListItem = React.createClass({
+let ListItem = React.createClass({
 
     clickHandler(event) {
         this.props.onSelect(this.props.value, this.props.label);
@@ -24,7 +24,7 @@ var ListItem = React.createClass({
 });
 
 
-var Dropdown = React.createClass({
+let Dropdown = React.createClass({
 
     searchKeyChangeHandler(e) {
         this.props.onSearchKeyChange(e.target.value);
@@ -32,7 +32,7 @@ var Dropdown = React.createClass({
 
     render() {
 
-        var items = this.props.list.map((item) => {
+        let items = this.props.list.map((item) => {
                 return <ListItem value={item[this.props.valueField]}
                                  label={item[this.props.labelField]}
                                  onSelect={this.props.onChange}/>
@@ -43,7 +43,7 @@ var Dropdown = React.createClass({
                 <div className="slds-dropdown__header">
                     <div placeholder="Find in list..." className="slds-input-has-icon slds-input-has-icon--left slds-m-bottom--x-small">
                         <InputIcon name="search"/>
-                        <label className="slds-assistive-text" for="input__filter">Search...</label>
+                        <label className="slds-assistive-text" htmlFor="input__filter">Search...</label>
                         <input id="input__filter" className="slds-input" type="text" placeholder="Search..." onChange={this.searchKeyChangeHandler}/>
                     </div>
                 </div>
@@ -86,7 +86,7 @@ export default React.createClass({
             <div aria-expanded="true" className="slds-picklist slds-picklist--quickfind" onFocus={this.focusHandler}  onBlur={this.blurHandler}>
                 <button className="slds-button slds-button--neutral slds-picklist__label" aria-haspopup="true">
                     <span className="slds-truncate">{this.state.label}</span>
-                    <Icon type="utility" name="down"/>
+                    <Icon category="utility" name="down"/>
                 </button>
                 <Dropdown valueField={this.props.valueField}
                           labelField={this.props.labelField}

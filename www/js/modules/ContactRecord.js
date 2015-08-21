@@ -1,11 +1,11 @@
 import React from 'react';
 import Router from 'react-router';
 
-import ContactRecordHeader from './ContactRecordHeader';
-
 import * as contactService from './services/ContactService';
 
-var RouteHandler = Router.RouteHandler;
+import ContactRecordHeader from './ContactRecordHeader';
+
+let RouteHandler = Router.RouteHandler;
 
 export default React.createClass({
 
@@ -18,25 +18,19 @@ export default React.createClass({
     },
 
     componentDidMount() {
-        var contactId = this.context.router.getCurrentParams().contactId;
-        contactService.findById(contactId).then((contact) => {
-            console.log(contact);
-            this.setState({contact});
-        });
+        let contactId = this.context.router.getCurrentParams().contactId;
+        contactService.findById(contactId).then(contact => this.setState({contact}));
     },
 
     saveHandler(contact) {
-        contactService.updateItem(contact).then(() => {
-            console.log('contact saved');
-        });
+        contactService.updateItem(contact);
     },
 
     render() {
-        console.log("ContactRecord render");
         return (
             <div>
-                <ContactRecordHeader {...this.state.contact}/>
-                <RouteHandler {...this.state.contact} saveHandler={this.saveHandler}/>
+                <ContactRecordHeader contact={this.state.contact}/>
+                <RouteHandler contact={this.state.contact} saveHandler={this.saveHandler}/>
             </div>
         );
     }

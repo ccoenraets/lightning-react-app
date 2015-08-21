@@ -1,8 +1,8 @@
 import React from 'react';
+import moment from 'moment';
 
 import * as Icons from "./components/Icons";
 import * as activityService from './services/ActivityService';
-import moment from './utils/moment';
 
 let Icon = Icons.Icon;
 let ButtonIcon = Icons.ButtonIcon;
@@ -31,7 +31,7 @@ let ActivityListItem = React.createClass({
                     <div className="slds-media__body">
                         <div className={"slds-media slds-media--timeline slds-timeline__media--" + this.props.theme}>
                             <div className="slds-media__figure">
-                                <Icon type="standard" name={this.props.theme}/>
+                                <Icon name={this.props.theme}/>
                             </div>
                             <div className="slds-media__body">
                                 <div className="slds-tile">
@@ -84,27 +84,8 @@ let ActivityListItem = React.createClass({
 
 export default React.createClass({
 
-    getInitialState() {
-        return {activities: []};
-    },
-
-    componentWillReceiveProps(props) {
-        let promise;
-        if (props.propertyId) {
-            promise = activityService.findByProperty(props.propertyId);
-        } else if (props.contactId) {
-            promise = activityService.findByContact(props.contactId);
-        }
-        if (promise) {
-            promise.then((activities) => {
-                console.log(activities);
-                this.setState({activities: activities})
-            });
-        }
-    },
-
     render() {
-        var items = this.state.activities.map(activity => {
+        let items = this.props.activities.map(activity => {
             let theme = getActivityTheme(activity.activity_name)
             return (
                 <ActivityListItem key={activity.activity_id} activity={activity} theme={theme} showContact={this.props.showContact} showProperty={this.props.showProperty}/>
@@ -116,4 +97,5 @@ export default React.createClass({
             </ul>
         );
     }
+
 });

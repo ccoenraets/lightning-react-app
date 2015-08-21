@@ -1,59 +1,17 @@
-import React from 'react';
+import React from 'react/addons';
 
 export default React.createClass({
 
+    mixins: [React.addons.LinkedStateMixin],
+
     getInitialState() {
-        let {property_id, address, city, state, zip, pic, teaser, description, size, bathrooms, bedrooms, price} = this.props;
-        return {property_id, address, city, state, zip, pic, teaser, description, size, bathrooms, bedrooms, price};
+        let property = this.props.property;
+        return {...property};
     },
 
     componentWillReceiveProps(props) {
-        let {property_id, address, city, state, zip, description, size, bathrooms, bedrooms, price} = props;
-        this.setState({property_id, address, city, state, zip, pic, teaser, description, size, bathrooms, bedrooms, price});
-    },
-
-    addressChange(event) {
-        this.setState({address: event.target.value});
-    },
-
-    cityChange(event) {
-        this.setState({city: event.target.value});
-    },
-
-    stateChange(event) {
-        this.setState({state: event.target.value});
-    },
-
-    picChange(event) {
-        this.setState({pic: event.target.value});
-    },
-
-    zipChange(event) {
-        this.setState({zip: event.target.value});
-    },
-
-    teaserChange(event) {
-        this.setState({teaser: event.target.value});
-    },
-
-    descriptionChange(event) {
-        this.setState({description: event.target.value});
-    },
-
-    priceChange(event) {
-        this.setState({price: event.target.value});
-    },
-
-    sizeChange(event) {
-        this.setState({size: event.target.value});
-    },
-
-    bathroomsChange(event) {
-        this.setState({bathrooms: event.target.value});
-    },
-
-    bedroomsChange(event) {
-        this.setState({bedrooms: event.target.value});
+        let property = props.property;
+        this.setState({...property});
     },
 
     save() {
@@ -61,7 +19,7 @@ export default React.createClass({
     },
 
     render() {
-        var smallInput = {
+        let smallInput = {
             width: "120px"
         };
         return (
@@ -70,43 +28,43 @@ export default React.createClass({
                     <div className="slds-form-element">
                         <label className="slds-form-element__label" htmlFor="sample1">Address</label>
                         <div className="slds-form-element__control">
-                            <input className="slds-input" type="text" value={this.state.address} onChange={this.addressChange}/>
+                            <input className="slds-input" type="text" valueLink={this.linkState('address')}/>
                         </div>
                     </div>
                     <div className="slds-form-element">
                         <label className="slds-form-element__label" htmlFor="sample1">City</label>
                         <div className="slds-form-element__control">
-                            <input className="slds-input" type="text" value={this.state.city} onChange={this.cityChange}/>
+                            <input className="slds-input" type="text" valueLink={this.linkState('city')}/>
                         </div>
                     </div>
                     <div className="slds-form-element">
                         <label className="slds-form-element__label" htmlFor="sample1">State</label>
                         <div className="slds-form-element__control">
-                            <input className="slds-input" type="text" value={this.state.state} onChange={this.stateChange}/>
+                            <input className="slds-input" type="text" valueLink={this.linkState('state')}/>
                         </div>
                     </div>
                     <div className="slds-form-element">
                         <label className="slds-form-element__label" htmlFor="sample1">Zip</label>
                         <div className="slds-form-element__control">
-                            <input className="slds-input" type="text" value={this.state.zip} onChange={this.zipChange}/>
+                            <input className="slds-input" type="text" valueLink={this.linkState('zip')}/>
                         </div>
                     </div>
                     <div className="slds-form-element">
                         <label className="slds-form-element__label" htmlFor="sample1">Picture URL</label>
                         <div className="slds-form-element__control">
-                            <input className="slds-input" type="text" value={this.state.pic} onChange={this.picChange}/>
+                            <input className="slds-input" type="text" valueLink={this.linkState('pic')}/>
                         </div>
                     </div>
                     <div className="slds-form-element">
                         <label className="slds-form-element__label" htmlFor="sample1">Teaser</label>
                         <div className="slds-form-element__control">
-                            <input className="slds-input" type="text" value={this.state.teaser} onChange={this.teaserChange}/>
+                            <input className="slds-input" type="text" valueLink={this.linkState('teaser')}/>
                         </div>
                     </div>
                     <div className="slds-form-element">
                         <label className="slds-form-element__label" htmlFor="sample2">Description</label>
                         <div className="slds-form-element__control">
-                            <textarea id="description" rows="10" className="slds-textarea" value={this.state.description} onChange={this.descriptionChange}></textarea>
+                            <textarea id="description" rows="10" className="slds-textarea" valueLink={this.linkState('description')}></textarea>
                         </div>
                     </div>
                 </div>
@@ -114,25 +72,25 @@ export default React.createClass({
                     <div className="slds-form-element" style={smallInput}>
                         <label className="slds-form-element__label" htmlFor="sample1">Sqft</label>
                         <div className="slds-form-element__control">
-                            <input className="slds-input" type="text" value={this.state.size} onChange={this.sizeChange}/>
+                            <input className="slds-input" type="text" valueLink={this.linkState('size')}/>
                         </div>
                     </div>
                     <div className="slds-form-element" style={smallInput}>
                         <label className="slds-form-element__label" htmlFor="sample1">Bedrooms</label>
                         <div className="slds-form-element__control">
-                            <input className="slds-input" type="text" value={this.state.bedrooms} onChange={this.bedroomsChange}/>
+                            <input className="slds-input" type="text" valueLink={this.linkState('bedrooms')}/>
                         </div>
                     </div>
                     <div className="slds-form-element" style={smallInput}>
                         <label className="slds-form-element__label" htmlFor="sample1">Bathrooms</label>
                         <div className="slds-form-element__control">
-                            <input className="slds-input" type="text" value={this.state.bathrooms} onChange={this.bathroomsChange}/>
+                            <input className="slds-input" type="text" valueLink={this.linkState('bathrooms')}/>
                         </div>
                     </div>
                     <div className="slds-form-element" style={smallInput}>
                         <label className="slds-form-element__label" htmlFor="sample1">Price</label>
                         <div className="slds-form-element__control">
-                            <input className="slds-input" type="text" value={this.state.price} onChange={this.priceChange}/>
+                            <input className="slds-input" type="text" valueLink={this.linkState('price')}/>
                         </div>
                     </div>
                 </div>

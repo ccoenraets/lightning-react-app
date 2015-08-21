@@ -1,6 +1,5 @@
 var express = require('express'),
     bodyParser = require('body-parser'),
-    //path = require('path'),
     compression = require('compression'),
     properties = require('./server/properties'),
     contacts = require('./server/contacts'),
@@ -8,31 +7,32 @@ var express = require('express'),
     brokers = require('./server/brokers'),
     activityTypes = require('./server/activitytypes'),
     sqlinit = require('./server/sqlinit'),
+    //auth = require('basic-auth'),
     app = express();
 
+
 app.set('port', process.env.PORT || 5000);
+
+/*
+app.use(function(req, res, next) {
+    var credentials = auth(req);
+    if (!credentials || credentials.name !== 'landmark' || credentials.pass !== 'theramp') {
+        res.statusCode = 401;
+        res.setHeader('WWW-Authenticate', 'Basic realm="Realty"');
+        console.log(req.path + " unauthorized");
+        res.end('Unauthorized');
+    } else {
+        console.log(req.path + " authorized");
+        next();
+    }
+});
+*/
 
 app.use(bodyParser.json());
 app.use(compression());
 
 app.use('/', express.static(__dirname + '/www'));
 
-// Adding CORS support
-/*
-app.all('*', function (req, res, next) {
-    // Set CORS headers: allow all origins, methods, and headers: you may want to lock this down in a production environment
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET, PUT, PATCH, POST, DELETE");
-    res.header("Access-Control-Allow-Headers", req.header('access-control-request-headers'));
-
-    if (req.method === 'OPTIONS') {
-        // CORS Preflight
-        res.send();
-    } else {
-        next();
-    }
-});
-*/
 app.get('/properties', properties.findAll);
 app.get('/properties/:id', properties.findById);
 app.post('/properties', properties.createItem);

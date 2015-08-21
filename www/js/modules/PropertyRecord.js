@@ -1,10 +1,11 @@
 import React from 'react';
 import Router from 'react-router';
 
-import PropertyRecordHeader from './PropertyRecordHeader';
 import * as propertyService from './services/PropertyService';
 
-var RouteHandler = Router.RouteHandler;
+import PropertyRecordHeader from './PropertyRecordHeader';
+
+let RouteHandler = Router.RouteHandler;
 
 export default React.createClass({
 
@@ -17,9 +18,8 @@ export default React.createClass({
     },
 
     componentDidMount() {
-        var propertyId = this.context.router.getCurrentParams().propertyId;
+        let propertyId = this.context.router.getCurrentParams().propertyId;
         propertyService.findById(propertyId).then((property) => {
-            console.log(property);
             this.setState({property});
         });
     },
@@ -33,8 +33,8 @@ export default React.createClass({
     render() {
         return (
             <div>
-                <PropertyRecordHeader {...this.state.property}/>
-                <RouteHandler {...this.state.property} saveHandler={this.saveHandler}/>
+                <PropertyRecordHeader property={this.state.property}/>
+                <RouteHandler property={this.state.property} saveHandler={this.saveHandler}/>
             </div>
         );
     }

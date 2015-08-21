@@ -1,44 +1,35 @@
 import React from 'react';
 
+import * as ContactService from './services/ContactService';
+
 import ContactListHeader from './ContactListHeader';
 import ContactList from './ContactList';
 import ContactNew from './ContactNew';
-import * as ContactService from './services/ContactService';
-
 
 export default React.createClass({
     getInitialState() {
-        console.log('initState');
         return {contacts: []};
     },
     componentDidMount() {
-        console.log('didMount');
-        ContactService.findAll().then(contacts => {
-            console.log(contacts);
-            this.setState({contacts:contacts});
-        });
+        ContactService.findAll().then(contacts => this.setState({contacts:contacts}));
     },
-    onNew() {
-        this.setState({new: true});
+    newHandler() {
+        this.setState({addingContact: true});
     },
-    onSave(Contact) {
-        console.log('adding Contact');
+    saveHandler(Contact) {
         ContactService.createItem(Contact).then(() => {
-            console.log('Contact added');
-            this.setState({new: false});
+            ContactService.findAll().then(contacts => this.setState({addingContact: false, contacts:contacts}));
         });
     },
-    onCancel() {
-        this.setState({new: false});
+    cancelHandler() {
+        this.setState({addingContact: false});
     },
     render() {
-        console.log('render');
-        console.log(this.state.contacts);
         return (
             <div>
-                <ContactListHeader contacts={this.state.contacts} onNew={this.onNew}/>
+                <ContactListHeader contacts={this.state.contacts} onNew={this.newHandler}/>
                 <ContactList contacts={this.state.contacts}/>
-                {this.state.new ?  <ContactNew onSave={this.onSave} onCancel={this.onCancel}/> : ""}
+                {this.state.addingContact ?  <ContactNew onSave={this.saveHandler} onCancel={this.cancelHandler}/> : ""}
             </div>
         );
     }

@@ -5,7 +5,7 @@ import * as Icons from "./Icons";
 let Icon = Icons.Icon;
 let ButtonIcon = Icons.ButtonIcon;
 
-var ListItem = React.createClass({
+let ListItem = React.createClass({
 
     clickHandler() {
         console.log(this.props.label);
@@ -22,7 +22,7 @@ var ListItem = React.createClass({
 
 });
 
-var Dropdown = React.createClass({
+let Dropdown = React.createClass({
 
     render() {
         let items = this.props.items.map((item) => <ListItem data={item[this.props.valueField]} label={item[this.props.labelField]} onSelect={this.props.onChange}/>);
@@ -65,7 +65,7 @@ export default React.createClass({
             <div aria-expanded="true" className="slds-picklist" onFocus={this.focusHandler}  onBlur={this.blurHandler}>
                 <button className="slds-button slds-button--neutral slds-picklist__label" aria-haspopup="true">
                     <span className="slds-truncate">{this.state.label}</span>
-                    <Icon type="utility" name="down"/>
+                    <Icon category="utility" name="down"/>
                 </button>
                 <Dropdown onChange={this.changeHandler} valueField={this.props.valueField} labelField={this.props.labelField} items={this.props.items} isOpen={this.state.isOpen}/>
             </div>

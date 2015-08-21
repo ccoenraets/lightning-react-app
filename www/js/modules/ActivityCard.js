@@ -3,32 +3,12 @@ import React from 'react';
 import * as activityService from './services/ActivityService';
 
 import DataGrid from "./components/DataGrid";
-import * as Icons from "./Icons";
+import * as Icons from "./components/Icons";
 
 let Icon = Icons.Icon;
 let ButtonIcon = Icons.ButtonIcon;
 
 export default React.createClass({
-
-    getInitialState() {
-        return {activities: []};
-    },
-
-    componentWillReceiveProps(props) {
-        let promise;
-        if (props.propertyId) {
-            promise = activityService.findByProperty(props.propertyId);
-        } else if (props.contactId) {
-            promise = activityService.findByContact(props.contactId);
-        }
-        if (promise) {
-            promise.then((activities) => this.setState({activities: activities}));
-        }
-    },
-
-    sortHandler(field) {
-        alert(field);
-    },
 
     contactLinkHandler(activity) {
         window.location.hash = "#contact/" + activity.contact_id;
@@ -63,13 +43,13 @@ export default React.createClass({
                 </header>
 
                 <section className="slds-card__body">
-                    <DataGrid data={this.state.activities}>
-                        <div header="Type" field="activity_name" sortable="true"/>
-                        <div header="Date" field="activity_date" sortable="true" format="date"/>
+                    <DataGrid data={this.props.activities}>
+                        <div header="Type" field="activity_name" sortable={true}/>
+                        <div header="Date" field="activity_date" sortable={true} format="date"/>
                         {this.props.showContact ? <div header="First Name" field="first_name" onLink={this.contactLinkHandler}/> : ''}
                         {this.props.showContact ? <div header="Last Name" field="last_name" onLink={this.contactLinkHandler}/> : ''}
                         {this.props.showProperty ? <div header="Property" field="address" onLink={this.propertyLinkHandler}/> : ''}
-                        <div header="Price" field="price" sortable="true" format="currency"/>
+                        <div header="Price" field="price" sortable={true} format="currency"/>
                     </DataGrid>
                 </section>
 

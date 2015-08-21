@@ -2,7 +2,7 @@ import React from 'react';
 
 export default React.createClass({
 
-    getDefaultProps: function () {
+    getDefaultProps() {
         return {
             zoom: 12,
             centerLat: 42.3600820,
@@ -25,34 +25,33 @@ export default React.createClass({
     },
 
     addMarkers(map, data) {
-        console.log(data);
-        if (data) {
-            for (let i=0; i<data.length; i++) {
-                let item = data[i];
-                if (item.location) {
-                    let marker = new google.maps.Marker({position: {lat: item.location.y, lng: item.location.x}, title: 'Click for details', map: map});
-                    var infowindow = new google.maps.InfoWindow({
-                        content: this.props.infoWindow
-                    });
-                    marker.addListener('click', function() {
-                        infowindow.open(map, marker);
-                    });
-                }
+        if (!data) return;
+        if (!Array.isArray(data)) {
+            data = [data];
+        }
+        for (let i=0; i<data.length; i++) {
+            let item = data[i];
+            if (item.location) {
+                let marker = new google.maps.Marker({position: {lat: item.location.y, lng: item.location.x}, title: 'Click for details', map: map});
+                let infowindow = new google.maps.InfoWindow({
+                    content: this.props.infoWindow
+                });
+                marker.addListener('click', () => infowindow.open(map, marker));
             }
         }
     },
 
-    componentDidMount: function() {
-        var mapOptions = {
+    componentDidMount() {
+        let mapOptions = {
             center: new google.maps.LatLng(this.props.centerLat, this.props.centerLng),
             zoom: this.props.zoom
         };
-        var map = new google.maps.Map(this.getDOMNode(), mapOptions);
+        let map = new google.maps.Map(this.getDOMNode(), mapOptions);
         this.setState({map: map});
         this.addMarkers(map, this.props.data);
     },
 
-    render: function () {
+    render() {
         return (
             <div style={{height: this.props.height}}></div>
         );
