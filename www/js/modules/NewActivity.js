@@ -7,6 +7,9 @@ import PropertyQuickFind from './PropertyQuickFind';
 import ContactQuickFind from './ContactQuickFind';
 import * as Icons from './components/Icons';
 
+import SLDSDateInput from './slds/SLDSDateInput';
+
+
 let Icon = Icons.Icon;
 
 export default React.createClass({
@@ -89,7 +92,11 @@ export default React.createClass({
                                 <div className="slds-form-element">
                                     <label className="slds-form-element__label" htmlFor="sample1">Date</label>
                                     <div className="slds-form-element__control">
+{/*
                                         <DatePicker value={this.state.activity_date} onChange={this.activityDateChange}/>
+*/}
+ 
+                                        <SLDSDateInput />
                                     </div>
                                 </div>
 

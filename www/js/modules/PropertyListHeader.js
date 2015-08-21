@@ -15,10 +15,10 @@ export default React.createClass({
             <div className="slds-page-header">
                 <div className="slds-grid">
                     <div className="slds-col slds-has-flexi-truncate">
-                        <p className="slds-text-heading--label">Properties</p>
+                        <p className="slds-text-heading--label">Properties:</p>
                         <div className="slds-grid">
                             <div className="slds-grid slds-type-focus slds-no-space">
-                                <h1 className="slds-text-heading--medium slds-truncate" title="My Leads (truncates)">My Properties</h1>
+                                <h1 className="slds-text-heading--medium slds-truncate" title="My Leads (truncates)">My Properties:</h1>
                                 <button className="slds-button slds-button--icon-bare slds-shrink-none slds-align-middle slds-m-left--x-small">
                                     <ButtonIcon name="down"/>
                                     <span className="slds-assistive-text">View More</span>
