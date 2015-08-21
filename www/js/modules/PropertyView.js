@@ -9,7 +9,7 @@ import FileDropArea from './components/FileDropArea';
 import ActivityTimeline from './ActivityTimeline';
 import BrokerCard from './BrokerCard';
 import ActivityCard from './ActivityCard';
-import NewActivity from './NewActivity';
+import NewActivityWindow from './NewActivityWindow';
 
 let headerStyle = {
     fontWeight: "bold",
@@ -157,7 +157,7 @@ export default React.createClass({
                     <ActivityCard propertyId={this.props.property.property_id} activities={this.state.activities} showContact={true} showProperty={false} onNew={this.newActivityHandler}/>
                     <BrokerCard propertyId={this.props.property.property_id}/>
                 </div>
-                {this.state.addingActivity ? <NewActivity onSave={this.saveActivityHandler} onCancel={this.cancelActivityHandler} propertyId={this.props.property.property_id} price={this.props.property.price}/> : ""}
+                {this.state.addingActivity ? <NewActivityWindow onSave={this.saveActivityHandler} onCancel={this.cancelActivityHandler} propertyId={this.props.property.property_id} price={this.props.property.price}/> : ""}
             </div>
         );
     }

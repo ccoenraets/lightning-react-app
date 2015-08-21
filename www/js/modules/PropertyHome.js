@@ -6,21 +6,22 @@ import GoogleMaps from './components/GoogleMaps';
 
 import PropertyListHeader from './PropertyListHeader';
 import PropertyList from './PropertyList';
-import PropertyNew from './PropertyNew';
+import NewPropertyWindow from './NewPropertyWindow';
 
 export default React.createClass({
 
     getInitialState() {
         return {view: "grid", sortOrder: "address", properties: []};
     },
+
     componentDidMount() {
         propertyService.findAll(this.state.sortOrder).then(properties => {
             return this.setState({properties:properties})
         });
     },
+
     sortHandler(sortOrder) {
         propertyService.findAll(sortOrder).then(properties => {
-            console.log(properties);
             this.setState({sortOrder: sortOrder, properties: properties})
         });
     },
@@ -66,7 +67,7 @@ export default React.createClass({
                                     onSort={this.sortHandler}
                                     onViewChange={this.viewChangeHandler}/>
                 {view}
-                {this.state.addingProperty ?  <PropertyNew onSave={this.saveHandler} onCancel={this.cancelHandler}/> : ""}
+                {this.state.addingProperty ?  <NewPropertyWindow onSave={this.saveHandler} onCancel={this.cancelHandler}/> : ""}
             </div>
         );
     }

@@ -30503,7 +30503,7 @@ _reactRouter2['default'].run(routes, function (Handler) {
     _react2['default'].render(_react2['default'].createElement(Handler, null), document.body);
 });
 
-},{"./modules/ContactForm":223,"./modules/ContactHome":224,"./modules/ContactRecord":230,"./modules/ContactView":232,"./modules/PropertyForm":234,"./modules/PropertyHome":235,"./modules/PropertyRecord":240,"./modules/PropertyView":242,"react":215,"react-router":28}],219:[function(require,module,exports){
+},{"./modules/ContactForm":223,"./modules/ContactHome":224,"./modules/ContactRecord":228,"./modules/ContactView":230,"./modules/PropertyForm":234,"./modules/PropertyHome":235,"./modules/PropertyRecord":239,"./modules/PropertyView":241,"react":215,"react-router":28}],219:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -30623,7 +30623,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/DataGrid":243,"./components/Icons":248,"./services/ActivityService":253,"react":215}],220:[function(require,module,exports){
+},{"./components/DataGrid":242,"./components/Icons":246,"./services/ActivityService":250,"react":215}],220:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -30837,7 +30837,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/Icons":248,"./services/ActivityService":253,"moment":2,"react":215}],221:[function(require,module,exports){
+},{"./components/Icons":246,"./services/ActivityService":250,"moment":2,"react":215}],221:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -30882,7 +30882,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/PickList":250,"./services/ActivityTypeService":254,"react":215}],222:[function(require,module,exports){
+},{"./components/PickList":247,"./services/ActivityTypeService":251,"react":215}],222:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -31011,7 +31011,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/DataGrid":243,"./components/Icons":248,"./services/BrokerService":255,"react":215}],223:[function(require,module,exports){
+},{"./components/DataGrid":242,"./components/Icons":246,"./services/BrokerService":252,"react":215}],223:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31164,9 +31164,9 @@ var _ContactList = require('./ContactList');
 
 var _ContactList2 = _interopRequireDefault(_ContactList);
 
-var _ContactNew = require('./ContactNew');
+var _NewContactWindow = require('./NewContactWindow');
 
-var _ContactNew2 = _interopRequireDefault(_ContactNew);
+var _NewContactWindow2 = _interopRequireDefault(_NewContactWindow);
 
 exports['default'] = _react2['default'].createClass({
     displayName: 'ContactHome',
@@ -31202,13 +31202,13 @@ exports['default'] = _react2['default'].createClass({
             null,
             _react2['default'].createElement(_ContactListHeader2['default'], { contacts: this.state.contacts, onNew: this.newHandler }),
             _react2['default'].createElement(_ContactList2['default'], { contacts: this.state.contacts }),
-            this.state.addingContact ? _react2['default'].createElement(_ContactNew2['default'], { onSave: this.saveHandler, onCancel: this.cancelHandler }) : ""
+            this.state.addingContact ? _react2['default'].createElement(_NewContactWindow2['default'], { onSave: this.saveHandler, onCancel: this.cancelHandler }) : ""
         );
     }
 });
 module.exports = exports['default'];
 
-},{"./ContactList":225,"./ContactListHeader":226,"./ContactNew":228,"./services/ContactService":256,"react":215}],225:[function(require,module,exports){
+},{"./ContactList":225,"./ContactListHeader":226,"./NewContactWindow":232,"./services/ContactService":253,"react":215}],225:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -31246,7 +31246,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/DataGrid":243,"react":215}],226:[function(require,module,exports){
+},{"./components/DataGrid":242,"react":215}],226:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -31424,243 +31424,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/Icons":248,"react":215}],227:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, '__esModule', {
-    value: true
-});
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj['default'] = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _servicesContactService = require('./services/ContactService');
-
-var ContactService = _interopRequireWildcard(_servicesContactService);
-
-var _componentsLookup = require('./components/Lookup');
-
-var _componentsLookup2 = _interopRequireDefault(_componentsLookup);
-
-exports['default'] = _react2['default'].createClass({
-    displayName: 'ContactLookup',
-
-    getInitialState: function getInitialState() {
-        return {
-            searchKey: undefined,
-            items: []
-        };
-    },
-
-    searchKeyChangeHandler: function searchKeyChangeHandler(key) {
-        var _this = this;
-
-        ContactService.findByName(key).then(function (items) {
-            return _this.setState({ searchKey: key, items: items });
-        });
-    },
-
-    render: function render() {
-        return _react2['default'].createElement(_componentsLookup2['default'], { label: 'Select a contact',
-            searchKey: this.state.searchKey,
-            items: this.state.items,
-            dataField: 'contact_id',
-            labelField: 'name',
-            onSearchKeyChange: this.searchKeyChangeHandler,
-            onChange: this.props.onChange });
-    }
-
-});
-module.exports = exports['default'];
-
-},{"./components/Lookup":249,"./services/ContactService":256,"react":215}],228:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-exports["default"] = _react2["default"].createClass({
-    displayName: "ContactNew",
-
-    getInitialState: function getInitialState() {
-        var _props = this.props;
-        var contact_id = _props.contact_id;
-        var first_name = _props.first_name;
-        var last_name = _props.last_name;
-        var mobile_phone = _props.mobile_phone;
-        var home_phone = _props.home_phone;
-        var email = _props.email;
-
-        return { contact_id: contact_id, first_name: first_name, last_name: last_name, mobile_phone: mobile_phone, home_phone: home_phone, email: email };
-    },
-
-    firstNameChange: function firstNameChange(event) {
-        this.setState({ first_name: event.target.value });
-    },
-
-    lastNameChange: function lastNameChange(event) {
-        this.setState({ last_name: event.target.value });
-    },
-
-    cellPhoneChange: function cellPhoneChange(event) {
-        this.setState({ mobile_phone: event.target.value });
-    },
-
-    housePhoneChange: function housePhoneChange(event) {
-        this.setState({ home_phone: event.target.value });
-    },
-
-    emailChange: function emailChange(event) {
-        this.setState({ email: event.target.value });
-    },
-
-    onSave: function onSave() {
-        this.props.onSave(this.state);
-    },
-
-    render: function render() {
-        return _react2["default"].createElement(
-            "div",
-            null,
-            _react2["default"].createElement(
-                "div",
-                { "aria-hidden": "false", role: "dialog", className: "slds-modal slds-fade-in-open" },
-                _react2["default"].createElement(
-                    "div",
-                    { className: "slds-modal__container" },
-                    _react2["default"].createElement(
-                        "div",
-                        { className: "slds-modal__header" },
-                        _react2["default"].createElement(
-                            "h2",
-                            { className: "slds-text-heading--medium" },
-                            "New Contact"
-                        ),
-                        _react2["default"].createElement(
-                            "button",
-                            { className: "slds-button slds-modal__close" },
-                            _react2["default"].createElement("svg", { "aria-hidden": "true", className: "slds-button__icon slds-button__icon--inverse slds-button__icon--large" }),
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-assistive-text" },
-                                "Close"
-                            )
-                        )
-                    ),
-                    _react2["default"].createElement(
-                        "div",
-                        { className: "slds-modal__content" },
-                        _react2["default"].createElement(
-                            "div",
-                            { className: "slds-form--stacked" },
-                            _react2["default"].createElement(
-                                "div",
-                                { className: "slds-form-element" },
-                                _react2["default"].createElement(
-                                    "label",
-                                    { className: "slds-form-element__label", htmlFor: "sample1" },
-                                    "First Name"
-                                ),
-                                _react2["default"].createElement(
-                                    "div",
-                                    { className: "slds-form-element__control" },
-                                    _react2["default"].createElement("input", { className: "slds-input", type: "text", value: this.state.first_name, onChange: this.firstNameChange })
-                                )
-                            ),
-                            _react2["default"].createElement(
-                                "div",
-                                { className: "slds-form-element" },
-                                _react2["default"].createElement(
-                                    "label",
-                                    { className: "slds-form-element__label", htmlFor: "sample1" },
-                                    "Last Name"
-                                ),
-                                _react2["default"].createElement(
-                                    "div",
-                                    { className: "slds-form-element__control" },
-                                    _react2["default"].createElement("input", { className: "slds-input", type: "text", value: this.state.last_name, onChange: this.lastNameChange })
-                                )
-                            ),
-                            _react2["default"].createElement(
-                                "div",
-                                { className: "slds-form-element" },
-                                _react2["default"].createElement(
-                                    "label",
-                                    { className: "slds-form-element__label", htmlFor: "sample1" },
-                                    "Cell Phone"
-                                ),
-                                _react2["default"].createElement(
-                                    "div",
-                                    { className: "slds-form-element__control" },
-                                    _react2["default"].createElement("input", { className: "slds-input", type: "text", value: this.state.mobile_phone, onChange: this.cellPhpneChange })
-                                )
-                            ),
-                            _react2["default"].createElement(
-                                "div",
-                                { className: "slds-form-element" },
-                                _react2["default"].createElement(
-                                    "label",
-                                    { className: "slds-form-element__label", htmlFor: "sample1" },
-                                    "House Phone"
-                                ),
-                                _react2["default"].createElement(
-                                    "div",
-                                    { className: "slds-form-element__control" },
-                                    _react2["default"].createElement("input", { className: "slds-input", type: "text", value: this.state.house_phone, onChange: this.housePhoneChange })
-                                )
-                            ),
-                            _react2["default"].createElement(
-                                "div",
-                                { className: "slds-form-element" },
-                                _react2["default"].createElement(
-                                    "label",
-                                    { className: "slds-form-element__label", htmlFor: "sample1" },
-                                    "Email"
-                                ),
-                                _react2["default"].createElement(
-                                    "div",
-                                    { className: "slds-form-element__control" },
-                                    _react2["default"].createElement("input", { className: "slds-input", type: "text", value: this.state.email, onChange: this.emailChange })
-                                )
-                            )
-                        )
-                    ),
-                    _react2["default"].createElement(
-                        "div",
-                        { className: "slds-modal__footer" },
-                        _react2["default"].createElement(
-                            "button",
-                            { className: "slds-button slds-button--neutral", onClick: this.props.onCancel },
-                            "Cancel"
-                        ),
-                        _react2["default"].createElement(
-                            "button",
-                            { className: "slds-button slds-button--neutral slds-button--brand", onClick: this.onSave },
-                            "Save"
-                        )
-                    )
-                )
-            ),
-            _react2["default"].createElement("div", { className: "slds-modal-backdrop slds-modal-backdrop--open" })
-        );
-    }
-
-});
-module.exports = exports["default"];
-
-},{"react":215}],229:[function(require,module,exports){
+},{"./components/Icons":246,"react":215}],227:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -31714,7 +31478,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/QuickFind":251,"./services/ContactService":256,"react":215}],230:[function(require,module,exports){
+},{"./components/QuickFind":248,"./services/ContactService":253,"react":215}],228:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -31778,7 +31542,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./ContactRecordHeader":231,"./services/ContactService":256,"react":215,"react-router":28}],231:[function(require,module,exports){
+},{"./ContactRecordHeader":229,"./services/ContactService":253,"react":215,"react-router":28}],229:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -31994,7 +31758,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./components/Icons":248,"react":215}],232:[function(require,module,exports){
+},{"./components/Icons":246,"react":215}],230:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -32029,9 +31793,9 @@ var _ActivityCard = require('./ActivityCard');
 
 var _ActivityCard2 = _interopRequireDefault(_ActivityCard);
 
-var _NewActivity = require('./NewActivity');
+var _NewActivityWindow = require('./NewActivityWindow');
 
-var _NewActivity2 = _interopRequireDefault(_NewActivity);
+var _NewActivityWindow2 = _interopRequireDefault(_NewActivityWindow);
 
 var headerStyle = {
     fontWeight: "bold",
@@ -32256,14 +32020,14 @@ exports['default'] = _react2['default'].createClass({
                 _react2['default'].createElement('br', null),
                 _react2['default'].createElement(_ActivityCard2['default'], { contactId: this.props.contact.contact_id, activities: this.state.activities, showContact: false, showProperty: true, onNew: this.newActivityHandler })
             ),
-            this.state.addingActivity ? _react2['default'].createElement(_NewActivity2['default'], { onSave: this.saveActivityHandler, onCancel: this.cancelActivityHandler, contactId: this.props.contact.contact_id }) : ""
+            this.state.addingActivity ? _react2['default'].createElement(_NewActivityWindow2['default'], { onSave: this.saveActivityHandler, onCancel: this.cancelActivityHandler, contactId: this.props.contact.contact_id }) : ""
         );
     }
 
 });
 module.exports = exports['default'];
 
-},{"./ActivityCard":219,"./ActivityTimeline":220,"./NewActivity":233,"./components/Tabs":252,"./services/ActivityService":253,"moment":2,"react":215}],233:[function(require,module,exports){
+},{"./ActivityCard":219,"./ActivityTimeline":220,"./NewActivityWindow":231,"./components/Tabs":249,"./services/ActivityService":250,"moment":2,"react":215}],231:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -32278,17 +32042,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _componentsDatePicker = require('./components/DatePicker');
-
-var _componentsDatePicker2 = _interopRequireDefault(_componentsDatePicker);
-
 var _ActivityTypePickList = require('./ActivityTypePickList');
 
 var _ActivityTypePickList2 = _interopRequireDefault(_ActivityTypePickList);
-
-var _ContactLookup = require('./ContactLookup');
-
-var _ContactLookup2 = _interopRequireDefault(_ContactLookup);
 
 var _PropertyQuickFind = require('./PropertyQuickFind');
 
@@ -32309,7 +32065,7 @@ var _sldsSLDSDateInput2 = _interopRequireDefault(_sldsSLDSDateInput);
 var Icon = Icons.Icon;
 
 exports['default'] = _react2['default'].createClass({
-    displayName: 'NewActivity',
+    displayName: 'NewActivityWindow',
 
     getInitialState: function getInitialState() {
         return { property_id: this.props.propertyId, contact_id: this.props.contactId, price: this.props.price, activity_type_id: undefined, activity_date: new Date(), comment: "" };
@@ -32488,11 +32244,326 @@ exports['default'] = _react2['default'].createClass({
 
 });
 module.exports = exports['default'];
-/*
-                                       <DatePicker value={this.state.activity_date} onChange={this.activityDateChange}/>
-*/
 
-},{"./ActivityTypePickList":221,"./ContactLookup":227,"./ContactQuickFind":229,"./PropertyQuickFind":239,"./components/DatePicker":244,"./components/Icons":248,"./slds/SLDSDateInput":264,"react":215}],234:[function(require,module,exports){
+},{"./ActivityTypePickList":221,"./ContactQuickFind":227,"./PropertyQuickFind":238,"./components/Icons":246,"./slds/SLDSDateInput":261,"react":215}],232:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var _reactAddons = require('react/addons');
+
+var _reactAddons2 = _interopRequireDefault(_reactAddons);
+
+exports["default"] = _reactAddons2["default"].createClass({
+    displayName: "NewContactWindow",
+
+    mixins: [_reactAddons2["default"].addons.LinkedStateMixin],
+
+    getInitialState: function getInitialState() {
+        var contact = this.props.contact;
+        return _extends({}, contact);
+    },
+
+    onSave: function onSave() {
+        this.props.onSave(this.state);
+    },
+
+    render: function render() {
+        return _reactAddons2["default"].createElement(
+            "div",
+            null,
+            _reactAddons2["default"].createElement(
+                "div",
+                { "aria-hidden": "false", role: "dialog", className: "slds-modal slds-fade-in-open" },
+                _reactAddons2["default"].createElement(
+                    "div",
+                    { className: "slds-modal__container" },
+                    _reactAddons2["default"].createElement(
+                        "div",
+                        { className: "slds-modal__header" },
+                        _reactAddons2["default"].createElement(
+                            "h2",
+                            { className: "slds-text-heading--medium" },
+                            "New Contact"
+                        ),
+                        _reactAddons2["default"].createElement(
+                            "button",
+                            { className: "slds-button slds-modal__close" },
+                            _reactAddons2["default"].createElement("svg", { "aria-hidden": "true", className: "slds-button__icon slds-button__icon--inverse slds-button__icon--large" }),
+                            _reactAddons2["default"].createElement(
+                                "span",
+                                { className: "slds-assistive-text" },
+                                "Close"
+                            )
+                        )
+                    ),
+                    _reactAddons2["default"].createElement(
+                        "div",
+                        { className: "slds-modal__content" },
+                        _reactAddons2["default"].createElement(
+                            "div",
+                            { className: "slds-form--stacked" },
+                            _reactAddons2["default"].createElement(
+                                "div",
+                                { className: "slds-form-element" },
+                                _reactAddons2["default"].createElement(
+                                    "label",
+                                    { className: "slds-form-element__label", htmlFor: "sample1" },
+                                    "First Name"
+                                ),
+                                _reactAddons2["default"].createElement(
+                                    "div",
+                                    { className: "slds-form-element__control" },
+                                    _reactAddons2["default"].createElement("input", { className: "slds-input", type: "text", valueLink: this.linkState('first_name') })
+                                )
+                            ),
+                            _reactAddons2["default"].createElement(
+                                "div",
+                                { className: "slds-form-element" },
+                                _reactAddons2["default"].createElement(
+                                    "label",
+                                    { className: "slds-form-element__label", htmlFor: "sample1" },
+                                    "Last Name"
+                                ),
+                                _reactAddons2["default"].createElement(
+                                    "div",
+                                    { className: "slds-form-element__control" },
+                                    _reactAddons2["default"].createElement("input", { className: "slds-input", type: "text", valueLink: this.linkState('last_name') })
+                                )
+                            ),
+                            _reactAddons2["default"].createElement(
+                                "div",
+                                { className: "slds-form-element" },
+                                _reactAddons2["default"].createElement(
+                                    "label",
+                                    { className: "slds-form-element__label", htmlFor: "sample1" },
+                                    "Cell Phone"
+                                ),
+                                _reactAddons2["default"].createElement(
+                                    "div",
+                                    { className: "slds-form-element__control" },
+                                    _reactAddons2["default"].createElement("input", { className: "slds-input", type: "text", valueLink: this.linkState('mobile_phone') })
+                                )
+                            ),
+                            _reactAddons2["default"].createElement(
+                                "div",
+                                { className: "slds-form-element" },
+                                _reactAddons2["default"].createElement(
+                                    "label",
+                                    { className: "slds-form-element__label", htmlFor: "sample1" },
+                                    "Home Phone"
+                                ),
+                                _reactAddons2["default"].createElement(
+                                    "div",
+                                    { className: "slds-form-element__control" },
+                                    _reactAddons2["default"].createElement("input", { className: "slds-input", type: "text", valueLink: this.linkState('home_phone') })
+                                )
+                            ),
+                            _reactAddons2["default"].createElement(
+                                "div",
+                                { className: "slds-form-element" },
+                                _reactAddons2["default"].createElement(
+                                    "label",
+                                    { className: "slds-form-element__label", htmlFor: "sample1" },
+                                    "Email"
+                                ),
+                                _reactAddons2["default"].createElement(
+                                    "div",
+                                    { className: "slds-form-element__control" },
+                                    _reactAddons2["default"].createElement("input", { className: "slds-input", type: "text", valueLink: this.linkState('email') })
+                                )
+                            )
+                        )
+                    ),
+                    _reactAddons2["default"].createElement(
+                        "div",
+                        { className: "slds-modal__footer" },
+                        _reactAddons2["default"].createElement(
+                            "button",
+                            { className: "slds-button slds-button--neutral", onClick: this.props.onCancel },
+                            "Cancel"
+                        ),
+                        _reactAddons2["default"].createElement(
+                            "button",
+                            { className: "slds-button slds-button--neutral slds-button--brand", onClick: this.onSave },
+                            "Save"
+                        )
+                    )
+                )
+            ),
+            _reactAddons2["default"].createElement("div", { className: "slds-modal-backdrop slds-modal-backdrop--open" })
+        );
+    }
+
+});
+module.exports = exports["default"];
+
+},{"react/addons":43}],233:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var _reactAddons = require('react/addons');
+
+var _reactAddons2 = _interopRequireDefault(_reactAddons);
+
+exports["default"] = _reactAddons2["default"].createClass({
+    displayName: "NewPropertyWindow",
+
+    mixins: [_reactAddons2["default"].addons.LinkedStateMixin],
+
+    getInitialState: function getInitialState() {
+        var property = this.props.property;
+        return _extends({}, property);
+    },
+
+    onSave: function onSave() {
+        this.props.onSave(this.state);
+    },
+
+    render: function render() {
+        return _reactAddons2["default"].createElement(
+            "div",
+            null,
+            _reactAddons2["default"].createElement(
+                "div",
+                { "aria-hidden": "false", role: "dialog", className: "slds-modal slds-fade-in-open" },
+                _reactAddons2["default"].createElement(
+                    "div",
+                    { className: "slds-modal__container" },
+                    _reactAddons2["default"].createElement(
+                        "div",
+                        { className: "slds-modal__header" },
+                        _reactAddons2["default"].createElement(
+                            "h2",
+                            { className: "slds-text-heading--medium" },
+                            "New Property"
+                        ),
+                        _reactAddons2["default"].createElement(
+                            "button",
+                            { className: "slds-button slds-modal__close" },
+                            _reactAddons2["default"].createElement("svg", { "aria-hidden": "true", className: "slds-button__icon slds-button__icon--inverse slds-button__icon--large" }),
+                            _reactAddons2["default"].createElement(
+                                "span",
+                                { className: "slds-assistive-text" },
+                                "Close"
+                            )
+                        )
+                    ),
+                    _reactAddons2["default"].createElement(
+                        "div",
+                        { className: "slds-modal__content" },
+                        _reactAddons2["default"].createElement(
+                            "div",
+                            { className: "slds-form--stacked" },
+                            _reactAddons2["default"].createElement(
+                                "div",
+                                { className: "slds-form-element" },
+                                _reactAddons2["default"].createElement(
+                                    "label",
+                                    { className: "slds-form-element__label", htmlFor: "sample1" },
+                                    "Address"
+                                ),
+                                _reactAddons2["default"].createElement(
+                                    "div",
+                                    { className: "slds-form-element__control" },
+                                    _reactAddons2["default"].createElement("input", { className: "slds-input", type: "text", valueLink: this.linkState('address') })
+                                )
+                            ),
+                            _reactAddons2["default"].createElement(
+                                "div",
+                                { className: "slds-form-element" },
+                                _reactAddons2["default"].createElement(
+                                    "label",
+                                    { className: "slds-form-element__label", htmlFor: "sample1" },
+                                    "City"
+                                ),
+                                _reactAddons2["default"].createElement(
+                                    "div",
+                                    { className: "slds-form-element__control" },
+                                    _reactAddons2["default"].createElement("input", { className: "slds-input", type: "text", valueLink: this.linkState('city') })
+                                )
+                            ),
+                            _reactAddons2["default"].createElement(
+                                "div",
+                                { className: "slds-form-element" },
+                                _reactAddons2["default"].createElement(
+                                    "label",
+                                    { className: "slds-form-element__label", htmlFor: "sample1" },
+                                    "State"
+                                ),
+                                _reactAddons2["default"].createElement(
+                                    "div",
+                                    { className: "slds-form-element__control" },
+                                    _reactAddons2["default"].createElement("input", { className: "slds-input", type: "text", valueLink: this.linkState('state') })
+                                )
+                            ),
+                            _reactAddons2["default"].createElement(
+                                "div",
+                                { className: "slds-form-element" },
+                                _reactAddons2["default"].createElement(
+                                    "label",
+                                    { className: "slds-form-element__label", htmlFor: "sample1" },
+                                    "Zip"
+                                ),
+                                _reactAddons2["default"].createElement(
+                                    "div",
+                                    { className: "slds-form-element__control" },
+                                    _reactAddons2["default"].createElement("input", { className: "slds-input", type: "text", valueLink: this.linkState('zip') })
+                                )
+                            ),
+                            _reactAddons2["default"].createElement(
+                                "div",
+                                { className: "slds-form-element" },
+                                _reactAddons2["default"].createElement(
+                                    "label",
+                                    { className: "slds-form-element__label", htmlFor: "sample1" },
+                                    "Asking Price"
+                                ),
+                                _reactAddons2["default"].createElement(
+                                    "div",
+                                    { className: "slds-form-element__control" },
+                                    _reactAddons2["default"].createElement("input", { className: "slds-input", type: "text", valueLink: this.linkState('price') })
+                                )
+                            )
+                        )
+                    ),
+                    _reactAddons2["default"].createElement(
+                        "div",
+                        { className: "slds-modal__footer" },
+                        _reactAddons2["default"].createElement(
+                            "button",
+                            { className: "slds-button slds-button--neutral", onClick: this.props.onCancel },
+                            "Cancel"
+                        ),
+                        _reactAddons2["default"].createElement(
+                            "button",
+                            { className: "slds-button slds-button--neutral slds-button--brand", onClick: this.onSave },
+                            "Save"
+                        )
+                    )
+                )
+            ),
+            _reactAddons2["default"].createElement("div", { className: "slds-modal-backdrop slds-modal-backdrop--open" })
+        );
+    }
+
+});
+module.exports = exports["default"];
+
+},{"react/addons":43}],234:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32741,9 +32812,9 @@ var _PropertyList = require('./PropertyList');
 
 var _PropertyList2 = _interopRequireDefault(_PropertyList);
 
-var _PropertyNew = require('./PropertyNew');
+var _NewPropertyWindow = require('./NewPropertyWindow');
 
-var _PropertyNew2 = _interopRequireDefault(_PropertyNew);
+var _NewPropertyWindow2 = _interopRequireDefault(_NewPropertyWindow);
 
 exports['default'] = _react2['default'].createClass({
     displayName: 'PropertyHome',
@@ -32751,6 +32822,7 @@ exports['default'] = _react2['default'].createClass({
     getInitialState: function getInitialState() {
         return { view: "grid", sortOrder: "address", properties: [] };
     },
+
     componentDidMount: function componentDidMount() {
         var _this = this;
 
@@ -32758,11 +32830,11 @@ exports['default'] = _react2['default'].createClass({
             return _this.setState({ properties: properties });
         });
     },
+
     sortHandler: function sortHandler(sortOrder) {
         var _this2 = this;
 
         propertyService.findAll(sortOrder).then(function (properties) {
-            console.log(properties);
             _this2.setState({ sortOrder: sortOrder, properties: properties });
         });
     },
@@ -32819,14 +32891,14 @@ exports['default'] = _react2['default'].createClass({
                 onSort: this.sortHandler,
                 onViewChange: this.viewChangeHandler }),
             view,
-            this.state.addingProperty ? _react2['default'].createElement(_PropertyNew2['default'], { onSave: this.saveHandler, onCancel: this.cancelHandler }) : ""
+            this.state.addingProperty ? _react2['default'].createElement(_NewPropertyWindow2['default'], { onSave: this.saveHandler, onCancel: this.cancelHandler }) : ""
         );
     }
 
 });
 module.exports = exports['default'];
 
-},{"./PropertyList":236,"./PropertyListHeader":237,"./PropertyNew":238,"./components/GoogleMaps":247,"./services/PropertyService":257,"react":215}],236:[function(require,module,exports){
+},{"./NewPropertyWindow":233,"./PropertyList":236,"./PropertyListHeader":237,"./components/GoogleMaps":245,"./services/PropertyService":254,"react":215}],236:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -32869,7 +32941,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/DataGrid":243,"react":215}],237:[function(require,module,exports){
+},{"./components/DataGrid":242,"react":215}],237:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -33041,189 +33113,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/Dropdown":245,"./components/Icons":248,"react":215}],238:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-exports["default"] = _react2["default"].createClass({
-    displayName: "PropertyNew",
-
-    getInitialState: function getInitialState() {
-        var _props = this.props;
-        var property_id = _props.property_id;
-        var address = _props.address;
-        var city = _props.city;
-        var state = _props.state;
-        var zip = _props.zip;
-        var price = _props.price;
-
-        return { property_id: property_id, address: address, city: city, state: state, zip: zip, price: price };
-    },
-
-    addressChange: function addressChange(event) {
-        this.setState({ address: event.target.value });
-    },
-
-    cityChange: function cityChange(event) {
-        this.setState({ city: event.target.value });
-    },
-
-    stateChange: function stateChange(event) {
-        this.setState({ state: event.target.value });
-    },
-
-    zipChange: function zipChange(event) {
-        this.setState({ zip: event.target.value });
-    },
-
-    priceChange: function priceChange(event) {
-        this.setState({ price: event.target.value });
-    },
-
-    onSave: function onSave() {
-        this.props.onSave(this.state);
-    },
-
-    render: function render() {
-        return _react2["default"].createElement(
-            "div",
-            null,
-            _react2["default"].createElement(
-                "div",
-                { "aria-hidden": "false", role: "dialog", className: "slds-modal slds-fade-in-open" },
-                _react2["default"].createElement(
-                    "div",
-                    { className: "slds-modal__container" },
-                    _react2["default"].createElement(
-                        "div",
-                        { className: "slds-modal__header" },
-                        _react2["default"].createElement(
-                            "h2",
-                            { className: "slds-text-heading--medium" },
-                            "New Property"
-                        ),
-                        _react2["default"].createElement(
-                            "button",
-                            { className: "slds-button slds-modal__close" },
-                            _react2["default"].createElement("svg", { "aria-hidden": "true", className: "slds-button__icon slds-button__icon--inverse slds-button__icon--large" }),
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-assistive-text" },
-                                "Close"
-                            )
-                        )
-                    ),
-                    _react2["default"].createElement(
-                        "div",
-                        { className: "slds-modal__content" },
-                        _react2["default"].createElement(
-                            "div",
-                            { className: "slds-form--stacked" },
-                            _react2["default"].createElement(
-                                "div",
-                                { className: "slds-form-element" },
-                                _react2["default"].createElement(
-                                    "label",
-                                    { className: "slds-form-element__label", htmlFor: "sample1" },
-                                    "Address"
-                                ),
-                                _react2["default"].createElement(
-                                    "div",
-                                    { className: "slds-form-element__control" },
-                                    _react2["default"].createElement("input", { className: "slds-input", type: "text", value: this.state.address, onChange: this.addressChange })
-                                )
-                            ),
-                            _react2["default"].createElement(
-                                "div",
-                                { className: "slds-form-element" },
-                                _react2["default"].createElement(
-                                    "label",
-                                    { className: "slds-form-element__label", htmlFor: "sample1" },
-                                    "City"
-                                ),
-                                _react2["default"].createElement(
-                                    "div",
-                                    { className: "slds-form-element__control" },
-                                    _react2["default"].createElement("input", { className: "slds-input", type: "text", value: this.state.city, onChange: this.cityChange })
-                                )
-                            ),
-                            _react2["default"].createElement(
-                                "div",
-                                { className: "slds-form-element" },
-                                _react2["default"].createElement(
-                                    "label",
-                                    { className: "slds-form-element__label", htmlFor: "sample1" },
-                                    "State"
-                                ),
-                                _react2["default"].createElement(
-                                    "div",
-                                    { className: "slds-form-element__control" },
-                                    _react2["default"].createElement("input", { className: "slds-input", type: "text", value: this.state.state, onChange: this.stateChange })
-                                )
-                            ),
-                            _react2["default"].createElement(
-                                "div",
-                                { className: "slds-form-element" },
-                                _react2["default"].createElement(
-                                    "label",
-                                    { className: "slds-form-element__label", htmlFor: "sample1" },
-                                    "Zip"
-                                ),
-                                _react2["default"].createElement(
-                                    "div",
-                                    { className: "slds-form-element__control" },
-                                    _react2["default"].createElement("input", { className: "slds-input", type: "text", value: this.state.zip, onChange: this.zipChange })
-                                )
-                            ),
-                            _react2["default"].createElement(
-                                "div",
-                                { className: "slds-form-element" },
-                                _react2["default"].createElement(
-                                    "label",
-                                    { className: "slds-form-element__label", htmlFor: "sample1" },
-                                    "Asking Price"
-                                ),
-                                _react2["default"].createElement(
-                                    "div",
-                                    { className: "slds-form-element__control" },
-                                    _react2["default"].createElement("input", { className: "slds-input", type: "text", value: this.state.price, onChange: this.priceChange })
-                                )
-                            )
-                        )
-                    ),
-                    _react2["default"].createElement(
-                        "div",
-                        { className: "slds-modal__footer" },
-                        _react2["default"].createElement(
-                            "button",
-                            { className: "slds-button slds-button--neutral", onClick: this.props.onCancel },
-                            "Cancel"
-                        ),
-                        _react2["default"].createElement(
-                            "button",
-                            { className: "slds-button slds-button--neutral slds-button--brand", onClick: this.onSave },
-                            "Save"
-                        )
-                    )
-                )
-            ),
-            _react2["default"].createElement("div", { className: "slds-modal-backdrop slds-modal-backdrop--open" })
-        );
-    }
-
-});
-module.exports = exports["default"];
-
-},{"react":215}],239:[function(require,module,exports){
+},{"./components/Dropdown":243,"./components/Icons":246,"react":215}],238:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -33277,7 +33167,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./components/QuickFind":251,"./services/PropertyService":257,"react":215}],240:[function(require,module,exports){
+},{"./components/QuickFind":248,"./services/PropertyService":254,"react":215}],239:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -33343,7 +33233,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./PropertyRecordHeader":241,"./services/PropertyService":257,"react":215,"react-router":28}],241:[function(require,module,exports){
+},{"./PropertyRecordHeader":240,"./services/PropertyService":254,"react":215,"react-router":28}],240:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33583,7 +33473,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./components/Icons":248,"react":215}],242:[function(require,module,exports){
+},{"./components/Icons":246,"react":215}],241:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -33626,9 +33516,9 @@ var _ActivityCard = require('./ActivityCard');
 
 var _ActivityCard2 = _interopRequireDefault(_ActivityCard);
 
-var _NewActivity = require('./NewActivity');
+var _NewActivityWindow = require('./NewActivityWindow');
 
-var _NewActivity2 = _interopRequireDefault(_NewActivity);
+var _NewActivityWindow2 = _interopRequireDefault(_NewActivityWindow);
 
 var headerStyle = {
     fontWeight: "bold",
@@ -33888,14 +33778,14 @@ exports['default'] = _react2['default'].createClass({
                 _react2['default'].createElement(_ActivityCard2['default'], { propertyId: this.props.property.property_id, activities: this.state.activities, showContact: true, showProperty: false, onNew: this.newActivityHandler }),
                 _react2['default'].createElement(_BrokerCard2['default'], { propertyId: this.props.property.property_id })
             ),
-            this.state.addingActivity ? _react2['default'].createElement(_NewActivity2['default'], { onSave: this.saveActivityHandler, onCancel: this.cancelActivityHandler, propertyId: this.props.property.property_id, price: this.props.property.price }) : ""
+            this.state.addingActivity ? _react2['default'].createElement(_NewActivityWindow2['default'], { onSave: this.saveActivityHandler, onCancel: this.cancelActivityHandler, propertyId: this.props.property.property_id, price: this.props.property.price }) : ""
         );
     }
 
 });
 module.exports = exports['default'];
 
-},{"./ActivityCard":219,"./ActivityTimeline":220,"./BrokerCard":222,"./NewActivity":233,"./components/FileDropArea":246,"./components/GoogleMaps":247,"./components/Tabs":252,"./services/ActivityService":253,"react":215}],243:[function(require,module,exports){
+},{"./ActivityCard":219,"./ActivityTimeline":220,"./BrokerCard":222,"./NewActivityWindow":231,"./components/FileDropArea":244,"./components/GoogleMaps":245,"./components/Tabs":249,"./services/ActivityService":250,"react":215}],242:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -34068,540 +33958,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./Icons":248,"moment":2,"react":215}],244:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj["default"] = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Icons = require("./Icons");
-
-var Icons = _interopRequireWildcard(_Icons);
-
-var Icon = Icons.Icon;
-var ButtonIcon = Icons.ButtonIcon;
-var InputIcon = Icons.InputIcon;
-
-var Dropdown = _react2["default"].createClass({
-    displayName: "Dropdown",
-
-    render: function render() {
-        return _react2["default"].createElement(
-            "div",
-            { className: "slds-dropdown slds-dropdown--left slds-datepicker", "aria-hidden": "false", "data-selection": "single" },
-            _react2["default"].createElement(
-                "div",
-                { className: "slds-datepicker__filter slds-grid" },
-                _react2["default"].createElement(
-                    "div",
-                    { className: "slds-datepicker__filter--month slds-grid slds-grid--align-spread slds-size--3-of-4" },
-                    _react2["default"].createElement(
-                        "div",
-                        { className: "slds-align-middle", role: "button", "aria-labelledby": "bn_prev-label", tabIndex: "0" },
-                        _react2["default"].createElement(
-                            "button",
-                            { className: "slds-button slds-button--icon-container" },
-                            _react2["default"].createElement(ButtonIcon, { name: "left", size: "small" }),
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-assistive-text" },
-                                "Previous Month"
-                            )
-                        )
-                    ),
-                    _react2["default"].createElement(
-                        "div",
-                        { id: "month", className: "slds-align-middle", role: "heading", "aria-live": "assertive", "aria-atomic": "true" },
-                        "June 2015"
-                    ),
-                    _react2["default"].createElement(
-                        "div",
-                        { className: "slds-align-middle", role: "button", "aria-labelledby": "bn_next-label", tabIndex: "0" },
-                        _react2["default"].createElement(
-                            "button",
-                            { className: "slds-button slds-button--icon-container" },
-                            _react2["default"].createElement(ButtonIcon, { name: "right", size: "small" }),
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-assistive-text" },
-                                "Next Month"
-                            )
-                        )
-                    )
-                ),
-                _react2["default"].createElement(
-                    "div",
-                    { className: "slds-picklist datepicker__filter--year slds-shrink-none" },
-                    _react2["default"].createElement(
-                        "button",
-                        { id: "year", className: "slds-button slds-button--neutral slds-picklist__label", "aria-haspopup": "true", "aria-expanded": "false" },
-                        "2015",
-                        _react2["default"].createElement(Icon, { name: "down", size: "small" })
-                    )
-                )
-            ),
-            _react2["default"].createElement(
-                "table",
-                { className: "datepicker__month", role: "grid", "aria-labelledby": "month", tabIndex: "0" },
-                _react2["default"].createElement(
-                    "thead",
-                    null,
-                    _react2["default"].createElement(
-                        "tr",
-                        { id: "weekdays" },
-                        _react2["default"].createElement(
-                            "th",
-                            { id: "Sunday" },
-                            _react2["default"].createElement(
-                                "abbr",
-                                { title: "Sunday" },
-                                "S"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "th",
-                            { id: "Monday" },
-                            _react2["default"].createElement(
-                                "abbr",
-                                { title: "Monday" },
-                                "M"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "th",
-                            { id: "Tuesday" },
-                            _react2["default"].createElement(
-                                "abbr",
-                                { title: "Tuesday" },
-                                "T"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "th",
-                            { id: "Wednesday" },
-                            _react2["default"].createElement(
-                                "abbr",
-                                { title: "Wednesday" },
-                                "W"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "th",
-                            { id: "Thursday" },
-                            _react2["default"].createElement(
-                                "abbr",
-                                { title: "Thursday" },
-                                "T"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "th",
-                            { id: "Friday" },
-                            _react2["default"].createElement(
-                                "abbr",
-                                { title: "Friday" },
-                                "F"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "th",
-                            { id: "Saturday" },
-                            _react2["default"].createElement(
-                                "abbr",
-                                { title: "Saturday" },
-                                "S"
-                            )
-                        )
-                    )
-                ),
-                _react2["default"].createElement(
-                    "tbody",
-                    null,
-                    _react2["default"].createElement(
-                        "tr",
-                        null,
-                        _react2["default"].createElement(
-                            "td",
-                            { className: "slds-disabled-text", headers: "Sunday", role: "gridcell", "aria-disabled": "true" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "31"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Monday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "1"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Tuesday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "2"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Wednesday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "3"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Thursday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "4"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Friday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "5"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Saturday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "6"
-                            )
-                        )
-                    ),
-                    _react2["default"].createElement(
-                        "tr",
-                        null,
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Sunday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "7"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Monday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "8"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Tuesday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "9"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Wednesday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "10"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Thursday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "11"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Friday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "12"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Saturday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "13"
-                            )
-                        )
-                    ),
-                    _react2["default"].createElement(
-                        "tr",
-                        null,
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Sunday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "14"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Monday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "15"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Tuesday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "16"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Wednesday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "17"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { className: "slds-is-today", headers: "Thursday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "18"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Friday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "19"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Saturday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "20"
-                            )
-                        )
-                    ),
-                    _react2["default"].createElement(
-                        "tr",
-                        null,
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Sunday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "21"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Monday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "22"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { className: "slds-is-selected", headers: "Tuesday", role: "gridcell", "aria-selected": "true" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "23"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Wednesday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "24"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Thursday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "25"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Friday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "26"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Saturday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "27"
-                            )
-                        )
-                    ),
-                    _react2["default"].createElement(
-                        "tr",
-                        null,
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Sunday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "28"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Monday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "29"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { headers: "Tuesday", role: "gridcell", "aria-selected": "false" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "30"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { className: "slds-disabled-text", headers: "Wednesday", role: "gridcell", "aria-disabled": "true" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "1"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { className: "slds-disabled-text", headers: "Thursday", role: "gridcell", "aria-disabled": "true" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "2"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { className: "slds-disabled-text", headers: "Friday", role: "gridcell", "aria-disabled": "true" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "3"
-                            )
-                        ),
-                        _react2["default"].createElement(
-                            "td",
-                            { className: "slds-disabled-text", headers: "Saturday", role: "gridcell", "aria-disabled": "true" },
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-day" },
-                                "4"
-                            )
-                        )
-                    )
-                )
-            ),
-            _react2["default"].createElement(
-                "span",
-                { id: "bn_prev-label", className: "slds-assistive-text" },
-                "Go to previous month"
-            ),
-            _react2["default"].createElement(
-                "span",
-                { id: "bn_next-label", className: "slds-assistive-text" },
-                "Go to next month"
-            )
-        );
-    }
-
-});
-
-exports["default"] = _react2["default"].createClass({
-    displayName: "DatePicker",
-
-    handleFocus: function handleFocus() {
-        console.log("focus");
-    },
-
-    handleBlur: function handleBlur() {
-        console.log("blur");
-    },
-
-    render: function render() {
-        return _react2["default"].createElement(
-            "div",
-            { className: "slds-input-has-icon slds-input-has-icon--right" },
-            _react2["default"].createElement(InputIcon, { name: "event" }),
-            _react2["default"].createElement("input", { id: "date", className: "slds-input", type: "text", placeholder: "Pick a Date", label: "Date Picker Label", onFocus: this.handleFocus, onBlur: this.handleBlur })
-        );
-    }
-
-});
-module.exports = exports["default"];
-
-},{"./Icons":248,"react":215}],245:[function(require,module,exports){
+},{"./Icons":246,"moment":2,"react":215}],243:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34726,7 +34083,7 @@ var ButtonDropdown = _react2["default"].createClass({
 });
 exports.ButtonDropdown = ButtonDropdown;
 
-},{"./Icons":248,"react":215}],246:[function(require,module,exports){
+},{"./Icons":246,"react":215}],244:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -34787,7 +34144,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"react":215}],247:[function(require,module,exports){
+},{"react":215}],245:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -34857,7 +34214,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"react":215}],248:[function(require,module,exports){
+},{"react":215}],246:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -34934,113 +34291,7 @@ var InputIcon = _react2['default'].createClass({
 });
 exports.InputIcon = InputIcon;
 
-},{"react":215}],249:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj["default"] = obj; return newObj; } }
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _Icons = require("./Icons");
-
-var Icons = _interopRequireWildcard(_Icons);
-
-var InputIcon = Icons.InputIcon;
-var Icon = Icons.Icon;
-
-var LookupItem = _react2["default"].createClass({
-    displayName: "LookupItem",
-
-    clickHandler: function clickHandler(event) {
-        this.props.onSelect(this.props[valueField], this.props[labelField]);
-        event.preventDefault();
-    },
-
-    render: function render() {
-        return _react2["default"].createElement(
-            "li",
-            { className: "slds-lookup__item", role: "presentation" },
-            _react2["default"].createElement(
-                "a",
-                { href: "#", role: "option", onClick: this.clickHandler },
-                _react2["default"].createElement(Icon, { name: "user", size: "small" }),
-                this.props[this.props.labelField]
-            )
-        );
-    }
-
-});
-
-var ListBox = _react2["default"].createClass({
-    displayName: "ListBox",
-
-    getInitialState: function getInitialState() {
-        return { items: [], opened: false };
-    },
-
-    componentWillReceiveProps: function componentWillReceiveProps(props) {
-        if (props.items) {
-            this.setState({ items: props.items, opened: true });
-        }
-    },
-
-    render: function render() {
-        var _this = this;
-
-        var lookupItems = this.props.items.map(function (item) {
-            return _react2["default"].createElement(LookupItem, { data: item, valueField: _this.props.valueField, dataField: _this.props.dataField, onSelect: _this.props.onChange });
-        });
-        return _react2["default"].createElement(
-            "div",
-            { className: "slds-lookup__menu", role: "listbox" },
-            _react2["default"].createElement(
-                "ul",
-                { className: "slds-lookup__list", role: "presentation" },
-                lookupItems
-            )
-        );
-    }
-
-});
-
-exports["default"] = _react2["default"].createClass({
-    displayName: "Lookup",
-
-    getInitialState: function getInitialState() {
-        return {
-            value: undefined,
-            label: this.props.label || 'Select an option',
-            opened: false
-        };
-    },
-
-    changeHandler: function changeHandler(value, label) {
-        this.setState({ data: value, label: label, opened: false });
-        this.props.onChange(value, label);
-    },
-
-    render: function render() {
-        return _react2["default"].createElement(
-            "div",
-            { className: "slds-lookup__control slds-input-has-icon slds-input-has-icon--right" },
-            _react2["default"].createElement(InputIcon, { name: "search" }),
-            _react2["default"].createElement("input", { className: "slds-input--bare", type: "text", "aria-label": "lookup", label: "Lookup Label", "aria-haspopup": "true", "aria-autocomplete": "list", role: "combobox", onChange: this.props.onSearchKeyChange }),
-            _react2["default"].createElement(ListBox, { valueField: this.props.dataField, labelField: this.props.labelField, items: this.props.items, onChange: this.changeHandler })
-        );
-    }
-
-});
-module.exports = exports["default"];
-
-},{"./Icons":248,"react":215}],250:[function(require,module,exports){
+},{"react":215}],247:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35151,7 +34402,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./Icons":248,"react":215}],251:[function(require,module,exports){
+},{"./Icons":246,"react":215}],248:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35289,7 +34540,7 @@ exports["default"] = _react2["default"].createClass({
 });
 module.exports = exports["default"];
 
-},{"./Icons":248,"react":215}],252:[function(require,module,exports){
+},{"./Icons":246,"react":215}],249:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -35376,7 +34627,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"react":215}],253:[function(require,module,exports){
+},{"react":215}],250:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35491,7 +34742,7 @@ var deleteItem = function deleteItem(contact) {
 };
 exports.deleteItem = deleteItem;
 
-},{}],254:[function(require,module,exports){
+},{}],251:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35512,7 +34763,7 @@ var findAll = function findAll() {
 };
 exports.findAll = findAll;
 
-},{}],255:[function(require,module,exports){
+},{}],252:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35546,7 +34797,7 @@ var findByProperty = function findByProperty(id) {
 };
 exports.findByProperty = findByProperty;
 
-},{}],256:[function(require,module,exports){
+},{}],253:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35651,7 +34902,7 @@ var deleteItem = function deleteItem(contact) {
 };
 exports.deleteItem = deleteItem;
 
-},{}],257:[function(require,module,exports){
+},{}],254:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35756,7 +35007,7 @@ var deleteItem = function deleteItem(property) {
 };
 exports.deleteItem = deleteItem;
 
-},{}],258:[function(require,module,exports){
+},{}],255:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -35797,7 +35048,7 @@ module.exports = _react2["default"].createClass({
   }
 });
 
-},{"react":215}],259:[function(require,module,exports){
+},{"react":215}],256:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -35841,7 +35092,7 @@ module.exports = _react2['default'].createClass({
   }
 });
 
-},{"../SLDSCalendarDay/index":258,"react":215}],260:[function(require,module,exports){
+},{"../SLDSCalendarDay/index":255,"react":215}],257:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -36005,7 +35256,7 @@ module.exports = _react2['default'].createClass({
 
 });
 
-},{"./SLDSCalendarWeek/index":259,"moment":2,"react":215}],261:[function(require,module,exports){
+},{"./SLDSCalendarWeek/index":256,"moment":2,"react":215}],258:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -36125,7 +35376,7 @@ module.exports = _react2['default'].createClass({
   }
 });
 
-},{"../../SLDSYearSelector/index":263,"./../../../../components/Icons":248,"moment":2,"react":215}],262:[function(require,module,exports){
+},{"../../SLDSYearSelector/index":260,"./../../../../components/Icons":246,"moment":2,"react":215}],259:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -36215,7 +35466,7 @@ module.exports = _react2['default'].createClass({
   }
 });
 
-},{"../SLDSCalendar/index":260,"./SLDSDatePickerNav/index":261,"moment":2,"react":215}],263:[function(require,module,exports){
+},{"../SLDSCalendar/index":257,"./SLDSDatePickerNav/index":258,"moment":2,"react":215}],260:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -36368,7 +35619,7 @@ module.exports = _react2['default'].createClass({
   }
 });
 
-},{"../../SLDSPopover/index":265,"./../../../components/Icons":248,"moment":2,"react":215}],264:[function(require,module,exports){
+},{"../../SLDSPopover/index":262,"./../../../components/Icons":246,"moment":2,"react":215}],261:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -36503,7 +35754,7 @@ module.exports = _react2['default'].createClass({
   }
 });
 
-},{"../SLDSPopover/index":265,"./../../components/Icons":248,"./SLDSDatePicker/index":262,"moment":2,"react":215}],265:[function(require,module,exports){
+},{"../SLDSPopover/index":262,"./../../components/Icons":246,"./SLDSDatePicker/index":259,"moment":2,"react":215}],262:[function(require,module,exports){
 "use strict";
 
 var React = require("react/addons");

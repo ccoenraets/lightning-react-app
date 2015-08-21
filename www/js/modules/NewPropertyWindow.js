@@ -1,30 +1,12 @@
-import React from 'react';
+import React from 'react/addons';
 
 export default React.createClass({
 
+    mixins: [React.addons.LinkedStateMixin],
+
     getInitialState() {
-        let {contact_id, first_name, last_name, mobile_phone, home_phone, email} = this.props;
-        return {contact_id, first_name, last_name, mobile_phone, home_phone, email};
-    },
-
-    firstNameChange(event) {
-        this.setState({first_name: event.target.value});
-    },
-
-    lastNameChange(event) {
-        this.setState({last_name: event.target.value});
-    },
-
-    cellPhoneChange(event) {
-        this.setState({mobile_phone: event.target.value});
-    },
-
-    housePhoneChange(event) {
-        this.setState({home_phone: event.target.value});
-    },
-
-    emailChange(event) {
-        this.setState({email: event.target.value});
+        let property = this.props.property;
+        return {...property};
     },
 
     onSave() {
@@ -37,7 +19,7 @@ export default React.createClass({
                 <div aria-hidden="false" role="dialog" className="slds-modal slds-fade-in-open">
                     <div className="slds-modal__container">
                         <div className="slds-modal__header">
-                            <h2 className="slds-text-heading--medium">New Contact</h2>
+                            <h2 className="slds-text-heading--medium">New Property</h2>
                             <button className="slds-button slds-modal__close">
                                 <svg aria-hidden="true" className="slds-button__icon slds-button__icon--inverse slds-button__icon--large">
                                 </svg>
@@ -48,33 +30,33 @@ export default React.createClass({
 
                             <div className="slds-form--stacked">
                                 <div className="slds-form-element">
-                                    <label className="slds-form-element__label" htmlFor="sample1">First Name</label>
+                                    <label className="slds-form-element__label" htmlFor="sample1">Address</label>
                                     <div className="slds-form-element__control">
-                                        <input className="slds-input" type="text" value={this.state.first_name} onChange={this.firstNameChange}/>
+                                        <input className="slds-input" type="text" valueLink={this.linkState('address')}/>
                                     </div>
                                 </div>
                                 <div className="slds-form-element">
-                                    <label className="slds-form-element__label" htmlFor="sample1">Last Name</label>
+                                    <label className="slds-form-element__label" htmlFor="sample1">City</label>
                                     <div className="slds-form-element__control">
-                                        <input className="slds-input" type="text" value={this.state.last_name} onChange={this.lastNameChange}/>
+                                        <input className="slds-input" type="text" valueLink={this.linkState('city')}/>
                                     </div>
                                 </div>
                                 <div className="slds-form-element">
-                                    <label className="slds-form-element__label" htmlFor="sample1">Cell Phone</label>
+                                    <label className="slds-form-element__label" htmlFor="sample1">State</label>
                                     <div className="slds-form-element__control">
-                                        <input className="slds-input" type="text" value={this.state.mobile_phone} onChange={this.cellPhpneChange}/>
+                                        <input className="slds-input" type="text" valueLink={this.linkState('state')}/>
                                     </div>
                                 </div>
                                 <div className="slds-form-element">
-                                    <label className="slds-form-element__label" htmlFor="sample1">House Phone</label>
+                                    <label className="slds-form-element__label" htmlFor="sample1">Zip</label>
                                     <div className="slds-form-element__control">
-                                        <input className="slds-input" type="text" value={this.state.house_phone} onChange={this.housePhoneChange}/>
+                                        <input className="slds-input" type="text" valueLink={this.linkState('zip')}/>
                                     </div>
                                 </div>
                                 <div className="slds-form-element">
-                                    <label className="slds-form-element__label" htmlFor="sample1">Email</label>
+                                    <label className="slds-form-element__label" htmlFor="sample1">Asking Price</label>
                                     <div className="slds-form-element__control">
-                                        <input className="slds-input" type="text" value={this.state.email} onChange={this.emailChange}/>
+                                        <input className="slds-input" type="text" valueLink={this.linkState('price')}/>
                                     </div>
                                 </div>
                             </div>

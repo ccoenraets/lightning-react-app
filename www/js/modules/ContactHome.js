@@ -4,7 +4,7 @@ import * as ContactService from './services/ContactService';
 
 import ContactListHeader from './ContactListHeader';
 import ContactList from './ContactList';
-import ContactNew from './ContactNew';
+import NewContactWindow from './NewContactWindow';
 
 export default React.createClass({
     getInitialState() {
@@ -29,7 +29,7 @@ export default React.createClass({
             <div>
                 <ContactListHeader contacts={this.state.contacts} onNew={this.newHandler}/>
                 <ContactList contacts={this.state.contacts}/>
-                {this.state.addingContact ?  <ContactNew onSave={this.saveHandler} onCancel={this.cancelHandler}/> : ""}
+                {this.state.addingContact ?  <NewContactWindow onSave={this.saveHandler} onCancel={this.cancelHandler}/> : ""}
             </div>
         );
     }

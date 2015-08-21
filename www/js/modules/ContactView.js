@@ -7,7 +7,7 @@ import Tabs from './components/Tabs';
 
 import ActivityTimeline from './ActivityTimeline';
 import ActivityCard from './ActivityCard';
-import NewActivity from './NewActivity';
+import NewActivityWindow from './NewActivityWindow';
 
 
 let headerStyle = {
@@ -128,7 +128,7 @@ export default React.createClass({
                     <br/>
                     <ActivityCard contactId={this.props.contact.contact_id} activities={this.state.activities} showContact={false} showProperty={true} onNew={this.newActivityHandler}/>
                 </div>
-                {this.state.addingActivity ? <NewActivity onSave={this.saveActivityHandler} onCancel={this.cancelActivityHandler} contactId={this.props.contact.contact_id} /> : ""}
+                {this.state.addingActivity ? <NewActivityWindow onSave={this.saveActivityHandler} onCancel={this.cancelActivityHandler} contactId={this.props.contact.contact_id} /> : ""}
             </div>
         );
     }
