@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SLDSPopover from '../../SLDSPopover/index';
+import SLDSPopover from '../../SLDSPopover';
 import Moment from 'moment';
 import {InputIcon} from "./../../../components/Icons";
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SLDSPopover from '../SLDSPopover/index';
+import SLDSPopover from '../SLDSPopover';
 import SLDSDatePicker from './SLDSDatePicker/index';
 import Moment from 'moment';
 import {InputIcon} from "./../../components/Icons";
@@ -12,7 +12,7 @@ module.exports = React.createClass( {
       selected: null,
       placeholder: 'Pick a Date',
       format: 'MM/DD/YYYY',
-      onDateChage: function(moment){
+      onDateChange: function(moment){
         console.log('onDateChage should be defined');
       }
     }
@@ -32,7 +32,7 @@ module.exports = React.createClass( {
       isOpen:false,
       string:moment.format(this.props.format)
     })
-    if(this.props.onDateChage){
+    if(this.props.onDateChange){
       this.props.onDateChange(moment)
     }
   },

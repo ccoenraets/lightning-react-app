@@ -1,7 +1,7 @@
 var React = require( "react/addons" );
 var TetherDrop = require( "tether-drop" );
 var ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
-
+import { TransitionSpring, Spring } from 'react-motion';
 
 //require('./index.css');
 
@@ -44,11 +44,11 @@ module.exports = React.createClass( {
   },
 
   componentDidMount: function() {
-    this._renderPopover();
+    this.renderPopover();
   },
 
   componentDidUpdate: function() {
-    this._renderPopover();
+    this.renderPopover();
   },
 
   handleClick: function(event){
@@ -56,26 +56,38 @@ module.exports = React.createClass( {
     event.stopPropagation();
   },
 
-  _popoverComponent: function() {
-
-
-    console.log('_popoverComponent: ', this.props.children);
+  popoverComp: function() {
     var className = this.props.className;
     return (
       <div className={className} 
         onClick={this.handleClick} 
         onMousedown={this.handleClick} 
         onMouseup={this.handleClick}>
-        <div className="SLDSPopover">
-          <ReactCSSTransitionGroup transitionName="SLDSPopoverAnim" transitionAppear={true}>
-            {this.props.children}
-          </ReactCSSTransitionGroup>
+        <div className="slds-dropdown" 
+              style={{
+                transform:'none',
+                marginTop:'0.25rem',
+                marginBottom:'0.35rem',
+
+              }}>
+
+          <Spring 
+            defaultValue={{ val:0 }}
+            endValue={{ val:1, config: [70, 10] }}>
+            {currentVal => {
+                var style = {opacity:currentVal.val};
+                return (<div style={style}>{this.props.children}</div>);
+              }.bind(this)
+            }
+          </Spring>
         </div>
       </div>
     );
 
   },
 
+  beforeClose: function(){
+  },
 
   dropOptions: function() {
     let target = this.props.targetElement?this.props.targetElement.getDOMNode():this.getDOMNode().parentNode;
@@ -85,14 +97,15 @@ module.exports = React.createClass( {
       classes: 'drop-theme-arrows',
       position: 'bottom left',
       openOn: 'always',
+      beforeClose:this.beforeClose,
       constrainToWindow:true,
       constrainToScrollParent:false
     };
   },
 
-  _renderPopover: function() {
+  renderPopover: function() {
 
-    React.render( this._popoverComponent(), this._popoverElement );
+    React.render( this.popoverComp(), this._popoverElement );
 
     if ( this.drop != null ) {
       if(this.drop.setOptions){
