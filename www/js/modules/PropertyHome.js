@@ -67,7 +67,7 @@ export default React.createClass({
                                     onSort={this.sortHandler}
                                     onViewChange={this.viewChangeHandler}/>
                 {view}
-                {this.state.addingProperty ?  <NewPropertyWindow onSave={this.saveHandler} onCancel={this.cancelHandler}/> : ""}
+                {this.state.addingProperty ? <NewPropertyWindow onSave={this.saveHandler} onCancel={this.cancelHandler}/> : ""}
             </div>
         );
     }

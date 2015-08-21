@@ -3,7 +3,7 @@ import Router from 'react-router';
 
 import * as propertyService from './services/PropertyService';
 
-import PropertyRecordHeader from './PropertyRecordHeader';
+import {RecordHeader, HeaderField} from './components/PageHeader';
 
 let RouteHandler = Router.RouteHandler;
 
@@ -30,10 +30,19 @@ export default React.createClass({
         });
     },
 
+    editHandler() {
+        window.location.hash= '#property/' + this.state.property.property_id + '/edit';
+    },
+
     render() {
         return (
             <div>
-                <PropertyRecordHeader property={this.state.property}/>
+                <RecordHeader type="Property" icon="user" title={this.state.property.address} onEdit={this.editHandler}>
+                    <HeaderField label="City" value={this.state.property.city}/>
+                    <HeaderField label="Type" value="Single Family"/>
+                    <HeaderField label="Date Listed" value="Aug 1st 2015"/>
+                    <HeaderField label="Asking Price" value={this.state.property.price}/>
+                </RecordHeader>
                 <RouteHandler property={this.state.property} saveHandler={this.saveHandler}/>
             </div>
         );

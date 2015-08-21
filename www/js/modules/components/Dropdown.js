@@ -1,9 +1,6 @@
 import React from 'react';
 
-import * as Icons from "./Icons";
-
-let Icon = Icons.Icon;
-let ButtonIcon = Icons.ButtonIcon;
+import {Icon, ButtonIcon} from "./Icons";
 
 export let DropdownItem = React.createClass({
 

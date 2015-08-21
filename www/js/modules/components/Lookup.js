@@ -1,10 +1,6 @@
 import React from 'react';
 
-import * as Icons from "./Icons";
-
-let InputIcon = Icons.InputIcon;
-let Icon = Icons.Icon;
-
+import {Icon, InputIcon} from "./Icons";
 
 let LookupItem = React.createClass({
 

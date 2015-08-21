@@ -1,9 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-import * as Icons from "./Icons";
-
-let ButtonIcon = Icons.ButtonIcon;
+import {ButtonIcon} from "./Icons";
 
 let ColumnHeader = React.createClass({
 

@@ -1,9 +1,6 @@
 import React from 'react';
 
-import * as Icons from "./Icons";
-
-let Icon = Icons.Icon;
-let ButtonIcon = Icons.ButtonIcon;
+import {Icon, ButtonIcon} from "./Icons";
 
 let ListItem = React.createClass({
 

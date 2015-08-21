@@ -156,10 +156,6 @@
 <body>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0" style="position:absolute">
 
-<symbol id="3dots" viewBox="0 0 24 24">
-        <path  d="M3.7 9.2c1.5 0 2.8 1.3 2.8 2.8s-1.3 2.8-2.8 2.8S.9 13.5.9 12s1.3-2.8 2.8-2.8zm8.3 0c1.5 0 2.8 1.3 2.8 2.8s-1.3 2.8-2.8 2.8-2.8-1.3-2.8-2.8 1.3-2.8 2.8-2.8zm8.3 0c1.5 0 2.8 1.3 2.8 2.8s-1.3 2.8-2.8 2.8-2.8-1.3-2.8-2.8 1.3-2.8 2.8-2.8z"/>
-</symbol>
-
 <symbol id="add" viewBox="0 0 24 24">
         <path  d="M13.8 13.4h7.7c.3 0 .7-.3.7-.7v-1.4c0-.4-.4-.7-.7-.7h-7.7c-.2 0-.4-.2-.4-.4V2.5c0-.3-.3-.7-.7-.7h-1.4c-.4 0-.7.4-.7.7v7.7c0 .2-.2.4-.4.4H2.5c-.3 0-.7.3-.7.7v1.4c0 .4.4.7.7.7h7.7c.2 0 .4.2.4.4v7.7c0 .3.3.7.7.7h1.4c.4 0 .7-.4.7-.7v-7.7c0-.2.2-.4.4-.4z"/>
 </symbol>
@@ -756,6 +752,10 @@
         <path  d="M4.8 16.6h1.9c.3 0 .5-.2.6-.5L8.8 12H15l1.6 4.1c.1.3.4.5.7.5h1.9c.3 0 .5-.3.4-.6L14 2.3c-.1-.3-.3-.5-.6-.5h-3.2c-.3 0-.6.2-.7.5L4.4 16c-.1.3.1.6.4.6zm6.8-12h.4l2 4.6H9.8l1.8-4.6zm10.8 14.8H1.6c-.4 0-.7.3-.7.7v1.4c0 .3.3.7.7.7h20.8c.4 0 .7-.4.7-.7v-1.4c0-.4-.3-.7-.7-.7z"/>
 </symbol>
 
+<symbol id="threedots" viewBox="0 0 24 24">
+        <path  d="M3.7 9.2c1.5 0 2.8 1.3 2.8 2.8s-1.3 2.8-2.8 2.8S.9 13.5.9 12s1.3-2.8 2.8-2.8zm8.3 0c1.5 0 2.8 1.3 2.8 2.8s-1.3 2.8-2.8 2.8-2.8-1.3-2.8-2.8 1.3-2.8 2.8-2.8zm8.3 0c1.5 0 2.8 1.3 2.8 2.8s-1.3 2.8-2.8 2.8-2.8-1.3-2.8-2.8 1.3-2.8 2.8-2.8z"/>
+</symbol>
+
 <symbol id="tile_card_list" viewBox="0 0 24 24">
         <path  d="M6.7 1.8H2.5c-.3 0-.7.4-.7.7v7.9c0 .4.4.7.7.7h4.2c.4 0 .7-.3.7-.7V2.5c0-.3-.3-.7-.7-.7zm7.4 0H9.9c-.3 0-.7.4-.7.7v7.9c0 .4.4.7.7.7h4.2c.3 0 .7-.3.7-.7V2.5c0-.3-.4-.7-.7-.7zm7.4 0h-4.2c-.4 0-.7.4-.7.7v7.9c0 .4.3.7.7.7h4.2c.3 0 .7-.3.7-.7V2.5c0-.3-.4-.7-.7-.7zM6.7 12.9H2.5c-.3 0-.7.3-.7.7v7.9c0 .3.4.7.7.7h4.2c.4 0 .7-.4.7-.7v-7.9c0-.4-.3-.7-.7-.7zm7.4 0H9.9c-.3 0-.7.3-.7.7v7.9c0 .3.4.7.7.7h4.2c.3 0 .7-.4.7-.7v-7.9c0-.4-.4-.7-.7-.7zm7.4 0h-4.2c-.4 0-.7.3-.7.7v7.9c0 .3.3.7.7.7h4.2c.3 0 .7-.4.7-.7v-7.9c0-.4-.4-.7-.7-.7z"/>
 </symbol>
@@ -835,22 +835,6 @@
 </header>
 <section>
     <ul class="icon-boxes">
-        
-<li title="3dots">
-            <div class="icon-box" id="icon-box-3dots">
-                <svg class="icon 3dots">
-                    <use xlink:href="#3dots" />
-                </svg>
-            </div>
-            <h2>3dots</h2>
-            <button onclick="showPopover('snippet-3dots')">Show Snippet</button>
-            <br/>
-            <button onclick="invertBackground('icon-box-3dots')">Invert Background</button>
-            <div class="snippet-popover" id="snippet-3dots">
-                <pre><code>&lt;svg class=&quot;icon 3dots&quot;&gt;&lt;use xlink:href=&quot;#3dots&quot;&gt;&lt;/use&gt;&lt;/svg&gt;</code></pre>
-                <button onclick="hidePopover()">Close</button>
-            </div>
-        </li>
         
 <li title="add">
             <div class="icon-box" id="icon-box-add">
@@ -3232,6 +3216,22 @@
             <button onclick="invertBackground('icon-box-text_color')">Invert Background</button>
             <div class="snippet-popover" id="snippet-text_color">
                 <pre><code>&lt;svg class=&quot;icon text_color&quot;&gt;&lt;use xlink:href=&quot;#text_color&quot;&gt;&lt;/use&gt;&lt;/svg&gt;</code></pre>
+                <button onclick="hidePopover()">Close</button>
+            </div>
+        </li>
+        
+<li title="threedots">
+            <div class="icon-box" id="icon-box-threedots">
+                <svg class="icon threedots">
+                    <use xlink:href="#threedots" />
+                </svg>
+            </div>
+            <h2>threedots</h2>
+            <button onclick="showPopover('snippet-threedots')">Show Snippet</button>
+            <br/>
+            <button onclick="invertBackground('icon-box-threedots')">Invert Background</button>
+            <div class="snippet-popover" id="snippet-threedots">
+                <pre><code>&lt;svg class=&quot;icon threedots&quot;&gt;&lt;use xlink:href=&quot;#threedots&quot;&gt;&lt;/use&gt;&lt;/svg&gt;</code></pre>
                 <button onclick="hidePopover()">Close</button>
             </div>
         </li>

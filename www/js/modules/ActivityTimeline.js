@@ -1,11 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 
-import * as Icons from "./components/Icons";
 import * as activityService from './services/ActivityService';
-
-let Icon = Icons.Icon;
-let ButtonIcon = Icons.ButtonIcon;
+import {Icon, ButtonIcon} from "./components/Icons";
 
 let getActivityTheme =  (activityName) => {
     if (activityName === "Listed") {
