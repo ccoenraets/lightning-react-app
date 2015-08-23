@@ -107,6 +107,14 @@ module.exports = React.createClass( {
 
     React.render( this.popoverComp(), this._popoverElement );
 
+    if(this._popoverElement && 
+        this._popoverElement.parentNode && 
+        this._popoverElement.parentNode.parentNode &&
+        this._popoverElement.parentNode.parentNode.className &&
+        this._popoverElement.parentNode.parentNode.className.indexOf('drop ') > -1 ){
+      this._popoverElement.parentNode.parentNode.style.zIndex = 10001;
+    }
+
     if ( this.drop != null ) {
       if(this.drop.setOptions){
         this.drop.setOptions( this.dropOptions() );

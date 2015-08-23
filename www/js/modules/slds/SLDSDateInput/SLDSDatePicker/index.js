@@ -31,7 +31,6 @@ module.exports = React.createClass( {
   },
 
   handleMonthChange: function(moment){
-    console.log(moment);
     this.setState({month:moment});
   },
 

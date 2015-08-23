@@ -37505,8 +37505,6 @@ var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
-//require('./index.css');
-
 module.exports = _react2['default'].createClass({
 
   displayName: "SLDSCalendar",
@@ -37822,7 +37820,6 @@ module.exports = _react2['default'].createClass({
   },
 
   handleMonthChange: function handleMonthChange(moment) {
-    console.log(moment);
     this.setState({ month: moment });
   },
 
@@ -37953,8 +37950,8 @@ module.exports = _react2['default'].createClass({
   listItems: function listItems() {
     var listItems = [];
     var currentYear = this.props.moment.year();
-    var from = currentYear + this.props.relativeFrom;
-    var to = currentYear + this.props.relativeTo;
+    var from = (0, _moment2['default'])().add(this.props.relativeFrom, 'y').year();
+    var to = (0, _moment2['default'])().add(this.props.relativeTo, 'y').year();
 
     for (var i = from; i < to; i++) {
       listItems.push(_react2['default'].createElement(ListItemComponent, {
@@ -38246,10 +38243,7 @@ module.exports = React.createClass({
     );
   },
 
-  beforeClose: function beforeClose() {
-    console.log('BEFORE CLOSE!!!');
-    return false;
-  },
+  beforeClose: function beforeClose() {},
 
   dropOptions: function dropOptions() {
     var target = this.props.targetElement ? this.props.targetElement.getDOMNode() : this.getDOMNode().parentNode;
@@ -38268,6 +38262,10 @@ module.exports = React.createClass({
   renderPopover: function renderPopover() {
 
     React.render(this.popoverComp(), this._popoverElement);
+
+    if (this._popoverElement && this._popoverElement.parentNode && this._popoverElement.parentNode.parentNode && this._popoverElement.parentNode.parentNode.className && this._popoverElement.parentNode.parentNode.className.indexOf('drop ') > -1) {
+      this._popoverElement.parentNode.parentNode.style.zIndex = 10001;
+    }
 
     if (this.drop != null) {
       if (this.drop.setOptions) {
