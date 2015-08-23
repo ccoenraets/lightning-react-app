@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Week from './SLDSCalendarWeek/index';
 import moment from 'moment';
 
-//require('./index.css');
-
 module.exports = React.createClass({
 
   displayName: "SLDSCalendar",

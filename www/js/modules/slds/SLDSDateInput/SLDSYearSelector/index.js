@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SLDSPopover from '../../SLDSPopover/index';
+import SLDSPopover from '../../SLDSPopover';
 import Moment from 'moment';
 import {InputIcon} from "./../../../components/Icons";
 
@@ -74,8 +74,8 @@ module.exports = React.createClass( {
   listItems() {
     var listItems = [];
     var currentYear = this.props.moment.year();
-    var from = currentYear+this.props.relativeFrom;
-    var to = currentYear+this.props.relativeTo;
+    var from = Moment().add(this.props.relativeFrom,'y').year();
+    var to = Moment().add(this.props.relativeTo,'y').year();
 
     for(var i=from;i<to;i++){
       listItems.push(<ListItemComponent 
