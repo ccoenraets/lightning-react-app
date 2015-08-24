@@ -15,15 +15,23 @@ export default React.createClass({
     },
 
     componentDidMount() {
-        propertyService.findAll(this.state.sortOrder).then(properties => {
-            return this.setState({properties:properties})
-        });
+        propertyService.findAll(this.state.sortOrder).then(properties => this.setState({properties}));
     },
 
     sortHandler(sortOrder) {
         propertyService.findAll(sortOrder).then(properties => {
             this.setState({sortOrder: sortOrder, properties: properties})
         });
+    },
+
+    deleteHandler(data) {
+        propertyService.deleteItem(data.property_id).then(() => {
+            propertyService.findAll(this.state.sort).then(properties => this.setState({properties:properties}));
+        });
+    },
+
+    editHandler(data) {
+        window.location.hash = "#property/" + data.property_id + "/edit";
     },
 
     viewChangeHandler(value) {
@@ -50,15 +58,15 @@ export default React.createClass({
             view = <GoogleMaps data={this.state.properties}/>;
         } else if (this.state.view === "split") {
             view = <div className="slds-grid slds-wrap">
-                <div className="slds-col slds-size--1-of-1 slds-large-size--1-of-2">
-                    <PropertyList properties={this.state.properties} onSortChange={this.sortChangeHandler} />
+                <div className="slds-col slds-size--1-of-1 slds-large-size--2-of-3">
+                    <PropertyList properties={this.state.properties} onSortChange={this.sortChangeHandler} onDelete={this.deleteHandler} onEdit={this.editHandler}/>
                 </div>
-                <div className="slds-col--padded slds-size--1-of-1 slds-large-size--1-of-2">
+                <div className="slds-col--padded slds-size--1-of-1 slds-large-size--1-of-3">
                     <GoogleMaps data={this.state.properties}/>
                 </div>
             </div>;
         } else {
-            view = <PropertyList properties={this.state.properties} onSort={this.sortHandler}/>;
+            view = <PropertyList properties={this.state.properties} onSort={this.sortHandler} onDelete={this.deleteHandler} onEdit={this.editHandler}/>;
         }
         return (
             <div>

@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 
 import {ButtonIcon} from "./Icons";
+import {ActionButton, DropdownItem} from "./Dropdown";
 
 let ColumnHeader = React.createClass({
 
@@ -65,6 +66,10 @@ let Column = React.createClass({
 
 let Row = React.createClass({
 
+    actionHandler(value, label) {
+        this.props.onAction(this.props.data, value, label);
+    },
+
     render() {
         let columns = [];
         for (let i=0; i<this.props.columns.length; i++) {
@@ -75,6 +80,16 @@ let Row = React.createClass({
                                      onLink={column.props.onLink}/>);
             }
         }
+
+        columns.push(
+            <td style={{width:"50px"}}>
+                <ActionButton onChange={this.actionHandler}>
+                    <DropdownItem label="Edit"/>
+                    <DropdownItem label="Delete"/>
+                </ActionButton>
+            </td>
+        );
+
         return (
             <tr className="slds-hint-parent">
                 {columns}
@@ -104,13 +119,14 @@ export default React.createClass({
         }
         let rows;
         if (this.props.data) {
-            rows = this.props.data.map(item => <Row data={item} columns={this.props.children}/>);
+            rows = this.props.data.map(item => <Row data={item} columns={this.props.children} onAction={this.props.onAction}/>);
         }
         return (
             <table className="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal slds-no-row-hover">
                 <thead>
                 <tr className="slds-text-heading--label">
                     {headers}
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>

@@ -1,5 +1,6 @@
 var express = require('express'),
     bodyParser = require('body-parser'),
+    //methodOverride = require('method-override'),
     compression = require('compression'),
     properties = require('./server/properties'),
     contacts = require('./server/contacts'),
@@ -13,23 +14,9 @@ var express = require('express'),
 
 app.set('port', process.env.PORT || 5000);
 
-/*
-app.use(function(req, res, next) {
-    var credentials = auth(req);
-    if (!credentials || credentials.name !== 'landmark' || credentials.pass !== 'theramp') {
-        res.statusCode = 401;
-        res.setHeader('WWW-Authenticate', 'Basic realm="Realty"');
-        console.log(req.path + " unauthorized");
-        res.end('Unauthorized');
-    } else {
-        console.log(req.path + " authorized");
-        next();
-    }
-});
-*/
-
 app.use(bodyParser.json());
-app.use(compression());
+//app.use(compression());
+//app.use(methodOverride());
 
 app.use('/', express.static(__dirname + '/www'));
 

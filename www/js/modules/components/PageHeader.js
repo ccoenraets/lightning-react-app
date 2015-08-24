@@ -65,8 +65,8 @@ export let RecordHeader = React.createClass({
                     <div className="slds-col slds-no-flex slds-align-bottom">
                         <div className="slds-button-group" role="group">
                             <button className="slds-button slds-button--neutral" onClick={this.props.onEdit}>Edit</button>
-                            <button className="slds-button slds-button--neutral">Delete</button>
-                            <button className="slds-button slds-button--neutral">Clone</button>
+                            <button className="slds-button slds-button--neutral" onClick={this.props.onDelete}>Delete</button>
+                            <button className="slds-button slds-button--neutral" onClick={this.props.onClone}>Clone</button>
                             <div className="slds-button--last">
                                 <button className="slds-button slds-button--icon-border-filled">
                                     <ButtonIcon name="down"/>

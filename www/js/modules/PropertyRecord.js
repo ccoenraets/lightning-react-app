@@ -19,9 +19,7 @@ export default React.createClass({
 
     componentDidMount() {
         let propertyId = this.context.router.getCurrentParams().propertyId;
-        propertyService.findById(propertyId).then((property) => {
-            this.setState({property});
-        });
+        propertyService.findById(propertyId).then(property => this.setState({property}));
     },
 
     saveHandler(property) {
@@ -31,13 +29,26 @@ export default React.createClass({
     },
 
     editHandler() {
-        window.location.hash= '#property/' + this.state.property.property_id + '/edit';
+        window.location.hash = '#property/' + this.state.property.property_id + '/edit';
+    },
+
+    deleteHandler() {
+        propertyService.deleteItem(this.state.property.property_id).then(() => {
+            window.location.hash = '#properties';
+        });
+    },
+
+    cloneHandler() {
+        //window.location.hash= '#property/' + this.state.property.property_id + '/edit';
     },
 
     render() {
         return (
             <div>
-                <RecordHeader type="Property" icon="user" title={this.state.property.address} onEdit={this.editHandler}>
+                <RecordHeader type="Property" icon="account" title={this.state.property.address}
+                              onEdit={this.editHandler}
+                              onDelete={this.deleteHandler}
+                              onClone={this.cloneHandler}>
                     <HeaderField label="City" value={this.state.property.city}/>
                     <HeaderField label="Type" value="Single Family"/>
                     <HeaderField label="Date Listed" value="Aug 1st 2015"/>

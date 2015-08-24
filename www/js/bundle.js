@@ -30539,6 +30539,12 @@ exports['default'] = _react2['default'].createClass({
         window.location.hash = "#property/" + activity.property_id;
     },
 
+    actionHandler: function actionHandler(data, value, label) {
+        if (label === "Delete") {
+            this.props.onDelete(data);
+        }
+    },
+
     render: function render() {
 
         return _react2['default'].createElement(
@@ -30594,11 +30600,10 @@ exports['default'] = _react2['default'].createClass({
                 { className: 'slds-card__body' },
                 _react2['default'].createElement(
                     _componentsDataGrid2['default'],
-                    { data: this.props.activities },
+                    { data: this.props.activities, onAction: this.actionHandler },
                     _react2['default'].createElement('div', { header: 'Type', field: 'activity_name', sortable: true }),
                     _react2['default'].createElement('div', { header: 'Date', field: 'activity_date', sortable: true, format: 'date' }),
-                    this.props.showContact ? _react2['default'].createElement('div', { header: 'First Name', field: 'first_name', onLink: this.contactLinkHandler }) : '',
-                    this.props.showContact ? _react2['default'].createElement('div', { header: 'Last Name', field: 'last_name', onLink: this.contactLinkHandler }) : '',
+                    this.props.showContact ? _react2['default'].createElement('div', { header: 'Contact', field: 'contact', onLink: this.contactLinkHandler }) : '',
                     this.props.showProperty ? _react2['default'].createElement('div', { header: 'Property', field: 'address', onLink: this.propertyLinkHandler }) : '',
                     _react2['default'].createElement('div', { header: 'Price', field: 'price', sortable: true, format: 'currency' })
                 )
@@ -30714,9 +30719,7 @@ var ActivityListItem = _react2['default'].createClass({
                                                 _react2['default'].createElement(
                                                     'a',
                                                     { href: '#contact/' + this.props.activity.contact_id },
-                                                    this.props.activity.first_name,
-                                                    ' ',
-                                                    this.props.activity.last_name
+                                                    this.props.activity.contact
                                                 )
                                             )
                                         )
@@ -31159,6 +31162,7 @@ exports['default'] = _react2['default'].createClass({
     getInitialState: function getInitialState() {
         return { contacts: [] };
     },
+
     componentDidMount: function componentDidMount() {
         var _this = this;
 
@@ -31166,27 +31170,45 @@ exports['default'] = _react2['default'].createClass({
             return _this.setState({ contacts: contacts });
         });
     },
+
     newHandler: function newHandler() {
         this.setState({ addingContact: true });
     },
-    saveHandler: function saveHandler(Contact) {
+
+    deleteHandler: function deleteHandler(data) {
         var _this2 = this;
 
-        ContactService.createItem(Contact).then(function () {
-            ContactService.findAll().then(function (contacts) {
-                return _this2.setState({ addingContact: false, contacts: contacts });
+        ContactService.deleteItem(data.contact_id).then(function () {
+            ContactService.findAll(_this2.state.sort).then(function (contacts) {
+                return _this2.setState({ contacts: contacts });
             });
         });
     },
+
+    editHandler: function editHandler(data) {
+        window.location.hash = "#contact/" + data.contact_id + "/edit";
+    },
+
+    saveHandler: function saveHandler(Contact) {
+        var _this3 = this;
+
+        ContactService.createItem(Contact).then(function () {
+            ContactService.findAll().then(function (contacts) {
+                return _this3.setState({ addingContact: false, contacts: contacts });
+            });
+        });
+    },
+
     cancelHandler: function cancelHandler() {
         this.setState({ addingContact: false });
     },
+
     render: function render() {
         return _react2['default'].createElement(
             'div',
             null,
             _react2['default'].createElement(_ContactListHeader2['default'], { contacts: this.state.contacts, onNew: this.newHandler }),
-            _react2['default'].createElement(_ContactList2['default'], { contacts: this.state.contacts }),
+            _react2['default'].createElement(_ContactList2['default'], { contacts: this.state.contacts, onDelete: this.deleteHandler, onEdit: this.editHandler }),
             this.state.addingContact ? _react2['default'].createElement(_NewContactWindow2['default'], { onSave: this.saveHandler, onCancel: this.cancelHandler }) : ""
         );
     }
@@ -31217,10 +31239,18 @@ exports['default'] = _react2['default'].createClass({
         window.location.hash = "#contact/" + contact.contact_id;
     },
 
+    actionHandler: function actionHandler(data, value, label) {
+        if (label === "Delete") {
+            this.props.onDelete(data);
+        } else if (label === "Edit") {
+            this.props.onEdit(data);
+        }
+    },
+
     render: function render() {
         return _react2['default'].createElement(
             _componentsDataGrid2['default'],
-            { data: this.props.contacts },
+            { data: this.props.contacts, onAction: this.actionHandler },
             _react2['default'].createElement('div', { header: 'First Name', field: 'first_name', onLink: this.linkHandler }),
             _react2['default'].createElement('div', { header: 'Last Name', field: 'last_name', onLink: this.linkHandler }),
             _react2['default'].createElement('div', { header: 'Mobile Phone', field: 'mobile_phone' }),
@@ -31518,13 +31548,24 @@ exports['default'] = _react2['default'].createClass({
         window.location.hash = '#contact/' + this.state.contact.contact_id + '/edit';
     },
 
+    deleteHandler: function deleteHandler() {
+        contactService.deleteItem(this.state.contact.contact_id).then(function () {
+            window.location.hash = '#contacts';
+        });
+    },
+
+    cloneHandler: function cloneHandler() {},
+
     render: function render() {
         return _react2['default'].createElement(
             'div',
             null,
             _react2['default'].createElement(
                 _componentsPageHeader.RecordHeader,
-                { type: 'Contact', icon: 'user', title: this.state.contact.first_name + ' ' + this.state.contact.first_name, onEdit: this.editHandler },
+                { type: 'Contact', icon: 'user', title: this.state.contact.first_name + ' ' + this.state.contact.first_name,
+                    onEdit: this.editHandler,
+                    onDelete: this.deleteHandler,
+                    onClone: this.cloneHandler },
                 _react2['default'].createElement(_componentsPageHeader.HeaderField, { label: 'Mobile Phone', value: this.state.contact.mobile_phone }),
                 _react2['default'].createElement(_componentsPageHeader.HeaderField, { label: 'Home Phone', value: this.state.contact.home_phone }),
                 _react2['default'].createElement(_componentsPageHeader.HeaderField, { label: 'Email', value: this.state.contact.email })
@@ -32016,7 +32057,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./ActivityTypePickList":221,"./ContactQuickFind":227,"./PropertyQuickFind":237,"./components/Icons":244,"./slds/SLDSDateInput":260,"react":215}],231:[function(require,module,exports){
+},{"./ActivityTypePickList":221,"./ContactQuickFind":227,"./PropertyQuickFind":237,"./components/Icons":244,"./slds/SLDSDateInput":261,"react":215}],231:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32610,6 +32651,20 @@ exports['default'] = _react2['default'].createClass({
         });
     },
 
+    deleteHandler: function deleteHandler(data) {
+        var _this3 = this;
+
+        propertyService.deleteItem(data.property_id).then(function () {
+            propertyService.findAll(_this3.state.sort).then(function (properties) {
+                return _this3.setState({ properties: properties });
+            });
+        });
+    },
+
+    editHandler: function editHandler(data) {
+        window.location.hash = "#property/" + data.property_id + "/edit";
+    },
+
     viewChangeHandler: function viewChangeHandler(value) {
         this.setState({ view: value });
     },
@@ -32619,11 +32674,11 @@ exports['default'] = _react2['default'].createClass({
     },
 
     saveHandler: function saveHandler(property) {
-        var _this3 = this;
+        var _this4 = this;
 
         propertyService.createItem(property).then(function () {
-            propertyService.findAll(_this3.state.sort).then(function (properties) {
-                return _this3.setState({ addingProperty: false, properties: properties });
+            propertyService.findAll(_this4.state.sort).then(function (properties) {
+                return _this4.setState({ addingProperty: false, properties: properties });
             });
         });
     },
@@ -32642,17 +32697,17 @@ exports['default'] = _react2['default'].createClass({
                 { className: 'slds-grid slds-wrap' },
                 _react2['default'].createElement(
                     'div',
-                    { className: 'slds-col slds-size--1-of-1 slds-large-size--1-of-2' },
-                    _react2['default'].createElement(_PropertyList2['default'], { properties: this.state.properties, onSortChange: this.sortChangeHandler })
+                    { className: 'slds-col slds-size--1-of-1 slds-large-size--2-of-3' },
+                    _react2['default'].createElement(_PropertyList2['default'], { properties: this.state.properties, onSortChange: this.sortChangeHandler, onDelete: this.deleteHandler, onEdit: this.editHandler })
                 ),
                 _react2['default'].createElement(
                     'div',
-                    { className: 'slds-col--padded slds-size--1-of-1 slds-large-size--1-of-2' },
+                    { className: 'slds-col--padded slds-size--1-of-1 slds-large-size--1-of-3' },
                     _react2['default'].createElement(_componentsGoogleMaps2['default'], { data: this.state.properties })
                 )
             );
         } else {
-            view = _react2['default'].createElement(_PropertyList2['default'], { properties: this.state.properties, onSort: this.sortHandler });
+            view = _react2['default'].createElement(_PropertyList2['default'], { properties: this.state.properties, onSort: this.sortHandler, onDelete: this.deleteHandler, onEdit: this.editHandler });
         }
         return _react2['default'].createElement(
             'div',
@@ -32697,10 +32752,18 @@ exports['default'] = _react2['default'].createClass({
         window.location.hash = "#property/" + property.property_id;
     },
 
+    actionHandler: function actionHandler(data, value, label) {
+        if (label === "Delete") {
+            this.props.onDelete(data);
+        } else if (label === "Edit") {
+            this.props.onEdit(data);
+        }
+    },
+
     render: function render() {
         return _react2['default'].createElement(
             _componentsDataGrid2['default'],
-            { data: this.props.properties, onSort: this.sortHandler, rowKey: 'property_id' },
+            { data: this.props.properties, onSort: this.sortHandler, onAction: this.actionHandler },
             _react2['default'].createElement('div', { header: 'Address', field: 'address', sortable: true, onLink: this.linkHandler }),
             _react2['default'].createElement('div', { header: 'City', field: 'city', sortable: true }),
             _react2['default'].createElement('div', { header: 'Bedrooms', field: 'bedrooms', textAlign: 'center' }),
@@ -32971,7 +33034,7 @@ exports['default'] = _react2['default'].createClass({
 
         var propertyId = this.context.router.getCurrentParams().propertyId;
         propertyService.findById(propertyId).then(function (property) {
-            _this.setState({ property: property });
+            return _this.setState({ property: property });
         });
     },
 
@@ -32985,13 +33048,26 @@ exports['default'] = _react2['default'].createClass({
         window.location.hash = '#property/' + this.state.property.property_id + '/edit';
     },
 
+    deleteHandler: function deleteHandler() {
+        propertyService.deleteItem(this.state.property.property_id).then(function () {
+            window.location.hash = '#properties';
+        });
+    },
+
+    cloneHandler: function cloneHandler() {
+        //window.location.hash= '#property/' + this.state.property.property_id + '/edit';
+    },
+
     render: function render() {
         return _react2['default'].createElement(
             'div',
             null,
             _react2['default'].createElement(
                 _componentsPageHeader.RecordHeader,
-                { type: 'Property', icon: 'user', title: this.state.property.address, onEdit: this.editHandler },
+                { type: 'Property', icon: 'account', title: this.state.property.address,
+                    onEdit: this.editHandler,
+                    onDelete: this.deleteHandler,
+                    onClone: this.cloneHandler },
                 _react2['default'].createElement(_componentsPageHeader.HeaderField, { label: 'City', value: this.state.property.city }),
                 _react2['default'].createElement(_componentsPageHeader.HeaderField, { label: 'Type', value: 'Single Family' }),
                 _react2['default'].createElement(_componentsPageHeader.HeaderField, { label: 'Date Listed', value: 'Aug 1st 2015' }),
@@ -33078,16 +33154,24 @@ exports['default'] = _react2['default'].createClass({
         this.setState({ addingActivity: true });
     },
 
+    deleteActivityHandler: function deleteActivityHandler(activity) {
+        var _this2 = this;
+
+        activityService.deleteItem(activity.activity_id).then(function () {
+            return _this2.loadActivities(_this2.props.property.property_id);
+        });
+    },
+
     cancelActivityHandler: function cancelActivityHandler() {
         this.setState({ addingActivity: false });
     },
 
     saveActivityHandler: function saveActivityHandler(activity) {
-        var _this2 = this;
+        var _this3 = this;
 
         activityService.createItem(activity).then(function () {
-            _this2.loadActivities(_this2.props.property.property_id);
-            _this2.setState({ addingActivity: false });
+            _this3.loadActivities(_this3.props.property.property_id);
+            _this3.setState({ addingActivity: false });
         });
     },
 
@@ -33305,7 +33389,9 @@ exports['default'] = _react2['default'].createClass({
                 'div',
                 { className: 'slds-col--padded slds-size--1-of-1' },
                 _react2['default'].createElement('br', null),
-                _react2['default'].createElement(_ActivityCard2['default'], { propertyId: this.props.property.property_id, activities: this.state.activities, showContact: true, showProperty: false, onNew: this.newActivityHandler }),
+                _react2['default'].createElement(_ActivityCard2['default'], { propertyId: this.props.property.property_id, activities: this.state.activities, showContact: true, showProperty: false,
+                    onNew: this.newActivityHandler,
+                    onDelete: this.deleteActivityHandler }),
                 _react2['default'].createElement(_BrokerCard2['default'], { propertyId: this.props.property.property_id })
             ),
             this.state.addingActivity ? _react2['default'].createElement(_NewActivityWindow2['default'], { onSave: this.saveActivityHandler, onCancel: this.cancelActivityHandler, propertyId: this.props.property.property_id, price: this.props.property.price }) : ""
@@ -33333,6 +33419,8 @@ var _moment = require('moment');
 var _moment2 = _interopRequireDefault(_moment);
 
 var _Icons = require("./Icons");
+
+var _Dropdown = require("./Dropdown");
 
 var ColumnHeader = _react2['default'].createClass({
     displayName: 'ColumnHeader',
@@ -33413,6 +33501,10 @@ var Column = _react2['default'].createClass({
 var Row = _react2['default'].createClass({
     displayName: 'Row',
 
+    actionHandler: function actionHandler(value, label) {
+        this.props.onAction(this.props.data, value, label);
+    },
+
     render: function render() {
         var columns = [];
         for (var i = 0; i < this.props.columns.length; i++) {
@@ -33423,6 +33515,18 @@ var Row = _react2['default'].createClass({
                     onLink: column.props.onLink }));
             }
         }
+
+        columns.push(_react2['default'].createElement(
+            'td',
+            { style: { width: "50px" } },
+            _react2['default'].createElement(
+                _Dropdown.ActionButton,
+                { onChange: this.actionHandler },
+                _react2['default'].createElement(_Dropdown.DropdownItem, { label: 'Edit' }),
+                _react2['default'].createElement(_Dropdown.DropdownItem, { label: 'Delete' })
+            )
+        ));
+
         return _react2['default'].createElement(
             'tr',
             { className: 'slds-hint-parent' },
@@ -33456,7 +33560,7 @@ exports['default'] = _react2['default'].createClass({
         var rows = undefined;
         if (this.props.data) {
             rows = this.props.data.map(function (item) {
-                return _react2['default'].createElement(Row, { data: item, columns: _this.props.children });
+                return _react2['default'].createElement(Row, { data: item, columns: _this.props.children, onAction: _this.props.onAction });
             });
         }
         return _react2['default'].createElement(
@@ -33468,7 +33572,8 @@ exports['default'] = _react2['default'].createClass({
                 _react2['default'].createElement(
                     'tr',
                     { className: 'slds-text-heading--label' },
-                    headers
+                    headers,
+                    _react2['default'].createElement('th', null)
                 )
             ),
             _react2['default'].createElement(
@@ -33482,7 +33587,7 @@ exports['default'] = _react2['default'].createClass({
 });
 module.exports = exports['default'];
 
-},{"./Icons":244,"moment":2,"react":215}],241:[function(require,module,exports){
+},{"./Dropdown":241,"./Icons":244,"moment":2,"react":215}],241:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33501,14 +33606,15 @@ var DropdownItem = _react2["default"].createClass({
     displayName: "DropdownItem",
 
     clickHandler: function clickHandler(event) {
-        this.props.onSelect(this.props.value, this.props.label);
         event.preventDefault();
+        this.props.onSelect(this.props.value, this.props.label);
     },
 
     render: function render() {
+        // slds-has-icon--left
         return _react2["default"].createElement(
             "li",
-            { className: "slds-dropdown__item slds-has-icon--left", role: "menuitem option", tabIndex: "-1" },
+            { className: "slds-dropdown__item", role: "menuitem option", tabIndex: "-1" },
             _react2["default"].createElement(
                 "a",
                 { href: "#", tabIndex: "-1", className: "slds-truncate", onClick: this.clickHandler },
@@ -33524,16 +33630,23 @@ exports.DropdownItem = DropdownItem;
 var Dropdown = _react2["default"].createClass({
     displayName: "Dropdown",
 
+    getDefaultProps: function getDefaultProps() {
+        return { position: "right" };
+    },
+
     render: function render() {
         var _this = this;
 
         var items = this.props.items.map(function (item) {
             return _react2["default"].cloneElement(item, { onSelect: _this.props.onChange });
         });
+        var className = "slds-dropdown slds-dropdown--menu";
+        if (this.props.position) className = className + " slds-dropdown--" + this.props.position;
+        if (this.props.size) className = className + " slds-dropdown--" + this.props.size;
         return _react2["default"].createElement(
             "div",
-            { className: "slds-dropdown slds-dropdown--right slds-dropdown--small slds-dropdown--menu" },
-            _react2["default"].createElement(
+            { className: className },
+            this.props.header ? _react2["default"].createElement(
                 "div",
                 { className: "slds-dropdown__header" },
                 _react2["default"].createElement(
@@ -33541,7 +33654,7 @@ var Dropdown = _react2["default"].createClass({
                     { className: "slds-text-heading--label" },
                     this.props.header
                 )
-            ),
+            ) : "",
             _react2["default"].createElement(
                 "ul",
                 { className: "slds-dropdown__list", role: "menu" },
@@ -33593,12 +33706,46 @@ var ButtonDropdown = _react2["default"].createClass({
                 valueField: this.props.valueField,
                 labelField: this.props.labelField,
                 items: this.props.children,
+                size: "small",
                 onChange: this.changeHandler })
         );
     }
 
 });
+
 exports.ButtonDropdown = ButtonDropdown;
+var ActionButton = _react2["default"].createClass({
+    displayName: "ActionButton",
+
+    changeHandler: function changeHandler(value, label) {
+        this.setState({ value: value, label: label, opened: false });
+        this.props.onChange(value, label);
+    },
+
+    render: function render() {
+        return _react2["default"].createElement(
+            "div",
+            { className: "slds-dropdown-trigger", "aria-haspopup": "true" },
+            _react2["default"].createElement(
+                "button",
+                { className: "slds-button slds-button--icon-border-filled slds-button--icon-border-small" },
+                _react2["default"].createElement(_Icons.ButtonIcon, { name: "down", size: "small" }),
+                _react2["default"].createElement(
+                    "span",
+                    { className: "slds-assistive-text" },
+                    "Show More"
+                )
+            ),
+            _react2["default"].createElement(Dropdown, { header: this.props.header,
+                valueField: this.props.valueField,
+                labelField: this.props.labelField,
+                items: this.props.children,
+                onChange: this.changeHandler })
+        );
+    }
+
+});
+exports.ActionButton = ActionButton;
 
 },{"./Icons":244,"react":215}],242:[function(require,module,exports){
 'use strict';
@@ -33944,12 +34091,12 @@ var RecordHeader = _react2["default"].createClass({
                         ),
                         _react2["default"].createElement(
                             "button",
-                            { className: "slds-button slds-button--neutral" },
+                            { className: "slds-button slds-button--neutral", onClick: this.props.onDelete },
                             "Delete"
                         ),
                         _react2["default"].createElement(
                             "button",
-                            { className: "slds-button slds-button--neutral" },
+                            { className: "slds-button slds-button--neutral", onClick: this.props.onClone },
                             "Clone"
                         ),
                         _react2["default"].createElement(
@@ -34305,383 +34452,261 @@ module.exports = exports['default'];
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj["default"] = obj; return newObj; } }
+
+var _h = require('./h');
+
+var h = _interopRequireWildcard(_h);
+
 var url = "/activities";
 
-var findAll = function findAll() {
-    return new Promise(function (resolve, reject) {
-        fetch(url).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            return resolve(data);
-        })["catch"](function (error) {
-            return reject(error);
-        });
-    });
+var findAll = function findAll(sort) {
+  return h.get(url, { sort: sort });
 };
 
 exports.findAll = findAll;
-var findById = function findById(id) {
-    return new Promise(function (resolve, reject) {
-        fetch(url + "/" + id).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            return resolve(data);
-        })["catch"](function (error) {
-            return reject(error);
-        });
-    });
+var findByName = function findByName(name) {
+  return h.get(url, { name: name });
 };
 
-exports.findById = findById;
-var findByProperty = function findByProperty(id) {
-    return new Promise(function (resolve, reject) {
-        fetch(url + "?propertyId=" + id, { credentials: 'same-origin' }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            return resolve(data);
-        })["catch"](function (error) {
-            return reject(error);
-        });
-    });
+exports.findByName = findByName;
+var findByProperty = function findByProperty(propertyId) {
+  return h.get(url, { propertyId: propertyId });
 };
 
 exports.findByProperty = findByProperty;
-var findByContact = function findByContact(id) {
-    return new Promise(function (resolve, reject) {
-        fetch(url + "?contactId=" + id).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            return resolve(data);
-        })["catch"](function (error) {
-            return reject(error);
-        });
-    });
+var findByContact = function findByContact(contactId) {
+  return h.get(url, { contactId: contactId });
 };
 
 exports.findByContact = findByContact;
-var updateItem = function updateItem(contact) {
-    return new Promise(function (resolve, reject) {
-        fetch(url, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'put',
-            body: JSON.stringify(contact)
-        }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            resolve(data);
-        })["catch"](function (e) {
-            return reject(e);
-        });
-    });
-};
-
-exports.updateItem = updateItem;
-var createItem = function createItem(contact) {
-    return new Promise(function (resolve, reject) {
-        fetch(url, {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'post',
-            body: JSON.stringify(contact)
-        }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            resolve(data);
-        })["catch"](function (e) {
-            return reject(e);
-        });
-    });
-};
-
-exports.createItem = createItem;
-var deleteItem = function deleteItem(contact) {
-    return new Promise(function (resolve, reject) {
-        fetch(url, {
-            method: 'del'
-        }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            resolve(data);
-        })["catch"](function (e) {
-            return reject(e);
-        });
-    });
-};
-exports.deleteItem = deleteItem;
-
-},{}],250:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var url = "/activitytypes";
-
-var findAll = function findAll() {
-    return new Promise(function (resolve, reject) {
-        fetch(url, { credentials: 'same-origin' }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            return resolve(data);
-        })["catch"](function (error) {
-            return reject(error);
-        });
-    });
-};
-exports.findAll = findAll;
-
-},{}],251:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var url = "/brokers";
-
-var findAll = function findAll() {
-    return new Promise(function (resolve, reject) {
-        fetch(url, { credentials: 'same-origin' }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            return resolve(data);
-        })["catch"](function (error) {
-            return reject(error);
-        });
-    });
-};
-
-exports.findAll = findAll;
-var findByProperty = function findByProperty(id) {
-    return new Promise(function (resolve, reject) {
-        fetch(url + "?propertyId=" + id, { credentials: 'same-origin' }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            return resolve(data);
-        })["catch"](function (error) {
-            return reject(error);
-        });
-    });
-};
-exports.findByProperty = findByProperty;
-
-},{}],252:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var url = "/contacts";
-
-var findAll = function findAll() {
-    return new Promise(function (resolve, reject) {
-        fetch(url, { credentials: 'same-origin' }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            return resolve(data);
-        })["catch"](function (error) {
-            return reject(error);
-        });
-    });
-};
-
-exports.findAll = findAll;
 var findById = function findById(id) {
-    return new Promise(function (resolve, reject) {
-        fetch(url + "/" + id, { credentials: 'same-origin' }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            return resolve(data);
-        })["catch"](function (error) {
-            return reject(error);
-        });
-    });
-};
-
-exports.findById = findById;
-var findByName = function findByName(name) {
-    return new Promise(function (resolve, reject) {
-        fetch(url + "?name=" + name, { credentials: 'same-origin' }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            return resolve(data);
-        })["catch"](function (error) {
-            return reject(error);
-        });
-    });
-};
-
-exports.findByName = findByName;
-var updateItem = function updateItem(contact) {
-    return new Promise(function (resolve, reject) {
-        fetch(url, {
-            credentials: 'same-origin',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'put',
-            body: JSON.stringify(contact)
-        }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            resolve(data);
-        })["catch"](function (e) {
-            return reject(e);
-        });
-    });
-};
-
-exports.updateItem = updateItem;
-var createItem = function createItem(contact) {
-    return new Promise(function (resolve, reject) {
-        fetch(url, {
-            credentials: 'same-origin',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'post',
-            body: JSON.stringify(contact)
-        }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            resolve(data);
-        })["catch"](function (e) {
-            return reject(e);
-        });
-    });
-};
-
-exports.createItem = createItem;
-var deleteItem = function deleteItem(contact) {
-    return new Promise(function (resolve, reject) {
-        fetch(url, {
-            credentials: 'same-origin',
-            method: 'del'
-        }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            resolve(data);
-        })["catch"](function (e) {
-            return reject(e);
-        });
-    });
-};
-exports.deleteItem = deleteItem;
-
-},{}],253:[function(require,module,exports){
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-var url = "/properties";
-
-var findAll = function findAll(sort) {
-    return new Promise(function (resolve, reject) {
-        fetch(url + (sort ? "?sort=" + sort : ""), { credentials: 'same-origin' }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            return resolve(data);
-        })["catch"](function (error) {
-            return reject(error);
-        });
-    });
-};
-
-exports.findAll = findAll;
-var findByName = function findByName(name) {
-    return new Promise(function (resolve, reject) {
-        fetch(url + "?name=" + name, { credentials: 'same-origin' }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            return resolve(data);
-        })["catch"](function (error) {
-            return reject(error);
-        });
-    });
-};
-
-exports.findByName = findByName;
-var findById = function findById(id) {
-    return new Promise(function (resolve, reject) {
-        fetch(url + "/" + id, { credentials: 'same-origin' }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            return resolve(data);
-        })["catch"](function (error) {
-            return reject(error);
-        });
-    });
+  return h.get(url + "/" + id);
 };
 
 exports.findById = findById;
 var updateItem = function updateItem(property) {
-    return new Promise(function (resolve, reject) {
-        fetch(url, {
-            credentials: 'same-origin',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'put',
-            body: JSON.stringify(property)
-        }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            resolve(data);
-        })["catch"](function (e) {
-            return reject(e);
-        });
-    });
+  return h.put(url, property);
 };
 
 exports.updateItem = updateItem;
 var createItem = function createItem(property) {
-    return new Promise(function (resolve, reject) {
-        fetch(url, {
-            credentials: 'same-origin',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'post',
-            body: JSON.stringify(property)
-        }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            resolve(data);
-        })["catch"](function (e) {
-            return reject(e);
-        });
-    });
+  return h.post(url, property);
 };
 
 exports.createItem = createItem;
-var deleteItem = function deleteItem(property) {
-    return new Promise(function (resolve, reject) {
-        fetch(url, {
-            credentials: 'same-origin',
-            method: 'del'
-        }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            resolve(data);
-        })["catch"](function (e) {
-            return reject(e);
-        });
-    });
+var deleteItem = function deleteItem(id) {
+  return h.del(url + "/" + id);
 };
 exports.deleteItem = deleteItem;
 
-},{}],254:[function(require,module,exports){
+},{"./h":254}],250:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj["default"] = obj; return newObj; } }
+
+var _h = require('./h');
+
+var h = _interopRequireWildcard(_h);
+
+var url = "/activitytypes";
+
+var findAll = function findAll(sort) {
+  return h.get(url, { sort: sort });
+};
+exports.findAll = findAll;
+
+},{"./h":254}],251:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj["default"] = obj; return newObj; } }
+
+var _h = require('./h');
+
+var h = _interopRequireWildcard(_h);
+
+var url = "/brokers";
+
+var findAll = function findAll(sort) {
+  return h.get(url, { sort: sort });
+};
+
+exports.findAll = findAll;
+var findByProperty = function findByProperty(propertyId) {
+  return h.get(url, { propertyId: propertyId });
+};
+exports.findByProperty = findByProperty;
+
+},{"./h":254}],252:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj["default"] = obj; return newObj; } }
+
+var _h = require('./h');
+
+var h = _interopRequireWildcard(_h);
+
+var url = "/contacts";
+
+var findAll = function findAll(sort) {
+  return h.get(url, { sort: sort });
+};
+
+exports.findAll = findAll;
+var findByName = function findByName(name) {
+  return h.get(url, { name: name });
+};
+
+exports.findByName = findByName;
+var findById = function findById(id) {
+  return h.get(url + "/" + id);
+};
+
+exports.findById = findById;
+var updateItem = function updateItem(property) {
+  return h.put(url, property);
+};
+
+exports.updateItem = updateItem;
+var createItem = function createItem(property) {
+  return h.post(url, property);
+};
+
+exports.createItem = createItem;
+var deleteItem = function deleteItem(id) {
+  return h.del(url + "/" + id);
+};
+exports.deleteItem = deleteItem;
+
+},{"./h":254}],253:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj["default"] = obj; return newObj; } }
+
+var _h = require('./h');
+
+var h = _interopRequireWildcard(_h);
+
+var url = "/properties";
+
+var findAll = function findAll(sort) {
+  return h.get(url, { sort: sort });
+};
+
+exports.findAll = findAll;
+var findByName = function findByName(name) {
+  return h.get(url, { name: name });
+};
+
+exports.findByName = findByName;
+var findById = function findById(id) {
+  return h.get(url + "/" + id);
+};
+
+exports.findById = findById;
+var updateItem = function updateItem(property) {
+  return h.put(url, property);
+};
+
+exports.updateItem = updateItem;
+var createItem = function createItem(property) {
+  return h.post(url, property);
+};
+
+exports.createItem = createItem;
+var deleteItem = function deleteItem(id) {
+  return h.del(url + "/" + id);
+};
+exports.deleteItem = deleteItem;
+
+},{"./h":254}],254:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+function toQueryString(obj) {
+    var parts = [],
+        i;
+    for (i in obj) {
+        if (obj.hasOwnProperty(i) && obj[i]) {
+            parts.push(encodeURIComponent(i) + "=" + encodeURIComponent(obj[i]));
+        }
+    }
+    return parts.join("&");
+}
+
+function request(obj) {
+
+    return new Promise(function (resolve, reject) {
+
+        var xhr = new XMLHttpRequest();
+
+        if (obj.params) {
+            obj.url += '?' + toQueryString(obj.params);
+        }
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status > 199 && xhr.status < 300) {
+                    console.log(JSON.parse(xhr.responseText));
+                    resolve(xhr.responseText ? JSON.parse(xhr.responseText) : undefined);
+                } else {
+                    reject(xhr.responseText);
+                }
+            }
+        };
+
+        xhr.open(obj.method, obj.url, true);
+        xhr.setRequestHeader("Accept", "application/json");
+        if (obj.contentType) {
+            xhr.setRequestHeader("Content-Type", obj.contentType);
+        }
+        console.log(obj.data);
+        xhr.send(obj.data ? JSON.stringify(obj.data) : undefined);
+    });
+}
+
+var get = function get(url, params) {
+    return request({ method: "GET", url: url, params: params });
+};
+
+exports.get = get;
+var post = function post(url, data) {
+    return request({ method: "POST", contentType: "application/json", url: url, data: data });
+};
+
+exports.post = post;
+var put = function put(url, data) {
+    return request({ method: "PUT", contentType: "application/json", url: url, data: data });
+};
+
+exports.put = put;
+var del = function del(url) {
+    return request({ method: "DELETE", url: url });
+};
+exports.del = del;
+
+},{}],255:[function(require,module,exports){
 "use strict";
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -34722,7 +34747,7 @@ module.exports = _react2["default"].createClass({
   }
 });
 
-},{"react":215}],255:[function(require,module,exports){
+},{"react":215}],256:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -34766,7 +34791,7 @@ module.exports = _react2['default'].createClass({
   }
 });
 
-},{"../SLDSCalendarDay/index":254,"react":215}],256:[function(require,module,exports){
+},{"../SLDSCalendarDay/index":255,"react":215}],257:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -34930,7 +34955,7 @@ module.exports = _react2['default'].createClass({
 
 });
 
-},{"./SLDSCalendarWeek/index":255,"moment":2,"react":215}],257:[function(require,module,exports){
+},{"./SLDSCalendarWeek/index":256,"moment":2,"react":215}],258:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -35050,7 +35075,7 @@ module.exports = _react2['default'].createClass({
   }
 });
 
-},{"../../SLDSYearSelector/index":259,"./../../../../components/Icons":244,"moment":2,"react":215}],258:[function(require,module,exports){
+},{"../../SLDSYearSelector/index":260,"./../../../../components/Icons":244,"moment":2,"react":215}],259:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -35140,7 +35165,7 @@ module.exports = _react2['default'].createClass({
   }
 });
 
-},{"../SLDSCalendar/index":256,"./SLDSDatePickerNav/index":257,"moment":2,"react":215}],259:[function(require,module,exports){
+},{"../SLDSCalendar/index":257,"./SLDSDatePickerNav/index":258,"moment":2,"react":215}],260:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -35293,7 +35318,7 @@ module.exports = _react2['default'].createClass({
   }
 });
 
-},{"../../SLDSPopover/index":261,"./../../../components/Icons":244,"moment":2,"react":215}],260:[function(require,module,exports){
+},{"../../SLDSPopover/index":262,"./../../../components/Icons":244,"moment":2,"react":215}],261:[function(require,module,exports){
 'use strict';
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -35428,7 +35453,7 @@ module.exports = _react2['default'].createClass({
   }
 });
 
-},{"../SLDSPopover/index":261,"./../../components/Icons":244,"./SLDSDatePicker/index":258,"moment":2,"react":215}],261:[function(require,module,exports){
+},{"../SLDSPopover/index":262,"./../../components/Icons":244,"./SLDSDatePicker/index":259,"moment":2,"react":215}],262:[function(require,module,exports){
 "use strict";
 
 var React = require("react/addons");
