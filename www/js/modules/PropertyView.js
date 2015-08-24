@@ -34,6 +34,10 @@ export default React.createClass({
         this.setState({addingActivity: true});
     },
 
+    deleteActivityHandler(activity) {
+        activityService.deleteItem(activity.activity_id).then(() => this.loadActivities(this.props.property.property_id));
+    },
+
     cancelActivityHandler() {
         this.setState({addingActivity: false});
     },
@@ -154,7 +158,9 @@ export default React.createClass({
 
                 <div className="slds-col--padded slds-size--1-of-1">
                     <br/>
-                    <ActivityCard propertyId={this.props.property.property_id} activities={this.state.activities} showContact={true} showProperty={false} onNew={this.newActivityHandler}/>
+                    <ActivityCard propertyId={this.props.property.property_id} activities={this.state.activities} showContact={true} showProperty={false}
+                        onNew={this.newActivityHandler}
+                        onDelete={this.deleteActivityHandler}/>
                     <BrokerCard propertyId={this.props.property.property_id}/>
                 </div>
                 {this.state.addingActivity ? <NewActivityWindow onSave={this.saveActivityHandler} onCancel={this.cancelActivityHandler} propertyId={this.props.property.property_id} price={this.props.property.price}/> : ""}

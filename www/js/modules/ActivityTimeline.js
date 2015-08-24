@@ -1,11 +1,8 @@
 import React from 'react';
 import moment from 'moment';
 
-import * as Icons from "./components/Icons";
 import * as activityService from './services/ActivityService';
-
-let Icon = Icons.Icon;
-let ButtonIcon = Icons.ButtonIcon;
+import {Icon, ButtonIcon} from "./components/Icons";
 
 let getActivityTheme =  (activityName) => {
     if (activityName === "Listed") {
@@ -41,7 +38,7 @@ let ActivityListItem = React.createClass({
                                         <li className="slds-list__item">
                                             <dl className="slds-dl--inline">
                                                 <dt className="slds-dl--inline__label">From:</dt>
-                                                <dd className="slds-dl--inline__detail"><a href={'#contact/' + this.props.activity.contact_id}>{this.props.activity.first_name} {this.props.activity.last_name}</a></dd>
+                                                <dd className="slds-dl--inline__detail"><a href={'#contact/' + this.props.activity.contact_id}>{this.props.activity.contact}</a></dd>
                                             </dl>
                                         </li>
                                     </ul> : ""}

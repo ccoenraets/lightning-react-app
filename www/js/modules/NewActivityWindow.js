@@ -3,11 +3,9 @@ import React from 'react';
 import ActivityTypePickList from './ActivityTypePickList';
 import PropertyQuickFind from './PropertyQuickFind';
 import ContactQuickFind from './ContactQuickFind';
-import * as Icons from './components/Icons';
+import {Icon} from "./components/Icons";
 
 import SLDSDateInput from './slds/SLDSDateInput';
-
-let Icon = Icons.Icon;
 
 export default React.createClass({
 

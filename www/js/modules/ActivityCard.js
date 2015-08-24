@@ -3,10 +3,7 @@ import React from 'react';
 import * as activityService from './services/ActivityService';
 
 import DataGrid from "./components/DataGrid";
-import * as Icons from "./components/Icons";
-
-let Icon = Icons.Icon;
-let ButtonIcon = Icons.ButtonIcon;
+import {Icon, ButtonIcon} from "./components/Icons";
 
 export default React.createClass({
 
@@ -16,6 +13,12 @@ export default React.createClass({
 
     propertyLinkHandler(activity) {
         window.location.hash = "#property/" + activity.property_id;
+    },
+
+    actionHandler(data, value, label) {
+        if (label === "Delete") {
+            this.props.onDelete(data);
+        }
     },
 
     render() {
@@ -43,11 +46,10 @@ export default React.createClass({
                 </header>
 
                 <section className="slds-card__body">
-                    <DataGrid data={this.props.activities}>
+                    <DataGrid data={this.props.activities} onAction={this.actionHandler}>
                         <div header="Type" field="activity_name" sortable={true}/>
                         <div header="Date" field="activity_date" sortable={true} format="date"/>
-                        {this.props.showContact ? <div header="First Name" field="first_name" onLink={this.contactLinkHandler}/> : ''}
-                        {this.props.showContact ? <div header="Last Name" field="last_name" onLink={this.contactLinkHandler}/> : ''}
+                        {this.props.showContact ? <div header="Contact" field="contact" onLink={this.contactLinkHandler}/> : ''}
                         {this.props.showProperty ? <div header="Property" field="address" onLink={this.propertyLinkHandler}/> : ''}
                         <div header="Price" field="price" sortable={true} format="currency"/>
                     </DataGrid>

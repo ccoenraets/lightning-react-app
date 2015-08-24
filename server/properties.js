@@ -12,6 +12,8 @@ function findAll(req, res, next) {
         params.push(name);
     }
 
+    console.log(sort);
+
     db.query("SELECT property_id, address, city, bedrooms, bathrooms, price, location FROM property " + whereClause + " ORDER BY " + sort, params)
         .then(function (properties) {
             return res.send(JSON.stringify(properties));

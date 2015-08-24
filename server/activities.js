@@ -18,7 +18,7 @@ function findAll(req, res, next) {
 
     var where = whereParts.length > 0 ? ("WHERE " + whereParts.join(" AND ")) : "";
 
-    db.query("SELECT activity_id, activity.property_id, property.address, activity.contact_id as contact_id, contact.first_name as first_name, contact.last_name as last_name, activity_type.name as activity_name, activity_date, activity.price, comment FROM activity " +
+    db.query("SELECT activity_id, activity.property_id, property.address, activity.contact_id as contact_id, contact.first_name || ' ' || contact.last_name as contact, activity_type.name as activity_name, activity_date, activity.price, comment FROM activity " +
              "INNER JOIN property on activity.property_id = property.property_id " +
              "LEFT JOIN contact on activity.contact_id = contact.contact_id " +
              "INNER JOIN activity_type on activity.activity_type_id = activity_type.activity_type_id " +
@@ -58,6 +58,7 @@ function createItem(req, res, next) {
 };
 
 function deleteItem(req, res, next) {
+    console.log("delete activities");
     var activityId = req.params.id;
     db.query('DELETE FROM activity WHERE activity_id=$1', [activityId], true)
         .then(function () {

@@ -1,72 +1,19 @@
+import * as h from './h';
+
 let url = "/activities";
 
-export let findAll = () => new Promise((resolve, reject) => {
-    fetch(url)
-        .then(response => response.json())
-        .then(data => resolve(data))
-        .catch(error => reject(error));
-});
+export let findAll = sort => h.get(url, {sort});
 
-export let findById = (id) => new Promise((resolve, reject) => {
-    fetch(url + "/"+id)
-        .then(response => response.json())
-        .then(data => resolve(data))
-        .catch(error => reject(error));
-});
+export let findByName = name => h.get(url, {name});
 
-export let findByProperty = (id) => new Promise((resolve, reject) => {
-    fetch(url + "?propertyId="+id, {credentials: 'same-origin'})
-        .then(response => response.json())
-        .then(data => resolve(data))
-        .catch(error => reject(error));
-});
+export let findByProperty = propertyId => h.get(url, {propertyId});
 
-export let findByContact = (id) => new Promise((resolve, reject) => {
-    fetch(url + "?contactId="+id)
-        .then(response => response.json())
-        .then(data => resolve(data))
-        .catch(error => reject(error));
-});
+export let findByContact = contactId => h.get(url, {contactId});
 
-export let updateItem = (contact) => new Promise((resolve, reject) => {
-    fetch(url, {
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        method: 'put',
-        body: JSON.stringify(contact)
-    })
-    .then(response => response.json())
-    .then(data => {
-        resolve(data);
-    })
-    .catch(e => reject(e));
-});
+export let findById = id => h.get(url + "/" + id);
 
-export let createItem = (contact) => new Promise((resolve, reject) => {
-    fetch(url, {
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        method: 'post',
-        body: JSON.stringify(contact)
-    })
-    .then(response => response.json())
-    .then(data => {
-        resolve(data);
-    })
-    .catch(e => reject(e));
-});
+export let updateItem = property => h.put(url, property);
 
-export let deleteItem = (contact) => new Promise((resolve, reject) => {
-    fetch(url, {
-        method: 'del'
-    })
-    .then(response => response.json())
-    .then(data => {
-        resolve(data);
-    })
-    .catch(e => reject(e));
-});
+export let createItem = property => h.post(url, property);
+
+export let deleteItem = id => h.del(url + "/" + id);
