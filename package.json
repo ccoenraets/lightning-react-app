@@ -29,7 +29,7 @@
     "q": "^1.4.1",
     "react-onclickoutside": "0.3.0",
     "moment": "^2.10",
-    "react-motion": "0.2.5"
+    "react-motion": "0.2.5",
     "tether": "^1.1.0",
     "tether-drop": "^1.2.2"
   },
