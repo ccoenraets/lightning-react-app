@@ -11,11 +11,6 @@ import BrokerCard from './BrokerCard';
 import ActivityCard from './ActivityCard';
 import NewActivityWindow from './NewActivityWindow';
 
-let headerStyle = {
-    fontWeight: "bold",
-    paddingTop: "8px"
-};
-
 export default React.createClass({
 
     getInitialState() {
@@ -71,10 +66,10 @@ export default React.createClass({
                             {this.props.property.description}
                         </div>
 
-                        <div className="slds-col--padded slds-size--1-of-2 slds-medium-size--1-of-3">
+                        <div className="slds-col--padded slds-size--1-of-2 slds-medium-size--1-of-3 slds-m-top--medium">
                             <dl className="page-header--rec-home__detail-item">
                                 <dt>
-                                    <p className="slds-truncate" title="Field 1" style={headerStyle}>Sqft</p>
+                                    <p className="slds-text-heading--label slds-truncate" title="Field 1">Sqft</p>
                                 </dt>
                                 <dd>
                                     <p className="slds-text-body--regular slds-truncate" title="">{this.props.property.size}</p>
@@ -82,10 +77,10 @@ export default React.createClass({
                             </dl>
                         </div>
 
-                        <div className="slds-col--padded slds-size--1-of-2 slds-medium-size--1-of-3">
+                        <div className="slds-col--padded slds-size--1-of-2 slds-medium-size--1-of-3 slds-m-top--medium">
                             <dl className="page-header--rec-home__detail-item">
                                 <dt>
-                                    <p className="slds-truncate" title="Field 1" style={headerStyle}>Bedrooms</p>
+                                    <p className="slds-text-heading--label slds-truncate" title="Field 1">Bedrooms</p>
                                 </dt>
                                 <dd>
                                     <p className="slds-text-body--regular slds-truncate" title="">{this.props.property.bedrooms}</p>
@@ -93,10 +88,10 @@ export default React.createClass({
                             </dl>
                         </div>
 
-                        <div className="slds-col--padded slds-size--1-of-2 slds-medium-size--1-of-3">
+                        <div className="slds-col--padded slds-size--1-of-2 slds-medium-size--1-of-3 slds-m-top--medium">
                             <dl className="page-header--rec-home__detail-item">
                                 <dt>
-                                    <p className="slds-truncate" title="Field 1" style={headerStyle}>Bathrooms</p>
+                                    <p className="slds-text-heading--label slds-truncate" title="Field 1">Bathrooms</p>
                                 </dt>
                                 <dd>
                                     <p className="slds-text-body--regular slds-truncate" title="">{this.props.property.bathrooms}</p>
@@ -104,10 +99,10 @@ export default React.createClass({
                             </dl>
                         </div>
 
-                        <div className="slds-col--padded slds-size--1-of-2 slds-medium-size--1-of-3">
+                        <div className="slds-col--padded slds-size--1-of-2 slds-medium-size--1-of-3 slds-m-top--medium">
                             <dl className="page-header--rec-home__detail-item">
                                 <dt>
-                                    <p className="slds-truncate" title="Field 1" style={headerStyle}>Garage</p>
+                                    <p className="slds-text-heading--label slds-truncate" title="Field 1">Garage</p>
                                 </dt>
                                 <dd>
                                     <p className="slds-text-body--regular slds-truncate" title="">2 cars</p>
@@ -115,10 +110,10 @@ export default React.createClass({
                             </dl>
                         </div>
 
-                        <div className="slds-col--padded slds-size--1-of-2 slds-medium-size--1-of-3">
+                        <div className="slds-col--padded slds-size--1-of-2 slds-medium-size--1-of-3 slds-m-top--medium">
                             <dl className="page-header--rec-home__detail-item">
                                 <dt>
-                                    <p className="slds-truncate" title="Field 1" style={headerStyle}>Finished Basement </p>
+                                    <p className="slds-text-heading--label slds-truncate" title="Field 1">Finished Basement </p>
                                 </dt>
                                 <dd>
                                     <p className="slds-text-body--regular slds-truncate" title="">Yes</p>
@@ -126,10 +121,10 @@ export default React.createClass({
                             </dl>
                         </div>
 
-                        <div className="slds-col--padded slds-size--1-of-2 slds-medium-size--1-of-3">
+                        <div className="slds-col--padded slds-size--1-of-2 slds-medium-size--1-of-3 slds-m-top--medium">
                             <dl className="page-header--rec-home__detail-item">
                                 <dt>
-                                    <p className="slds-truncate" title="Field 1" style={headerStyle}>Heating</p>
+                                    <p className="slds-text-heading--label slds-truncate" title="Field 1">Heating</p>
                                 </dt>
                                 <dd>
                                     <p className="slds-text-body--regular slds-truncate" title="">Gas</p>

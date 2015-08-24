@@ -9,12 +9,6 @@ import ActivityTimeline from './ActivityTimeline';
 import ActivityCard from './ActivityCard';
 import NewActivityWindow from './NewActivityWindow';
 
-
-let headerStyle = {
-    fontWeight: "bold",
-    paddingTop: "8px"
-};
-
 export default React.createClass({
 
     getInitialState() {
@@ -60,50 +54,50 @@ export default React.createClass({
                             </span>
                         </div>
 
-                        <div className="slds-col--padded slds-size--1-of-2">
+                        <div className="slds-col--padded slds-size--1-of-2 slds-m-top--medium">
                             <dl className="page-header--rec-home__detail-item">
                                 <dt>
-                                    <p className="slds-truncate" title="Field 1" style={headerStyle}>Address</p>
+                                    <p className="slds-text-heading--label slds-truncate" title="Field 1">Address</p>
                                 </dt>
                                 <dd>
                                     <p className="slds-text-body--regular slds-truncate" title="">{this.props.contact.address}<br/>{this.props.contact.city}, {this.props.contact.state} {this.props.contact.zip}</p>
                                 </dd>
                             </dl>
                         </div>
-                        <div className="slds-col--padded slds-size--1-of-2">
+                        <div className="slds-col--padded slds-size--1-of-2 slds-m-top--medium">
                             <dl className="page-header--rec-home__detail-item">
                                 <dt>
-                                    <p className="slds-truncate" title="Field 1" style={headerStyle}>Occupation</p>
+                                    <p className="slds-text-heading--label slds-truncate" title="Field 1">Occupation</p>
                                 </dt>
                                 <dd>
                                     <p className="slds-text-body--regular slds-truncate" title="">{this.props.contact.occupation}</p>
                                 </dd>
                             </dl>
                         </div>
-                        <div className="slds-col--padded slds-size--1-of-2">
+                        <div className="slds-col--padded slds-size--1-of-2 slds-m-top--medium">
                             <dl className="page-header--rec-home__detail-item">
                                 <dt>
-                                    <p className="slds-truncate" title="Field 1" style={headerStyle}>Member since</p>
+                                    <p className="slds-text-heading--label slds-truncate" title="Field 1">Member since</p>
                                 </dt>
                                 <dd>
                                     <p className="slds-text-body--regular slds-truncate" title="">{moment(this.props.contact.member_since).format("MMMM Do YYYY")}</p>
                                 </dd>
                             </dl>
                         </div>
-                        <div className="slds-col--padded slds-size--1-of-2">
+                        <div className="slds-col--padded slds-size--1-of-2 slds-m-top--medium">
                             <dl className="page-header--rec-home__detail-item">
                                 <dt>
-                                    <p className="slds-truncate" title="Field 1" style={headerStyle}>Lead Source</p>
+                                    <p className="slds-text-heading--label slds-truncate" title="Field 1">Lead Source</p>
                                 </dt>
                                 <dd>
                                     <p className="slds-text-body--regular slds-truncate" title="">{this.props.contact.lead_source}</p>
                                 </dd>
                             </dl>
                         </div>
-                        <div className="slds-col--padded slds-size--1-of-2">
+                        <div className="slds-col--padded slds-size--1-of-2 slds-m-top--medium">
                             <dl className="page-header--rec-home__detail-item">
                                 <dt>
-                                    <p className="slds-truncate" title="Field 1" style={headerStyle}>Category</p>
+                                    <p className="slds-text-heading--label slds-truncate" title="Field 1">Category</p>
                                 </dt>
                                 <dd>
                                     <p className="slds-text-body--regular slds-truncate" title="">{this.props.contact.category}</p>

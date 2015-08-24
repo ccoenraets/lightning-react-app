@@ -33,7 +33,7 @@ export default React.createClass({
                 <header className="slds-card__header slds-grid">
                     <div className="slds-media slds-media--center slds-has-flexi-truncate">
                         <div className="slds-media__figure">
-                            <Icon name="contact" size="small"/>
+                            <Icon name="groups" size="small"/>
                         </div>
                         <div className="slds-media__body">
                             <h3 className="slds-text-heading--small slds-truncate">Brokers</h3>
