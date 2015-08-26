@@ -112,8 +112,8 @@ export default React.createClass({
                         <div label="Activity">
                             <ActivityTimeline contactId={this.props.contact.contact_id} activities={this.state.activities} showContact={false} showProperty={true}/>
                         </div>
-                        <div label="Gallery">
-                            Drag and drop photos in this area
+                        <div label="Related">
+                            Not implemented in this demo
                         </div>
                     </Tabs>
                 </div>

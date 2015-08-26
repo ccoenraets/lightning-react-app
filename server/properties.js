@@ -2,25 +2,32 @@ var db = require('./pghelper');
 
 function findAll(req, res, next) {
 
-    var sort = req.query.sort || "price";
-    var name = req.query.name;
-    var params = [];
+    var brokerId = req.query.brokerId,
+        promise;
 
-    var whereClause = "";
-    if (name) {
-        whereClause = "WHERE address || city ~* $1";
-        params.push(name);
+    if (brokerId) {
+        promise = db.query("SELECT pb.property_id, p.address, p.city, p.bedrooms, p.bathrooms, p.price, p.location FROM property_broker as pb " +
+            "INNER JOIN property AS p on pb.property_id = p.property_id " +
+            "INNER JOIN broker AS b on pb.broker_id = b.broker_id " +
+            "WHERE pb.broker_id = $1 ORDER BY p.address", [brokerId]);
+    } else {
+        var sort = req.query.sort || "price";
+        var name = req.query.name;
+        var params = [];
+        var whereClause = "";
+        if (name) {
+            whereClause = "WHERE address || city ~* $1";
+            params.push(name);
+        }
+        promise = db.query("SELECT property_id, address, city, bedrooms, bathrooms, price, location FROM property " + whereClause + " ORDER BY " + sort, params);
     }
-
-    console.log(sort);
-
-    db.query("SELECT property_id, address, city, bedrooms, bathrooms, price, location FROM property " + whereClause + " ORDER BY " + sort, params)
-        .then(function (properties) {
-            return res.send(JSON.stringify(properties));
-        })
-        .catch(next);
+    promise.then(function (properties) {
+        return res.send(JSON.stringify(properties));
+    })
+    .catch(next);
 
 };
+
 
 function findById(req, res, next) {
     var id = req.params.id;
@@ -37,8 +44,8 @@ function findById(req, res, next) {
 
 function createItem(req, res, next) {
     var property = req.body;
-    db.query('INSERT INTO property (address, city, state, zip, description, size, bedrooms, bathrooms, price) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',
-        [property.address, property.city, property.state, property.zip, property.size, property.bedrooms, property.size, property.bathrooms, property.price], true)
+    db.query('INSERT INTO property (address, city, state, zip, teaser, description, size, bedrooms, bathrooms, price) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
+        [property.address, property.city, property.state, property.zip, property.teaser, property.description, property.size, property.bedrooms, property.bathrooms, property.price], true)
         .then(function () {
             return res.send({result: 'ok'});
         })

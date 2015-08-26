@@ -5,8 +5,7 @@ export default React.createClass({
     mixins: [React.addons.LinkedStateMixin],
 
     getInitialState() {
-        let property = this.props.property;
-        return {...property};
+        return {};
     },
 
     onSave() {
@@ -29,30 +28,50 @@ export default React.createClass({
                         <div className="slds-modal__content">
 
                             <div className="slds-form--stacked">
-                                <div className="slds-form-element">
-                                    <label className="slds-form-element__label" htmlFor="sample1">Address</label>
-                                    <div className="slds-form-element__control">
-                                        <input className="slds-input" type="text" valueLink={this.linkState('address')}/>
+                                <fieldset className="slds-form--compound slds-m-bottom--medium">
+                                    <legend className="slds-form-element__label">Address</legend>
+                                    <div className="form-element__group">
+                                        <div className="slds-form-element__row">
+                                            <label className="slds-form-element__control slds-size--1-of-1">
+                                                <small className="slds-form-element__helper">Street</small>
+                                                <input className="slds-input" type="text" valueLink={this.linkState('address')}/>
+                                            </label>
+                                        </div>
+                                        <div className="slds-form-element__row">
+                                            <label className="slds-form-element__control slds-size--2-of-4">
+                                                <small className="slds-form-element__helper">City</small>
+                                                <input className="slds-input" type="text" valueLink={this.linkState('city')}/>
+                                            </label>
+                                            <label className="slds-form-element__control slds-size--1-of-4">
+                                                <small className="slds-form-element__helper">State</small>
+                                                <input className="slds-input" type="text" valueLink={this.linkState('state')}/>
+                                            </label>
+                                            <label className="slds-form-element__control slds-size--1-of-4">
+                                                <small className="slds-form-element__helper">ZIP Code</small>
+                                                <input className="slds-input" type="text" valueLink={this.linkState('zip')}/>
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="slds-form-element">
-                                    <label className="slds-form-element__label" htmlFor="sample1">City</label>
-                                    <div className="slds-form-element__control">
-                                        <input className="slds-input" type="text" valueLink={this.linkState('city')}/>
+                                </fieldset>
+                                <fieldset className="slds-form--compound slds-m-bottom--medium">
+                                    <legend className="slds-form-element__label">Size</legend>
+                                    <div className="form-element__group">
+                                        <div className="slds-form-element__row">
+                                            <label className="slds-form-element__control slds-size--1-of-3">
+                                                <small className="slds-form-element__helper">Sqft</small>
+                                                <input className="slds-input" type="text" valueLink={this.linkState('size')}/>
+                                            </label>
+                                            <label className="slds-form-element__control slds-size--1-of-3">
+                                                <small className="slds-form-element__helper">Bedrooms</small>
+                                                <input className="slds-input" type="text" valueLink={this.linkState('bedrooms')}/>
+                                            </label>
+                                            <label className="slds-form-element__control slds-size--1-of-3">
+                                                <small className="slds-form-element__helper">Bathrooms</small>
+                                                <input className="slds-input" type="text" valueLink={this.linkState('bathrooms')}/>
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="slds-form-element">
-                                    <label className="slds-form-element__label" htmlFor="sample1">State</label>
-                                    <div className="slds-form-element__control">
-                                        <input className="slds-input" type="text" valueLink={this.linkState('state')}/>
-                                    </div>
-                                </div>
-                                <div className="slds-form-element">
-                                    <label className="slds-form-element__label" htmlFor="sample1">Zip</label>
-                                    <div className="slds-form-element__control">
-                                        <input className="slds-input" type="text" valueLink={this.linkState('zip')}/>
-                                    </div>
-                                </div>
+                                </fieldset>
                                 <div className="slds-form-element">
                                     <label className="slds-form-element__label" htmlFor="sample1">Asking Price</label>
                                     <div className="slds-form-element__control">

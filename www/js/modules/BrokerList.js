@@ -4,8 +4,8 @@ import DataGrid from './components/DataGrid';
 
 export default React.createClass({
 
-    linkHandler(contact) {
-        window.location.hash = "#contact/" + contact.contact_id;
+    linkHandler(broker) {
+        window.location.hash = "#broker/" + broker.broker_id;
     },
 
     actionHandler(data, value, label) {
@@ -18,13 +18,14 @@ export default React.createClass({
 
     render() {
         return (
-            <DataGrid data={this.props.contacts} onSort={this.props.onSort} onAction={this.actionHandler}>
+            <DataGrid data={this.props.brokers} onSort={this.props.onSort} onAction={this.actionHandler}>
                 <div header="First Name" field="first_name" sortable="true" onLink={this.linkHandler}/>
                 <div header="Last Name" field="last_name" sortable="true" onLink={this.linkHandler}/>
                 <div header="Mobile Phone" field="mobile_phone"/>
-                <div header="Home Phone" field="home_phone"/>
+                <div header="Office Phone" field="office_phone"/>
                 <div header="Email" field="email"/>
             </DataGrid>
         );
     }
+
 });

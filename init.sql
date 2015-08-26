@@ -10,6 +10,10 @@ CREATE TABLE IF NOT EXISTS broker (
     first_name      TEXT,
     last_name       TEXT,
     title           TEXT,
+    address         TEXT,
+    city            TEXT,
+    state           TEXT,
+    zip             TEXT,
     mobile_phone    TEXT,
     office_phone    TEXT,
     email           TEXT,
@@ -75,9 +79,9 @@ CREATE TABLE IF NOT EXISTS activity (
   );
 
 
-INSERT INTO BROKER (first_name, last_name, title, mobile_phone, office_phone, email, pic) VALUES
-('Caroline', 'Kingsley', 'Senior Broker', '617-985-6955', '617-666-5555', 'caroline@lightningrealty.com', 'https://s3-us-west-1.amazonaws.com/sfdc-demo/people/caroline_kingsley.jpg'),
-('Brad', 'Moretti', 'Senior Broker', '617-985-6955', '617-666-5555', 'brad@lightningrealty.com', 'https://s3-us-west-1.amazonaws.com/sfdc-demo/people/brad_moretti.jpg');
+INSERT INTO BROKER (first_name, last_name, title, address, city, state, zip, mobile_phone, office_phone, email, pic) VALUES
+('Caroline', 'Kingsley', 'Senior Broker', '1 Federal street', 'Boston', 'MA', '0218', '617-985-6955', '617-666-5555', 'caroline@lightningrealty.com', 'https://s3-us-west-1.amazonaws.com/sfdc-demo/people/caroline_kingsley.jpg'),
+('Brad', 'Moretti', 'Senior Broker', '1 Federal street', 'Boston', 'MA', '0218', '617-985-6955', '617-666-5555', 'brad@lightningrealty.com', 'https://s3-us-west-1.amazonaws.com/sfdc-demo/people/brad_moretti.jpg');
 
 INSERT INTO CONTACT (first_name, last_name, address, city, state, zip, occupation, mobile_phone, home_phone, email, lead_source, category, member_since, pic, notes) VALUES
 ('Tanya', 'Sharma', '18 Henry st', 'Cambridge', 'MA', '01742', 'Medical Doctor', '617-985-6955', '617-666-5555', 'tsharma@fakemail.com', 'Open House', 'Buyer', '2015/01/15', 'https://s3-us-west-1.amazonaws.com/sfdc-demo/people/tanya_sharma.jpg', 'Lorem Ipsum'),

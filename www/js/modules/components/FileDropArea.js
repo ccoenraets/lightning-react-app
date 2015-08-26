@@ -27,7 +27,7 @@ export default React.createClass({
     },
 
     render() {
-        let imgs = this.state.pictures.map(picture => <img src={picture}/>);
+        let imgs = this.state.pictures.map(picture => <img src={picture} style={{padding: "4px 0"}}/>);
         return (
             <div onDragOver={this.dragOverHandler} onDrop={this.dropHandler} style={{width:"100%", minHeight:"300px"}}>
                 Drag images in this area to add them to the gallery

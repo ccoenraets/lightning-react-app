@@ -2,7 +2,8 @@ import React from 'react';
 
 import * as ContactService from './services/ContactService';
 
-import ContactListHeader from './ContactListHeader';
+import {HomeHeader} from './components/PageHeader';
+
 import ContactList from './ContactList';
 import NewContactWindow from './NewContactWindow';
 
@@ -14,6 +15,12 @@ export default React.createClass({
 
     componentDidMount() {
         ContactService.findAll().then(contacts => this.setState({contacts}));
+    },
+
+    sortHandler(sortOrder) {
+        ContactService.findAll(sortOrder).then(contacts => {
+            this.setState({sortOrder, contacts})
+        });
     },
 
     newHandler() {
@@ -43,8 +50,16 @@ export default React.createClass({
     render() {
         return (
             <div>
-                <ContactListHeader contacts={this.state.contacts} onNew={this.newHandler}/>
-                <ContactList contacts={this.state.contacts} onDelete={this.deleteHandler} onEdit={this.editHandler}/>
+                <HomeHeader type="contacts"
+                            title="My Contacts"
+                            actions={[{value:"new", label:"New Contact"}]}
+                            itemCount={this.state.contacts.length}
+                            viewOptions={[{value:"table", label:"Table", icon:"table"},{value:"tiles", label:"Tiles", icon:"location"}]}
+                            sortOptions={[{value:"first_name", label:"First Name"},{value:"last_name", label:"Last Name"}]}
+                            onNew={this.newHandler}
+                            onSort={this.sortHandler}
+                            onViewChange={this.viewChangeHandler}/>
+                <ContactList contacts={this.state.contacts} onSort={this.sortHandler} onDelete={this.deleteHandler} onEdit={this.editHandler}/>
                 {this.state.addingContact ?  <NewContactWindow onSave={this.saveHandler} onCancel={this.cancelHandler}/> : ""}
             </div>
         );

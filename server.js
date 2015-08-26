@@ -39,6 +39,10 @@ app.delete('/activities/:id', activities.deleteItem);
 
 app.get('/activitytypes', activityTypes.findAll);
 app.get('/brokers', brokers.findAll);
+app.get('/brokers/:id', brokers.findById);
+app.post('/brokers', brokers.createItem);
+app.put('/brokers', brokers.updateItem);
+app.delete('/brokers/:id', brokers.deleteItem);
 
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));

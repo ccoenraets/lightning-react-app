@@ -6,7 +6,7 @@ export let DropdownItem = React.createClass({
 
     clickHandler(event) {
         event.preventDefault();
-        this.props.onSelect(this.props.value, this.props.label);
+        this.props.onSelect(this.props.value, this.props.label, this.props.icon);
     },
 
     render() {
@@ -56,27 +56,39 @@ export let ButtonDropdown = React.createClass({
     getDefaultProps() {
         return {
             valueField: "value",
-            labelField: "label"
+            labelField: "label",
+            iconField: "icon"
         };
     },
 
     getInitialState() {
         return {
-            value: undefined,
+            value: this.props.value,
             label: this.props.label || 'Select an option'
         };
     },
 
-    changeHandler(value, label) {
-        this.setState({value: value, label: label, opened: false});
+    changeHandler(value, label, icon) {
+        this.setState({value: value, label: label, icon: icon, opened: false});
         this.props.onChange(value, label);
     },
 
     render() {
+        let label;
+        let icon;
+        let items = this.props.children;
+        for (let i=0; i<items.length; i++) {
+            let item = items[i];
+            if (item.props[this.props.valueField] == this.state.value) {
+                label = item.props[this.props.labelField];
+                icon = item.props[this.props.iconField];
+                break;
+            }
+        }
         return (
             <div className="slds-dropdown-trigger" aria-haspopup="true">
                 <button className="slds-button slds-button--icon-more" aria-haspopup="true">
-                    <ButtonIcon name={this.props.icon}/>
+                    <ButtonIcon name={icon || this.props.icon}/>
                     <span className="slds-assistive-text">Settings</span>
                     <ButtonIcon name="down" size="x-small"/>
                 </button>

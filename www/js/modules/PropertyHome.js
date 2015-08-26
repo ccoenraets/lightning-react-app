@@ -3,8 +3,8 @@ import React from 'react';
 import * as propertyService from './services/PropertyService';
 
 import GoogleMaps from './components/GoogleMaps';
+import {HomeHeader} from './components/PageHeader';
 
-import PropertyListHeader from './PropertyListHeader';
 import PropertyList from './PropertyList';
 import NewPropertyWindow from './NewPropertyWindow';
 
@@ -20,7 +20,7 @@ export default React.createClass({
 
     sortHandler(sortOrder) {
         propertyService.findAll(sortOrder).then(properties => {
-            this.setState({sortOrder: sortOrder, properties: properties})
+            this.setState({sortOrder, properties})
         });
     },
 
@@ -70,10 +70,15 @@ export default React.createClass({
         }
         return (
             <div>
-                <PropertyListHeader properties={this.state.properties}
-                                    onNew={this.newHandler}
-                                    onSort={this.sortHandler}
-                                    onViewChange={this.viewChangeHandler}/>
+                <HomeHeader type="properties"
+                            title="My Properties"
+                            actions={[{value:"new", label:"New Property"}]}
+                            itemCount={this.state.properties.length}
+                            viewOptions={[{value:"table", label:"Table", icon:"table"},{value:"map", label:"Map", icon:"location"},{value:"split", label:"Split", icon:"layout"}]}
+                            sortOptions={[{value:"address", label:"Address"},{value:"city", label:"City"},{value:"price", label:"Price"}]}
+                            onNew={this.newHandler}
+                            onSort={this.sortHandler}
+                            onViewChange={this.viewChangeHandler}/>
                 {view}
                 {this.state.addingProperty ? <NewPropertyWindow onSave={this.saveHandler} onCancel={this.cancelHandler}/> : ""}
             </div>

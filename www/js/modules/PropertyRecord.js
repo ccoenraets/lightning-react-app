@@ -52,7 +52,7 @@ export default React.createClass({
                     <HeaderField label="City" value={this.state.property.city}/>
                     <HeaderField label="Type" value="Single Family"/>
                     <HeaderField label="Date Listed" value="Aug 1st 2015"/>
-                    <HeaderField label="Asking Price" value={this.state.property.price}/>
+                    <HeaderField label="Asking Price" value={this.state.property.price} format="currency"/>
                 </RecordHeader>
                 <RouteHandler property={this.state.property} saveHandler={this.saveHandler}/>
             </div>

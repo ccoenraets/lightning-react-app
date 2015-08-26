@@ -5,13 +5,13 @@ export default React.createClass({
     mixins: [React.addons.LinkedStateMixin],
 
     getInitialState() {
-        let contact = this.props.contact;
-        return {...contact};
+        let broker = this.props.broker;
+        return {...broker};
     },
 
     componentWillReceiveProps(props) {
-        let contact = props.contact;
-        this.setState({...contact});
+        let broker = props.broker;
+        this.setState({...broker});
     },
 
     save() {
@@ -35,9 +35,9 @@ export default React.createClass({
                         </div>
                     </div>
                     <div className="slds-form-element">
-                        <label className="slds-form-element__label" htmlFor="sample1">Occupation</label>
+                        <label className="slds-form-element__label" htmlFor="sample1">Title</label>
                         <div className="slds-form-element__control">
-                            <input className="slds-input" type="text" valueLink={this.linkState('occupation')}/>
+                            <input className="slds-input" type="text" valueLink={this.linkState('title')}/>
                         </div>
                     </div>
                     <fieldset className="slds-form--compound slds-m-top--medium slds-m-bottom--medium">
@@ -74,9 +74,9 @@ export default React.createClass({
                         </div>
                     </div>
                     <div className="slds-form-element">
-                        <label className="slds-form-element__label" htmlFor="sample2">Home Phone</label>
+                        <label className="slds-form-element__label" htmlFor="sample2">Office Phone</label>
                         <div className="slds-form-element__control">
-                            <input className="slds-input" type="text" valueLink={this.linkState('home_phone')}/>
+                            <input className="slds-input" type="text" valueLink={this.linkState('office_phone')}/>
                         </div>
                     </div>
                     <div className="slds-form-element">

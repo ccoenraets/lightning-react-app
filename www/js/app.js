@@ -11,6 +11,11 @@ import ContactRecord from './modules/ContactRecord';
 import ContactForm from './modules/ContactForm';
 import ContactView from './modules/ContactView';
 
+import BrokerHome from './modules/BrokerHome';
+import BrokerRecord from './modules/BrokerRecord';
+import BrokerForm from './modules/BrokerForm';
+import BrokerView from './modules/BrokerView';
+
 let DefaultRoute = Router.DefaultRoute;
 let Link = Router.Link;
 let Route = Router.Route;
@@ -28,7 +33,7 @@ let App = React.createClass({
                     <ul  className="slds-list--horizontal">
                         <li className="slds-list__item"><Link to="app">Properties</Link></li>
                         <li className="slds-list__item"><Link to="contacts">Contacts</Link></li>
-                        <li className="slds-list__item"><Link to="property">Brokers</Link></li>
+                        <li className="slds-list__item"><Link to="brokers">Brokers</Link></li>
                     </ul>
                 </header>
                 <RouteHandler/>
@@ -47,6 +52,11 @@ let routes = (
         <Route name="contact" handler={ContactRecord}>
             <Route name="viewContact" path=":contactId" handler={ContactView}/>
             <Route name="editContact" path=":contactId/edit" handler={ContactForm}/>
+        </Route>
+        <Route name="brokers" handler={BrokerHome}/>
+        <Route name="broker" handler={BrokerRecord}>
+            <Route name="view" path=":brokerId" handler={BrokerView}/>
+            <Route name="edit" path=":brokerId/edit" handler={BrokerForm}/>
         </Route>
         <DefaultRoute handler={PropertyHome}/>
     </Route>

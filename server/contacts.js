@@ -1,15 +1,15 @@
 var db = require('./pghelper');
 
 function findAll(req, res, next) {
-    console.log("contacts findAll");
 
     var name = req.query.name;
+    var sort = req.query.sort || "first_name";
 
     var whereClause = name ? "WHERE first_name || last_name ~* $1" : "";
 
-    db.query("SELECT contact_id, first_name, last_name, first_name || ' ' || last_name as name, home_phone, mobile_phone, email FROM contact " + whereClause, name ? [name] : [])
-        .then(function (properties) {
-            return res.send(JSON.stringify(properties));
+    db.query("SELECT contact_id, first_name, last_name, first_name || ' ' || last_name as name, home_phone, mobile_phone, email FROM contact " + whereClause + " ORDER BY " + sort , name ? [name] : [])
+        .then(function (contacts) {
+            return res.send(JSON.stringify(contacts));
         })
         .catch(next);
 
