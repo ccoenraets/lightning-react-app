@@ -1,6 +1,5 @@
 {
   "name": "lightning-react-app",
-  "description": "Sample app with React and the Lightning Design System",
-  "repository": "https://github.com/ccoenraets/lightning-react-app",
+  "description": "Reference app built with the Lightning Design System and React",
   "addons": ["heroku-postgresql:hobby-dev"]
 }
