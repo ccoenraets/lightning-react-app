@@ -1,12 +1,12 @@
-# Lightning Realty 
+# Lightning React Reference Application 
 
-**Lightning Realty** is a sample application built with [React](http://facebook.github.io/react/) and the [Lightning Design System](www.lightningdesignsystem.com). 
+**Lightning Realty** is a reference application built with [React](http://facebook.github.io/react/) and the [Lightning Design System](www.lightningdesignsystem.com). 
 
 Check out this video for a quick walkthrough:
 
 [![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/UZtvQazYX8A/0.jpg)](http://www.youtube.com/watch?v=UZtvQazYX8A)
 
-The back-end is built on Node.js using a Postgres database. 
+The back-end is built with **Node.js** using a **Postgres** database. 
 
 ## Automatic Deployment to Heroku
 
