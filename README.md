@@ -14,15 +14,15 @@ Click the Button below to deploy the application on Heroku.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
-Your own instance of the application is automatically deployed, and your own Postgres database is initialized with sample data.
+Your own instance of the application is automatically deployed, and your own Postgres database is populated with sample data.
 
 ## Local Installation
 
 1. Install [Postgres](http://www.postgresql.org/) locally and create a database called **realty**.
 
-1. Clone this repository or download and unzip [this]() zip file.
+1. Clone this repository or download and unzip [this](https://github.com/ccoenraets/lightning-react-app/archive/master.zip) zip file.
 
-1. Navigate to the **lightningrealty** directory and install the project dependencies:
+1. Navigate to the **lightning-react-app** directory and install the project dependencies:
 
     ```npm install```
 
@@ -32,15 +32,15 @@ Your own instance of the application is automatically deployed, and your own Pos
 
     ```npm run build-client```
     
-    The project is written using ECMAScript 6 including ECMAScript modules.
+    The project is written using ECMAScript 6 including ECMAScript 6 modules.
 
-1. Type the following command to Start the server:
+1. Type the following command to start the server:
     
     ```npm start```
     
-    > The database is automatically populated
+    The database is automatically populated
     
-1. Open a browser and access http://localhost:5000    
+1. Open a browser and access [http://localhost:5000](http://localhost:5000)    
 
 ## Work in Progress
 
