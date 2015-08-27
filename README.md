@@ -1,8 +1,8 @@
-# React and Lightning Design System 
+# React and the Lightning Design System 
 
 ## Reference Application 
 
-**Lightning Realty** is a reference application built with [React](http://facebook.github.io/react/) and the [Lightning Design System](www.lightningdesignsystem.com). 
+This repository is the home of **Lightning Realty**, a reference application built with [React](http://facebook.github.io/react/) and the [Lightning Design System](www.lightningdesignsystem.com). 
 
 Check out this video for a quick walkthrough:
 
