@@ -1,5 +1,7 @@
 # Lightning Realty 
 
+Lightning Realty is a sample application built with [React](http://facebook.github.io/react/) and the [Lightning Design System](www.lightningdesignsystem.com). The back-end is built on Node.js using a Postgres database. 
+
 ## Automatic Deployment to Heroku
 
 Click the Button below to deploy to Heroku
@@ -27,4 +29,3 @@ Click the Button below to deploy to Heroku
     > The database is automatically populated
     
 1. Open a browser and access http://localhost:5000    
-    
