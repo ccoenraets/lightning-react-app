@@ -24,19 +24,25 @@ Your own instance of the application is automatically deployed, and your own Pos
 
 1. Navigate to the **lightning-react-app** directory and install the project dependencies:
 
-    ```npm install```
+    ```
+    npm install
+    ```
 
 1. Open **server/config.js** and make sure the **databaseURL** matches your configuration (use your user name)
 
 1. Type the following command to build the client application:
 
-    ```npm run build-client```
+    ```
+    npm run build-client
+    ```
     
     The project is written using ECMAScript 6 including ECMAScript 6 modules.
 
 1. Type the following command to start the server:
     
-    ```npm start```
+    ```
+    npm start
+    ```
     
     The database is automatically populated
     
