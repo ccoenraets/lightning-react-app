@@ -12,7 +12,7 @@ The back-end is built on Node.js using a Postgres database.
 
 Click the Button below to deploy the application on Heroku.
 
-(available soon)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 Your own instance of the application is automatically deployed, and your own Postgres database is initialized with sample data.
 

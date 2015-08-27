@@ -1,0 +1,5 @@
+{
+  "name": "LightningRealty",
+  "description": "Sample app with React and the Lightning Design System",
+  "addons": ["heroku-postgresql:hobby-dev"]
+}
