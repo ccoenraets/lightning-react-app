@@ -10,7 +10,9 @@ The back-end is built with **Node.js** using a **Postgres** database.
 
 ## Automatic Deployment to Heroku
 
-Click the Button below to deploy the application on Heroku.
+1. Make sure you are logged in to the [Heroku Dashboard](https://dashboard.heroku.com)
+
+2. Click the Button below to deploy the application on Heroku.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
