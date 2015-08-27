@@ -18,6 +18,8 @@ Your own instance of the application is automatically deployed, and your own Pos
 
 ## Local Installation
 
+Follow the instructions below if you prefer to install the application on your local machine:
+
 1. Install [Postgres](http://www.postgresql.org/) locally and create a database called **realty**.
 
 1. Clone this repository or download and unzip [this](https://github.com/ccoenraets/lightning-react-app/archive/master.zip) zip file.
@@ -55,6 +57,7 @@ This project is work in progress. For example, here are some items that still ne
 - Make components more robust and general purpose
 - Create more components
 - Fix React keys throughout the project
+- Improved navigation system
 - etc.
 
 
