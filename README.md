@@ -4,7 +4,7 @@ This repository is the home of **Lightning Realty**, a reference application bui
 
 Check out this video for a quick walkthrough:
 
-[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/UZtvQazYX8A/0.jpg)](http://www.youtube.com/watch?v=UZtvQazYX8A)
+[![Video](http://img.youtube.com/vi/UZtvQazYX8A/0.jpg)](http://www.youtube.com/watch?v=UZtvQazYX8A)
 
 The back-end is built with **Node.js** using a **Postgres** database. 
 

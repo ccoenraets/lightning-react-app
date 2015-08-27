@@ -1,5 +1,5 @@
 /***
- * Lightning Design System v0.7.0
+ * Lightning Design System v0.8.0
  */
 
 /*
@@ -10,6 +10,39 @@ Redistributions in binary form must reproduce the above copyright notice, this l
 Neither the name of salesforce.com, inc. nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+@font-face {
+  font-family: "Salesforce Sans";
+  src: url("/assets/fonts/webfonts/SalesforceSans-Light.woff2") format("woff2"), url("/assets/fonts/webfonts/SalesforceSans-Light.woff") format("woff");
+  font-weight: 300; }
+
+@font-face {
+  font-family: "Salesforce Sans";
+  src: url("/assets/fonts/webfonts/SalesforceSans-LightItalic.woff2") format("woff2"), url("/assets/fonts/webfonts/SalesforceSans-LightItalic.woff") format("woff");
+  font-style: italic;
+  font-weight: 300; }
+
+@font-face {
+  font-family: "Salesforce Sans";
+  src: url("/assets/fonts/webfonts/SalesforceSans-Regular.woff2") format("woff2"), url("/assets/fonts/webfonts/SalesforceSans-Regular.woff") format("woff");
+  font-weight: 400; }
+
+@font-face {
+  font-family: "Salesforce Sans";
+  src: url("/assets/fonts/webfonts/SalesforceSans-Italic.woff2") format("woff2"), url("/assets/fonts/webfonts/SalesforceSans-Italic.woff") format("woff");
+  font-style: italic;
+  font-weight: 400; }
+
+@font-face {
+  font-family: "Salesforce Sans";
+  src: url("/assets/fonts/webfonts/SalesforceSans-Bold.woff2") format("woff2"), url("/assets/fonts/webfonts/SalesforceSans-Bold.woff") format("woff");
+  font-weight: 700; }
+
+@font-face {
+  font-family: "Salesforce Sans";
+  src: url("/assets/fonts/webfonts/SalesforceSans-BoldItalic.woff2") format("woff2"), url("/assets/fonts/webfonts/SalesforceSans-BoldItalic.woff") format("woff");
+  font-style: italic;
+  font-weight: 700; }
+
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -185,38 +218,6 @@ table {
 td,
 th {
   padding: 0; }
-@font-face {
-  font-family: "Salesforce Sans";
-  src: url("/assets/fonts/webfonts/SalesforceSans-Light.woff2") format("woff2"), url("/assets/fonts/webfonts/SalesforceSans-Light.woff") format("woff");
-  font-weight: 300; }
-
-@font-face {
-  font-family: "Salesforce Sans";
-  src: url("/assets/fonts/webfonts/SalesforceSans-LightItalic.woff2") format("woff2"), url("/assets/fonts/webfonts/SalesforceSans-LightItalic.woff") format("woff");
-  font-style: italic;
-  font-weight: 300; }
-
-@font-face {
-  font-family: "Salesforce Sans";
-  src: url("/assets/fonts/webfonts/SalesforceSans-Regular.woff2") format("woff2"), url("/assets/fonts/webfonts/SalesforceSans-Regular.woff") format("woff");
-  font-weight: 400; }
-
-@font-face {
-  font-family: "Salesforce Sans";
-  src: url("/assets/fonts/webfonts/SalesforceSans-Italic.woff2") format("woff2"), url("/assets/fonts/webfonts/SalesforceSans-Italic.woff") format("woff");
-  font-style: italic;
-  font-weight: 400; }
-
-@font-face {
-  font-family: "Salesforce Sans";
-  src: url("/assets/fonts/webfonts/SalesforceSans-Bold.woff2") format("woff2"), url("/assets/fonts/webfonts/SalesforceSans-Bold.woff") format("woff");
-  font-weight: 700; }
-
-@font-face {
-  font-family: "Salesforce Sans";
-  src: url("/assets/fonts/webfonts/SalesforceSans-BoldItalic.woff2") format("woff2"), url("/assets/fonts/webfonts/SalesforceSans-BoldItalic.woff") format("woff");
-  font-style: italic;
-  font-weight: 700; }
 *,
 *:before,
 *:after {
@@ -224,31 +225,30 @@ th {
 
 *::-webkit-input-placeholder {
   color: #54698d;
-  font-weight: 300; }
+  font-weight: 400; }
 
 *:-moz-placeholder {
   color: #54698d;
-  font-weight: 300; }
+  font-weight: 400; }
 
 *::-moz-placeholder {
   color: #54698d;
-  font-weight: 300; }
+  font-weight: 400; }
 
 *:-ms-input-placeholder {
   color: #54698d;
-  font-weight: 300; }
+  font-weight: 400; }
 
 html {
   height: 100%;
-  font: 100%/1.375 "Salesforce Sans", Arial, sans-serif;
+  font: 100%/1.5 "Salesforce Sans", Arial, sans-serif;
   background: white;
   color: #16325c;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-overflow-scrolling: touch; }
+  -webkit-tap-highlight-color: transparent; }
 
 body {
   height: 100%;
-  font-size: 1rem;
+  font-size: 0.875rem;
   background: transparent; }
 
 ::-moz-selection {
@@ -380,7 +380,7 @@ img {
             align-items: center; }
   .slds-timeline__date {
     margin-bottom: 0.25rem;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     color: #54698d; }
   .slds-timeline__media--call {
     border-left-color: #48c3cc; }
@@ -427,7 +427,7 @@ img {
     .slds-button-group .slds-button:focus {
       z-index: 1; }
     .slds-button-group .slds-button:only-child {
-      border-radius: 0.25rem; }
+      border-radius: .25rem; }
   .slds-button-group + .slds-button-group {
     margin-left: 0.25rem; }
   .slds-button-group .slds-button--last { }
@@ -785,12 +785,15 @@ a.slds-button--inverse:focus {
 .slds-form-element {
   position: relative; }
   .slds-form-element__helper {
-    font-size: 0.875rem; }
+    font-size: 0.75rem; }
 
 .slds-form-element__label {
+  display: inline-block;
   color: #54698d;
-  line-height: 1.375;
-  margin-right: 0.75rem; }
+  font-size: 0.75rem;
+  line-height: 1.5;
+  margin-right: 0.75rem;
+  margin-bottom: 0.25rem; }
   .slds-is-required > .slds-form-element__label:before {
     content: '*';
     color: #c23934;
@@ -798,11 +801,9 @@ a.slds-button--inverse:focus {
     left: -0.5rem; }
   .slds-form-element__label:empty {
     margin: 0; }
-  .slds-form-element__label--small {
-    font-size: 0.875rem; }
 
 .slds-form-element__help {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   margin-top: 0.5rem;
   display: block; }
   .slds-has-error .slds-form-element__help {
@@ -812,8 +813,6 @@ a.slds-button--inverse:focus {
   color: #16325c;
   border: 1px solid #d8dde6;
     border-radius: 0.25rem;
-  font-weight: 300;
-  font-size: 1.25rem;
   width: 100%;
   -webkit-transition: border 0.1s linear, background-color 0.1s linear;
           transition: border 0.1s linear, background-color 0.1s linear;
@@ -874,7 +873,7 @@ a.slds-button--inverse:focus {
   border: none;
   color: #16325c;
   font-weight: 300;
-  font-size: 1.25rem; }
+  font-size: 1.125rem; }
   .slds-input--bare:focus,
   .slds-input--bare:active {
     outline: 0; }
@@ -903,13 +902,11 @@ a.slds-button--inverse:focus {
   color: #16325c;
   border: 1px solid #d8dde6;
     border-radius: 0.25rem;
-  font-weight: 300;
-  font-size: 1.25rem;
   width: 100%;
   -webkit-transition: border 0.1s linear, background-color 0.1s linear;
           transition: border 0.1s linear, background-color 0.1s linear;
   resize: vertical;
-  padding: 0.75rem; }
+  padding: 0.5rem 0.75rem; }
   .slds-textarea:focus,
   .slds-textarea:active {
     outline: 0;
@@ -949,7 +946,9 @@ a.slds-button--inverse:focus {
     -webkit-transition: border 0.1s linear, background-color 0.1s linear;
             transition: border 0.1s linear, background-color 0.1s linear; }
   .slds-radio .slds-form-element__label {
-    vertical-align: middle; }
+    display: inline;
+    vertical-align: middle;
+    font-size: 0.875rem; }
   .slds-radio [type="radio"] {
     width: 1px;
     height: 1px;
@@ -1015,7 +1014,9 @@ a.slds-button--inverse:focus {
     -webkit-transition: border 0.1s linear, background-color 0.1s linear;
             transition: border 0.1s linear, background-color 0.1s linear; }
   .slds-checkbox .slds-form-element__label {
-    vertical-align: middle; }
+    display: inline;
+    vertical-align: middle;
+    font-size: 0.875rem; }
   .slds-checkbox [type="checkbox"] {
     width: 1px;
     height: 1px;
@@ -1069,8 +1070,6 @@ a.slds-button--inverse:focus {
   color: #16325c;
   border: 1px solid #d8dde6;
     border-radius: 0.25rem;
-  font-weight: 300;
-  font-size: 1.25rem;
   width: 100%;
   -webkit-transition: border 0.1s linear, background-color 0.1s linear;
           transition: border 0.1s linear, background-color 0.1s linear;
@@ -1110,7 +1109,8 @@ a.slds-button--inverse:focus {
     max-width: 33%;
     vertical-align: top;
     position: relative;
-    top: 0.375rem; }
+    top: 0.3125rem;
+    margin-bottom: 0; }
     .slds-form--horizontal .slds-form-element > .slds-form-element__label--top {
       top: 0; } }
 
@@ -1173,8 +1173,6 @@ a.slds-button--inverse:focus {
     max-width: 33%; } }
 .slds-form-element__static {
   display: inline-block;
-  font-weight: 300;
-  font-size: 1.25rem;
   line-height: 2.125rem;
   min-height: calc(2.125rem + 2px); }
 .slds-grid {
@@ -1196,8 +1194,8 @@ a.slds-button--inverse:focus {
   .slds-text-longform .slds-grid {
     padding-left: 0; }
 
-ul.slds-grid,
-.slds-text-longform ul.slds-grid {
+.slds-grid,
+.slds-text-longform .slds-grid {
   margin-left: 0;
   list-style: none; }
 
@@ -1215,9 +1213,28 @@ ul.slds-grid,
   padding-right: 0.75rem;
   padding-left: 0.75rem; }
 
+.slds-col--padded-medium {
+  padding-right: 1rem;
+  padding-left: 1rem; }
+
+.slds-col--padded-large {
+  padding-right: 1.5rem;
+  padding-left: 1.5rem; }
+
+.slds-grid--pull-padded,
 .slds-col--padded > .slds-grid {
   margin-right: -0.75rem;
   margin-left: -0.75rem; }
+
+.slds-grid--pull-padded-medium,
+.slds-col--padded-medium > .slds-grid {
+  margin-right: -1rem;
+  margin-left: -1rem; }
+
+.slds-grid--pull-padded-large,
+.slds-col--padded-large > .slds-grid {
+  margin-right: -1.5rem;
+  margin-left: -1.5rem; }
 
 @media (min-width: 64em) {
   .slds-col-rule--left {
@@ -1478,7 +1495,7 @@ ul.slds-grid,
 
 .slds-tooltip__body {
   padding: 0.5rem 0.75rem;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: white; }
 
 .slds-rise-from-ground {
@@ -1666,7 +1683,7 @@ ul.slds-grid,
   min-width: 15rem;
   max-width: 20rem;
   font-weight: 300;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   color: #16325c;
   text-align: left; }
   .slds-picklist__label .slds-icon {
@@ -1702,7 +1719,7 @@ ul.slds-grid,
 
 .slds-picklist__item {
   position: relative;
-  line-height: 1.375; }
+  line-height: 1.5; }
   .slds-picklist__item > a,
   .slds-picklist__item > span {
     display: block;
@@ -1801,7 +1818,7 @@ ul.slds-grid,
   .slds-dropdown__header {
     padding: 0.5rem 0.75rem; }
   .slds-dropdown__item {
-    line-height: 1.375; }
+    line-height: 1.5; }
     .slds-dropdown__item > a,
     .slds-dropdown__item > span {
       display: block;
@@ -1876,7 +1893,7 @@ ul.slds-grid,
 .slds-datepicker {
   margin-top: 0.25rem;
   padding: 0;
-  font-size: 0.875rem; }
+  font-size: 0.75rem; }
   .slds-datepicker th,
   .slds-datepicker td {
     text-align: center; }
@@ -1947,25 +1964,25 @@ ul.slds-grid,
     padding: 0 0.25rem 0 0; }
   .slds-datepicker .slds-picklist__label {
     min-width: 0;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     font-weight: 400; }
 
 .slds-disabled-text {
   color: #d8dde6; }
 .slds-datepicker--time {
   padding: 0.75rem 0;
-  font-size: 1rem; }
+  font-size: 0.875rem; }
   .slds-datepicker--time__list {
-    max-height: 12.75rem;
+    max-height: 13.5rem;
     overflow-y: auto; }
     .slds-datepicker--time__list > li {
       padding: 0.5rem;
         padding-left: 2rem; }
       .slds-datepicker--time__list > li:hover,
       .slds-datepicker--time__list > li:focus {
-        background: #005fb2;
-        color: white;
-        text-decoration: none; }
+        background: #f4f6f9;
+        text-decoration: none;
+        cursor: pointer; }
 .slds-modal {
   opacity: 0;
   visibility: hidden;
@@ -2566,7 +2583,7 @@ ul.slds-grid,
   font-size: 0.625rem;
   line-height: 1.25;
   text-transform: uppercase;
-  letter-spacing: 0.0625em;
+  letter-spacing: .0625em;
   color: #16325c;
   vertical-align: middle;
   white-space: nowrap; }
@@ -3742,7 +3759,7 @@ ul.slds-grid,
         color: #54698d;
         text-transform: uppercase;
         font-family: "SalesforceSans-Regular", Arial, sans-serif;
-        font-size: 0.875rem;
+        font-size: 0.75rem;
         font-weight: 300; }
     .slds-max-medium-table--stacked tr > td:first-child,
     .slds-max-medium-table--stacked tr > td:last-child {
@@ -3786,7 +3803,7 @@ ul.slds-grid,
         color: #54698d;
         text-transform: uppercase;
         font-family: "SalesforceSans-Regular", Arial, sans-serif;
-        font-size: 0.875rem;
+        font-size: 0.75rem;
         font-weight: 300; }
     .slds-max-medium-table--stacked-horizontal tr > td:first-child,
     .slds-max-medium-table--stacked-horizontal tr > td:last-child {
@@ -4677,10 +4694,10 @@ ul.slds-grid,
         -ms-flex-order: 12;
             order: 12; } }
 .slds-list--dotted {
-  margin-left: 3rem;
+  margin-left: 1.5rem;
   list-style: disc; }
 .slds-list--ordered {
-  margin-left: 3rem;
+  margin-left: 1.5rem;
   list-style: decimal; }
 .slds-dl--inline:after {
   content: '';
@@ -4941,31 +4958,27 @@ ul.slds-grid,
     .slds-theme--inverse-text a:not(.slds-button--neutral)[disabled] {
       color: rgba(255, 255, 255, 0.15); }
 .slds-text-body--regular {
-  font-size: 1rem; }
+  font-size: 0.875rem; }
 .slds-text-heading--small {
   font-weight: 300;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   line-height: 1.25; }
 .slds-text-heading--medium {
   font-weight: 300;
   font-size: 1.5rem;
   line-height: 1.25; }
 .slds-text-heading--large {
-  font-weight: 700;
-  font-size: 1.5rem;
+  font-weight: 300;
+  font-size: 2rem;
   line-height: 1.25; }
-  @media (min-width: 48em) {
-    .slds-text-heading--large {
-      font-weight: 300;
-      font-size: 2rem; } }
 .slds-text-heading--label {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   line-height: 1.25;
   text-transform: uppercase;
-  letter-spacing: 0.0625em;
+  letter-spacing: .0625em;
   color: #54698d; }
 .slds-text-body--small {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: #54698d; }
 .slds-text-align--left {
   text-align: left; }
@@ -4985,32 +4998,24 @@ ul.slds-grid,
 .slds-text-longform img {
   margin-bottom: 0.75rem; }
   .slds-text-longform h1:last-child,
-  .slds-text-longform h1 p img,
   .slds-text-longform h2:last-child,
-  .slds-text-longform h2 p img,
   .slds-text-longform h3:last-child,
-  .slds-text-longform h3 p img,
   .slds-text-longform p:last-child,
-  .slds-text-longform p p img,
   .slds-text-longform ul:last-child,
-  .slds-text-longform ul p img,
   .slds-text-longform ol:last-child,
-  .slds-text-longform ol p img,
   .slds-text-longform dl:last-child,
-  .slds-text-longform dl p img,
-  .slds-text-longform img:last-child,
-  .slds-text-longform img p img {
+  .slds-text-longform img:last-child {
     margin-bottom: 0; }
 
-.slds-text-longform ul:not(.slds-grid) {
-  margin-left: 3rem;
+.slds-text-longform ul {
+  margin-left: 1.5rem;
   list-style: disc; }
 
 .slds-text-longform ol {
-  margin-left: 3rem;
+  margin-left: 1.5rem;
   list-style: decimal; }
 .slds-section-title {
-  font-size: 1.25rem; }
+  font-size: 1.125rem; }
   .slds-section-title > a {
     display: inline-block;
     color: #16325c; }
@@ -5031,7 +5036,8 @@ ul.slds-grid,
       -ms-transform: rotate(-90deg);
           transform: rotate(-90deg); }
 .slds-type-focus {
-  border-bottom: 1px solid transparent; }
+  border-bottom: 1px solid transparent;
+  cursor: pointer; }
   .slds-type-focus:hover {
     border-bottom: 1px solid #005fb2; }
   .slds-type-focus:focus {
