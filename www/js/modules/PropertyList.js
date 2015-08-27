@@ -17,7 +17,7 @@ export default React.createClass({
 
     render() {
         return (
-            <DataGrid data={this.props.properties} onSort={this.props.onSort} onAction={this.actionHandler}>
+            <DataGrid data={this.props.properties} keyField="propertyId" onSort={this.props.onSort} onAction={this.actionHandler}>
                 <div header="Address" field="address" sortable={true} onLink={this.linkHandler}/>
                 <div header="City" field="city" sortable={true}/>
                 <div header="Bedrooms" field="bedrooms" textAlign="center"/>

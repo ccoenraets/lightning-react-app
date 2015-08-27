@@ -34,12 +34,6 @@ export default React.createClass({
                             <input className="slds-input" type="text" valueLink={this.linkState('last_name')}/>
                         </div>
                     </div>
-                    <div className="slds-form-element">
-                        <label className="slds-form-element__label" htmlFor="sample1">Title</label>
-                        <div className="slds-form-element__control">
-                            <input className="slds-input" type="text" valueLink={this.linkState('title')}/>
-                        </div>
-                    </div>
                     <fieldset className="slds-form--compound slds-m-top--medium slds-m-bottom--medium">
                         <legend className="slds-form-element__label">Address</legend>
                         <div className="form-element__group">
@@ -68,6 +62,12 @@ export default React.createClass({
                 </div>
                 <div className="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2">
                     <div className="slds-form-element">
+                        <label className="slds-form-element__label" htmlFor="sample1">Title</label>
+                        <div className="slds-form-element__control">
+                            <input className="slds-input" type="text" valueLink={this.linkState('title')}/>
+                        </div>
+                    </div>
+                    <div className="slds-form-element">
                         <label className="slds-form-element__label" htmlFor="sample1">Mobile Phone</label>
                         <div className="slds-form-element__control">
                             <input className="slds-input" type="text" valueLink={this.linkState('mobile_phone')}/>
@@ -92,7 +92,7 @@ export default React.createClass({
                         </div>
                     </div>
                 </div>
-                <div className="slds-col--padded slds-size--1-of-1">
+                <div className="slds-col--padded slds-m-top--medium slds-size--1-of-1">
                     <button className="slds-button slds-button--brand" onClick={this.save}>Save</button>
                 </div>
             </div>

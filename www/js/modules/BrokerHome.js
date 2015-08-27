@@ -1,6 +1,6 @@
 import React from 'react';
 
-import * as BrokerService from './services/BrokerService';
+import * as brokerService from './services/BrokerService';
 
 import {HomeHeader} from './components/PageHeader';
 import BrokerList from './BrokerList';
@@ -13,11 +13,11 @@ export default React.createClass({
     },
 
     componentDidMount() {
-        BrokerService.findAll().then(brokers => this.setState({brokers}));
+        brokerService.findAll().then(brokers => this.setState({brokers}));
     },
 
     sortHandler(sortOrder) {
-        BrokerService.findAll(sortOrder).then(brokers => {
+        brokerService.findAll(sortOrder).then(brokers => {
             this.setState({sortOrder, brokers})
         });
     },
@@ -27,8 +27,8 @@ export default React.createClass({
     },
 
     deleteHandler(data) {
-        BrokerService.deleteItem(data.broker_id).then(() => {
-            BrokerService.findAll(this.state.sort).then(brokers => this.setState({brokers}));
+        brokerService.deleteItem(data.broker_id).then(() => {
+            brokerService.findAll(this.state.sort).then(brokers => this.setState({brokers}));
         });
     },
 
@@ -37,8 +37,8 @@ export default React.createClass({
     },
 
     saveHandler(Broker) {
-        BrokerService.createItem(Broker).then(() => {
-            BrokerService.findAll().then(brokers => this.setState({addingBroker: false, brokers}));
+        brokerService.createItem(Broker).then(() => {
+            brokerService.findAll().then(brokers => this.setState({addingBroker: false, brokers}));
         });
     },
 
@@ -51,6 +51,7 @@ export default React.createClass({
             <div>
                 <HomeHeader type="brokers"
                             title="My Brokers"
+                            newLabel="New Broker"
                             actions={[{value:"new", label:"New Broker"}]}
                             itemCount={this.state.brokers.length}
                             viewOptions={[{value:"table", label:"Table", icon:"table"},{value:"tiles", label:"Tiles", icon:"location"}]}

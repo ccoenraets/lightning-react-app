@@ -21,9 +21,8 @@ function findById(req, res, next) {
     var sql = "SELECT contact_id, first_name, last_name, address, city, state, zip, occupation, home_phone, mobile_phone, email, lead_source, category, member_since, notes, pic FROM contact WHERE contact_id = $1";
 
     db.query(sql, [id])
-        .then(function (product) {
-            console.log(product[0]);
-            return res.json(product[0]);
+        .then(function (contact) {
+            return res.json(contact[0]);
         })
         .catch(next);
 };
@@ -43,8 +42,8 @@ function createItem(req, res, next) {
 
 function updateItem(req, res, next) {
     var contact = req.body;
-    db.query('UPDATE contact SET first_name=$1, last_name=$2, home_phone=$3, mobile_phone=$4, email=$5 WHERE contact_id=$6',
-        [contact.first_name, contact.last_name, contact.home_phone, contact.mobile_phone, contact.email, contact.contact_id], true)
+    db.query('UPDATE contact SET first_name=$1, last_name=$2, address=$3, city=$4, state=$5, zip=$6, home_phone=$7, mobile_phone=$8, email=$9, occupation=$10, pic=$11 WHERE contact_id=$12',
+        [contact.first_name, contact.last_name, contact.address, contact.city, contact.state, contact.zip, contact.home_phone, contact.mobile_phone, contact.email, contact.occupation, contact.pic, contact.contact_id], true)
         .then(function () {
             return res.send({result: 'ok'});
         })

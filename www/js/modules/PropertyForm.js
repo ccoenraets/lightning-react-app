@@ -14,14 +14,19 @@ export default React.createClass({
         this.setState({...property});
     },
 
+    latitudeChange(event) {
+        this.setState({location: {x: parseFloat(event.target.value), y: this.state.location.y}});
+    },
+
+    longitudeChange(event) {
+        this.setState({location: {x: this.state.location.x, y: parseFloat(event.target.value)}});
+    },
+
     save() {
         this.props.saveHandler(this.state);
     },
 
     render() {
-        let smallInput = {
-            width: "120px"
-        };
         return (
             <div className="slds-form--stacked slds-grid slds-wrap slds-m-top--large">
                 <div className="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2">
@@ -56,11 +61,11 @@ export default React.createClass({
                             <div className="slds-form-element__row">
                                 <label className="slds-form-element__control slds-size--1-of-2">
                                     <small className="slds-form-element__helper">Latitude</small>
-                                    <input className="slds-input" type="text" valueLink={this.linkState('latitude')}/>
+                                    <input className="slds-input" type="text" value={this.state.location ? this.state.location.x : ""} onChange={this.latitudeChange}/>
                                 </label>
                                 <label className="slds-form-element__control slds-size--1-of-2">
                                     <small className="slds-form-element__helper">Longitude</small>
-                                    <input className="slds-input" type="text" valueLink={this.linkState('longitude')}/>
+                                    <input className="slds-input" type="text" value={this.state.location ? this.state.location.y : ""} onChange={this.longitudeChange}/>
                                 </label>
                             </div>
                         </div>
@@ -111,7 +116,7 @@ export default React.createClass({
                         </div>
                     </div>
                 </div>
-                <div className="slds-col--padded slds-size--1-of-1">
+                <div className="slds-col--padded slds-m-top--medium slds-size--1-of-1">
                     <button className="slds-button slds-button--brand" onClick={this.save}>Save</button>
                 </div>
             </div>

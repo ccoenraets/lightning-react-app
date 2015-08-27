@@ -43,12 +43,12 @@ export default React.createClass({
     render() {
         return (
             <div>
-                <RecordHeader type="Broker" icon="user" title={this.state.broker.first_name + ' ' + this.state.broker.last_name}
+                <RecordHeader type="Broker" icon="people" title={this.state.broker.first_name + ' ' + this.state.broker.last_name}
                               onEdit={this.editHandler}
                               onDelete={this.deleteHandler}
                               onClone={this.cloneHandler}>
                     <HeaderField label="Mobile Phone" value={this.state.broker.mobile_phone}/>
-                    <HeaderField label="Home Phone" value={this.state.broker.home_phone}/>
+                    <HeaderField label="Office Phone" value={this.state.broker.office_phone}/>
                     <HeaderField label="Email" value={this.state.broker.email}/>
                 </RecordHeader>
                 <RouteHandler broker={this.state.broker} saveHandler={this.saveHandler}/>

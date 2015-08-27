@@ -27,6 +27,10 @@ export default React.createClass({
         this.setState({addingActivity: true})
     },
 
+    deleteActivityHandler(activity) {
+        activityService.deleteItem(activity.activity_id).then(() => this.loadActivities(this.props.contact.contact_id));
+    },
+
     cancelActivityHandler() {
         this.setState({addingActivity: false});
     },
@@ -60,7 +64,7 @@ export default React.createClass({
                                     <p className="slds-text-heading--label slds-truncate" title="Field 1">Address</p>
                                 </dt>
                                 <dd>
-                                    <p className="slds-text-body--regular slds-truncate" title="">{this.props.contact.address}<br/>{this.props.contact.city}, {this.props.contact.state} {this.props.contact.zip}</p>
+                                    <p className="slds-text-body--regular slds-truncate" title="">{this.props.contact.address}<br/>{this.props.contact.city} {this.props.contact.state} {this.props.contact.zip}</p>
                                 </dd>
                             </dl>
                         </div>
@@ -109,7 +113,7 @@ export default React.createClass({
 
                 <div className="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2">
                     <Tabs>
-                        <div label="Activity">
+                        <div label="Activities">
                             <ActivityTimeline contactId={this.props.contact.contact_id} activities={this.state.activities} showContact={false} showProperty={true}/>
                         </div>
                         <div label="Related">
@@ -120,7 +124,10 @@ export default React.createClass({
 
                 <div className="slds-col--padded slds-size--1-of-1">
                     <br/>
-                    <ActivityCard contactId={this.props.contact.contact_id} activities={this.state.activities} showContact={false} showProperty={true} onNew={this.newActivityHandler}/>
+                    <ActivityCard contactId={this.props.contact.contact_id} activities={this.state.activities} showContact={false} showProperty={true}
+                          onNew={this.newActivityHandler}
+                          onDelete={this.deleteActivityHandler}/>
+
                 </div>
                 {this.state.addingActivity ? <NewActivityWindow onSave={this.saveActivityHandler} onCancel={this.cancelActivityHandler} contactId={this.props.contact.contact_id} /> : ""}
             </div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 import QuickFind from './components/QuickFind';
 
-import * as ContactService from './services/ContactService';
+import * as contactService from './services/ContactService';
 
 export default React.createClass({
 
@@ -14,7 +14,7 @@ export default React.createClass({
     },
 
     searchKeyChangeHandler(key) {
-        ContactService.findByName(key).then(list => this.setState({searchKey: key, list: list}));
+        contactService.findByName(key).then(list => this.setState({searchKey: key, list: list}));
     },
 
     render() {

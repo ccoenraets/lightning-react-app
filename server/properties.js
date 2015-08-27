@@ -6,7 +6,7 @@ function findAll(req, res, next) {
         promise;
 
     if (brokerId) {
-        promise = db.query("SELECT pb.property_id, p.address, p.city, p.bedrooms, p.bathrooms, p.price, p.location FROM property_broker as pb " +
+        promise = db.query("SELECT pb.property_id, p.address, p.city, p.bedrooms, p.bathrooms, p.price, p.location, p.pic FROM property_broker as pb " +
             "INNER JOIN property AS p on pb.property_id = p.property_id " +
             "INNER JOIN broker AS b on pb.broker_id = b.broker_id " +
             "WHERE pb.broker_id = $1 ORDER BY p.address", [brokerId]);
@@ -19,7 +19,7 @@ function findAll(req, res, next) {
             whereClause = "WHERE address || city ~* $1";
             params.push(name);
         }
-        promise = db.query("SELECT property_id, address, city, bedrooms, bathrooms, price, location FROM property " + whereClause + " ORDER BY " + sort, params);
+        promise = db.query("SELECT property_id, address, city, bedrooms, bathrooms, price, location, pic FROM property " + whereClause + " ORDER BY " + sort, params);
     }
     promise.then(function (properties) {
         return res.send(JSON.stringify(properties));
@@ -35,9 +35,8 @@ function findById(req, res, next) {
     var sql = "SELECT property_id, address, city, zip, pic, state, teaser, description, size, bedrooms, bathrooms, price, location FROM property WHERE property_id = $1";
 
     db.query(sql, [id])
-        .then(function (product) {
-            console.log(product[0]);
-            return res.json(product[0]);
+        .then(function (property) {
+            return res.json(property[0]);
         })
         .catch(next);
 };
@@ -57,8 +56,8 @@ function createItem(req, res, next) {
 
 function updateItem(req, res, next) {
     var property = req.body;
-    db.query('UPDATE property SET address=$1, city=$2, state=$3, zip=$4, pic=$5, teaser=$6, description=$7, size=$8, bedrooms=$9, bathrooms=$10, price=$11 WHERE property_id=$12',
-        [property.address, property.city, property.state, property.zip, property.pic, property.teaser, property.description, property.size, property.bedrooms, property.bathrooms, property.price, property.property_id], true)
+    db.query('UPDATE property SET address=$1, city=$2, state=$3, zip=$4, pic=$5, teaser=$6, description=$7, size=$8, bedrooms=$9, bathrooms=$10, price=$11, location=POINT($12, $13) WHERE property_id=$14',
+        [property.address, property.city, property.state, property.zip, property.pic, property.teaser, property.description, property.size, property.bedrooms, property.bathrooms, property.price, property.location.x, property.location.y, property.property_id], true)
         .then(function () {
             return res.send({result: 'ok'});
         })

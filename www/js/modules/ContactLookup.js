@@ -1,6 +1,6 @@
 import React from 'react';
 
-import * as ContactService from './services/ContactService';
+import * as contactService from './services/ContactService';
 
 import Lookup from './components/Lookup';
 
@@ -14,7 +14,7 @@ export default React.createClass({
     },
 
     searchKeyChangeHandler(key) {
-        ContactService.findByName(key).then(items => this.setState({searchKey: key, items: items}));
+        contactService.findByName(key).then(items => this.setState({searchKey: key, items: items}));
     },
 
     render() {

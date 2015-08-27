@@ -1,5 +1,5 @@
 function toQueryString(obj) {
-    var parts = [],
+    let parts = [],
         i;
     for (i in obj) {
         if (obj.hasOwnProperty(i) && obj[i]) {
@@ -24,7 +24,6 @@ function request(obj) {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 if (xhr.status > 199 && xhr.status < 300) {
-                    console.log(JSON.parse(xhr.responseText));
                     resolve(xhr.responseText ? JSON.parse(xhr.responseText) : undefined);
                 } else {
                     reject(xhr.responseText);
@@ -37,7 +36,6 @@ function request(obj) {
         if (obj.contentType) {
             xhr.setRequestHeader("Content-Type", obj.contentType);
         }
-        console.log(obj.data);
         xhr.send(obj.data ? JSON.stringify(obj.data) : undefined);
     });
 

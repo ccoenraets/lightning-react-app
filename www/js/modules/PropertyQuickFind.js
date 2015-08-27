@@ -1,6 +1,6 @@
 import React from 'react';
 
-import * as PropertyService from './services/PropertyService';
+import * as propertyService from './services/PropertyService';
 
 import QuickFind from './components/QuickFind';
 
@@ -14,7 +14,7 @@ export default React.createClass({
     },
 
     searchKeyChangeHandler(key) {
-        PropertyService.findByName(key).then(list => this.setState({searchKey: key, list: list}));
+        propertyService.findByName(key).then(list => this.setState({searchKey: key, list: list}));
     },
 
     render() {

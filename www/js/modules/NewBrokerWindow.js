@@ -48,9 +48,9 @@ export default React.createClass({
                                     </div>
                                 </div>
                                 <div className="slds-form-element">
-                                    <label className="slds-form-element__label" htmlFor="sample1">Home Phone</label>
+                                    <label className="slds-form-element__label" htmlFor="sample1">Office Phone</label>
                                     <div className="slds-form-element__control">
-                                        <input className="slds-input" type="text" valueLink={this.linkState('home_phone')}/>
+                                        <input className="slds-input" type="text" valueLink={this.linkState('office_phone')}/>
                                     </div>
                                 </div>
                                 <div className="slds-form-element">

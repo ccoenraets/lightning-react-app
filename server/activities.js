@@ -31,21 +31,7 @@ function findAll(req, res, next) {
 
 };
 
-function findById(req, res, next) {
-    var id = req.params.id;
-
-    var sql = "SELECT contact_id, first_name, last_name, home_phone, mobile_phone, email FROM contact WHERE contact_id = $1";
-
-    db.query(sql, [id])
-        .then(function (product) {
-            console.log(product[0]);
-            return res.json(product[0]);
-        })
-        .catch(next);
-};
-
 function createItem(req, res, next) {
-    console.log(activity);
     var activity = req.body;
     db.query('INSERT INTO activity (property_id, contact_id, activity_type_id, activity_date, price, comment) VALUES ($1, $2, $3, $4, $5, $6)',
         [activity.property_id, activity.contact_id, activity.activity_type_id, activity.activity_date, activity.price, activity.comment], true)
@@ -58,7 +44,6 @@ function createItem(req, res, next) {
 };
 
 function deleteItem(req, res, next) {
-    console.log("delete activities");
     var activityId = req.params.id;
     db.query('DELETE FROM activity WHERE activity_id=$1', [activityId], true)
         .then(function () {
@@ -71,6 +56,5 @@ function deleteItem(req, res, next) {
 };
 
 exports.findAll = findAll;
-exports.findById = findById;
 exports.createItem = createItem;
 exports.deleteItem = deleteItem;

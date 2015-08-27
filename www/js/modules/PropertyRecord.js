@@ -34,7 +34,7 @@ export default React.createClass({
 
     deleteHandler() {
         propertyService.deleteItem(this.state.property.property_id).then(() => {
-            window.location.hash = '#properties';
+            window.location.hash = '#';
         });
     },
 

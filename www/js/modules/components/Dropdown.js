@@ -85,12 +85,20 @@ export let ButtonDropdown = React.createClass({
                 break;
             }
         }
+        let className = "slds-button slds-button--icon-more";
+        //if (this.props.iconMore) {
+        //    className = className + "";
+        //}
+        //if (this.props.iconBorder) {
+        //    className = className + " slds-button--icon-border";
+        //}
         return (
             <div className="slds-dropdown-trigger" aria-haspopup="true">
-                <button className="slds-button slds-button--icon-more" aria-haspopup="true">
+                <button className={className} aria-haspopup="true">
                     <ButtonIcon name={icon || this.props.icon}/>
                     <span className="slds-assistive-text">Settings</span>
                     <ButtonIcon name="down" size="x-small"/>
+                    <span className="slds-assistive-text">More</span>
                 </button>
                 <Dropdown header={this.props.header}
                           valueField={this.props.valueField}
@@ -116,7 +124,7 @@ export let ActionButton = React.createClass({
             <div className="slds-dropdown-trigger" aria-haspopup="true">
                 <button className="slds-button slds-button--icon-border-filled slds-button--icon-border-small">
                     <ButtonIcon name="down" size="small"/>
-                    <span className="slds-assistive-text">Show More</span>
+                    <span className="slds-assistive-text">More</span>
                 </button>
                 <Dropdown header={this.props.header}
                     valueField={this.props.valueField}

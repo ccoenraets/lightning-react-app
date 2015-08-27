@@ -1,6 +1,6 @@
 import React from 'react';
 
-import * as ContactService from './services/ContactService';
+import * as contactService from './services/ContactService';
 
 import {HomeHeader} from './components/PageHeader';
 
@@ -14,11 +14,11 @@ export default React.createClass({
     },
 
     componentDidMount() {
-        ContactService.findAll().then(contacts => this.setState({contacts}));
+        contactService.findAll().then(contacts => this.setState({contacts}));
     },
 
     sortHandler(sortOrder) {
-        ContactService.findAll(sortOrder).then(contacts => {
+        contactService.findAll(sortOrder).then(contacts => {
             this.setState({sortOrder, contacts})
         });
     },
@@ -28,8 +28,8 @@ export default React.createClass({
     },
 
     deleteHandler(data) {
-        ContactService.deleteItem(data.contact_id).then(() => {
-            ContactService.findAll(this.state.sort).then(contacts => this.setState({contacts}));
+        contactService.deleteItem(data.contact_id).then(() => {
+            contactService.findAll(this.state.sort).then(contacts => this.setState({contacts}));
         });
     },
 
@@ -38,8 +38,8 @@ export default React.createClass({
     },
 
     saveHandler(Contact) {
-        ContactService.createItem(Contact).then(() => {
-            ContactService.findAll().then(contacts => this.setState({addingContact: false, contacts}));
+        contactService.createItem(Contact).then(() => {
+            contactService.findAll().then(contacts => this.setState({addingContact: false, contacts}));
         });
     },
 
@@ -52,6 +52,7 @@ export default React.createClass({
             <div>
                 <HomeHeader type="contacts"
                             title="My Contacts"
+                            newLabel="New Contact"
                             actions={[{value:"new", label:"New Contact"}]}
                             itemCount={this.state.contacts.length}
                             viewOptions={[{value:"table", label:"Table", icon:"table"},{value:"tiles", label:"Tiles", icon:"location"}]}

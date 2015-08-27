@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 
 import * as activityService from './services/ActivityService';
+
 import {Icon, ButtonIcon} from "./components/Icons";
 
 let getActivityTheme =  (activityName) => {

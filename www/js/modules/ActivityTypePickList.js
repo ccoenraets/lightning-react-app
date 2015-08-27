@@ -1,6 +1,6 @@
 import React from 'react';
 
-import * as ActivityTypeService from './services/ActivityTypeService';
+import * as activityTypeService from './services/ActivityTypeService';
 
 import PickList from "./components/PickList";
 
@@ -11,7 +11,7 @@ export default React.createClass({
     },
 
     componentDidMount() {
-        ActivityTypeService.findAll().then(activityTypes => this.setState({activityTypes: activityTypes}));
+        activityTypeService.findAll().then(activityTypes => this.setState({activityTypes: activityTypes}));
     },
 
     render() {

@@ -5,7 +5,6 @@ import {Icon, ButtonIcon} from "./Icons";
 let ListItem = React.createClass({
 
     clickHandler() {
-        console.log(this.props.label);
         this.props.onSelect(this.props.data, this.props.label);
     },
 

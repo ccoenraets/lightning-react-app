@@ -32011,6 +32011,8 @@ var _reactRouter = require('react-router');
 
 var _reactRouter2 = _interopRequireDefault(_reactRouter);
 
+var _modulesComponentsIcons = require('./modules/components/Icons');
+
 var _modulesPropertyHome = require('./modules/PropertyHome');
 
 var _modulesPropertyHome2 = _interopRequireDefault(_modulesPropertyHome);
@@ -32068,16 +32070,12 @@ var App = _react2['default'].createClass({
     displayName: 'App',
 
     render: function render() {
-        var headerStyles = {
-            backgroundColor: "#01344E",
-            padding: "8px"
-        };
         return _react2['default'].createElement(
             'div',
             null,
             _react2['default'].createElement(
                 'header',
-                { style: headerStyles },
+                { className: 'menu' },
                 _react2['default'].createElement(
                     'ul',
                     { className: 'slds-list--horizontal' },
@@ -32087,6 +32085,7 @@ var App = _react2['default'].createClass({
                         _react2['default'].createElement(
                             Link,
                             { to: 'app' },
+                            _react2['default'].createElement(_modulesComponentsIcons.Icon, { name: 'account', theme: null }),
                             'Properties'
                         )
                     ),
@@ -32096,6 +32095,7 @@ var App = _react2['default'].createClass({
                         _react2['default'].createElement(
                             Link,
                             { to: 'contacts' },
+                            _react2['default'].createElement(_modulesComponentsIcons.Icon, { name: 'lead', theme: null }),
                             'Contacts'
                         )
                     ),
@@ -32105,6 +32105,7 @@ var App = _react2['default'].createClass({
                         _react2['default'].createElement(
                             Link,
                             { to: 'brokers' },
+                            _react2['default'].createElement(_modulesComponentsIcons.Icon, { name: 'people', theme: null }),
                             'Brokers'
                         )
                     )
@@ -32145,7 +32146,7 @@ _reactRouter2['default'].run(routes, function (Handler) {
     _react2['default'].render(_react2['default'].createElement(Handler, null), document.body);
 });
 
-},{"./modules/BrokerForm":243,"./modules/BrokerHome":244,"./modules/BrokerRecord":246,"./modules/BrokerView":247,"./modules/ContactForm":248,"./modules/ContactHome":249,"./modules/ContactRecord":252,"./modules/ContactView":253,"./modules/PropertyForm":259,"./modules/PropertyHome":260,"./modules/PropertyRecord":263,"./modules/PropertyView":264,"react":235,"react-router":48}],239:[function(require,module,exports){
+},{"./modules/BrokerForm":243,"./modules/BrokerHome":244,"./modules/BrokerRecord":246,"./modules/BrokerView":247,"./modules/ContactForm":248,"./modules/ContactHome":249,"./modules/ContactRecord":252,"./modules/ContactView":253,"./modules/PropertyForm":259,"./modules/PropertyHome":260,"./modules/PropertyRecord":263,"./modules/PropertyView":264,"./modules/components/Icons":269,"react":235,"react-router":48}],239:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -32489,7 +32490,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _servicesActivityTypeService = require('./services/ActivityTypeService');
 
-var ActivityTypeService = _interopRequireWildcard(_servicesActivityTypeService);
+var activityTypeService = _interopRequireWildcard(_servicesActivityTypeService);
 
 var _componentsPickList = require("./components/PickList");
 
@@ -32505,7 +32506,7 @@ exports['default'] = _react2['default'].createClass({
     componentDidMount: function componentDidMount() {
         var _this = this;
 
-        ActivityTypeService.findAll().then(function (activityTypes) {
+        activityTypeService.findAll().then(function (activityTypes) {
             return _this.setState({ activityTypes: activityTypes });
         });
     },
@@ -32552,17 +32553,22 @@ exports['default'] = _react2['default'].createClass({
     componentWillReceiveProps: function componentWillReceiveProps(props) {
         var _this = this;
 
-        brokerService.findByProperty(props.propertyId).then(function (brokers) {
-            console.log(brokers);
-            _this.setState({ brokers: brokers });
+        brokerService.findByProperty(props.property_id).then(function (brokers) {
+            return _this.setState({ brokers: brokers });
         });
     },
 
-    linkHandler: function linkHandler(contact) {
+    linkHandler: function linkHandler(broker) {
         window.location.hash = "#broker/" + broker.broker_id;
     },
 
-    onNew: function onNew() {},
+    newHandler: function newHandler() {
+        alert("Not yet implemented in this demo app");
+    },
+
+    actionHandler: function actionHandler(data, value, label) {
+        alert("Not yet implemented in this demo app");
+    },
 
     render: function render() {
 
@@ -32598,7 +32604,7 @@ exports['default'] = _react2['default'].createClass({
                         { className: 'slds-button-group' },
                         _react2['default'].createElement(
                             'button',
-                            { className: 'slds-button slds-button--neutral slds-button--small', onClick: this.props.onNew },
+                            { className: 'slds-button slds-button--neutral slds-button--small', onClick: this.newHandler },
                             'New'
                         ),
                         _react2['default'].createElement(
@@ -32619,9 +32625,9 @@ exports['default'] = _react2['default'].createClass({
                 { className: 'slds-card__body' },
                 _react2['default'].createElement(
                     _componentsDataGrid2['default'],
-                    { data: this.state.brokers },
-                    _react2['default'].createElement('div', { header: 'First Name', field: 'first_name' }),
-                    _react2['default'].createElement('div', { header: 'Last Name', field: 'last_name' }),
+                    { data: this.state.brokers, onAction: this.actionHandler },
+                    _react2['default'].createElement('div', { header: 'Name', field: 'name', onLink: this.linkHandler }),
+                    _react2['default'].createElement('div', { header: 'Title', field: 'title' }),
                     _react2['default'].createElement('div', { header: 'Mobile Phone', field: 'mobile_phone' }),
                     _react2['default'].createElement('div', { header: 'Office Phone', field: 'office_phone' })
                 )
@@ -32711,20 +32717,6 @@ exports["default"] = _reactAddons2["default"].createClass({
                     )
                 ),
                 _reactAddons2["default"].createElement(
-                    "div",
-                    { className: "slds-form-element" },
-                    _reactAddons2["default"].createElement(
-                        "label",
-                        { className: "slds-form-element__label", htmlFor: "sample1" },
-                        "Title"
-                    ),
-                    _reactAddons2["default"].createElement(
-                        "div",
-                        { className: "slds-form-element__control" },
-                        _reactAddons2["default"].createElement("input", { className: "slds-input", type: "text", valueLink: this.linkState('title') })
-                    )
-                ),
-                _reactAddons2["default"].createElement(
                     "fieldset",
                     { className: "slds-form--compound slds-m-top--medium slds-m-bottom--medium" },
                     _reactAddons2["default"].createElement(
@@ -32795,6 +32787,20 @@ exports["default"] = _reactAddons2["default"].createClass({
                     _reactAddons2["default"].createElement(
                         "label",
                         { className: "slds-form-element__label", htmlFor: "sample1" },
+                        "Title"
+                    ),
+                    _reactAddons2["default"].createElement(
+                        "div",
+                        { className: "slds-form-element__control" },
+                        _reactAddons2["default"].createElement("input", { className: "slds-input", type: "text", valueLink: this.linkState('title') })
+                    )
+                ),
+                _reactAddons2["default"].createElement(
+                    "div",
+                    { className: "slds-form-element" },
+                    _reactAddons2["default"].createElement(
+                        "label",
+                        { className: "slds-form-element__label", htmlFor: "sample1" },
                         "Mobile Phone"
                     ),
                     _reactAddons2["default"].createElement(
@@ -32848,7 +32854,7 @@ exports["default"] = _reactAddons2["default"].createClass({
             ),
             _reactAddons2["default"].createElement(
                 "div",
-                { className: "slds-col--padded slds-size--1-of-1" },
+                { className: "slds-col--padded slds-m-top--medium slds-size--1-of-1" },
                 _reactAddons2["default"].createElement(
                     "button",
                     { className: "slds-button slds-button--brand", onClick: this.save },
@@ -32878,7 +32884,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _servicesBrokerService = require('./services/BrokerService');
 
-var BrokerService = _interopRequireWildcard(_servicesBrokerService);
+var brokerService = _interopRequireWildcard(_servicesBrokerService);
 
 var _componentsPageHeader = require('./components/PageHeader');
 
@@ -32900,7 +32906,7 @@ exports['default'] = _react2['default'].createClass({
     componentDidMount: function componentDidMount() {
         var _this = this;
 
-        BrokerService.findAll().then(function (brokers) {
+        brokerService.findAll().then(function (brokers) {
             return _this.setState({ brokers: brokers });
         });
     },
@@ -32908,7 +32914,7 @@ exports['default'] = _react2['default'].createClass({
     sortHandler: function sortHandler(sortOrder) {
         var _this2 = this;
 
-        BrokerService.findAll(sortOrder).then(function (brokers) {
+        brokerService.findAll(sortOrder).then(function (brokers) {
             _this2.setState({ sortOrder: sortOrder, brokers: brokers });
         });
     },
@@ -32920,8 +32926,8 @@ exports['default'] = _react2['default'].createClass({
     deleteHandler: function deleteHandler(data) {
         var _this3 = this;
 
-        BrokerService.deleteItem(data.broker_id).then(function () {
-            BrokerService.findAll(_this3.state.sort).then(function (brokers) {
+        brokerService.deleteItem(data.broker_id).then(function () {
+            brokerService.findAll(_this3.state.sort).then(function (brokers) {
                 return _this3.setState({ brokers: brokers });
             });
         });
@@ -32934,8 +32940,8 @@ exports['default'] = _react2['default'].createClass({
     saveHandler: function saveHandler(Broker) {
         var _this4 = this;
 
-        BrokerService.createItem(Broker).then(function () {
-            BrokerService.findAll().then(function (brokers) {
+        brokerService.createItem(Broker).then(function () {
+            brokerService.findAll().then(function (brokers) {
                 return _this4.setState({ addingBroker: false, brokers: brokers });
             });
         });
@@ -32951,6 +32957,7 @@ exports['default'] = _react2['default'].createClass({
             null,
             _react2['default'].createElement(_componentsPageHeader.HomeHeader, { type: 'brokers',
                 title: 'My Brokers',
+                newLabel: 'New Broker',
                 actions: [{ value: "new", label: "New Broker" }],
                 itemCount: this.state.brokers.length,
                 viewOptions: [{ value: "table", label: "Table", icon: "table" }, { value: "tiles", label: "Tiles", icon: "location" }],
@@ -33081,12 +33088,12 @@ exports['default'] = _react2['default'].createClass({
             null,
             _react2['default'].createElement(
                 _componentsPageHeader.RecordHeader,
-                { type: 'Broker', icon: 'user', title: this.state.broker.first_name + ' ' + this.state.broker.last_name,
+                { type: 'Broker', icon: 'people', title: this.state.broker.first_name + ' ' + this.state.broker.last_name,
                     onEdit: this.editHandler,
                     onDelete: this.deleteHandler,
                     onClone: this.cloneHandler },
                 _react2['default'].createElement(_componentsPageHeader.HeaderField, { label: 'Mobile Phone', value: this.state.broker.mobile_phone }),
-                _react2['default'].createElement(_componentsPageHeader.HeaderField, { label: 'Home Phone', value: this.state.broker.home_phone }),
+                _react2['default'].createElement(_componentsPageHeader.HeaderField, { label: 'Office Phone', value: this.state.broker.office_phone }),
                 _react2['default'].createElement(_componentsPageHeader.HeaderField, { label: 'Email', value: this.state.broker.email })
             ),
             _react2['default'].createElement(RouteHandler, { broker: this.state.broker, saveHandler: this.saveHandler })
@@ -33303,20 +33310,6 @@ exports["default"] = _reactAddons2["default"].createClass({
                     )
                 ),
                 _reactAddons2["default"].createElement(
-                    "div",
-                    { className: "slds-form-element" },
-                    _reactAddons2["default"].createElement(
-                        "label",
-                        { className: "slds-form-element__label", htmlFor: "sample1" },
-                        "Occupation"
-                    ),
-                    _reactAddons2["default"].createElement(
-                        "div",
-                        { className: "slds-form-element__control" },
-                        _reactAddons2["default"].createElement("input", { className: "slds-input", type: "text", valueLink: this.linkState('occupation') })
-                    )
-                ),
-                _reactAddons2["default"].createElement(
                     "fieldset",
                     { className: "slds-form--compound slds-m-top--medium slds-m-bottom--medium" },
                     _reactAddons2["default"].createElement(
@@ -33387,6 +33380,20 @@ exports["default"] = _reactAddons2["default"].createClass({
                     _reactAddons2["default"].createElement(
                         "label",
                         { className: "slds-form-element__label", htmlFor: "sample1" },
+                        "Occupation"
+                    ),
+                    _reactAddons2["default"].createElement(
+                        "div",
+                        { className: "slds-form-element__control" },
+                        _reactAddons2["default"].createElement("input", { className: "slds-input", type: "text", valueLink: this.linkState('occupation') })
+                    )
+                ),
+                _reactAddons2["default"].createElement(
+                    "div",
+                    { className: "slds-form-element" },
+                    _reactAddons2["default"].createElement(
+                        "label",
+                        { className: "slds-form-element__label", htmlFor: "sample1" },
                         "Mobile Phone"
                     ),
                     _reactAddons2["default"].createElement(
@@ -33440,7 +33447,7 @@ exports["default"] = _reactAddons2["default"].createClass({
             ),
             _reactAddons2["default"].createElement(
                 "div",
-                { className: "slds-col--padded slds-size--1-of-1" },
+                { className: "slds-col--padded slds-m-top--medium slds-size--1-of-1" },
                 _reactAddons2["default"].createElement(
                     "button",
                     { className: "slds-button slds-button--brand", onClick: this.save },
@@ -33470,7 +33477,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _servicesContactService = require('./services/ContactService');
 
-var ContactService = _interopRequireWildcard(_servicesContactService);
+var contactService = _interopRequireWildcard(_servicesContactService);
 
 var _componentsPageHeader = require('./components/PageHeader');
 
@@ -33492,7 +33499,7 @@ exports['default'] = _react2['default'].createClass({
     componentDidMount: function componentDidMount() {
         var _this = this;
 
-        ContactService.findAll().then(function (contacts) {
+        contactService.findAll().then(function (contacts) {
             return _this.setState({ contacts: contacts });
         });
     },
@@ -33500,7 +33507,7 @@ exports['default'] = _react2['default'].createClass({
     sortHandler: function sortHandler(sortOrder) {
         var _this2 = this;
 
-        ContactService.findAll(sortOrder).then(function (contacts) {
+        contactService.findAll(sortOrder).then(function (contacts) {
             _this2.setState({ sortOrder: sortOrder, contacts: contacts });
         });
     },
@@ -33512,8 +33519,8 @@ exports['default'] = _react2['default'].createClass({
     deleteHandler: function deleteHandler(data) {
         var _this3 = this;
 
-        ContactService.deleteItem(data.contact_id).then(function () {
-            ContactService.findAll(_this3.state.sort).then(function (contacts) {
+        contactService.deleteItem(data.contact_id).then(function () {
+            contactService.findAll(_this3.state.sort).then(function (contacts) {
                 return _this3.setState({ contacts: contacts });
             });
         });
@@ -33526,8 +33533,8 @@ exports['default'] = _react2['default'].createClass({
     saveHandler: function saveHandler(Contact) {
         var _this4 = this;
 
-        ContactService.createItem(Contact).then(function () {
-            ContactService.findAll().then(function (contacts) {
+        contactService.createItem(Contact).then(function () {
+            contactService.findAll().then(function (contacts) {
                 return _this4.setState({ addingContact: false, contacts: contacts });
             });
         });
@@ -33543,6 +33550,7 @@ exports['default'] = _react2['default'].createClass({
             null,
             _react2['default'].createElement(_componentsPageHeader.HomeHeader, { type: 'contacts',
                 title: 'My Contacts',
+                newLabel: 'New Contact',
                 actions: [{ value: "new", label: "New Contact" }],
                 itemCount: this.state.contacts.length,
                 viewOptions: [{ value: "table", label: "Table", icon: "table" }, { value: "tiles", label: "Tiles", icon: "location" }],
@@ -33624,7 +33632,7 @@ var _componentsQuickFind2 = _interopRequireDefault(_componentsQuickFind);
 
 var _servicesContactService = require('./services/ContactService');
 
-var ContactService = _interopRequireWildcard(_servicesContactService);
+var contactService = _interopRequireWildcard(_servicesContactService);
 
 exports['default'] = _react2['default'].createClass({
     displayName: 'ContactQuickFind',
@@ -33639,7 +33647,7 @@ exports['default'] = _react2['default'].createClass({
     searchKeyChangeHandler: function searchKeyChangeHandler(key) {
         var _this = this;
 
-        ContactService.findByName(key).then(function (list) {
+        contactService.findByName(key).then(function (list) {
             return _this.setState({ searchKey: key, list: list });
         });
     },
@@ -33726,7 +33734,7 @@ exports['default'] = _react2['default'].createClass({
             null,
             _react2['default'].createElement(
                 _componentsPageHeader.RecordHeader,
-                { type: 'Contact', icon: 'user', title: this.state.contact.first_name + ' ' + this.state.contact.last_name,
+                { type: 'Contact', icon: 'lead', title: this.state.contact.first_name + ' ' + this.state.contact.last_name,
                     onEdit: this.editHandler,
                     onDelete: this.deleteHandler,
                     onClone: this.cloneHandler },
@@ -33802,16 +33810,24 @@ exports['default'] = _react2['default'].createClass({
         this.setState({ addingActivity: true });
     },
 
+    deleteActivityHandler: function deleteActivityHandler(activity) {
+        var _this2 = this;
+
+        activityService.deleteItem(activity.activity_id).then(function () {
+            return _this2.loadActivities(_this2.props.contact.contact_id);
+        });
+    },
+
     cancelActivityHandler: function cancelActivityHandler() {
         this.setState({ addingActivity: false });
     },
 
     saveActivityHandler: function saveActivityHandler(activity) {
-        var _this2 = this;
+        var _this3 = this;
 
         activityService.createItem(activity).then(function () {
-            _this2.loadActivities(_this2.props.contact.contact_id);
-            _this2.setState({ addingActivity: false });
+            _this3.loadActivities(_this3.props.contact.contact_id);
+            _this3.setState({ addingActivity: false });
         });
     },
 
@@ -33859,7 +33875,7 @@ exports['default'] = _react2['default'].createClass({
                                     this.props.contact.address,
                                     _react2['default'].createElement('br', null),
                                     this.props.contact.city,
-                                    ', ',
+                                    ' ',
                                     this.props.contact.state,
                                     ' ',
                                     this.props.contact.zip
@@ -33981,7 +33997,7 @@ exports['default'] = _react2['default'].createClass({
                     null,
                     _react2['default'].createElement(
                         'div',
-                        { label: 'Activity' },
+                        { label: 'Activities' },
                         _react2['default'].createElement(_ActivityTimeline2['default'], { contactId: this.props.contact.contact_id, activities: this.state.activities, showContact: false, showProperty: true })
                     ),
                     _react2['default'].createElement(
@@ -33995,7 +34011,9 @@ exports['default'] = _react2['default'].createClass({
                 'div',
                 { className: 'slds-col--padded slds-size--1-of-1' },
                 _react2['default'].createElement('br', null),
-                _react2['default'].createElement(_ActivityCard2['default'], { contactId: this.props.contact.contact_id, activities: this.state.activities, showContact: false, showProperty: true, onNew: this.newActivityHandler })
+                _react2['default'].createElement(_ActivityCard2['default'], { contactId: this.props.contact.contact_id, activities: this.state.activities, showContact: false, showProperty: true,
+                    onNew: this.newActivityHandler,
+                    onDelete: this.deleteActivityHandler })
             ),
             this.state.addingActivity ? _react2['default'].createElement(_NewActivityWindow2['default'], { onSave: this.saveActivityHandler, onCancel: this.cancelActivityHandler, contactId: this.props.contact.contact_id }) : ""
         );
@@ -34328,12 +34346,12 @@ exports["default"] = _reactAddons2["default"].createClass({
                                 _reactAddons2["default"].createElement(
                                     "label",
                                     { className: "slds-form-element__label", htmlFor: "sample1" },
-                                    "Home Phone"
+                                    "Office Phone"
                                 ),
                                 _reactAddons2["default"].createElement(
                                     "div",
                                     { className: "slds-form-element__control" },
-                                    _reactAddons2["default"].createElement("input", { className: "slds-input", type: "text", valueLink: this.linkState('home_phone') })
+                                    _reactAddons2["default"].createElement("input", { className: "slds-input", type: "text", valueLink: this.linkState('office_phone') })
                                 )
                             ),
                             _reactAddons2["default"].createElement(
@@ -34774,10 +34792,12 @@ exports['default'] = _react2['default'].createClass({
         window.location.hash = "#property/" + property.property_id;
     },
 
+    newHandler: function newHandler() {
+        alert("Not yet implemented in this demo app");
+    },
+
     actionHandler: function actionHandler(data, value, label) {
-        if (label === "Delete") {
-            this.props.onDelete(data);
-        }
+        alert("Not yet implemented in this demo app");
     },
 
     render: function render() {
@@ -34814,7 +34834,7 @@ exports['default'] = _react2['default'].createClass({
                         { className: 'slds-button-group' },
                         _react2['default'].createElement(
                             'button',
-                            { className: 'slds-button slds-button--neutral slds-button--small', onClick: this.props.onNew },
+                            { className: 'slds-button slds-button--neutral slds-button--small', onClick: this.newHandler },
                             'New'
                         ),
                         _react2['default'].createElement(
@@ -34886,14 +34906,19 @@ exports["default"] = _reactAddons2["default"].createClass({
         this.setState(_extends({}, property));
     },
 
+    latitudeChange: function latitudeChange(event) {
+        this.setState({ location: { x: parseFloat(event.target.value), y: this.state.location.y } });
+    },
+
+    longitudeChange: function longitudeChange(event) {
+        this.setState({ location: { x: this.state.location.x, y: parseFloat(event.target.value) } });
+    },
+
     save: function save() {
         this.props.saveHandler(this.state);
     },
 
     render: function render() {
-        var smallInput = {
-            width: "120px"
-        };
         return _reactAddons2["default"].createElement(
             "div",
             { className: "slds-form--stacked slds-grid slds-wrap slds-m-top--large" },
@@ -34983,7 +35008,7 @@ exports["default"] = _reactAddons2["default"].createClass({
                                     { className: "slds-form-element__helper" },
                                     "Latitude"
                                 ),
-                                _reactAddons2["default"].createElement("input", { className: "slds-input", type: "text", valueLink: this.linkState('latitude') })
+                                _reactAddons2["default"].createElement("input", { className: "slds-input", type: "text", value: this.state.location ? this.state.location.x : "", onChange: this.latitudeChange })
                             ),
                             _reactAddons2["default"].createElement(
                                 "label",
@@ -34993,7 +35018,7 @@ exports["default"] = _reactAddons2["default"].createClass({
                                     { className: "slds-form-element__helper" },
                                     "Longitude"
                                 ),
-                                _reactAddons2["default"].createElement("input", { className: "slds-input", type: "text", valueLink: this.linkState('longitude') })
+                                _reactAddons2["default"].createElement("input", { className: "slds-input", type: "text", value: this.state.location ? this.state.location.y : "", onChange: this.longitudeChange })
                             )
                         )
                     )
@@ -35108,7 +35133,7 @@ exports["default"] = _reactAddons2["default"].createClass({
             ),
             _reactAddons2["default"].createElement(
                 "div",
-                { className: "slds-col--padded slds-size--1-of-1" },
+                { className: "slds-col--padded slds-m-top--medium slds-size--1-of-1" },
                 _reactAddons2["default"].createElement(
                     "button",
                     { className: "slds-button slds-button--brand", onClick: this.save },
@@ -35240,6 +35265,7 @@ exports['default'] = _react2['default'].createClass({
             null,
             _react2['default'].createElement(_componentsPageHeader.HomeHeader, { type: 'properties',
                 title: 'My Properties',
+                newLabel: 'New Property',
                 actions: [{ value: "new", label: "New Property" }],
                 itemCount: this.state.properties.length,
                 viewOptions: [{ value: "table", label: "Table", icon: "table" }, { value: "map", label: "Map", icon: "location" }, { value: "split", label: "Split", icon: "layout" }],
@@ -35290,7 +35316,7 @@ exports['default'] = _react2['default'].createClass({
     render: function render() {
         return _react2['default'].createElement(
             _componentsDataGrid2['default'],
-            { data: this.props.properties, onSort: this.props.onSort, onAction: this.actionHandler },
+            { data: this.props.properties, keyField: 'propertyId', onSort: this.props.onSort, onAction: this.actionHandler },
             _react2['default'].createElement('div', { header: 'Address', field: 'address', sortable: true, onLink: this.linkHandler }),
             _react2['default'].createElement('div', { header: 'City', field: 'city', sortable: true }),
             _react2['default'].createElement('div', { header: 'Bedrooms', field: 'bedrooms', textAlign: 'center' }),
@@ -35319,7 +35345,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _servicesPropertyService = require('./services/PropertyService');
 
-var PropertyService = _interopRequireWildcard(_servicesPropertyService);
+var propertyService = _interopRequireWildcard(_servicesPropertyService);
 
 var _componentsQuickFind = require('./components/QuickFind');
 
@@ -35338,7 +35364,7 @@ exports['default'] = _react2['default'].createClass({
     searchKeyChangeHandler: function searchKeyChangeHandler(key) {
         var _this = this;
 
-        PropertyService.findByName(key).then(function (list) {
+        propertyService.findByName(key).then(function (list) {
             return _this.setState({ searchKey: key, list: list });
         });
     },
@@ -35415,7 +35441,7 @@ exports['default'] = _react2['default'].createClass({
 
     deleteHandler: function deleteHandler() {
         propertyService.deleteItem(this.state.property.property_id).then(function () {
-            window.location.hash = '#properties';
+            window.location.hash = '#';
         });
     },
 
@@ -35735,7 +35761,7 @@ exports['default'] = _react2['default'].createClass({
                     null,
                     _react2['default'].createElement(
                         'div',
-                        { label: 'Activity' },
+                        { label: 'Activities' },
                         _react2['default'].createElement(_ActivityTimeline2['default'], { propertyId: this.props.property.property_id, activities: this.state.activities, showContact: true, showProperty: false })
                     ),
                     _react2['default'].createElement(
@@ -36060,19 +36086,31 @@ var ButtonDropdown = _react2["default"].createClass({
                 break;
             }
         }
+        var className = "slds-button slds-button--icon-more";
+        //if (this.props.iconMore) {
+        //    className = className + "";
+        //}
+        //if (this.props.iconBorder) {
+        //    className = className + " slds-button--icon-border";
+        //}
         return _react2["default"].createElement(
             "div",
             { className: "slds-dropdown-trigger", "aria-haspopup": "true" },
             _react2["default"].createElement(
                 "button",
-                { className: "slds-button slds-button--icon-more", "aria-haspopup": "true" },
+                { className: className, "aria-haspopup": "true" },
                 _react2["default"].createElement(_Icons.ButtonIcon, { name: icon || this.props.icon }),
                 _react2["default"].createElement(
                     "span",
                     { className: "slds-assistive-text" },
                     "Settings"
                 ),
-                _react2["default"].createElement(_Icons.ButtonIcon, { name: "down", size: "x-small" })
+                _react2["default"].createElement(_Icons.ButtonIcon, { name: "down", size: "x-small" }),
+                _react2["default"].createElement(
+                    "span",
+                    { className: "slds-assistive-text" },
+                    "More"
+                )
             ),
             _react2["default"].createElement(Dropdown, { header: this.props.header,
                 valueField: this.props.valueField,
@@ -36105,7 +36143,7 @@ var ActionButton = _react2["default"].createClass({
                 _react2["default"].createElement(
                     "span",
                     { className: "slds-assistive-text" },
-                    "Show More"
+                    "More"
                 )
             ),
             _react2["default"].createElement(Dropdown, { header: this.props.header,
@@ -36201,8 +36239,7 @@ exports['default'] = _react2['default'].createClass({
             zoom: 12,
             centerLat: 42.3600820,
             centerLng: -71.0588800,
-            height: "500px",
-            infoWindow: '<div>\n                    <div className="slds-dialog__content" role="document">\n                        <div className="slds-dialog__head">\n                            <p className="slds-text-heading--small">Dialog Heading</p>\n                        </div>\n                        <div className="slds-dialog__body">Sit nulla est ex deserunt exercitation anim occaecat. Nostrud <a href="#">ullamco</a> deserunt aute id consequat veniam incididunt duis in sint irure nisi.</div>\n                    </div>\n                </div>'
+            height: "500px"
         };
     },
 
@@ -36211,25 +36248,28 @@ exports['default'] = _react2['default'].createClass({
     },
 
     addMarkers: function addMarkers(map, data) {
-        var _this = this;
-
         if (!data) return;
         if (!Array.isArray(data)) {
             data = [data];
         }
-        for (var i = 0; i < data.length; i++) {
+
+        var _loop = function (i) {
             var item = data[i];
             if (item.location) {
                 (function () {
-                    var marker = new google.maps.Marker({ position: { lat: item.location.y, lng: item.location.x }, title: 'Click for details', map: map });
-                    var infowindow = new google.maps.InfoWindow({
-                        content: _this.props.infoWindow
-                    });
+                    var marker = new google.maps.Marker({ position: { lat: item.location.y, lng: item.location.x }, title: 'Click for details', map: map, item: item });
                     marker.addListener('click', function () {
-                        return infowindow.open(map, marker);
+                        // Using ES6 template here because this is rendered internally by Google Maps outside React
+                        var infoHTML = '\n                        <div class="slds-media slds-media--center">\n                            <div class="slds-media__figure">\n                                <img src="' + item.pic + '" style="height:100px;" alt="Placeholder" />\n                            </div>\n                            <div class="slds-media__body">\n                                <p>' + marker.item.address + '</p>\n                                <p>' + marker.item.city + '</p>\n                                <p>' + parseFloat(marker.item.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' }) + '</p>\n                                <p class="slds-m-top--small"><a href="#property/' + marker.item.property_id + '">See details</a></p>\n                            </div>\n                        </div>';
+                        var infowindow = new google.maps.InfoWindow({ content: infoHTML });
+                        infowindow.open(map, marker);
                     });
                 })();
             }
+        };
+
+        for (var i = 0; i < data.length; i++) {
+            _loop(i);
         }
     },
 
@@ -36299,6 +36339,7 @@ var Icon = _react2['default'].createClass({
     render: function render() {
         var useTag = '<use xlink:href="/assets/icons/' + this.props.category + '-sprite/svg/symbols.svg#' + this.props.name + '" />';
         var className = "slds-icon";
+        var theme = this.props.theme === undefined ? this.props.name : this.props.theme;
         if (this.props.stateful) {
             className += "--stateful";
         }
@@ -36308,7 +36349,9 @@ var Icon = _react2['default'].createClass({
         if (this.props.position) {
             className = className + " slds-icon--" + this.props.position;
         }
-        className = className + " slds-icon-standard-" + (this.props.theme || this.props.name);
+        if (theme) {
+            className = className + " slds-icon-" + this.props.category + "-" + theme;
+        }
         return _react2['default'].createElement('svg', { 'aria-hidden': 'true', className: className, dangerouslySetInnerHTML: { __html: useTag } });
     }
 
@@ -36395,6 +36438,10 @@ var RecordHeader = _react2["default"].createClass({
         };
     },
 
+    followHandler: function followHandler() {
+        alert("Not implemented in this demo app");
+    },
+
     render: function render() {
         return _react2["default"].createElement(
             "div",
@@ -36434,7 +36481,7 @@ var RecordHeader = _react2["default"].createClass({
                                     { className: "slds-col slds-shrink-none" },
                                     _react2["default"].createElement(
                                         "button",
-                                        { className: "slds-button slds-button--neutral slds-not-selected", "aria-live": "assertive" },
+                                        { className: "slds-button slds-button--neutral slds-not-selected", "aria-live": "assertive", onClick: this.followHandler },
                                         _react2["default"].createElement(
                                             "span",
                                             { className: "slds-text-not-selected" },
@@ -36474,11 +36521,6 @@ var RecordHeader = _react2["default"].createClass({
                             "button",
                             { className: "slds-button slds-button--neutral", onClick: this.props.onDelete },
                             "Delete"
-                        ),
-                        _react2["default"].createElement(
-                            "button",
-                            { className: "slds-button slds-button--neutral", onClick: this.props.onClone },
-                            "Clone"
                         ),
                         _react2["default"].createElement(
                             "div",
@@ -36549,33 +36591,7 @@ var HomeHeader = _react2["default"].createClass({
                                 "h1",
                                 { className: "slds-text-heading--medium slds-truncate", title: "My Properties" },
                                 this.props.title
-                            ),
-                            _react2["default"].createElement(
-                                "button",
-                                { className: "slds-button slds-button--icon-bare slds-shrink-none slds-align-middle slds-m-left--x-small" },
-                                _react2["default"].createElement(_Icons.ButtonIcon, { name: "down" }),
-                                _react2["default"].createElement(
-                                    "span",
-                                    { className: "slds-assistive-text" },
-                                    "View More"
-                                )
                             )
-                        ),
-                        _react2["default"].createElement(
-                            "button",
-                            { className: "slds-button slds-button--icon-more slds-shrink-none slds-m-left--large", "aria-haspopup": "true" },
-                            _react2["default"].createElement(_Icons.ButtonIcon, { name: "settings" }),
-                            _react2["default"].createElement(
-                                "span",
-                                { className: "slds-assistive-text" },
-                                "Settings"
-                            ),
-                            _react2["default"].createElement(_Icons.ButtonIcon, { name: "down", size: "x-small" })
-                        ),
-                        _react2["default"].createElement(
-                            "button",
-                            { className: "slds-button slds-button--brand slds-button-space-left slds-m-right--medium slds-shrink-none slds-align-middle slds-hide", "aria-hidden": "true" },
-                            "Save"
                         )
                     )
                 ),
@@ -36590,42 +36606,22 @@ var HomeHeader = _react2["default"].createClass({
                             { className: "slds-button-space-left" },
                             _react2["default"].createElement(
                                 _Dropdown.ButtonDropdown,
-                                { header: "Display as", value: this.props.viewOptions[0].value, onChange: this.props.onViewChange },
+                                { header: "Display as", iconMore: true, value: this.props.viewOptions[0].value, onChange: this.props.onViewChange },
                                 viewItems
                             )
                         ),
                         _react2["default"].createElement(
                             "div",
-                            { className: "slds-button-group slds-button-space-left", role: "group" },
-                            _react2["default"].createElement(
-                                "button",
-                                { className: "slds-button slds-button--icon-border" },
-                                _react2["default"].createElement(_Icons.ButtonIcon, { name: "chart" }),
-                                _react2["default"].createElement(
-                                    "span",
-                                    { className: "slds-assistive-text" },
-                                    "Chart"
-                                )
-                            ),
-                            _react2["default"].createElement(
-                                "button",
-                                { className: "slds-button slds-button--icon-border" },
-                                _react2["default"].createElement(_Icons.ButtonIcon, { name: "filterList" }),
-                                _react2["default"].createElement(
-                                    "span",
-                                    { className: "slds-assistive-text" },
-                                    "Filter List"
-                                )
-                            ),
+                            { className: "slds-button-space-left" },
                             _react2["default"].createElement(
                                 _Dropdown.ButtonDropdown,
-                                { header: "Sort By", icon: "sort", onChange: this.props.onSort },
+                                { header: "Sort By", icon: "sort", iconMore: true, onChange: this.props.onSort },
                                 sortItems
                             )
                         ),
                         _react2["default"].createElement(
                             "div",
-                            { className: "slds-button-group", role: "group" },
+                            { className: "slds-button-group slds-button-space-left", role: "group" },
                             _react2["default"].createElement(
                                 "button",
                                 { className: "slds-button slds-button--neutral", onClick: this.props.onNew },
@@ -36682,7 +36678,6 @@ var ListItem = _react2["default"].createClass({
     displayName: "ListItem",
 
     clickHandler: function clickHandler() {
-        console.log(this.props.label);
         this.props.onSelect(this.props.data, this.props.label);
     },
 
@@ -37212,7 +37207,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 function toQueryString(obj) {
     var parts = [],
-        i;
+        i = undefined;
     for (i in obj) {
         if (obj.hasOwnProperty(i) && obj[i]) {
             parts.push(encodeURIComponent(i) + "=" + encodeURIComponent(obj[i]));
@@ -37234,7 +37229,6 @@ function request(obj) {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
                 if (xhr.status > 199 && xhr.status < 300) {
-                    console.log(JSON.parse(xhr.responseText));
                     resolve(xhr.responseText ? JSON.parse(xhr.responseText) : undefined);
                 } else {
                     reject(xhr.responseText);
@@ -37247,7 +37241,6 @@ function request(obj) {
         if (obj.contentType) {
             xhr.setRequestHeader("Content-Type", obj.contentType);
         }
-        console.log(obj.data);
         xhr.send(obj.data ? JSON.stringify(obj.data) : undefined);
     });
 }

@@ -37,6 +37,10 @@ export let RecordHeader = React.createClass({
         }
     },
 
+    followHandler() {
+        alert("Not implemented in this demo app");
+    },
+
     render() {
         return (
             <div className="slds-page-header">
@@ -51,7 +55,7 @@ export let RecordHeader = React.createClass({
                                 <div className="slds-grid">
                                     <h1 className="slds-text-heading--medium slds-m-right--small slds-truncate slds-align-middle" title={this.props.title}>{this.props.title}</h1>
                                     <div className="slds-col slds-shrink-none">
-                                        <button className="slds-button slds-button--neutral slds-not-selected" aria-live="assertive">
+                                        <button className="slds-button slds-button--neutral slds-not-selected" aria-live="assertive" onClick={this.followHandler}>
                                                 <span className="slds-text-not-selected">
                                                     <ButtonIcon name="add" stateful={true} position="left"/>
                                                     Follow
@@ -74,7 +78,6 @@ export let RecordHeader = React.createClass({
                         <div className="slds-button-group" role="group">
                             <button className="slds-button slds-button--neutral" onClick={this.props.onEdit}>Edit</button>
                             <button className="slds-button slds-button--neutral" onClick={this.props.onDelete}>Delete</button>
-                            <button className="slds-button slds-button--neutral" onClick={this.props.onClone}>Clone</button>
                             <div className="slds-button--last">
                                 <button className="slds-button slds-button--icon-border-filled">
                                     <ButtonIcon name="down"/>
@@ -113,40 +116,22 @@ export let HomeHeader = React.createClass({
                         <div className="slds-grid">
                             <div className="slds-grid slds-type-focus slds-no-space">
                                 <h1 className="slds-text-heading--medium slds-truncate" title="My Properties">{this.props.title}</h1>
-                                <button className="slds-button slds-button--icon-bare slds-shrink-none slds-align-middle slds-m-left--x-small">
-                                    <ButtonIcon name="down"/>
-                                    <span className="slds-assistive-text">View More</span>
-                                </button>
                             </div>
-                            <button className="slds-button slds-button--icon-more slds-shrink-none slds-m-left--large" aria-haspopup="true">
-                                <ButtonIcon name="settings"/>
-                                <span className="slds-assistive-text">Settings</span>
-                                <ButtonIcon name="down" size="x-small"/>
-                            </button>
-                            <button className="slds-button slds-button--brand slds-button-space-left slds-m-right--medium slds-shrink-none slds-align-middle slds-hide" aria-hidden="true">Save</button>
                         </div>
                     </div>
                     <div className="slds-col slds-no-flex slds-align-bottom">
                         <div className="slds-grid">
                             <div className="slds-button-space-left">
-                                <ButtonDropdown header="Display as" value={this.props.viewOptions[0].value} onChange={this.props.onViewChange}>
+                                <ButtonDropdown header="Display as" iconMore={true} value={this.props.viewOptions[0].value} onChange={this.props.onViewChange}>
                                     {viewItems}
                                 </ButtonDropdown>
                             </div>
-                            <div className="slds-button-group slds-button-space-left" role="group">
-                                <button className="slds-button slds-button--icon-border">
-                                    <ButtonIcon name="chart"/>
-                                    <span className="slds-assistive-text">Chart</span>
-                                </button>
-                                <button className="slds-button slds-button--icon-border">
-                                    <ButtonIcon name="filterList"/>
-                                    <span className="slds-assistive-text">Filter List</span>
-                                </button>
-                                <ButtonDropdown header="Sort By" icon="sort" onChange={this.props.onSort}>
+                            <div className="slds-button-space-left">
+                                <ButtonDropdown header="Sort By" icon="sort" iconMore={true} onChange={this.props.onSort}>
                                     {sortItems}
                                 </ButtonDropdown>
                             </div>
-                            <div className="slds-button-group" role="group">
+                            <div className="slds-button-group slds-button-space-left" role="group">
                                 <button className="slds-button slds-button--neutral" onClick={this.props.onNew}>{this.props.newLabel}</button>
                                 <div className="slds-button--last">
                                     <button className="slds-button slds-button--icon-border-filled">

@@ -1,6 +1,5 @@
 var express = require('express'),
     bodyParser = require('body-parser'),
-    //methodOverride = require('method-override'),
     compression = require('compression'),
     properties = require('./server/properties'),
     contacts = require('./server/contacts'),
@@ -8,15 +7,13 @@ var express = require('express'),
     brokers = require('./server/brokers'),
     activityTypes = require('./server/activitytypes'),
     sqlinit = require('./server/sqlinit'),
-    //auth = require('basic-auth'),
     app = express();
 
 
 app.set('port', process.env.PORT || 5000);
 
 app.use(bodyParser.json());
-//app.use(compression());
-//app.use(methodOverride());
+app.use(compression());
 
 app.use('/', express.static(__dirname + '/www'));
 
@@ -33,11 +30,11 @@ app.put('/contacts', contacts.updateItem);
 app.delete('/contacts/:id', contacts.deleteItem);
 
 app.get('/activities', activities.findAll);
-app.get('/activities/:id', activities.findById);
 app.post('/activities', activities.createItem);
 app.delete('/activities/:id', activities.deleteItem);
 
 app.get('/activitytypes', activityTypes.findAll);
+
 app.get('/brokers', brokers.findAll);
 app.get('/brokers/:id', brokers.findById);
 app.post('/brokers', brokers.createItem);

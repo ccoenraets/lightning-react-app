@@ -26,7 +26,7 @@ export default React.createClass({
 
     deleteHandler(data) {
         propertyService.deleteItem(data.property_id).then(() => {
-            propertyService.findAll(this.state.sort).then(properties => this.setState({properties:properties}));
+            propertyService.findAll(this.state.sort).then(properties => this.setState({properties}));
         });
     },
 
@@ -44,7 +44,7 @@ export default React.createClass({
 
     saveHandler(property) {
         propertyService.createItem(property).then(() => {
-            propertyService.findAll(this.state.sort).then(properties => this.setState({addingProperty: false, properties:properties}));
+            propertyService.findAll(this.state.sort).then(properties => this.setState({addingProperty: false, properties}));
         });
     },
 
@@ -72,6 +72,7 @@ export default React.createClass({
             <div>
                 <HomeHeader type="properties"
                             title="My Properties"
+                            newLabel="New Property"
                             actions={[{value:"new", label:"New Property"}]}
                             itemCount={this.state.properties.length}
                             viewOptions={[{value:"table", label:"Table", icon:"table"},{value:"map", label:"Map", icon:"location"},{value:"split", label:"Split", icon:"layout"}]}

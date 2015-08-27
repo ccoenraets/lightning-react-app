@@ -1,6 +1,8 @@
 import React from 'react';
 import Router from 'react-router';
 
+import {Icon} from './modules/components/Icons';
+
 import PropertyHome from './modules/PropertyHome';
 import PropertyRecord from './modules/PropertyRecord';
 import PropertyForm from './modules/PropertyForm';
@@ -23,17 +25,13 @@ let RouteHandler = Router.RouteHandler;
 
 let App = React.createClass({
     render: function () {
-        let headerStyles = {
-            backgroundColor: "#01344E",
-            padding: "8px"
-        };
         return (
             <div>
-                <header style={headerStyles}>
-                    <ul  className="slds-list--horizontal">
-                        <li className="slds-list__item"><Link to="app">Properties</Link></li>
-                        <li className="slds-list__item"><Link to="contacts">Contacts</Link></li>
-                        <li className="slds-list__item"><Link to="brokers">Brokers</Link></li>
+                <header className="menu">
+                    <ul className="slds-list--horizontal">
+                        <li className="slds-list__item"><Link to="app"><Icon name="account" theme={null}/>Properties</Link></li>
+                        <li className="slds-list__item"><Link to="contacts"><Icon name="lead" theme={null}/>Contacts</Link></li>
+                        <li className="slds-list__item"><Link to="brokers"><Icon name="people" theme={null}/>Brokers</Link></li>
                     </ul>
                 </header>
                 <RouteHandler/>

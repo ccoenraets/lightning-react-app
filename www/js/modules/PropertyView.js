@@ -142,7 +142,7 @@ export default React.createClass({
 
                 <div className="slds-col--padded slds-size--1-of-1 slds-medium-size--1-of-2">
                     <Tabs>
-                        <div label="Activity">
+                        <div label="Activities">
                             <ActivityTimeline propertyId={this.props.property.property_id} activities={this.state.activities} showContact={true} showProperty={false}/>
                         </div>
                         <div label="Gallery">

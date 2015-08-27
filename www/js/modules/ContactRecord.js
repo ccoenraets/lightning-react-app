@@ -43,7 +43,7 @@ export default React.createClass({
     render() {
         return (
             <div>
-                <RecordHeader type="Contact" icon="user" title={this.state.contact.first_name + ' ' + this.state.contact.last_name}
+                <RecordHeader type="Contact" icon="lead" title={this.state.contact.first_name + ' ' + this.state.contact.last_name}
                               onEdit={this.editHandler}
                               onDelete={this.deleteHandler}
                               onClone={this.cloneHandler}>

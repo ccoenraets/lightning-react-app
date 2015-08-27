@@ -7,16 +7,7 @@ export default React.createClass({
             zoom: 12,
             centerLat: 42.3600820,
             centerLng: -71.0588800,
-            height: "500px",
-            infoWindow:
-                `<div>
-                    <div className="slds-dialog__content" role="document">
-                        <div className="slds-dialog__head">
-                            <p className="slds-text-heading--small">Dialog Heading</p>
-                        </div>
-                        <div className="slds-dialog__body">Sit nulla est ex deserunt exercitation anim occaecat. Nostrud <a href="#">ullamco</a> deserunt aute id consequat veniam incididunt duis in sint irure nisi.</div>
-                    </div>
-                </div>`
+            height: "500px"
         };
     },
 
@@ -32,11 +23,24 @@ export default React.createClass({
         for (let i=0; i<data.length; i++) {
             let item = data[i];
             if (item.location) {
-                let marker = new google.maps.Marker({position: {lat: item.location.y, lng: item.location.x}, title: 'Click for details', map: map});
-                let infowindow = new google.maps.InfoWindow({
-                    content: this.props.infoWindow
+                let marker = new google.maps.Marker({position: {lat: item.location.y, lng: item.location.x}, title: 'Click for details', map: map, item: item});
+                marker.addListener('click', () => {
+                    // Using ES6 template here because this is rendered internally by Google Maps outside React
+                    let infoHTML = `
+                        <div class="slds-media slds-media--center">
+                            <div class="slds-media__figure">
+                                <img src="${item.pic}" style="height:100px;" alt="Placeholder" />
+                            </div>
+                            <div class="slds-media__body">
+                                <p>${marker.item.address}</p>
+                                <p>${marker.item.city}</p>
+                                <p>${parseFloat(marker.item.price).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</p>
+                                <p class="slds-m-top--small"><a href="#property/${marker.item.property_id}">See details</a></p>
+                            </div>
+                        </div>`;
+                    let infowindow = new google.maps.InfoWindow({content: infoHTML});
+                    infowindow.open(map, marker)
                 });
-                marker.addListener('click', () => infowindow.open(map, marker));
             }
         }
     },

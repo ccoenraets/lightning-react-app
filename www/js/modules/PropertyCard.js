@@ -11,10 +11,12 @@ export default React.createClass({
         window.location.hash = "#property/" + property.property_id;
     },
 
+    newHandler() {
+        alert("Not yet implemented in this demo app");
+    },
+
     actionHandler(data, value, label) {
-        if (label === "Delete") {
-            this.props.onDelete(data);
-        }
+        alert("Not yet implemented in this demo app");
     },
 
     render() {
@@ -32,7 +34,7 @@ export default React.createClass({
                     </div>
                     <div className="slds-no-flex">
                         <div className="slds-button-group">
-                            <button className="slds-button slds-button--neutral slds-button--small" onClick={this.props.onNew}>New</button>
+                            <button className="slds-button slds-button--neutral slds-button--small" onClick={this.newHandler}>New</button>
                             <button className="slds-button slds-button--icon-border-filled">
                                 <ButtonIcon name="down"/>
                                 <span className="slds-assistive-text">Show More</span>
